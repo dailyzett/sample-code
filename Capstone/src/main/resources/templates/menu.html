@@ -1,55 +1,38 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<meta charset="utf-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/menu.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
 </head>
 <body>
-<div id="home_quicklinks">
-    <a class="quicklink link1" href="/members">
-                                    <span class="ql_caption">
-                                        <span class="outer">
-                                            <span class="inner">
-                                                <h2>Member</h2>
-                                            </span>
-                                        </span>
-                                    </span>
-        <span class="ql_top"></span>
-        <span class="ql_bottom"></span>
-    </a>
+<header role="banner" class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle pull-left"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        </div>
+        <div class="navbar-inverse side-collapse in">
+            <nav role="navigation" class="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="/members">Users</a></li>
+                    <li><a href="/#">Notice</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<div class="container side-collapse-container">
+    <div class="row">
+        <h1>Hello</h1>
+        <p>This is a side opening nav demonstration</p>
+        <p>Make your browser smaller and the top menu wil become into a lateral slider menu</p>
 
-    <a class="quicklink link2" href="#">
-                                    <span class="ql_caption">
-                                        <span class="outer">
-                                            <span class="inner">
-                                                <h2>Event</h2>
-                                            </span>
-                                        </span>
-                                    </span>
-        <span class="ql_top"></span>
-        <span class="ql_bottom"></span>
-    </a>
-
-    <a class="quicklink link3" href="#">
-                                    <span class="ql_caption">
-                                        <span class="outer">
-                                            <span class="inner">
-                                                <h2>Gallery </h2>
-                                            </span>
-                                        </span>
-                                    </span>
-        <span class="ql_top"></span>
-        <span class="ql_bottom"></span>
-    </a>
-    <div class="clear"></div>
-
+    </div>
 </div>
-
-
 </body>
+
 </html>
