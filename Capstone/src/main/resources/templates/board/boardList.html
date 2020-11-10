@@ -33,10 +33,16 @@
                 <tr>
                     <th>번호</th>
                     <th>제목</th>
-                    <th>작성자</th>
                 </tr>
                 </thead>
                 <tbody>
+                <tr th:each="post : ${postAll}">
+                    <td th:text="${post.id}"></td>
+                    <td>
+                    <a th:href="@{'/post/' + ${post.id}}">
+                        <span th:text="${post.title}"></span>
+                    </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
