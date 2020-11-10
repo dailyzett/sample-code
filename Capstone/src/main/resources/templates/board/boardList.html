@@ -25,11 +25,28 @@
     </div>
 </header>
 <div class="container side-collapse-container">
-    <div class="row">
-        <h1>Hello</h1>
-        <p>This is a side opening nav demonstration</p>
-        <p>Make your browser smaller and the top menu wil become into a lateral slider menu</p>
-
+    <div class="container">
+        <div th:replace="fragments/bodyBoardHeader :: bodyBoardHeader" />
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div align="right">
+            <button class="btn">
+            <a th:href="@{/post}"> 글쓰기 </a>
+            </button>
+        </div>
+        <div th:replace="fragments/footer :: footer" />
     </div>
 </div>
 </body>

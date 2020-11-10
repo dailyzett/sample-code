@@ -26,9 +26,21 @@
 </header>
 <div class="container side-collapse-container">
     <div class="row">
-        <h1>Hello</h1>
-        <p>This is a side opening nav demonstration</p>
-        <p>Make your browser smaller and the top menu wil become into a lateral slider menu</p>
+        <div class="container" style="padding: 100px 0px 0px 0px">
+            <form role="form" action="/notice" method="post">
+                <div class="form-group">
+                    <label></label>
+                    <input type="text" class="form-control" placeholder="제목 입력">
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <textarea name="content" class="form-control" style="height: 400px" placeholder="게시글 작성"></textarea>
+                </div>
+                <div class="form-group" align="right">
+                    <button type="submit" class="btn">등록</button>
+                </div>
+            </form>
+        </div>
 
     </div>
 </div>
