@@ -3,6 +3,7 @@ package QRCODE.Capstone.Controller;
 
 import QRCODE.Capstone.domain.Member;
 import QRCODE.Capstone.dto.MemberDto;
+import QRCODE.Capstone.repository.MemberRepository;
 import QRCODE.Capstone.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,11 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -66,4 +71,29 @@ public class MemberController {
         model.addAttribute("members", members);
         return "members/memberList";
     }
+
+    @RequestMapping("/vision")
+    @ResponseBody
+    public Map<String, String> androidTestWithRequestAndResponse(HttpServletRequest request){
+        System.out.println("request = " + request.getParameter("id"));
+        System.out.println("request = " + request.getParameter("pw"));
+        HashMap<String, String> result = new HashMap<>();
+
+        String username = request.getParameter("id");
+        String password = request.getParameter("pw");
+
+        List<Member> members = memberService.findMembers();
+
+        for (Member member : members) {
+            if (username.equals(member.getUsername()) && password.equals(member.getPassword())) {
+                result.put("username", username);
+                result.put("password", password);
+            }
+        }
+
+        return result;
+
+    }
+
+
 }
