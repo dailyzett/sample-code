@@ -28,5 +28,8 @@ public class PlaceService {
         return searchRepository.findAllByCriteria(memberSearch);
     }
 
+    public List<OldPlace> findOldPlace(MemberSearch memberSearch) {
+        return searchRepository.findAllByCriteria(memberSearch);
+    }
 
 }

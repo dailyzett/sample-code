@@ -24,7 +24,7 @@ public class Member {
 
 
     private String currentPlace;
-    private LocalDateTime localDateTime;
+    private String localDateTime;
 
     private String name;
     private int age;

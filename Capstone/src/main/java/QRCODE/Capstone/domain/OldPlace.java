@@ -16,10 +16,10 @@ public class OldPlace {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    private LocalDateTime localDateTime;
+    private String localDateTime;
     private String place;
 }

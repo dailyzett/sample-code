@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,17 +72,23 @@ public class RestMemberController {
         Member member = memberService.findName(request.getParameter("name"));
         String place = request.getParameter("place");
         Member merge = entityManager.merge(member);
+
         System.out.println("place = " + place);
         System.out.println("member.getName() = " + member.getName());
 
         OldPlace oldPlace = new OldPlace();
         oldPlace.setName(member.getName());
         oldPlace.setPlace(place);
-        oldPlace.setLocalDateTime(LocalDateTime.now());
+
 
         placeService.save(oldPlace);
 
-        merge.setLocalDateTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        String formatDateTime = now.format(formatter);
+        oldPlace.setLocalDateTime(formatDateTime);
+        merge.setLocalDateTime(formatDateTime);
         merge.setCurrentPlace(place);
     }
 }
