@@ -6,33 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="200dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textSize="30sp"
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="233dp"
+        android:layout_height="53dp"
+        android:text="회원가입"
+        android:textSize="24sp"
+        app:backgroundTint="#587FCA"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.57"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.453" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="40dp"
-        android:layout_height="48dp"
-        android:text="ID"
-        android:textColor="#000000"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.165"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366" />
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.735" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
@@ -43,10 +29,10 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.57"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.353" />
+        app:layout_constraintHorizontal_bias="0.657"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.35" />
 
     <TextView
         android:id="@+id/textView4"
@@ -55,12 +41,12 @@
         android:text="PW"
         android:textColor="#000000"
         android:textSize="23sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.167"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.465" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.212"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.451" />
 
     <Button
         android:id="@+id/button"
@@ -69,38 +55,52 @@
         android:text="로그인"
         android:textSize="24sp"
         app:backgroundTint="#587FCA"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.418"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.657" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="233dp"
-        android:layout_height="53dp"
-        android:text="회원가입"
-        android:textSize="24sp"
-        app:backgroundTint="#587FCA"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.416"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="40dp"
+        android:layout_height="48dp"
+        android:text="ID"
+        android:textColor="#000000"
+        android:textSize="27sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.738" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.657"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.451" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="416dp"
-        android:layout_height="732dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:alpha="0.3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/unnamed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

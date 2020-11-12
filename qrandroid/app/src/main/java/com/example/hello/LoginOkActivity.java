@@ -1,6 +1,7 @@
 package com.example.hello;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ public class LoginOkActivity extends AppCompatActivity {
 
         Button qr_button = (Button)findViewById(R.id.button4);
         Button logout = (Button)findViewById(R.id.button9);
+        Button call_button = (Button)findViewById(R.id.button5);
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
@@ -48,6 +50,13 @@ public class LoginOkActivity extends AppCompatActivity {
             }
         });
 
+        call_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:010-5584-2372"));
+                startActivity(cIntent);
+            }
+        });
 
     }
 

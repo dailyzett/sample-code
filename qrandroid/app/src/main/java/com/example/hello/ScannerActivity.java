@@ -56,10 +56,11 @@ public class ScannerActivity extends AppCompatActivity {
                 contentValues.put("name", getIntent().getStringExtra("id"));
                 contentValues.put("place", result.getContents());
 
-                ScannerTask scannerTask = new ScannerTask("http://f7f02859cffb.ngrok.io/places", contentValues);
+                ScannerTask scannerTask = new ScannerTask("http://9d002e4ee5e8.ngrok.io/places", contentValues);
                 scannerTask.execute();
 
                 Intent intent = new Intent(ScannerActivity.this,LoginOkActivity.class);
+                intent.putExtra("id", getIntent().getStringExtra("id"));
                 startActivity(intent);
             }
         } else {

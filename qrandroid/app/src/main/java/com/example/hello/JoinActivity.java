@@ -96,7 +96,7 @@ public class JoinActivity extends AppCompatActivity {
                 values.put("age", age);
                 values.put("phone", phone);
 
-                NetworkTask networkTask = new NetworkTask("http://f7f02859cffb.ngrok.io/join", values);
+                NetworkTask networkTask = new NetworkTask("http://9d002e4ee5e8.ngrok.io/join", values);
                 networkTask.execute();
             }
         });
