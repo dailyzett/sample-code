@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 values.put("id", id);
                 values.put("pw", pw);
 
-                Task task = new Task("http://afe7a24ac67e.ngrok.io/vision", values);
+                Task task = new Task("http://f7f02859cffb.ngrok.io/vision", values);
                 try {
                     String s = task.execute().get();
                     JSONObject jsonObject = new JSONObject(s);

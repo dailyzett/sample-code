@@ -71,29 +71,4 @@ public class MemberController {
         model.addAttribute("members", members);
         return "members/memberList";
     }
-
-    @RequestMapping("/vision")
-    @ResponseBody
-    public Map<String, String> androidTestWithRequestAndResponse(HttpServletRequest request){
-        System.out.println("request = " + request.getParameter("id"));
-        System.out.println("request = " + request.getParameter("pw"));
-        HashMap<String, String> result = new HashMap<>();
-
-        String username = request.getParameter("id");
-        String password = request.getParameter("pw");
-
-        List<Member> members = memberService.findMembers();
-
-        for (Member member : members) {
-            if (username.equals(member.getUsername()) && password.equals(member.getPassword())) {
-                result.put("username", username);
-                result.put("password", password);
-            }
-        }
-
-        return result;
-
-    }
-
-
 }

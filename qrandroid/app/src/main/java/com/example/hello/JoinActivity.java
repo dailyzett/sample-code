@@ -1,5 +1,8 @@
 package com.example.hello;
 
+import android.app.DownloadManager;
+import android.content.ContentValues;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.nio.channels.AsynchronousChannelGroup;
 
 public class JoinActivity extends AppCompatActivity {
 
@@ -77,7 +82,42 @@ public class JoinActivity extends AppCompatActivity {
                     builder.setPositiveButton("확인",null);
                     builder.create().show();
                 }
+
+                String id = idText.getText().toString();
+                String pw = pwText.getText().toString();
+                String name = nameText.getText().toString();
+                String age = birthText.getText().toString();
+                String phone = phoneText.getText().toString();
+
+                ContentValues values = new ContentValues();
+                values.put("id", id);
+                values.put("pw", pw);
+                values.put("name", name);
+                values.put("age", age);
+                values.put("phone", phone);
+
+                NetworkTask networkTask = new NetworkTask("http://f7f02859cffb.ngrok.io/join", values);
+                networkTask.execute();
             }
         });
+    }
+
+    public class NetworkTask extends AsyncTask<Void, Void, String>{
+
+        String url;
+        ContentValues values;
+
+        public NetworkTask(String url, ContentValues values) {
+            this.url = url;
+            this.values = values;
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            String result;
+            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
+            result = requestHttpURLConnection.request(url, values);
+            return result;
+        }
     }
 }
