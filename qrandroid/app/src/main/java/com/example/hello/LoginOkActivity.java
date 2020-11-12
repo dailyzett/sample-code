@@ -22,6 +22,10 @@ public class LoginOkActivity extends AppCompatActivity {
         Button qr_button = (Button)findViewById(R.id.button4);
         Button logout = (Button)findViewById(R.id.button9);
 
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+
+
         qr_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,6 +35,7 @@ public class LoginOkActivity extends AppCompatActivity {
                 else{
                     //QR 코드 찍을 수 있도록 페이지 넘김
                     Intent intent = new Intent(LoginOkActivity.this, ScannerActivity.class);
+                    intent.putExtra("id", id);
                     startActivity(intent);
                 }
             }

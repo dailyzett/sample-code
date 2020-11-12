@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -29,33 +28,29 @@
     </div>
 </header>
 <div class="container">
-    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div th:replace="fragments/placeHeader :: placeHeader" />
     <div>
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>#</th>
-                <th>아이디</th>
                 <th>이름</th>
-                <th>나이</th>
-                <th>핸드폰 번호</th>
-                <th>현재 위치</th>
-                <th>입장 시간</th>
+                <th>장소</th>
+                <th>들어간 시간</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="member : ${members}">
-                <td th:text="${member.id}"></td>
-                <td th:text="${member.username}"></td>
-                <td th:text="${member.name}"></td>
-                <td th:text="${member.age}"></td>
-                <td th:text="${member.phone}"></td>
-                <td th:text="${member.currentPlace}"></td>
-                <td th:text="${member.localDateTime}"></td>
+            <tr th:each="place : ${places}">
+                <td th:text="${place.id}"></td>
+                <td th:text="${place.name}"></td>
+                <td th:text="${place.place}"></td>
+                <td th:text="${place.localDateTime}"></td>
             </tr>
             </tbody>
         </table>
     </div>
+
+
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
 </body>

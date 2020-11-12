@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     if(id.equalsIgnoreCase(trueid)&&pw.equalsIgnoreCase(truepw)){
                         Intent intent = new Intent(LoginActivity.this,LoginOkActivity.class);
+                        intent.putExtra("id", trueid);
                         startActivity(intent);
                     }
                     else {

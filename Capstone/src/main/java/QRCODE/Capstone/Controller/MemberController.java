@@ -41,7 +41,7 @@ public class MemberController {
         log.info("id : {}, pw : {}", username, password);
         Member member = memberService.findOne(username,password);
         if(member != null){
-            return "menu";
+            return "redirect:/notice";
         }
         return "Home";
     }

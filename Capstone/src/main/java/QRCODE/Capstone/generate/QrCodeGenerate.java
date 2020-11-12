@@ -25,7 +25,7 @@ public class QrCodeGenerate {
 
     public static void main(String[] args) {
         try {
-            generateQRCodeImage("Company", 350, 350, QR_CODE_IMAGE_PATH);
+            generateQRCodeImage("Place2", 350, 350, QR_CODE_IMAGE_PATH);
         } catch (WriterException e) {
             System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
         } catch (IOException e) {
