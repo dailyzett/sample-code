@@ -25,7 +25,7 @@ public class QrCodeGenerate {
 
     public static void main(String[] args) {
         try {
-            generateQRCodeImage(new String("한글".getBytes("UTF-8"), "ISO-8859-1"), 350, 350, QR_CODE_IMAGE_PATH);
+            generateQRCodeImage(new String("섹터 A".getBytes("UTF-8"), "ISO-8859-1"), 350, 350, QR_CODE_IMAGE_PATH);
         } catch (WriterException e) {
             System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
         } catch (IOException e) {

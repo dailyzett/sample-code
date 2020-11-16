@@ -86,7 +86,7 @@
         android:layout_width="332dp"
         android:layout_height="51dp"
         android:background="#999A9E"
-        android:text="용접마스크 착용"
+        android:text="마스크 착용"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
 
