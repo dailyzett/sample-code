@@ -144,6 +144,7 @@ public class MemberDto {
 		public MemberDto build() {
 			return new MemberDto(this);
 		}
+		
 	}
 
 	@Override

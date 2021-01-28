@@ -2,35 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
-<c:if test="${requestScope.alreadyLogin eq 'yes'}">
-	<script>
-		alert("이미 로그인 중입니다");
+<c:if test="${empty sessionScope.sessionId }">
+  	<a href="login.jsp" style="float:right;">로그인</a>
+  	<script>
+  		alert('로그인이 필요한 서비스입니다. \n로그인 페이지로 이동하시겠습니까?')
+  		document.location.href="login.jsp";
+  	</script>
+  </c:if>
+  
+<c:if test="${requestScope.doublesubmit eq true }">
+<script>
+	alert('잘못된 처리형식입니다');
+	document.location.href="question.do";
 	</script>
 </c:if>
 
-<c:if test="${sessionScope.sessionId ne 'admin' }">
+<c:if test="${requestScope.deleteAlert eq '1' }">
 	<script>
-		alert('관리자만 접근 가능한 게시판입니다');
-		document.location.href="home.do";
+		alert('게시글 삭제가 완료되었습니다.');
 	</script>
 </c:if>
 
-<c:set var="count" value="${count }"/>
-<c:set var="currentPage" value="${currentPage }"/>
-<c:set var="pageSize" value="${pageSize }"/>
 
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/common.css">
-<link rel="stylesheet" href="css/memberList.css">
-
+<link rel="stylesheet" href="css/askBoard.css">
 </head>
 <body>
-
 
 <div class="navbar">
   <a href="home.do">홈</a>
@@ -77,42 +80,60 @@
 	<img src="https://user-images.githubusercontent.com/73692337/105316214-eb767b80-5c03-11eb-9af8-7631150565f0.png">
 </div>
 
-
 <div class="sidenav">
 	<div class="menubar">
-		관리자 메뉴
+		알림마당
 	</div>
-  <a href="memberlist.do" class="select">회원 관리</a>
-  <a href="reservationmanage">예약 관리</a>
+  <a href="notice.do">공지사항</a>
+  <a href="question.do"  class="select">문의하기</a>
+  <a href="visit.do">방문후기</a>
 </div>
 
-<div class="center">
-	<h4>[총회원수 : ${count }]</h4>
+<div class="selectBoxDiv">
+		<select name="park">
+			<option value="가야산" selected="selected">가야산</option>
+			<option value="계룡산">계룡산</option>
+			<option value="내장산">내장산</option>
+			<option value="설악산">설악산</option>
+		</select>
+		
+		<select name="condition">
+			<option value="제목">제목</option>
+			<option value="작성자">작성자</option>
+		</select>
+</div>
 	
-	<div class="search-container">
-    <form action="memberListSearch.do">
-      <input type="text" placeholder="이름 검색.." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
-  	</div>
-	<table class="memberlist">
+	<div class="searchDiv">
+		<form action="memberListSearch.do">
+     	 	<input type="text" name="search">
+      		<button type="submit"><i class="fa fa-search"></i></button>
+    	</form>
+	</div>
+	
+	<div class="buttonDiv">
+		<button type="button" onclick="location.href='writeQBoard.do'">글쓰기</button>
+	</div>
+
+
+<div class="center">
+	<table class="qblist">
 		<tr>
 			<th>번호</th>
-			<th>아이디</th>
-			<th>이름</th>
-			<th>이메일</th>
-			<th>전화번호</th>
-			<th>가입날짜</th>
+			<th>공원명</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>조회수</th>
+			<th>등록일</th>
 		</tr>
-
-		<c:forEach items="${dtos }" var="member">
+		
+		<c:forEach items="${qdtos }" var="q">
 		<tr>
-			<td style="width:8%;">${member.m_id }</td>
-			<td><a href="adminMemberModify.do?username=${member.username }">${member.username }</a></td>
-			<td>${member.name }</td>
-			<td>${member.email }</td>
-			<td>${member.phone1 } - ${member.phone2 } - ${member.phone3 }</td>
-			<td>${member.regit_date2 }</td>
+			<td style="width:7%;">${q.id }</td>
+			<td>${q.parkName }</td>
+			<td style="width:50%;"><a href="questionDetail.do?qid=${q.id }">${q.title }</a></td>
+			<td>${q.writerName}</td>
+			<td style="width:7%;">${q.hit }</td>
+			<td>${q.stringFormatDate }</td>
 		</tr>
 		</c:forEach>
 		
@@ -147,9 +168,9 @@
 						
 					%>
 					<c:if test="${pageScope.startPage gt pageScope.pageBlock }">
-						<a href="memberlist.do?pageNum=<%=startPage - 10 %>" class="beforenext">이전</a>
+						<a href="question.do?pageNum=<%=startPage - 10 %>" class="beforenext">이전</a>
 					</c:if>
-					<c:set var="loop_flag" value="false"/>
+					
 					<c:if test="${not loog_flag }">
 						<c:forEach var="i" begin="${startPage }" end="${endPage }">
 						
@@ -157,20 +178,22 @@
 								${i }
 							</c:if>
 							<c:if test="${i ne currentPage }">
-								<a href="memberlist.do?pageNum=${i }" class="pagenum">${i }</a>
+								<a href="question.do?pageNum=${i }" class="pagenum">${i }</a>
 							</c:if>
 						
 						</c:forEach>
 					</c:if>
 					<c:if test="${pageScope.endPage lt pageScope.pageCount }">
-						<a href="memberlist.do?pageNum=<%=startPage + 10 %>" class="beforenext">다음</a>
+						<a href="question.do?pageNum=<%=startPage + 10 %>" class="beforenext">다음</a>
 					</c:if>
 					
 				</c:if>
 			</td>
 		</tr>
 	</table>
-</div>
-<div class="footer">
+	
+	
 </div>
 
+</body>
+</html>

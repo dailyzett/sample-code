@@ -1,17 +1,21 @@
-package command;
+package askBoardCommand;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.BoardDao;
 import dao.MemberDao;
+import dto.BoardDto;
 import dto.MemberDto;
 
-public class MemberListCommand implements MemberCommand {
+public class QBoardListCommand implements QCommand {
 
 	@Override
-	public int execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public int execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		int pageSize = 8;
 		String pageNum = request.getParameter("pageNum");
@@ -25,20 +29,21 @@ public class MemberListCommand implements MemberCommand {
 		
 		
 		int count = 0;
-		MemberDao dao = MemberDao.getInstance();
+		BoardDao dao = new BoardDao();
 		count = dao.getCount();
 		
-		ArrayList<MemberDto> dtos = new ArrayList<MemberDto>();
+		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
 		
 		if(count > 0) {
-			dtos = dao.listAllMember(startRow, pageSize);
+			dtos = dao.findAllQBoard(startRow, pageSize);
 		}
 		
-		request.setAttribute("dtos", dtos);
+		request.setAttribute("qdtos", dtos);
 		request.setAttribute("count", count);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageSize", pageSize);
+		
 		return 0;
 	}
-
+	
 }

@@ -496,7 +496,6 @@ public class MemberDao {
 	
 	public ArrayList<MemberDto> searchMemberName(int startRow, int maxContent, String search) {
 		
-		System.out.println("dao에서 " + search);
 		
 		Connection connection = null;
 		PreparedStatement pstmt = null;

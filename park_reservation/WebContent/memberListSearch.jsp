@@ -145,6 +145,8 @@
 						if(endPage > pageCount){
 							endPage = pageCount;
 						}	
+						
+						pageContext.setAttribute("endPage", endPage);
 					%>
 					<c:if test="${pageScope.startPage gt pageScope.pageBlock }">
 						<a href="memberListSearch.do?search=<%=search %>&pageNum=<%=startPage - 10 %>" class="beforenext">이전</a>

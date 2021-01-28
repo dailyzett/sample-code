@@ -30,7 +30,6 @@ public class MemberSearchCommand implements MemberCommand{
 		MemberDao dao = MemberDao.getInstance();
 		count = dao.getSearchCount(search);
 		
-		System.out.println("커맨드에서: " + search);
 		
 		dtos = dao.searchMemberName(startRow, pageSize, search);
 	
