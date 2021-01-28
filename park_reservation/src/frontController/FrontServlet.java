@@ -113,7 +113,7 @@ public class FrontServlet extends HttpServlet {
 		}
 
 		else if (com.equals("/reservation.do")) {
-			viewPage = "reservation.jsp";
+			viewPage = "reserv/reserveKaya.jsp";
 		}
 
 		else if (com.equals("/MemberIdCheckAction.do")) {
