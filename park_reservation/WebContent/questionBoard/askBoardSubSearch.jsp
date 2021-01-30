@@ -137,9 +137,9 @@
 
 			<tr>
 				<td colspan="6" align="center"><c:if
-						test="${requestScope.count gt 0 }">
+						test="${requestScope.count2 gt 0 }">
 						<%
-							int count = Integer.parseInt(request.getAttribute("count").toString());
+							int count = Integer.parseInt(request.getAttribute("count2").toString());
 								int pageSize = Integer.parseInt(request.getAttribute("pageSize").toString());
 								int currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());
 

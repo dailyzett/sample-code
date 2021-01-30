@@ -37,10 +37,6 @@
 	font-size: 25px;
 }
 
-.main {
-	margin-left: 200px; /* Same as the width of the sidenav */
-}
-
 .select {
 	padding: 6px 6px 6px 32px;
 	text-decoration: none;
@@ -51,11 +47,9 @@
 	background-color: #FFDEDE;
 }
 
-
 #content {
-	margin: 0 auto;
+	
 	padding-bottom: 45px;
-	min-height: 780px;
 	width: 1400px;
 }
 
@@ -145,3 +139,34 @@
 .title {
 	text-align: center;
 }
+
+.con1{
+	margin-top: 50px;
+	margin-left: 10px;
+}
+
+.fixtbl_head {
+	position: absolute;
+	display: table;
+	border: thin;
+	margin-top: -53px;
+	width: calc(100% - 17px);
+	width: -moz-calc(100% - 17px);
+	width: -webkit-calc(100% - 17px);
+	height: 25px;
+}
+
+th, td {
+  	 border:1px solid #ddd;
+	text-align: center;
+	padding: 8px;
+  }
+
+
+
+
+
+<!-- table -->
+
+
+

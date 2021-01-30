@@ -7,22 +7,26 @@
 	<%
 		request.setAttribute("check", true);
 	%>
-	<jsp:forward page="login.jsp" />
+	<jsp:forward page="/login.jsp" />
 </c:if>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
 
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="js/reservation.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/reservation.css">
-<script type="text/javascript" src="js/reservation.js"></script>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body onload=getDateInfo()>
 
 	<div class="navbar">
 		<a href="home.do">홈</a> <a href="reservation.do">예약하기</a>
@@ -70,10 +74,11 @@
 		<img
 			src="https://user-images.githubusercontent.com/73692337/105316214-eb767b80-5c03-11eb-9af8-7631150565f0.png">
 	</div>
-	
+
 	<div class="title">
 		<h3>야영장 예약하기</h3>
 	</div>
+
 
 	<div id="content">
 		<div id="tab">
@@ -84,7 +89,42 @@
 				<li><a href="#">설악산</a></li>
 			</ul>
 		</div>
-		
+
+		<div class="con1">
+			<table class="normal_list reser_table">
+				<thead class="fixtbl_head">
+					<tr>
+						<th rowspan="2" colspan="3">야영장</th>
+						<th style="padding-right: 0px; padding-left: 0px;" colspan="${mCount1 }">
+							<c:out value="${beforeMonth }"/>월
+						</th>
+						<th style="padding-right: 0px; padding-left: 0px;" colspan="${mCount2 }">
+						<c:out value="${afterMonth }"/>월
+						</th>
+					</tr>
+					<tr>
+						<c:forEach var="dates" items="${dates }">
+							<td><c:out value="${dates }"/></td>
+						</c:forEach>
+					</tr>
+					<tr>
+						<th colspan="3">전체 영지수</th>
+						<c:forEach var="kaya" items="${dtos }">
+							<td><c:out value="20"/></td>
+						</c:forEach>
+					</tr>
+					<tr>
+						<th colspan="3">예약가능 시설수</th>
+						<c:forEach var="kaya" items="${dtos }">
+							<td><c:out value="${kaya.reserveEnable }"/></td>
+						</c:forEach>
+					</tr>
+				</thead>
+		</div>
+<c:forEach items="${date }" var="date">
+	<c:out value="${date }"/>
+</c:forEach>
+
 	</div>
 
 </body>
