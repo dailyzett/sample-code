@@ -98,12 +98,12 @@ public class FrontServlet extends HttpServlet {
 			if (res == 1) {
 				viewPage = "home.do";
 			} else {
-				viewPage = "member/login.jsp";
+				viewPage = "login.jsp";
 			}
 		}
 
 		else if (com.equals("/logout.do")) {
-			viewPage = "member/logout.jsp";
+			viewPage = "logout.jsp";
 		}
 
 		else if (com.equals("/join.do")) {
@@ -132,19 +132,19 @@ public class FrontServlet extends HttpServlet {
 		else if (com.equals("/joinSuccess.do")) {
 			command = new JoinCommand();
 			command.execute(request, response);
-			viewPage = "member/joinSuccess.jsp";
+			viewPage = "joinSuccess.jsp";
 		}
 
 		else if (com.equals("/listOne.do")) {
 			command = new ListOneCommand();
 			command.execute(request, response);
-			viewPage = "member/listOne.jsp";
+			viewPage = "listOne.jsp";
 		}
 
 		else if (com.equals("/modifyMember.do")) {
 			command = new ModifyMemberFormCommand();
 			command.execute(request, response);
-			viewPage = "member/modifyMember.jsp";
+			viewPage = "modifyMember.jsp";
 		}
 
 		else if (com.equals("/userPasswordCheck.do")) {
@@ -153,7 +153,7 @@ public class FrontServlet extends HttpServlet {
 			if (res == 1) {
 				viewPage = "modifyMember.do";
 			} else {
-				viewPage = "member/userPasswordCheck.jsp";
+				viewPage = "userPasswordCheck.jsp";
 			}
 		}
 
@@ -163,30 +163,30 @@ public class FrontServlet extends HttpServlet {
 			if (res == 1) {
 				viewPage = "listOne.do";
 			} else {
-				viewPage = "member/modifyMember.jsp";
+				viewPage = "modifyMember.jsp";
 			}
 		}
 
 		else if (com.equals("/memberlist.do")) {
 			command = new MemberListCommand();
 			command.execute(request, response);
-			viewPage = "member/memberList.jsp";
+			viewPage = "memberList.jsp";
 		}
 
 		else if (com.equals("/memberListSearch.do")) {
 			command = new MemberSearchCommand();
 			command.execute(request, response);
-			viewPage = "member/memberListSearch.jsp";
+			viewPage = "memberListSearch.jsp";
 		}
 
 		else if (com.equals("/signOut.do")) {
-			viewPage = "member/signOut.jsp";
+			viewPage = "signOut.jsp";
 		}
 
 		else if (com.equals("/signOutSucess.do")) {
 			command = new signOutSuccessCommand();
 			command.execute(request, response);
-			viewPage = "member/signOutSuccess.jsp";
+			viewPage = "signOutSuccess.jsp";
 		}
 
 		else if (com.equals("/userSignOutCheck.do")) {
