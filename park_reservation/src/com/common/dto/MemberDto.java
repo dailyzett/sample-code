@@ -14,9 +14,20 @@ public class MemberDto {
 	private String name;
 	private String regit_date2;
 	private Timestamp regit_date;
+	private int totalPrice;
 	
 	
 	
+	
+	
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
 	public String getRegit_date2() {
 		return regit_date2;
 	}

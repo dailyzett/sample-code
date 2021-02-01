@@ -18,6 +18,8 @@ public class GetDateCommand implements ReservationCommand{
 	@Override
 	public int execute(HttpServletRequest request, HttpServletResponse response) {
 		
+		String parkName = request.getParameter("pn");
+		
 		ReservationDao rDao = new ReservationDao();
 		ArrayList<ReservationDto> dtos = new ArrayList<>();
 		
@@ -29,13 +31,13 @@ public class GetDateCommand implements ReservationCommand{
 		cal.add(Calendar.DATE, 15);
 		Date end = new Date(cal.getTimeInMillis());
 		
-		dtos = rDao.getDates(start, end);
+		dtos = rDao.getParkInfo(start, end, parkName);
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 		ArrayList<String> sArr = new ArrayList<>();
-				
+		
 				
 		for(int i = 0; i < dtos.size(); i++) {
-			String str = transFormat.format(dtos.get(i).getReserveDate());
+			String str = transFormat.format(dtos.get(i).getReservationDate());
 			String result = str.substring(str.length()-2, str.length());
 			sArr.add(result);
 		}
@@ -43,7 +45,7 @@ public class GetDateCommand implements ReservationCommand{
 		String[] arr = null;
 		ArrayList<String> months = new ArrayList<String>();
 		for(int i = 0; i < dtos.size(); i++) {
-			String str = transFormat.format(dtos.get(i).getReserveDate());
+			String str = transFormat.format(dtos.get(i).getReservationDate());
 			arr = str.split("-");
 			months.add(arr[1]);
 		}
@@ -69,6 +71,9 @@ public class GetDateCommand implements ReservationCommand{
 		request.setAttribute("mCount2", mCount2);
 		request.setAttribute("beforeMonth", beforeMonth);
 		request.setAttribute("afterMonth", afterMonth);
+		
+		
+		
 		return 0;
 		
 	

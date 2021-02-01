@@ -37,6 +37,7 @@ import com.question.command.QWriteCommand;
 import com.question.command.QWriteFormCommand;
 import com.reservation.command.GetDateCommand;
 import com.reservation.command.ReservationCommand;
+import com.reservation.command.SetReservationStatusCommand;
 
 /**
  * Servlet implementation class FrontServlet
@@ -303,6 +304,12 @@ public class FrontServlet extends HttpServlet {
 			}else {
 				viewPage = "questionBoard/askBoardSubSearch.jsp";
 			}
+		}
+		
+		else if(com.equals("/reservationProcess.do")) {
+			rCommand = new SetReservationStatusCommand();
+			rCommand.execute(request, response);
+		
 		}
 		
 		if(viewPage != null) {

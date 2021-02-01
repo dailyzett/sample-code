@@ -28,8 +28,30 @@ public class ReservationDao {
 		return connection;
 	}
 	
+	public void updateParkInfo(Date currentDate, String parkName, int re_people) {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String query = "update park set enable_people = enable_people - ? where park_name=? and reservation_date = ?";
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, re_people);
+			pstmt.setString(2, parkName);
+			pstmt.setDate(3, currentDate);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+	}
 	
-	public ArrayList<ReservationDto> getDates(Date start, Date end) {
+	
+	public ArrayList<ReservationDto> getParkInfo(Date start, Date end, String parkName) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -38,19 +60,24 @@ public class ReservationDao {
 		
 
 		try {
-			String query = "select * from kaya_park where reserve_date BETWEEN ? and ?";
+			String query = "select * from park where reservation_date BETWEEN ? and ? and park_name = ?";
 			connection = getConnection();
 			pstmt = connection.prepareStatement(query);
 			pstmt.setDate(1, start);
 			pstmt.setDate(2, end);
+			pstmt.setString(3, parkName);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				ReservationDto tempDate = new ReservationDto();
-				tempDate.setReserveDate(rs.getDate("reserve_date"));
-				tempDate.setReserveEnable(rs.getInt("reserve_enable"));
-				arr.add(tempDate);
 
+			while(rs.next()) {
+	
+				ReservationDto tempDate = new ReservationDto();
+				tempDate.setParkName(rs.getString("park_name"));
+				tempDate.setEnablePeople(rs.getInt("enable_people"));
+				tempDate.setMaxPeople(rs.getInt("max_people"));
+				tempDate.setReservationDate(rs.getDate("reservation_date"));
+				tempDate.setParkPrice(rs.getInt("park_price"));
+				tempDate.setMemberFk(rs.getInt("member_fk"));
+				arr.add(tempDate);
 			}
 
 		} catch (Exception e) {

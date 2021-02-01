@@ -3,36 +3,61 @@ package com.common.dto;
 import java.sql.Date;
 
 public class ReservationDto {
-	private String reserveId;
-	private int reserveEnable;
-	private Date reserveDate;
-	private int kayaMemberFk;
+	private String parkName;
+	private int enablePeople;
+	private Date reservationDate;
+	private int parkPrice;
+	private int memberFk;
+	private int maxPeople;
 	
 	
-	public String getReserveId() {
-		return reserveId;
+
+	public int getMaxPeople() {
+		return maxPeople;
 	}
-	public void setReserveId(String reserveId) {
-		this.reserveId = reserveId;
+
+	public void setMaxPeople(int maxPeople) {
+		this.maxPeople = maxPeople;
 	}
-	public int getReserveEnable() {
-		return reserveEnable;
+
+	public String getParkName() {
+		return parkName;
 	}
-	public void setReserveEnable(int reserveEnable) {
-		this.reserveEnable = reserveEnable;
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
 	}
-	public Date getReserveDate() {
-		return reserveDate;
+
+	public int getEnablePeople() {
+		return enablePeople;
 	}
-	public void setReserveDate(Date reserveDate) {
-		this.reserveDate = reserveDate;
+
+	public void setEnablePeople(int enablePeople) {
+		this.enablePeople = enablePeople;
 	}
-	public int getKayaMemberFk() {
-		return kayaMemberFk;
+
+	public Date getReservationDate() {
+		return reservationDate;
 	}
-	public void setKayaMemberFk(int kayaMemberFk) {
-		this.kayaMemberFk = kayaMemberFk;
+
+	public void setReservationDate(Date reservationDate) {
+		this.reservationDate = reservationDate;
 	}
-	
-	
+
+	public int getParkPrice() {
+		return parkPrice;
+	}
+
+	public void setParkPrice(int parkPrice) {
+		this.parkPrice = parkPrice;
+	}
+
+	public int getMemberFk() {
+		return memberFk;
+	}
+
+	public void setMemberFk(int memberFk) {
+		this.memberFk = memberFk;
+	}
+
 }
