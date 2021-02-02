@@ -4,7 +4,7 @@
 <%
 	session.invalidate();
 %>
-<jsp:forward page="member/home.jsp"/>
+<jsp:forward page="home.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>

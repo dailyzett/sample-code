@@ -53,7 +53,7 @@ function removeCheck() {
 <body>
 
 	<div class="navbar">
-		<a href="home.do">홈</a> <a href="reservation.do">예약하기</a>
+		<a href="home.do">홈</a> <a href="reservation.do?pn=kaya">예약하기</a>
 
 
 		<div class="dropdown">

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.common.dao.MemberDao;
+import com.common.dao.ReservationDao;
 import com.common.etc.MemberIdCheckAction;
 import com.common.etc.Token;
 import com.member.command.AdminMemberModifyFormCommand;
@@ -36,6 +37,8 @@ import com.question.command.QSearchCommand;
 import com.question.command.QWriteCommand;
 import com.question.command.QWriteFormCommand;
 import com.reservation.command.GetDateCommand;
+import com.reservation.command.MemberReservationCancelCommand;
+import com.reservation.command.MemberReservationHistoryCommand;
 import com.reservation.command.ReservationCommand;
 import com.reservation.command.SetReservationStatusCommand;
 
@@ -120,7 +123,6 @@ public class FrontServlet extends HttpServlet {
 		else if (com.equals("/reservation.do")) {
 			rCommand = new GetDateCommand();
 			rCommand.execute(request, response);
-			
 			viewPage = "reserv/reserveKaya.jsp";
 		}
 
@@ -307,9 +309,31 @@ public class FrontServlet extends HttpServlet {
 		}
 		
 		else if(com.equals("/reservationProcess.do")) {
+			int route = 0;
+			if (Token.isValid(request)) {
+				Token.set(request);
+				request.setAttribute("TOKEN_SAVE_CHECK", "TRUE");
+			} else {
+				request.setAttribute("TOKEN_SAVE_CHECK", "FALSE");
+			}
+			
 			rCommand = new SetReservationStatusCommand();
-			rCommand.execute(request, response);
+			route = rCommand.execute(request, response);
+			if(route == ReservationDao.KAYA) {
+				viewPage = "reservation.do";
+			}
+		}
 		
+		else if(com.equals("/history.do")) {
+			rCommand = new MemberReservationHistoryCommand();
+			rCommand.execute(request, response);
+			viewPage = "reserv/history.jsp";
+		}
+		
+		else if(com.equals("/cancel")) {
+			rCommand = new MemberReservationCancelCommand();
+			rCommand.execute(request, response);
+			
 		}
 		
 		if(viewPage != null) {

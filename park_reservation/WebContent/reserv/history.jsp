@@ -24,6 +24,14 @@
 </c:if>
 
 
+<c:if test="${requestScope.doublesubmit eq true }">
+	<script>
+		alert('잘못된 처리형식입니다');
+		document.location.href = "reservation.do";
+	</script>
+</c:if>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,64 +90,40 @@
 	</div>
 
 	<div class="sidenav">
-		<div class="menubar">알림마당</div>
-		<a href="notice.do">공지사항</a> <a href="question.do" class="select">문의하기</a>
-		<a href="visit.do">방문후기</a>
-	</div>
-	<form action="qBoardListSearch.do" method="post">
-		<div class="selectBoxDiv">
-			<select name="park">
-				<option value="가야산" selected="selected">가야산</option>
-				<option value="계룡산">계룡산</option>
-				<option value="내장산">내장산</option>
-				<option value="설악산">설악산</option>
-			</select> 
-			
-			<select name="condition">
-				<option value="제목">제목</option>
-				<option value="작성자">작성자</option>
-			</select>
-		</div>
-		<div class="searchDiv">
-			<input type="text" name="search">
-			<button type="submit">
-				<i class="fa fa-search"></i>
-			</button>
-		</div>
-	</form>
-	<div class="buttonDiv">
-		<button type="button" onclick="location.href='writeQBoard.do'">글쓰기</button>
-	</div>
+		<div class="menubar">나의 예약</div>
+		<a href="notice.do" class="select">예약 현황</a>
 
+	</div>
 
 	<div class="center">
 		<table class="qblist">
 			<tr>
-				<th>번호</th>
-				<th>공원명</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>조회수</th>
-				<th>등록일</th>
+				<th>고유번호</th>
+				<th>국립공원</th>
+				<th>예약일</th>
+				<th>예약인원</th>
+				<th>가격</th>
+				<th>예약현황</th>
 			</tr>
-
-			<c:forEach items="${qdtos }" var="q">
+			
+			<c:forEach items="${mrdtos }" var="m">
 				<tr>
-					<td style="width: 7%;">${q.id }</td>
-					<td>${q.parkName }</td>
-					<td style="width: 50%;"><a
-						href="questionDetail.do?qid=${q.id }">${q.title }</a></td>
-					<td>${q.writerName}</td>
-					<td style="width: 7%;">${q.hit }</td>
-					<td>${q.stringFormatDate }</td>
+					<td style="width: 7%;">${m.rId }</td>
+					<td>${m.parkName }</td>
+					<td>${m.reservationDate}</td>
+					<td style="width: 50%;">${m.count }명</td>
+					<td>${m.price}원</td>
+					
+					<td><button type="button" onclick="document.location.href='cancel?rid=${m.rId}'">예약취소</button></td>
+					
 				</tr>
 			</c:forEach>
 
 			<tr>
 				<td colspan="6" align="center"><c:if
-						test="${requestScope.count2 gt 0 }">
+						test="${requestScope.count gt 0 }">
 						<%
-							int count = Integer.parseInt(request.getAttribute("count2").toString());
+							int count = Integer.parseInt(request.getAttribute("count").toString());
 								int pageSize = Integer.parseInt(request.getAttribute("pageSize").toString());
 								int currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());
 

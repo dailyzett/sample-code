@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page import="com.common.etc.Token" %>
 
 <c:if test="${empty sessionScope.sessionId }">
 	<%
@@ -9,6 +9,38 @@
 	%>
 	<jsp:forward page="/login.jsp" />
 </c:if>
+
+<c:if test="${requestScope.reservationCheck eq true }">
+	<script>
+		alert('예약이 완료되었습니다');
+	</script>
+</c:if>
+
+<c:if test="${requestScope.reservationCheck eq false }">
+	<script>
+		alert('해당 날짜는 예약할 수 없습니다. 다른 날짜로 예약해주세요.');
+	</script>
+</c:if>
+
+<c:if test="${requestScope.overMax eq true }">
+	<script>
+		alert('예약 인원수가 예약하고자 하는 야영장의 예약 가능 인원수보다 큽니다.');
+	</script>
+</c:if>
+
+
+<c:if test="${requestScope.doublesubmit eq true }">
+	<script>
+		alert('잘못된 처리형식입니다');
+		document.location.href = "reservation.do?pn=kaya";
+	</script>
+</c:if>
+
+<%
+	if(request.getAttribute("TOKEN_KEY")==null) 
+		Token.set(request);
+%>
+
 
 
 <!DOCTYPE html>
@@ -178,6 +210,7 @@
 			<input type="hidden" name="inputDate" id="inputDate" value="없음"/>
 			<input type="hidden" name="peopleCount" id="peopleCount" value="없음"/>
 			<input type="hidden" name="inputPrice" id="inputPrice" value="없음"/>		
+			<input type="hidden" name="TOKEN_KEY" value="<%=request.getAttribute("TOKEN_KEY")%>"/>
 			<button type="submit" class="submit" id="reservationBtn">예약하기</button>
 		</form>
 		</div>
