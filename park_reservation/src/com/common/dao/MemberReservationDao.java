@@ -29,6 +29,38 @@ public class MemberReservationDao {
 		return connection;
 	}
 	
+	public int getReservationCount(int rId) {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int count = 0;
+		
+		try {
+			String query = "select count from reservation where r_id = ?";
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, rId);
+			rs = pstmt.executeQuery();
+			
+			
+			if(rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+	
 	public void deleteReservation(int rId) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -49,6 +81,78 @@ public class MemberReservationDao {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public int findByRId(int rId) {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		int res = 0;
+		
+		try {
+			String query = "select m_id_fk from reservation where r_id = ?";
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, rId);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				res = rs.getInt("m_id_fk");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return res;
+	}
+	
+	public MemberReservationDto findByOneMemberId(int mId, int rId) {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberReservationDto dto = new MemberReservationDto();
+				
+		try {
+			String query = "select * from reservation where m_id_fk=? and r_id = ? order by reservation_date desc";
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, mId);
+			pstmt.setInt(2, rId);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				
+				
+				dto.setrId(rs.getInt("r_id"));
+				dto.setmIdFk(rs.getInt("m_id_fk"));
+				dto.setReservationDate(rs.getDate("reservation_date"));
+				dto.setStatus(rs.getInt("status"));
+				dto.setCount(rs.getInt("count"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setParkName(rs.getString("park_name"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+		
 	}
 
 	
@@ -86,6 +190,7 @@ public class MemberReservationDao {
 			e.printStackTrace();
 		}finally {
 			try {
+				rs.close();
 				pstmt.close();
 				connection.close();
 			} catch (SQLException e) {

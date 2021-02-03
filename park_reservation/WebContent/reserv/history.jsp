@@ -32,6 +32,18 @@
 </c:if>
 
 
+<c:if test="${requestScope.userCheck eq true }">
+	<script>
+		alert('예약 취소가 완료되었습니다.')
+	</script>
+</c:if>
+
+<c:if test="${requestScope.userCheck eq false }">
+	<script>
+		alert('예약 취소는 본인만 가능합니다.')
+	</script>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,7 +126,7 @@
 					<td style="width: 50%;">${m.count }명</td>
 					<td>${m.price}원</td>
 					
-					<td><button type="button" onclick="document.location.href='cancel?rid=${m.rId}'">예약취소</button></td>
+					<td><button type="button" onclick="document.location.href='cancel.do?rid=${m.rId}'">예약취소</button></td>
 					
 				</tr>
 			</c:forEach>

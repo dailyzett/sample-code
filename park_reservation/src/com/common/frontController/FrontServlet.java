@@ -330,10 +330,10 @@ public class FrontServlet extends HttpServlet {
 			viewPage = "reserv/history.jsp";
 		}
 		
-		else if(com.equals("/cancel")) {
+		else if(com.equals("/cancel.do")) {
 			rCommand = new MemberReservationCancelCommand();
 			rCommand.execute(request, response);
-			
+			viewPage = "history.do";
 		}
 		
 		if(viewPage != null) {

@@ -34,6 +34,30 @@ public class ReservationDao {
 		return connection;
 	}
 	
+	public void addReservationCount(int count, String parkName, Date date) {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		
+		System.out.println(count);
+		System.out.println(parkName);
+		System.out.println(date);
+		try {
+			
+			String query = "update park set enable_people = enable_people + ? where park_name = ? and reservation_date = ?";
+			
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, count);
+			pstmt.setString(2, parkName);
+			pstmt.setDate(3, date);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
 	public int checkEnableReservation(Date date) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
