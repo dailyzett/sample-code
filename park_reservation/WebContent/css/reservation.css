@@ -217,3 +217,13 @@ td.select_peo input[type="radio"]:disabled+label {
   width: 100%;
   opacity: 0.9;
 }
+
+
+.tableLayout>table>tbody>tr>td>button {
+	background-color: transparent !important;
+    background-image: none !important;
+    border-color: transparent;
+    border: none;
+    color: #FFFFFF;
+
+}

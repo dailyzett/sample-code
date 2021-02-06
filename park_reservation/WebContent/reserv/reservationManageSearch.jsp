@@ -1,40 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<c:if test="${empty sessionScope.sessionId }">
-	<a href="login.jsp" style="float: right;">로그인</a>
+
+<c:if test="${requestScope.alreadyLogin eq 'yes'}">
 	<script>
-		alert('로그인이 필요한 서비스입니다. \n로그인 페이지로 이동하시겠습니까?')
-		document.location.href = "login.jsp";
+		alert("이미 로그인 중입니다");
 	</script>
 </c:if>
 
-<c:if test="${requestScope.doublesubmit eq true }">
+<c:if test="${sessionScope.sessionId ne 'admin' }">
 	<script>
-		alert('잘못된 처리형식입니다');
-		document.location.href = "question.do";
+		alert('관리자만 접근 가능한 게시판입니다');
+		document.location.href = "home.do";
 	</script>
 </c:if>
 
-<c:if test="${requestScope.deleteAlert eq '1' }">
-	<script>
-		alert('게시글 삭제가 완료되었습니다.');
-	</script>
-</c:if>
-
+<c:set var="count" value="${count }" />
+<c:set var="currentPage" value="${currentPage }" />
+<c:set var="pageSize" value="${pageSize }" />
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/common.css">
-<link rel="stylesheet" href="css/askBoard.css">
+<link rel="stylesheet" href="css/memberList.css">
+
 </head>
 <body>
+
 
 	<div class="navbar">
 		<a href="home.do">홈</a> <a href="reservation.do?pn=kaya">예약하기</a>
@@ -57,7 +54,8 @@
 					관리자 메뉴 <i class="fa fa-caret-down"></i>
 				</button>
 				<div class="dropdown-content">
-					<a href="memberlist.do">회원 관리</a><a href="reservationManage.do">예약 관리</a>
+					<a href="memberlist.do">회원 관리</a>
+					<a href="reservationManage.do">예약 관리</a>
 				</div>
 			</div>
 		</c:if>
@@ -81,57 +79,44 @@
 			src="https://user-images.githubusercontent.com/73692337/105316214-eb767b80-5c03-11eb-9af8-7631150565f0.png">
 	</div>
 
-	<div class="sidenav">
-		<div class="menubar">알림마당</div>
-		<a href="notice.do">공지사항</a> <a href="question.do" class="select">문의하기</a>
-		<a href="visit.do">방문후기</a>
-	</div>
-	<form action="qBoardListSearch.do" method="post">
-		<div class="selectBoxDiv">
-			<select name="park">
-				<option value="가야산" selected="selected">가야산</option>
-				<option value="계룡산">계룡산</option>
-				<option value="내장산">내장산</option>
-				<option value="설악산">설악산</option>
-			</select> 
-			
-			<select name="condition">
-				<option value="제목">제목</option>
-				<option value="작성자">작성자</option>
-			</select>
-		</div>
-		<div class="searchDiv">
-			<input type="text" name="search">
-			<button type="submit">
-				<i class="fa fa-search"></i>
-			</button>
-		</div>
-	</form>
-	<div class="buttonDiv">
-		<button type="button" onclick="location.href='writeQBoard.do'">글쓰기</button>
-	</div>
 
+	<div class="sidenav">
+		<div class="menubar">관리자 메뉴</div>
+		<a href="memberlist.do">회원 관리</a>
+		<a href="reservationManage.do" class="select">예약 관리</a>
+	</div>
 
 	<div class="center">
-		<table class="qblist">
+		<h4>[총예약수 : ${count }]</h4>
+
+		<div class="search-container">
+			<form action="reservationListSearch.do">
+				<input type="text" placeholder="고유번호 검색.." name="search">
+				<button type="submit">
+					<i class="fa fa-search"></i>
+				</button>
+			</form>
+		</div>
+		<table class="memberlist">
 			<tr>
-				<th>번호</th>
-				<th>공원명</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>조회수</th>
-				<th>등록일</th>
+				<th style="width: 10%;">고유번호</th>
+				<th>국립공원</th>
+				<th>예약일</th>
+				<th>예약인원</th>
+				<th>가격</th>
+				<th>예약현황</th>
 			</tr>
 
-			<c:forEach items="${qdtos }" var="q">
+			<c:forEach items="${dtos }" var="reservation">
 				<tr>
-					<td style="width: 7%;">${q.id }</td>
-					<td>${q.parkName }</td>
-					<td style="width: 50%;"><a
-						href="questionDetail.do?qid=${q.id }">${q.title }</a></td>
-					<td>${q.writerName}</td>
-					<td style="width: 7%;">${q.hit }</td>
-					<td>${q.stringFormatDate }</td>
+					<tr>
+					<td style="width: 7%;">${reservation.rId }</td>
+					<td>${reservation.parkName }</td>
+					<td>${reservation.reservationDate}</td>
+					<td style="width: 50%;">${reservation.count }명</td>
+					<td><fmt:formatNumber value="${reservation.price }" pattern="#,###"/>원</td>
+					
+					<td><button type="button" onclick="document.location.href='cancelAdmin.do?rid=${reservation.rId}'">예약취소</button></td>
 				</tr>
 			</c:forEach>
 
@@ -139,7 +124,7 @@
 				<td colspan="6" align="center"><c:if
 						test="${requestScope.count gt 0 }">
 						<%
-							int count = Integer.parseInt(request.getAttribute("count").toString());
+						int count = Integer.parseInt(request.getAttribute("count").toString());
 								int pageSize = Integer.parseInt(request.getAttribute("pageSize").toString());
 								int currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());
 
@@ -163,10 +148,10 @@
 								}
 						%>
 						<c:if test="${pageScope.startPage gt pageScope.pageBlock }">
-							<a href="question.do?pageNum=<%=startPage - 10%>"
+							<a href="reservationListSearch.do?pageNum=<%=startPage - 10%>"
 								class="beforenext">이전</a>
 						</c:if>
-
+						<c:set var="loop_flag" value="false" />
 						<c:if test="${not loog_flag }">
 							<c:forEach var="i" begin="${startPage }" end="${endPage }">
 
@@ -174,22 +159,21 @@
 								${i }
 							</c:if>
 								<c:if test="${i ne currentPage }">
-									<a href="question.do?pageNum=${i }" class="pagenum">${i }</a>
+									<a href="reservationListSearch.do?pageNum=${i }" class="pagenum">${i }</a>
 								</c:if>
 
 							</c:forEach>
 						</c:if>
 						<c:if test="${pageScope.endPage lt pageScope.pageCount }">
-							<a href="question.do?pageNum=<%=startPage + 10%>"
+							<a href="reservationListSearch.do?pageNum=<%=startPage + 10%>"
 								class="beforenext">다음</a>
 						</c:if>
 
 					</c:if></td>
 			</tr>
 		</table>
-
-
 	</div>
+	<div class="footer"></div>
 
 </body>
 </html>

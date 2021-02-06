@@ -57,7 +57,7 @@
 					관리자 메뉴 <i class="fa fa-caret-down"></i>
 				</button>
 				<div class="dropdown-content">
-					<a href="memberlist.do">회원 관리</a>
+					<a href="memberlist.do">회원 관리</a><a href="reservationManage.do">예약 관리</a>
 				</div>
 			</div>
 		</c:if>
@@ -121,6 +121,7 @@
 				<th>작성자</th>
 				<th>조회수</th>
 				<th>등록일</th>
+				<th>상태</th>
 			</tr>
 
 			<c:forEach items="${qdtos }" var="q">
@@ -132,11 +133,18 @@
 					<td>${q.writerName}</td>
 					<td style="width: 7%;">${q.hit }</td>
 					<td>${q.stringFormatDate }</td>
+					<c:if test="${q.status eq '1' }">
+						<td style="font-weight: bold; color: green; ">답변 완료</td>	
+					</c:if>
+					<c:if test="${q.status eq '0' }">
+						<td> </td>	
+					</c:if>
+					
 				</tr>
 			</c:forEach>
 
 			<tr>
-				<td colspan="6" align="center"><c:if
+				<td colspan="7" align="center"><c:if
 						test="${requestScope.count gt 0 }">
 						<%
 							int count = Integer.parseInt(request.getAttribute("count").toString());

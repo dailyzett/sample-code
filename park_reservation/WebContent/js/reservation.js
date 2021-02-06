@@ -23,7 +23,7 @@ $(document).ready(function() {
 		var people = $("#btn01").val()
 		
 		if ($("input[id=btn01]:checked").val() == "1") {
-			$('#price').html(price * people);
+			$('#price').html((price * people).toLocaleString());
 			$('#peopleCount').val(people);
 			$('#inputPrice').val(price * people);
 		}
@@ -35,7 +35,7 @@ $(document).ready(function() {
 		var people = $("#btn02").val()
 
 		if ($("input[id=btn02]:checked").val() == "2") {
-			$('#price').html(price * people);
+			$('#price').html((price * people).toLocaleString());
 			$('#peopleCount').val(people);
 			$('#inputPrice').val(price * people);
 		}
@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 
 		if ($("input[id=btn03]:checked").val() == "3") {
-			$('#price').html(price * people);
+			$('#price').html((price * people).toLocaleString());
 			$('#peopleCount').val(people);
 			$('#inputPrice').val(price * people);
 		}
@@ -61,7 +61,7 @@ $(document).ready(function() {
 
 
 		if ($("input[id=btn04]:checked").val() == "4") {
-			$('#price').html(price * people);
+			$('#price').html((price * people).toLocaleString());
 			$('#peopleCount').val(people);
 			$('#inputPrice').val(price * people);
 			
@@ -75,7 +75,7 @@ $(document).ready(function() {
 
 
 		if ($("input[id=btn05]:checked").val() == "5") {
-			$('#price').html(price * people);
+			$('#price').html((price * people).toLocaleString());
 			$('#peopleCount').val(people);
 			$('#inputPrice').val(price * people);
 		}

@@ -36,9 +36,12 @@ import com.question.command.QReplyViewCommand;
 import com.question.command.QSearchCommand;
 import com.question.command.QWriteCommand;
 import com.question.command.QWriteFormCommand;
+import com.reservation.command.AdminReservaionCommand;
+import com.reservation.command.AdminReservationCancelCommand;
 import com.reservation.command.GetDateCommand;
 import com.reservation.command.MemberReservationCancelCommand;
 import com.reservation.command.MemberReservationHistoryCommand;
+import com.reservation.command.MemberReservationSearchCommand;
 import com.reservation.command.ReservationCommand;
 import com.reservation.command.SetReservationStatusCommand;
 
@@ -334,6 +337,25 @@ public class FrontServlet extends HttpServlet {
 			rCommand = new MemberReservationCancelCommand();
 			rCommand.execute(request, response);
 			viewPage = "history.do";
+		}
+		
+		else if(com.equals("/reservationManage.do")) {
+			rCommand = new AdminReservaionCommand();
+			rCommand.execute(request, response);
+			viewPage = "reserv/reservationManage.jsp";
+		}
+		
+		else if(com.equals("/reservationListSearch.do")) {
+			
+			rCommand = new MemberReservationSearchCommand();
+			rCommand.execute(request, response);
+			viewPage = "reserv/reservationManageSearch.jsp";
+		}
+		
+		else if(com.equals("/cancelAdmin.do")) {
+			rCommand = new AdminReservationCancelCommand();
+			rCommand.execute(request, response);
+			viewPage = "reservationManage.do";
 		}
 		
 		if(viewPage != null) {

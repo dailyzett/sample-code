@@ -38,9 +38,7 @@ public class ReservationDao {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		
-		System.out.println(count);
-		System.out.println(parkName);
-		System.out.println(date);
+		
 		try {
 			
 			String query = "update park set enable_people = enable_people + ? where park_name = ? and reservation_date = ?";
@@ -55,6 +53,13 @@ public class ReservationDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -107,6 +112,13 @@ public class ReservationDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		

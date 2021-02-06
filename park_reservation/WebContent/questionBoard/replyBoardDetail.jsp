@@ -49,7 +49,7 @@
 					관리자 메뉴 <i class="fa fa-caret-down"></i>
 				</button>
 				<div class="dropdown-content">
-					<a href="memberlist.do">회원 관리</a>
+					<a href="memberlist.do">회원 관리</a><a href="reservationManage.do">예약 관리</a>
 				</div>
 			</div>
 		</c:if>

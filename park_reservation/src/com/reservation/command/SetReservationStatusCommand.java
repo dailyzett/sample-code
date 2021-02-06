@@ -40,7 +40,7 @@ public class SetReservationStatusCommand implements ReservationCommand{
 		
 		if("TRUE".equals(request.getAttribute("TOKEN_SAVE_CHECK"))) {
 			if(count > 0) {
-				if(count - re_people > 0) {
+				if(count - re_people >= 0) {
 					rDao.updateParkInfo(commandDate, parkName, re_people); // 공원 예약 정보 업데이트
 					mDao.setMemberReservation(mId, commandDate, status, price, re_people, parkName); // 해당 회원 예약 정보 업데이트
 					request.setAttribute("reservationCheck", true);

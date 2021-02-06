@@ -22,7 +22,6 @@ public class MemberReservationCancelCommand implements ReservationCommand{
 		int mId = 0;
 		int count = 0;
 		String parkName = null;
-		Date date = null;
 		
 		HttpSession session = request.getSession();
 		String username = (String)session.getAttribute("sessionId");
@@ -37,6 +36,7 @@ public class MemberReservationCancelCommand implements ReservationCommand{
 		mFkId = mRDao.findByRId(rid);
 		count = mRDao.getReservationCount(rid);
 		reservationDto = mRDao.findByOneMemberId(mId, rid);
+		
 		
 		if(reservationDto.getParkName().equals("가야산")) {
 			parkName = "kaya";

@@ -29,6 +29,38 @@ public class MemberReservationDao {
 		return connection;
 	}
 	
+	public int getMemberFkId(int rId) {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int mFkId = 0;
+		
+		try {
+			String query = "select m_id_fk from reservation where r_id = ?";
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, rId);
+			rs = pstmt.executeQuery();
+			
+			
+			if(rs.next()) {
+				mFkId = rs.getInt("m_id_fk");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return mFkId;
+	}
+	
 	public int getReservationCount(int rId) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -154,22 +186,254 @@ public class MemberReservationDao {
 		return dto;
 		
 	}
+	
+	
+	public int getCount(int mId) {
+		int count = 0;
+		
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "select count(*) from reservation where m_id_fk = ?";
+		
+		try {
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, mId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				connection.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+	
+	public int getCountByRId(int rId) {
+		int count = 0;
+		
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "select count(*) from reservation where r_id = ?";
+		
+		try {
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, rId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				connection.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+	
+	public int getCountAll() {
+		int count = 0;
+		
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "select count(*) from reservation";
+		
+		try {
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				connection.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
 
 	
 	
-	public ArrayList<MemberReservationDto> findByMemberId(int mId) {
+	public ArrayList<MemberReservationDto> findByMemberId(int mId, int seq, int row) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		
 		ArrayList<MemberReservationDto> dtos = new ArrayList<MemberReservationDto>();
-		
+		String query = "SELECT r_id, m_id_fk, reservation_date, status, count, price, park_name " + 
+		"FROM " +
+		  "(" +
+		  " SELECT SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name " + 
+		  "FROM " +
+		  "(" +
+		    " SELECT ROWNUM AS SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name " +
+		    "FROM " +
+		      "(" +
+		        " SELECT * " +
+		        "FROM reservation where m_id_fk = ? " +
+		        "ORDER BY reservation_date DESC " +
+		      ")" +
+		  ")" +
+		" WHERE SEQ >= ? " +
+		")" +
+		" WHERE ROWNUM <= ?";
 		try {
-			String query = "select * from reservation where m_id_fk=? order by reservation_date desc";
+			
 			connection = getConnection();
 			pstmt = connection.prepareStatement(query);
 			pstmt.setInt(1, mId);
+			pstmt.setInt(2, seq);
+			pstmt.setInt(3, row);
+			
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				
+				MemberReservationDto dto = new MemberReservationDto();
+				
+				dto.setrId(rs.getInt("r_id"));
+				dto.setmIdFk(rs.getInt("m_id_fk"));
+				dto.setReservationDate(rs.getDate("reservation_date"));
+				dto.setStatus(rs.getInt("status"));
+				dto.setCount(rs.getInt("count"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setParkName(rs.getString("park_name"));
+				
+				dtos.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return dtos;
+	}
+	
+	
+	public ArrayList<MemberReservationDto> findByRId(int rId, int seq, int row) {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<MemberReservationDto> dtos = new ArrayList<MemberReservationDto>();
+		String query = "SELECT r_id, m_id_fk, reservation_date, status, count, price, park_name " + 
+		"FROM " +
+		  "(" +
+		  " SELECT SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name " + 
+		  "FROM " +
+		  "(" +
+		    " SELECT ROWNUM AS SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name " +
+		    "FROM " +
+		      "(" +
+		        " SELECT * " +
+		        "FROM reservation where r_id=? " +
+		        "ORDER BY reservation_date DESC " +
+		      ")" +
+		  ")" +
+		" WHERE SEQ >= ? " +
+		")" +
+		" WHERE ROWNUM <= ?";
+		try {
+			
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, rId);
+			pstmt.setInt(2, seq);
+			pstmt.setInt(3, row);
+			
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				
+				MemberReservationDto dto = new MemberReservationDto();
+				
+				dto.setrId(rs.getInt("r_id"));
+				dto.setmIdFk(rs.getInt("m_id_fk"));
+				dto.setReservationDate(rs.getDate("reservation_date"));
+				dto.setStatus(rs.getInt("status"));
+				dto.setCount(rs.getInt("count"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setParkName(rs.getString("park_name"));
+				
+				dtos.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return dtos;
+	}
+	
+	
+	public ArrayList<MemberReservationDto> findByAll(int seq, int row) {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<MemberReservationDto> dtos = new ArrayList<MemberReservationDto>();
+		String query = "SELECT r_id, m_id_fk, reservation_date, status, count, price, park_name " + 
+		"FROM " +
+		  "(" +
+		  " SELECT SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name " + 
+		  "FROM " +
+		  "(" +
+		    " SELECT ROWNUM AS SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name " +
+		    "FROM " +
+		      "(" +
+		        " SELECT * " +
+		        "FROM reservation " +
+		        "ORDER BY reservation_date DESC " +
+		      ")" +
+		  ")" +
+		" WHERE SEQ >= ? " +
+		")" +
+		" WHERE ROWNUM <= ?";
+		try {
+			
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, seq);
+			pstmt.setInt(2, row);
+			
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {

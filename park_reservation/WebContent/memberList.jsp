@@ -55,7 +55,7 @@
   			<i class="fa fa-caret-down"></i>
   		</button>
   		<div class="dropdown-content">
-  			<a href="memberlist.do">회원 관리</a>
+  			<a href="memberlist.do">회원 관리</a><a href="reservationManage.do">예약 관리</a>
   		</div>
   	</div>
   </c:if>
@@ -83,7 +83,7 @@
 		관리자 메뉴
 	</div>
   <a href="memberlist.do" class="select">회원 관리</a>
-  <a href="reservationmanage">예약 관리</a>
+  <a href="reservationManage.do">예약 관리</a>
 </div>
 
 <div class="center">
@@ -173,4 +173,8 @@
 </div>
 <div class="footer">
 </div>
+
+</body>
+</html>
+
 

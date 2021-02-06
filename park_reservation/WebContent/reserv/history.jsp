@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <c:if test="${empty sessionScope.sessionId }">
 	<a href="login.jsp" style="float: right;">로그인</a>
@@ -77,7 +79,7 @@
 					관리자 메뉴 <i class="fa fa-caret-down"></i>
 				</button>
 				<div class="dropdown-content">
-					<a href="memberlist.do">회원 관리</a>
+					<a href="memberlist.do">회원 관리</a><a href="reservationManage.do">예약 관리</a>
 				</div>
 			</div>
 		</c:if>
@@ -103,7 +105,7 @@
 
 	<div class="sidenav">
 		<div class="menubar">나의 예약</div>
-		<a href="notice.do" class="select">예약 현황</a>
+		<a href="history.do" class="select">예약 현황</a>
 
 	</div>
 
@@ -124,7 +126,7 @@
 					<td>${m.parkName }</td>
 					<td>${m.reservationDate}</td>
 					<td style="width: 50%;">${m.count }명</td>
-					<td>${m.price}원</td>
+					<td><fmt:formatNumber value="${m.price }" pattern="#,###"/>원</td>
 					
 					<td><button type="button" onclick="document.location.href='cancel.do?rid=${m.rId}'">예약취소</button></td>
 					
@@ -159,7 +161,7 @@
 								}
 						%>
 						<c:if test="${pageScope.startPage gt pageScope.pageBlock }">
-							<a href="question.do?pageNum=<%=startPage - 10%>"
+							<a href="history.do?pageNum=<%=startPage - 10%>"
 								class="beforenext">이전</a>
 						</c:if>
 
@@ -170,13 +172,13 @@
 								${i }
 							</c:if>
 								<c:if test="${i ne currentPage }">
-									<a href="question.do?pageNum=${i }" class="pagenum">${i }</a>
+									<a href="history.do?pageNum=${i }" class="pagenum">${i }</a>
 								</c:if>
 
 							</c:forEach>
 						</c:if>
 						<c:if test="${pageScope.endPage lt pageScope.pageCount }">
-							<a href="question.do?pageNum=<%=startPage + 10%>"
+							<a href="history.do?pageNum=<%=startPage + 10%>"
 								class="beforenext">다음</a>
 						</c:if>
 

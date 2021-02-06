@@ -126,10 +126,12 @@ public class BoardDao {
 				int hit = rs.getInt("qb_hit");
 				String writerName = rs.getString("writer_name");
 				String parkName = rs.getString("park_name");
+				int status = rs.getInt("status");
 
 				BoardDto dto = new BoardDto();
 				dto.setId(id);
 				dto.setTitle(title);
+				dto.setStatus(status);
 				dto.setWriteDate(date);
 				dto.setHit(hit);
 				dto.setWriterName(writerName);
@@ -184,9 +186,11 @@ public class BoardDao {
 				int hit = rs.getInt("qb_hit");
 				String writerName = rs.getString("writer_name");
 				String parkName = rs.getString("park_name");
+				int status = rs.getInt("status");
 
 				BoardDto dto = new BoardDto();
 				dto.setId(id);
+				dto.setStatus(status);
 				dto.setTitle(title);
 				dto.setWriteDate(date);
 				dto.setHit(hit);
@@ -474,9 +478,9 @@ public class BoardDao {
 
 		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
 
-		String sql = "SELECT qb_id, qb_title, qb_date, qb_hit, writer_name, park_name " + "FROM " + "("
-				+ " SELECT SEQ, qb_id, qb_title, qb_date, qb_hit, writer_name, park_name " + "FROM " + "("
-				+ " SELECT ROWNUM AS SEQ, qb_id, qb_title, qb_date, qb_hit, writer_name, park_name " + "FROM " + "("
+		String sql = "SELECT qb_id, qb_title, qb_date, qb_hit, writer_name, park_name,status " + "FROM " + "("
+				+ " SELECT SEQ, qb_id, qb_title, qb_date, qb_hit, writer_name, park_name, status " + "FROM " + "("
+				+ " SELECT ROWNUM AS SEQ, qb_id, qb_title, qb_date, qb_hit, writer_name, park_name, status " + "FROM " + "("
 				+ " SELECT * " + "FROM question_board " + "ORDER BY qb_id DESC " + ")" + ")" + " WHERE SEQ >= ? " + ")"
 				+ " WHERE ROWNUM <= ?";
 
@@ -495,9 +499,11 @@ public class BoardDao {
 				int hit = rs.getInt("qb_hit");
 				String writerName = rs.getString("writer_name");
 				String parkName = rs.getString("park_name");
+				int status = rs.getInt("status");
 
 				BoardDto dto = new BoardDto();
 				dto.setId(id);
+				dto.setStatus(status);
 				dto.setTitle(title);
 				dto.setWriteDate(date);
 				dto.setHit(hit);
