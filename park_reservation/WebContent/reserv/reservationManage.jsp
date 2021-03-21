@@ -10,10 +10,10 @@
 	</script>
 </c:if>
 
-<c:if test="${sessionScope.sessionId ne 'admin' }">
+<c:if test="${sessionScope.sessionRole ne 'admin' }">
 	<script>
 		alert('관리자만 접근 가능한 게시판입니다');
-		document.location.href = "home.do";
+		document.location.href = "home";
 	</script>
 </c:if>
 
@@ -34,7 +34,7 @@
 
 
 	<div class="navbar">
-		<a href="home.do">홈</a> <a href="reservation.do?pn=kaya">예약하기</a>
+		<a href="home">홈</a> <a href="reservation?pn=kaya">예약하기</a>
 
 
 		<div class="dropdown">
@@ -42,33 +42,33 @@
 				알림마당 <i class="fa fa-caret-down"></i>
 			</button>
 			<div class="dropdown-content">
-				<a href="notice.do">공지사항</a> <a href="question.do">문의하기</a> <a
-					href="visit.do">방문후기</a>
+				<a href="notice">공지사항</a> <a href="question">문의하기</a> <a
+					href="visit">방문후기</a>
 			</div>
 		</div>
-		<a href="history.do">나의 예약 내역</a>
+		<a href="history">나의 예약 내역</a>
 
-		<c:if test="${sessionScope.sessionId eq 'admin' }">
+		<c:if test="${sessionScope.sessionRole eq 'admin'}">
 			<div class="dropdown">
 				<button class="dropbtn">
 					관리자 메뉴 <i class="fa fa-caret-down"></i>
 				</button>
 				<div class="dropdown-content">
-					<a href="memberlist.do">회원 관리</a> <a href="reservationManage.do">예약
+					<a href="memberlist">회원 관리</a> <a href="reservationManage">예약
 						관리</a>
 				</div>
 			</div>
 		</c:if>
 
 
-		<a href="listOne.do" style="float: right;">마이페이지</a>
+		<a href="listOne" style="float: right;">마이페이지</a>
 
 		<c:if test="${empty sessionScope.sessionId }">
-			<a href="login.jsp" style="float: right;">로그인</a>
+			<a href="login" style="float: right;">로그인</a>
 		</c:if>
 
 		<c:if test="${!empty sessionScope.sessionId  }">
-			<a href="logout.do" style="float: right">로그아웃</a>
+			<a href="logout" style="float: right">로그아웃</a>
 			<a href='#' onclick="return false" style="float: right;"><%=session.getAttribute("sessionId")%>님
 				안녕하세요</a>
 		</c:if>
@@ -82,7 +82,7 @@
 
 	<div class="sidenav">
 		<div class="menubar">관리자 메뉴</div>
-		<a href="memberlist.do">회원 관리</a> <a href="reservationManage.do"
+		<a href="memberlist">회원 관리</a> <a href="reservationManage"
 			class="select">예약 관리</a>
 	</div>
 
@@ -118,7 +118,7 @@
 							pattern="#,###" />원</td>
 
 					<td><button type="button"
-							onclick="document.location.href='cancelAdmin.do?rid=${reservation.rId}'">예약취소</button></td>
+							onclick="document.location.href='cancelAdmin?rid=${reservation.rId}'">예약취소</button></td>
 				</tr>
 			</c:forEach>
 
@@ -150,7 +150,7 @@
 								}
 						%>
 						<c:if test="${pageScope.startPage gt pageScope.pageBlock }">
-							<a href="reservationManage.do?pageNum=<%=startPage - 10%>"
+							<a href="reservationManage?pageNum=<%=startPage - 10%>"
 								class="beforenext">이전</a>
 						</c:if>
 						<c:set var="loop_flag" value="false" />
@@ -161,13 +161,13 @@
 								${i }
 							</c:if>
 								<c:if test="${i ne currentPage }">
-									<a href="reservationManage.do?pageNum=${i }" class="pagenum">${i }</a>
+									<a href="reservationManage?pageNum=${i }" class="pagenum">${i }</a>
 								</c:if>
 
 							</c:forEach>
 						</c:if>
 						<c:if test="${pageScope.endPage lt pageScope.pageCount }">
-							<a href="reservationManage.do?pageNum=<%=startPage + 10%>"
+							<a href="reservationManage?pageNum=<%=startPage + 10%>"
 								class="beforenext">다음</a>
 						</c:if>
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+<mapper namespace="memberNS">
+
+	<insert id="insertMember">
+	<selectKey keyProperty="m_id" resultType="int" order="BEFORE">
+		select member_seq.NEXTVAL from DUAL
+	</selectKey>
+		insert into member(m_id, username, pw, name, email, phone_1, phone_2, phone_3, regit_date) values
+		(#{m_id}, #{username}, #{pw}, #{name}, #{email}, #{phone_1}, #{phone_2}, #{phone_3}, sysdate)
+	</insert>
+	
+	<select id="selectUsernameByUsername" parameterType="string" resultType="string">
+		select username from member where username=#{username}
+	</select>
+	
+	<select id="selectIdByUsername" resultType="int" parameterType="string">
+		select m_id from member where username=#{username}
+	</select>
+	
+	<select id="selectMemberByID" parameterType="int" resultType="Member">
+		select * from member where m_id=#{m_id}
+	</select>
+	
+	<select id="selectPasswordByUsername" resultType="string" parameterType="string">
+		select pw from member where username=#{username}
+	</select>
+	
+	<select id="selectMemberByUsername" resultType="Member" parameterType="string">
+		select * from member where username=#{username}	
+	</select>
+	
+	<update id="updateMemberInfo" parameterType="Member">
+		update member set name=#{name}, email=#{email}, phone_1=#{phone_1}, 
+		phone_2=#{phone_2}, phone_3=#{phone_3}, pw=#{pw} where username=#{username}
+	</update>
+	
+	<update id="updateMemberInfoById" parameterType="Member">
+		update member set username= #{username}, name=#{name}, email=#{email}, phone_1=#{phone_1}, 
+		phone_2=#{phone_2}, phone_3=#{phone_3}, pw=#{pw} where m_id=#{m_id}
+	</update>
+	
+	<select id="selectMemberCount" resultType="int">
+		select count(*) from member
+	</select>
+	
+	<select id="selectSearchMemberCount" resultType="int">
+		select count(*) from member where UPPER(name) like UPPER('%' || #{value} || '%')
+	</select>
+	
+	<select id="selectAllMemberPaging" resultType="Member" parameterType="hashmap">
+		SELECT m_id, username, name, email, phone_1, phone_2, phone_3, regit_date FROM (
+		 SELECT SEQ, m_id, username, name, email, phone_1, phone_2, phone_3, regit_date FROM (
+		  SELECT ROWNUM AS SEQ, m_id, username, name, email, phone_1, phone_2, phone_3, regit_date FROM (
+		   SELECT * FROM member ORDER BY m_id DESC )
+		   ) WHERE SEQ <![CDATA[  >=  ]]> #{seq}
+		   ) WHERE ROWNUM <![CDATA[  <=    ]]> #{rownum}
+	</select>
+	
+	<select id="selectSearchMemberPaging" resultType="Member" parameterType="hashmap">
+		SELECT m_id, username, name, email, phone_1, phone_2, phone_3, regit_date FROM (
+		 SELECT SEQ, m_id, username, name, email, phone_1, phone_2, phone_3, regit_date FROM (
+		  SELECT ROWNUM AS SEQ, m_id, username, name, email, phone_1, phone_2, phone_3, regit_date FROM (
+		   SELECT * FROM member  where UPPER(name) like UPPER('%' || #{value} || '%') ORDER BY m_id DESC )
+		   ) WHERE SEQ <![CDATA[  >=  ]]> #{seq}
+		   ) WHERE ROWNUM <![CDATA[  <=    ]]> #{rownum}
+	</select>
+	
+</mapper>

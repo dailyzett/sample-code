@@ -18,8 +18,8 @@
 
 
 <div class="navbar">
-  <a href="home.do">홈</a>
-  <a href="reservation.do?pn=kaya">예약하기</a>
+  <a href="home">홈</a>
+  <a href="reservation?pn=kaya">예약하기</a>
   
 
   
@@ -28,13 +28,13 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="notice.do">공지사항</a>
-      <a href="question.do">문의하기</a>
-      <a href="visit.do">방문후기</a>
+      <a href="notice">공지사항</a>
+      <a href="question">문의하기</a>
+      <a href="visit">방문후기</a>
     </div>
   </div>
   
-  <a href="history.do">나의 예약 내역</a>
+  <a href="history">나의 예약 내역</a>
 </div>
 
 
@@ -43,7 +43,7 @@
 <h1>탈퇴가 완료되었습니다.</h1><br/>
 <h2>다음에 더 좋은 서비스로 보답하겠습니다.</h2>
 <div class="loginDiv">
-	<button type="button" onclick="location.href='login.jsp'">로그인</button>
+	<button type="button" onclick="location.href='login'">로그인</button>
 </div>
 </body>
 </html>

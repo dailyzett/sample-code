@@ -32,9 +32,6 @@ public class QBoardDetailCommand implements QCommand{
 		}else {
 			return 1;
 		}
-		
-		
-		
 	}
 
 }

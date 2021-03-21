@@ -7,7 +7,7 @@
 	<%
 	request.setAttribute("check", true);
 	%>
-	<jsp:forward page="/login.jsp" />
+	<jsp:forward page="/login" />
 </c:if>
 
 <c:if test="${requestScope.reservationCheck eq true }">
@@ -32,7 +32,7 @@
 <c:if test="${requestScope.doublesubmit eq true }">
 	<script>
 		alert('잘못된 처리형식입니다');
-		document.location.href = "reservation.do?pn=kaya";
+		document.location.href = "reservation?pn=kaya";
 	</script>
 </c:if>
 
@@ -61,7 +61,7 @@ if (request.getAttribute("TOKEN_KEY") == null)
 <body>
 
 	<div class="navbar">
-		<a href="home.do">홈</a> <a href="reservation.do?pn=kaya">예약하기</a>
+		<a href="home">홈</a> <a href="reservation?pn=kaya">예약하기</a>
 
 
 
@@ -70,34 +70,34 @@ if (request.getAttribute("TOKEN_KEY") == null)
 				알림마당 <i class="fa fa-caret-down"></i>
 			</button>
 			<div class="dropdown-content">
-				<a href="notice.do">공지사항</a> <a href="question.do">문의하기</a> <a
-					href="visit.do">방문후기</a>
+				<a href="notice">공지사항</a> <a href="question">문의하기</a> <a
+					href="visit">방문후기</a>
 			</div>
 		</div>
 
-		<a href="history.do">나의 예약 내역</a>
+		<a href="history">나의 예약 내역</a>
 
-		<c:if test="${sessionScope.sessionId eq 'admin' }">
+		<c:if test="${sessionScope.sessionRole eq 'admin'}">
 			<div class="dropdown">
 				<button class="dropbtn">
 					관리자 메뉴 <i class="fa fa-caret-down"></i>
 				</button>
 				<div class="dropdown-content">
-					<a href="memberlist.do">회원 관리</a><a href="reservationManage.do">예약
+					<a href="memberlist">회원 관리</a><a href="reservationManage">예약
 						관리</a>
 				</div>
 			</div>
 		</c:if>
 
 
-		<a href="listOne.do" style="float: right;">마이페이지</a>
+		<a href="listOne" style="float: right;">마이페이지</a>
 
 		<c:if test="${empty sessionScope.sessionId }">
-			<a href="login.jsp" style="float: right;">로그인</a>
+			<a href="login" style="float: right;">로그인</a>
 		</c:if>
 
 		<c:if test="${!empty sessionScope.sessionId  }">
-			<a href="logout.do" style="float: right">로그아웃</a>
+			<a href="logout" style="float: right">로그아웃</a>
 			<a href='#' onclick="return false" style="float: right;"><%=session.getAttribute("sessionId")%>님
 				안녕하세요</a>
 		</c:if>
@@ -116,10 +116,10 @@ if (request.getAttribute("TOKEN_KEY") == null)
 	<div id="content">
 		<div id="tab">
 			<ul class="tab_menu">
-				<li class="on"><a href="reservation.do?pn=kaya">가야산</a></li>
-				<li><a href="reservation.do?pn=kelong">계룡산</a></li>
-				<li><a href="reservation.do?pn=naejang">내장산</a></li>
-				<li><a href="reservation.do?pn=seolak">설악산</a></li>
+				<li class="on"><a href="reservation?pn=kaya">가야산</a></li>
+				<li><a href="reservation?pn=kelong">계룡산</a></li>
+				<li><a href="reservation?pn=naejang">내장산</a></li>
+				<li><a href="reservation?pn=seolak">설악산</a></li>
 			</ul>
 		</div>
 

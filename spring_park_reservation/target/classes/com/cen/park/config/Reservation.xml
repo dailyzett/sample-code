@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reservationNs">
+
+	<select id="selectParkInfo" parameterType="map" resultType="Park">
+		select * from park where reservation_date 
+		BETWEEN to_date(#{start},'yyyy-mm-dd') and to_date(#{end}, 'yyyy-mm-dd') and park_name = #{park_name}
+	</select>
+	
+	<select id="selectEnablePeople" resultType="int" parameterType="map">
+		select enable_people from park where reservation_date = to_date(#{inputDate}, 'yyyy-mm-dd') and park_name=#{park_name}
+	</select>
+	
+	<update id="updateParkInfo" parameterType="map">
+		update park set enable_people = enable_people - #{peopleCount} where park_name=#{park_name} and reservation_date = to_date(#{inputDate}, 'yyyy-mm-dd')
+	</update>
+	
+	<insert id="insertReservationInfo" parameterType="map">
+	<selectKey keyProperty="r_id" resultType="int" order="BEFORE">
+		select reserve_seq.NEXTVAL from DUAL
+	</selectKey>
+		insert into reservation (r_id, m_id_fk, reservation_date, status, price, count,park_name) values (#{r_id}, #{m_id_fk}, #{reservation_date}, #{status}, #{price}, #{count}, #{park_name})
+	</insert>
+	
+	<select id="selectAllReservationInfo" resultType="Reservation" parameterType="hashmap">
+		SELECT r_id, m_id_fk, reservation_date, status, count, price, park_name FROM (
+		 SELECT SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name FROM (
+		  SELECT ROWNUM AS SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name  FROM (
+		   SELECT * FROM reservation where m_id_fk = #{m_id_fk}  ORDER BY reservation_date DESC )
+		   ) WHERE SEQ <![CDATA[  >=  ]]> #{seq}
+		   ) WHERE ROWNUM <![CDATA[  <=    ]]> #{rownum}
+	</select>
+	
+	<select id="selectAllReservationInfoByRId" resultType="Reservation" parameterType="hashmap">
+		SELECT r_id, m_id_fk, reservation_date, status, count, price, park_name FROM (
+		 SELECT SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name FROM (
+		  SELECT ROWNUM AS SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name  FROM (
+		   SELECT * FROM reservation where r_id = #{r_id}  ORDER BY reservation_date DESC )
+		   ) WHERE SEQ <![CDATA[  >=  ]]> #{seq}
+		   ) WHERE ROWNUM <![CDATA[  <=    ]]> #{rownum}
+	</select>
+	
+	<select id = "selectCountReservation" parameterType="int" resultType="int"> 
+		select count(*) from reservation where m_id_fk = #{m_id_fk}
+	</select>
+	
+	<delete id= "deleteReservation" parameterType="int">
+		delete from reservation where r_id = #{r_id}
+	</delete>
+	
+	<update id="addParkStatus" parameterType="map">
+		update park set enable_people = enable_people + #{enable_people} where park_name = #{park_name}
+		 and reservation_date = TO_DATE(#{reservation_date}, 'yyyy/mm/dd')
+	</update>
+	
+	<select id="selectMemberIdByReservationId" resultType="int" parameterType="int">
+		select m_id_fk from reservation where r_id = #{r_id}
+	</select>
+	
+	<select id="selectCountByReservationId" resultType="int">
+		select count(*) from reservation where r_id = #{r_id}
+	</select>
+	
+	<select id="selectParkByReservationId" resultType="string">
+		select park_name from reservation where r_id =#{r_id}
+	</select>
+	
+	 <select id="selectCountAll" resultType="int">
+		select count(*) from reservation
+	</select>
+	
+	<select id="selectAllParkByNoCondition" resultType="Reservation" parameterType="map">
+		SELECT r_id, m_id_fk, reservation_date, status, count, price, park_name FROM (
+		 SELECT SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name FROM (
+		  SELECT ROWNUM AS SEQ, r_id, m_id_fk, reservation_date, status, count, price, park_name  FROM (
+		   SELECT * FROM reservation ORDER BY reservation_date DESC )
+		   ) WHERE SEQ <![CDATA[  >=  ]]> #{seq}
+		   ) WHERE ROWNUM <![CDATA[  <=    ]]> #{rownum}
+	</select>
+	
+	<select id="selectReservationInfoByReservationId" resultType="Reservation" parameterType="int">
+		select * from reservation where r_id=#{r_id}
+	</select>
+</mapper>

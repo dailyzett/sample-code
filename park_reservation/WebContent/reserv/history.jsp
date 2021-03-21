@@ -5,17 +5,17 @@
 
 
 <c:if test="${empty sessionScope.sessionId }">
-	<a href="login.jsp" style="float: right;">로그인</a>
+	<a href="login" style="float: right;">로그인</a>
 	<script>
 		alert('로그인이 필요한 서비스입니다. \n로그인 페이지로 이동하시겠습니까?')
-		document.location.href = "login.jsp";
+		document.location.href = "login";
 	</script>
 </c:if>
 
 <c:if test="${requestScope.doublesubmit eq true }">
 	<script>
 		alert('잘못된 처리형식입니다');
-		document.location.href = "question.do";
+		document.location.href = "question";
 	</script>
 </c:if>
 
@@ -29,7 +29,7 @@
 <c:if test="${requestScope.doublesubmit eq true }">
 	<script>
 		alert('잘못된 처리형식입니다');
-		document.location.href = "reservation.do";
+		document.location.href = "reservation";
 	</script>
 </c:if>
 
@@ -59,7 +59,7 @@
 <body>
 
 	<div class="navbar">
-		<a href="home.do">홈</a> <a href="reservation.do?pn=kaya">예약하기</a>
+		<a href="home">홈</a> <a href="reservation?pn=kaya">예약하기</a>
 
 
 		<div class="dropdown">
@@ -67,32 +67,32 @@
 				알림마당 <i class="fa fa-caret-down"></i>
 			</button>
 			<div class="dropdown-content">
-				<a href="notice.do">공지사항</a> <a href="question.do">문의하기</a> <a
-					href="visit.do">방문후기</a>
+				<a href="notice">공지사항</a> <a href="question">문의하기</a> <a
+					href="visit">방문후기</a>
 			</div>
 		</div>
-		<a href="history.do">나의 예약 내역</a>
+		<a href="history">나의 예약 내역</a>
 
-		<c:if test="${sessionScope.sessionId eq 'admin' }">
+		<c:if test="${sessionScope.sessionRole eq 'admin'}">
 			<div class="dropdown">
 				<button class="dropbtn">
 					관리자 메뉴 <i class="fa fa-caret-down"></i>
 				</button>
 				<div class="dropdown-content">
-					<a href="memberlist.do">회원 관리</a><a href="reservationManage.do">예약 관리</a>
+					<a href="memberlist">회원 관리</a><a href="reservationManage">예약 관리</a>
 				</div>
 			</div>
 		</c:if>
 
 
-		<a href="listOne.do" style="float: right;">마이페이지</a>
+		<a href="listOne" style="float: right;">마이페이지</a>
 
 		<c:if test="${empty sessionScope.sessionId }">
-			<a href="login.jsp" style="float: right;">로그인</a>
+			<a href="login" style="float: right;">로그인</a>
 		</c:if>
 
 		<c:if test="${!empty sessionScope.sessionId  }">
-			<a href="logout.do" style="float: right">로그아웃</a>
+			<a href="logout" style="float: right">로그아웃</a>
 			<a href='#' onclick="return false" style="float: right;"><%=session.getAttribute("sessionId")%>님
 				안녕하세요</a>
 		</c:if>
@@ -105,7 +105,7 @@
 
 	<div class="sidenav">
 		<div class="menubar">나의 예약</div>
-		<a href="history.do" class="select">예약 현황</a>
+		<a href="history" class="select">예약 현황</a>
 
 	</div>
 
@@ -161,7 +161,7 @@
 								}
 						%>
 						<c:if test="${pageScope.startPage gt pageScope.pageBlock }">
-							<a href="history.do?pageNum=<%=startPage - 10%>"
+							<a href="history?pageNum=<%=startPage - 10%>"
 								class="beforenext">이전</a>
 						</c:if>
 
@@ -172,13 +172,13 @@
 								${i }
 							</c:if>
 								<c:if test="${i ne currentPage }">
-									<a href="history.do?pageNum=${i }" class="pagenum">${i }</a>
+									<a href="history?pageNum=${i }" class="pagenum">${i }</a>
 								</c:if>
 
 							</c:forEach>
 						</c:if>
 						<c:if test="${pageScope.endPage lt pageScope.pageCount }">
-							<a href="history.do?pageNum=<%=startPage + 10%>"
+							<a href="history?pageNum=<%=startPage + 10%>"
 								class="beforenext">다음</a>
 						</c:if>
 

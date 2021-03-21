@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NoticeBoardNs">
+	
+	<insert id="insertBoard">
+	<selectKey keyProperty="id" resultType="int" order="BEFORE">
+		select notice_seq.NEXTVAL from DUAL
+	</selectKey>
+		insert into notice_board values(#{id}, #{title}, #{content}, sysdate, 0, #{park_name})
+	</insert>
+	
+	<select id="selectAll" resultType="NoticeBoard" parameterType="map">
+	SELECT id, title, content, notice_date, hit, park_name FROM (
+		 SELECT SEQ, id, title, content, notice_date, hit, park_name FROM (
+		  SELECT ROWNUM AS SEQ,id, title, content, notice_date, hit, park_name FROM (
+		   SELECT id, title, content, notice_date, hit, park_name,
+		   CASE
+           when park_name='공통' then 1
+           else 2
+           end notice_order
+		    FROM notice_board ORDER BY notice_order ASC)
+		   ) WHERE SEQ <![CDATA[  >=  ]]>#{seq}
+		   ) WHERE ROWNUM <![CDATA[  <=    ]]> #{rownum}
+	</select>
+	
+	<select id="selectOneById" resultType="NoticeBoard">
+		select * from notice_board where id=#{id}
+	</select>
+	
+	<select id="selectCount" resultType="int">
+		select count(*) from notice_board
+	</select>
+
+
+	<update id="updateHit">
+		update notice_board set hit = hit+1 where id=#{id}
+	</update>
+	
+	<update id="updateBoard" parameterType="map">
+		update notice_board set title = #{title}, content = #{content} where id = #{id}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from notice_board where id=#{id}
+	</delete>
+	
+	<select id="selectSearchTitle" parameterType="map" resultType="NoticeBoard">
+		SELECT id, title, content, notice_date, hit, park_name  FROM (
+		 SELECT SEQ, id, title, content, notice_date, hit, park_name  FROM (
+		  SELECT ROWNUM AS SEQ, id, title, content, notice_date, hit, park_name  FROM (
+		   SELECT id, title, content, notice_date, hit, park_name,
+		    CASE
+           when park_name='공통' then 1
+           else 2
+           end notice_order
+		    FROM notice_board where UPPER(title) like UPPER('%' || #{title} || '%') and park_name = #{park_name} 
+		    ORDER BY notice_order ASC
+		      )
+		   ) WHERE SEQ <![CDATA[  >=  ]]> #{seq}
+		   ) WHERE ROWNUM <![CDATA[  <=    ]]> #{rownum}
+	</select>
+
+</mapper>

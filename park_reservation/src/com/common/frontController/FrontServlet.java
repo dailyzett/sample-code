@@ -103,27 +103,27 @@ public class FrontServlet extends HttpServlet {
 			command = new LoginCommand();
 			int res = command.execute(request, response);
 			if (res == 1) {
-				viewPage = "home.do";
+				viewPage = "home";
 			} else {
-				viewPage = "login.jsp";
+				viewPage = "login";
 			}
 		}
 
-		else if (com.equals("/logout.do")) {
+		else if (com.equals("/logout")) {
 			viewPage = "logout.jsp";
 		}
 
 		else if (com.equals("/join.do")) {
 			command = new JoinCommand();
 			command.execute(request, response);
-			viewPage = "home.do";
+			viewPage = "home";
 		}
 
-		else if (com.equals("/home.do")) {
+		else if (com.equals("/home")) {
 			viewPage = "home.jsp";
 		}
 
-		else if (com.equals("/reservation.do")) {
+		else if (com.equals("/reservation")) {
 			rCommand = new GetDateCommand();
 			rCommand.execute(request, response);
 			viewPage = "reserv/reserveKaya.jsp";
@@ -141,7 +141,7 @@ public class FrontServlet extends HttpServlet {
 			viewPage = "joinSuccess.jsp";
 		}
 
-		else if (com.equals("/listOne.do")) {
+		else if (com.equals("/listOne")) {
 			command = new ListOneCommand();
 			command.execute(request, response);
 			viewPage = "listOne.jsp";
@@ -167,13 +167,13 @@ public class FrontServlet extends HttpServlet {
 			command = new ModifyMemberCommand();
 			int res = command.execute(request, response);
 			if (res == 1) {
-				viewPage = "listOne.do";
+				viewPage = "listOne";
 			} else {
 				viewPage = "modifyMember.jsp";
 			}
 		}
 
-		else if (com.equals("/memberlist.do")) {
+		else if (com.equals("/memberlist")) {
 			command = new MemberListCommand();
 			command.execute(request, response);
 			viewPage = "memberList.jsp";
@@ -208,7 +208,7 @@ public class FrontServlet extends HttpServlet {
 		else if (com.equals("/adminMemberModify.do")) {
 			command = new AdminMemberModifyFormCommand();
 			command.execute(request, response);
-			viewPage = "member/adminMemberModify.jsp";
+			viewPage = "adminMemberModify.jsp";
 		}
 
 		else if (com.equals("/adminMemberModifySuccess.do")) {
@@ -219,11 +219,11 @@ public class FrontServlet extends HttpServlet {
 			if (res == MemberDao.MEMBER_EXISTENT) {
 				viewPage = "adminMemberModify.do";
 			} else {
-				viewPage = "memberlist.do";
+				viewPage = "memberlist";
 			}
 		}
 
-		else if (com.equals("/question.do")) {
+		else if (com.equals("/question")) {
 			qCommand = new QBoardListCommand();
 			qCommand.execute(request, response);
 			viewPage = "questionBoard/askBoardList.jsp";
@@ -244,7 +244,7 @@ public class FrontServlet extends HttpServlet {
 			}
 			qCommand = new QWriteCommand();
 			qCommand.execute(request, response);
-			viewPage = "question.do";
+			viewPage = "question";
 		}
 		
 		else if (com.equals("/questionDetail.do")) {
@@ -272,7 +272,7 @@ public class FrontServlet extends HttpServlet {
 			viewPage = "questionBoard/replyBoardDetail.jsp";
 		}
 		
-		else if (com.equals("/modifyQuestion.do")) {
+		else if (com.equals("/modifyquestion")) {
 			qCommand = new QModifyFormCommand();
 			qCommand.execute(request, response);
 			viewPage = "questionBoard/modifyQBoard.jsp";
@@ -286,14 +286,14 @@ public class FrontServlet extends HttpServlet {
 			viewPage = "questionDetail.do";
 		}
 		
-		else if (com.equals("/deleteQuestion.do")) {
+		else if (com.equals("/deletequestion")) {
 			int alertStatus = 0;
 			qCommand = new QDeleteCommand();
 			alertStatus = qCommand.execute(request, response);
 			if(alertStatus == 1) {
 				request.setAttribute("deleteAlert", alertStatus);
 				request.setAttribute("deleteCheck", true);
-				viewPage = "question.do";
+				viewPage = "question";
 			}else {
 				request.setAttribute("deleteCheck", false);
 				viewPage = "questionDetail.do";
@@ -323,11 +323,11 @@ public class FrontServlet extends HttpServlet {
 			rCommand = new SetReservationStatusCommand();
 			route = rCommand.execute(request, response);
 			if(route == ReservationDao.KAYA) {
-				viewPage = "reservation.do";
+				viewPage = "reservation";
 			}
 		}
 		
-		else if(com.equals("/history.do")) {
+		else if(com.equals("/history")) {
 			rCommand = new MemberReservationHistoryCommand();
 			rCommand.execute(request, response);
 			viewPage = "reserv/history.jsp";
@@ -336,10 +336,10 @@ public class FrontServlet extends HttpServlet {
 		else if(com.equals("/cancel.do")) {
 			rCommand = new MemberReservationCancelCommand();
 			rCommand.execute(request, response);
-			viewPage = "history.do";
+			viewPage = "history";
 		}
 		
-		else if(com.equals("/reservationManage.do")) {
+		else if(com.equals("/reservationManage")) {
 			rCommand = new AdminReservaionCommand();
 			rCommand.execute(request, response);
 			viewPage = "reserv/reservationManage.jsp";
@@ -352,10 +352,10 @@ public class FrontServlet extends HttpServlet {
 			viewPage = "reserv/reservationManageSearch.jsp";
 		}
 		
-		else if(com.equals("/cancelAdmin.do")) {
+		else if(com.equals("/cancelAdmin")) {
 			rCommand = new AdminReservationCancelCommand();
 			rCommand.execute(request, response);
-			viewPage = "reservationManage.do";
+			viewPage = "reservationManage";
 		}
 		
 		if(viewPage != null) {
