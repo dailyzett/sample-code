@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -9,12 +10,13 @@ import java.util.Scanner;
 * 3. 출력한다
 * */
 public class FlipWord {
-    public StringBuilder solution(String str) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(str);
-        sb.reverse();
-
-        return sb;
+    public ArrayList<String> solution(String[] str) {
+        ArrayList<String> answer = new ArrayList<>();
+        for(String x : str){
+            String tmp = new StringBuilder(x).reverse().toString();
+            answer.add(tmp);
+        }
+        return answer;
     }
 
     public static void main(String[] args) {
@@ -25,12 +27,11 @@ public class FlipWord {
         String[] strArr = new String[input1];
 
         for(int i = 0; i < input1; i++){
-            String temp = in.next();
-            strArr[i] = flipWord.solution(temp).toString();
+            strArr[i] = in.next();
         }
 
-        for(int i = 0; i < input1; i++){
-            System.out.println(strArr[i]);
+        for(String x : flipWord.solution(strArr)){
+            System.out.println(x);
         }
     }
 
