@@ -1,8 +1,7 @@
-/*
+package inflearn;/*
 * 8. 팰린드롬(replaceAll 정규식 이용)
 * */
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Palindrome2 {

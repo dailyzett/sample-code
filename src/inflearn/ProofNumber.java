@@ -1,4 +1,5 @@
-import java.util.Locale;
+package inflearn;
+
 import java.util.Scanner;
 
 public class ProofNumber {

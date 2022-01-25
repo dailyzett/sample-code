@@ -1,3 +1,5 @@
+package inflearn;
+
 import java.util.Scanner;
 
 public class Peaks10 {

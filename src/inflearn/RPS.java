@@ -1,3 +1,5 @@
+package inflearn;
+
 import java.util.Scanner;
 
 /*가위바위보
