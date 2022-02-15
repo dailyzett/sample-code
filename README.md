@@ -8,3 +8,4 @@
    2. [Stack](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Stack.md)
    3. [Set](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Set.md)
    4. [LinkedList](https://github.com/dailyzett/TIL/blob/main/JavaBasic/LinkedList.md)
+   5. [Map](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Map.md)
