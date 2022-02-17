@@ -29,3 +29,51 @@ synchronized 블록을 항상 전체 메소드로 지정할 필요는 없다. �
 
 ---
 
+### 동기화 메소드
+
+동기화에 사용되는 중요한 메소드
+
+- wait()
+- notifyAll()
+- notify()
+
+```java
+synchronized(instance)
+```
+만약 instance 가 null 이면 NullPointerException 발생
+
+> **Tip** 자바 synchronized 키워드는 변수에 적용할 수 없다.
+
+
+----
+
+### Java 에서의 Thread Safety
+
+- synchronized
+- Volatile
+- Atomic 변수
+- Final Keyword
+
+
+2번부터 설명하면, volatile 은 다음과 같이 선언한다
+
+```java
+static volatile int a = 0;, b = 0;
+```
+
+Atomic은 다음과 같다.
+
+```java
+AtomicInteger count = new AtomicInteger();
+    
+public void increment(){
+    count.incrementAndGet();
+}
+```
+
+final 키워드는 한 번 선언해 놓으면 변경이 불가능하다.<br>
+따라서 쓰레드가 접근하려할 때 컴파일 에러가 나오게 되기 때문에 thread-safe 하게 이용 가능하다.
+
+```java
+ final String str = new String("final");
+```

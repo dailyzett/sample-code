@@ -15,4 +15,5 @@
    5. [Map](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Map.md)
 6. [쓰레드](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Thread.md)
    1. [생명주기](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ThreadLifeCycle.md)
-   2. [synchronized](https://github.com/dailyzett/TIL/blob/main/JavaBasic/synchronized.md)
+   2. [쓰레드풀](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ThreadPool.md)
+   3. [synchronized](https://github.com/dailyzett/TIL/blob/main/JavaBasic/synchronized.md)
