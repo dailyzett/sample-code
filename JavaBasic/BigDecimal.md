@@ -74,7 +74,7 @@ System.out.println(positive);
 대신에 RoundingMode enum 값들 중 하나를 쓰는 것이 좋다. (ex) RoundingMode.HALF_UP
 
 
-간결성을 위해서 BigDecimal 메소드에 대한 설명 전체에 [슈도 코드](https://ko.wikipedia.org/wiki/%EC%9D%98%EC%82%AC%EC%BD%94%EB%93%9C)
+Java 공식 문서에서는 간결성을 위해서 BigDecimal 메소드에 대한 설명 전체에 [슈도 코드](https://ko.wikipedia.org/wiki/%EC%9D%98%EC%82%AC%EC%BD%94%EB%93%9C)
 를 표기한다.
 
 - 슈도코드 (i+j) 는 BigDecimal의 i + BigDecimal의 j
