@@ -1,6 +1,7 @@
 ## JAVA 기초
 
 ---
+
 1. [JDK, JRE and JVM](https://github.com/dailyzett/TIL/blob/main/JavaBasic/JDKJREJVM.md)
    1. [JVM](https://github.com/dailyzett/TIL/blob/main/JavaBasic/JVM.md)
    2. [Garbage Collection](https://github.com/dailyzett/TIL/blob/main/JavaBasic/GC.md)

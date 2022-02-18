@@ -104,3 +104,42 @@ System.out.println(c);
 // 출력값 : 0.3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333334
 ```
 
+
+---
+
+
+## BigInteger
+
+---
+
+### Structure
+
+java.lang.Object<br>
+&nbsp;&nbsp;java.lang.Number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;java.math.BigInteger<br>
+
+---
+
+BigDecimal 과 마찬가지로 불변 객체이다.
+
+int나 long 처럼 비트연산자를 제공하지만 연산자 대신 메소드를 사용해야한다.
+<br> ex) and, or, not, xor, andNot, shiftLeft, shiftRight
+
+참고로
+&lt;&lt;&lt; 연산자는 BigDecimal 가 제공하는 [infinite word size abstraction](https://stackoverflow.com/questions/57195887/infinite-word-size-abstraction) 때문에 거의 의미가 없기 때문에 생략된다.
+
+
+
+---
+지원범위 :
+- -2<sup>Integer.MAX_VALUE</sup> < x < 2<sup>Integer.MAX.VALUE</sup>
+
+
+null 값을 허용하지 않는다.
+
+
+각 메소드와 생성자는 공식 문서 참조
+- [BigDecimal](https://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html)
+- [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html)
+- [참고할만한 사이트 1](https://www.baeldung.com/java-bigdecimal-biginteger)
+- [참고할만한 사이트 2](https://www.geeksforgeeks.org/bigdecimal-class-java/)
