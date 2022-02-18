@@ -51,7 +51,7 @@ BigDecimal 은 반올림을 완벽하게 제어한다. 반올림 모드가 지�
 Java는 반올림을 제어하는 방법으로 총 8가지를 제공하는데, 이 클래스의 integer field들을 사용하여 반올림 모드를
 나타내는 것은 쓸모없다고 하고 있다.(ex) ROUND_HALF_UP
 
-실제로 사용해보면 deprecated 가 나온다.
+실제로 사용해보면 deprecated 가 나오므로 RoundingMode enum 값들 중 하나를 쓰는 것이 좋다. (ex) RoundingMode.HALF_UP
 
 ![img](https://media.vlpt.us/images/dailyzett/post/b59bd525-e056-4cf1-917c-68c9bc1c422a/image.png)
 
@@ -69,9 +69,6 @@ System.out.println(positive);
 ```java
 314.4 // newScale 값이 기존 scale 값보다 높을 경우, 그만큼 소숫점 오른쪽에 0 추가
 ```
-
-
-대신에 RoundingMode enum 값들 중 하나를 쓰는 것이 좋다. (ex) RoundingMode.HALF_UP
 
 
 Java 공식 문서에서는 간결성을 위해서 BigDecimal 메소드에 대한 설명 전체에 [슈도 코드](https://ko.wikipedia.org/wiki/%EC%9D%98%EC%82%AC%EC%BD%94%EB%93%9C)
