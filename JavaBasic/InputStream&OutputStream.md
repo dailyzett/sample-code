@@ -1,4 +1,4 @@
-##InputStream 과 OutputStream
+## InputStream 과 OutputStream
 
 ---
 
