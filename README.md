@@ -24,3 +24,7 @@
    2. [InputStream&OutputStream](https://github.com/dailyzett/TIL/blob/main/JavaBasic/InputStream&OutputStream.md)
    3. [NIO](https://github.com/dailyzett/TIL/blob/main/JavaBasic/NIO.md)
    4. [Serializable](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Serializable.md)
+9. 네트워크 프로그래밍
+   1. [용어](https://github.com/dailyzett/TIL/blob/main/JavaBasic/NetworkBasic.md)
+   2. [Socket-TCP](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Socket.md)
+   3. [Datagram-UDP](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Datagram.md)
