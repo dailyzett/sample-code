@@ -1,6 +1,5 @@
 ## JAVA 기초
 
----
 1. 자료형
    1. [BigDecimal, BigInteger](https://github.com/dailyzett/TIL/blob/main/JavaBasic/BigDecimal.md)
 2. [JDK, JRE and JVM](https://github.com/dailyzett/TIL/blob/main/JavaBasic/JDKJREJVM.md)
@@ -28,3 +27,5 @@
    1. [용어](https://github.com/dailyzett/TIL/blob/main/JavaBasic/NetworkBasic.md)
    2. [Socket-TCP](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Socket.md)
    3. [Datagram-UDP](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Datagram.md)
+10. Java 7 
+    1. [변경점](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Java7.md)
