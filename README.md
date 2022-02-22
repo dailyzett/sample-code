@@ -28,4 +28,5 @@
    2. [Socket-TCP](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Socket.md)
    3. [Datagram-UDP](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Datagram.md)
 10. Java 7 
-    1. [변경점](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Java7.md)
+    1. [변경](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Java7.md)
+    2. [추가](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Java7Add.md)
