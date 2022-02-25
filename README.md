@@ -38,3 +38,6 @@
 12. Java 8
     1. [Optional](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Optional.md)
     2. [Default Method](https://github.com/dailyzett/TIL/blob/main/JavaBasic/DefaultMethod.md)
+    3. [날짜 관련 클래스](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Calendar.md)
+    4. [Parallel array sorting](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ParallelArray.md)
+    5. [StringJoiner](https://github.com/dailyzett/TIL/blob/main/JavaBasic/StringJoiner.md)
