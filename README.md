@@ -41,3 +41,4 @@
     3. [날짜 관련 클래스](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Calendar.md)
     4. [Parallel array sorting](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ParallelArray.md)
     5. [StringJoiner](https://github.com/dailyzett/TIL/blob/main/JavaBasic/StringJoiner.md)
+    6. [람다 표현식 & Stream](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Lambda.md)
