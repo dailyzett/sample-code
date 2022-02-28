@@ -22,15 +22,14 @@ public class SearchMinMaze_8_11 {
     public void BFS(int x, int y){
         Queue<Point> Q = new LinkedList<>();
         Q.offer(new Point(x, y));
-        board[x][y] = 1;
         while (!Q.isEmpty()) {
             Point tmp = Q.poll();
-            for(int i = 0; i < 4; i++){
+            for (int i = 0; i < 4; i++) {
                 int nx = dx[i] + tmp.x;
                 int ny = dy[i] + tmp.y;
-                if(nx >= 1 && nx <= 7 && ny >= 1 && ny <= 7 && board[nx][ny] == 0){
+                if (nx >= 1 && ny >= 1 && nx <= 7 && ny <= 7 && board[nx][ny] == 0) {
                     board[nx][ny] = 1;
-                    Q.offer(new Point(nx,ny));
+                    Q.offer(new Point(nx, ny));
                     dis[nx][ny] = dis[tmp.x][tmp.y] + 1;
                 }
             }
@@ -48,7 +47,7 @@ public class SearchMinMaze_8_11 {
             }
         }
 
-        app.BFS(1,1);
+        app.BFS(1, 1);
         if(dis[7][7] == 0) System.out.println(-1);
         else System.out.println(dis[7][7]);
     }
