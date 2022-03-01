@@ -19,6 +19,7 @@
    3. [Set](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Set.md)
    4. [LinkedList](https://github.com/dailyzett/TIL/blob/main/JavaBasic/LinkedList.md)
    5. [Map](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Map.md)
+      1. [Map의 종류](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Map2.md)
 8. [쓰레드](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Thread.md)
    1. [생명주기](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ThreadLifeCycle.md)
    2. [쓰레드풀](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ThreadPool.md)
