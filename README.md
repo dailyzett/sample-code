@@ -1,3 +1,8 @@
+## Http Basic
+1. [URI](https://github.com/dailyzett/TIL/blob/main/JavaBasic/URI.md)
+2. [RESTful API](https://github.com/dailyzett/TIL/blob/main/JavaBasic/RestfulAPI.md)
+3. [Http Method](https://github.com/dailyzett/TIL/blob/main/JavaBasic/HttpMethod.md)
+
 ## Computer Science
 
 1. [캐시란?](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Interview5.md)
