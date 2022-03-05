@@ -3,6 +3,7 @@
 2. [RESTful API](https://github.com/dailyzett/TIL/blob/main/JavaBasic/RestfulAPI.md)
 3. [Http Method](https://github.com/dailyzett/TIL/blob/main/JavaBasic/HttpMethod.md)
 4. [웹 브라우저와 웹 서버](https://github.com/dailyzett/TIL/blob/main/JavaBasic/WebBrowserAndWebServer.md)
+5. [Request 기본 객체](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Request.md)
 
 ## Computer Science
 
