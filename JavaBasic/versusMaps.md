@@ -1,4 +1,4 @@
-##HashMap vs HashTable vs ConcurrentHashMap
+## HashMap vs HashTable vs ConcurrentHashMap
 
 HashMap 은 싱글 쓰레드에서 사용하고
 HashTable과 ConcurrentHashMap 은 멀티 쓰레드 환경에서 사용한다. 따라서 이들간의 차이점을 표로 정리하면 다음과 같다.
