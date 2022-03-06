@@ -10,7 +10,7 @@ HashTable 은 쓰레드에 안전하지만 동기화 메서드를 이용해서 �
 ### 1.1 ConcurrentHashMap 이 효율적인 이유
 
 ConcurrentHashMap은 분할 잠금 기술(segmented locking technology)을 사용한다. 16개의 세그먼트로
-영역을 구분해서 영역별로 잠금을 하는 방식이었다. 그리고 각 영역에는 리사이징되는 해시테이블을 갖는다. HashTable
+영역을 구분해서 영역별로 잠금을 하는 방식이다. 그리고 각 영역에는 리사이징되는 해시테이블을 갖는다. HashTable
 과 다르게 세그먼트별로 잠금을 하기 때문에, 멀티 쓰레드 환경에서 HashTable보다 16배 효율적이라고 볼 수 있다.
 
 다음은 ConcurrentHashMap의 구조를 나타내는 그림이다.
@@ -19,9 +19,9 @@ ConcurrentHashMap은 분할 잠금 기술(segmented locking technology)을 사�
 ### 1.2 JDK 1.8 이후 구현 변경점
 
 ConcurrentHashMap은 Java 8로 넘어오면서, 세그먼트 잠금 방식을 없애고 CAS(Compare And Swap) 방식을 채택했다.
-데이터 구조는 8버전의 HashMap, array + linked list 와 레드-블랙 이진 트리(red-black binary tree) 와 동일하다. 동기화를
-구현할 때 레드-블랙 이진 트리의 첫 번째 노드만 잠그기 때문에, 해시충돌이 일어나지 않는 이상 동시성은 없고 효율성은
-N배 상승한다.
+데이터 구조는 8버전의 HashMap, array + linked list 와 레드-블랙 이진 트리(red-black binary tree) 와 동일하다.
+이 방식은 현재 링크드 리스트의 첫번째 노드 혹은 레드-블랙 트리의 첫번째 노드만 잠근다. 그래서 해시 충돌이
+일어나지 않는다면, 비동시성이고 효율성은 N배 향상된다.
 
 ![img2](https://programmer.ink/images/think/a7b284d7d2c1911f82abcd079a3f58be.jpg)
 
