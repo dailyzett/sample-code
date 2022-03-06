@@ -14,6 +14,7 @@ ConcurrentHashMap은 분할 잠금 기술(segmented locking technology)을 사�
 과 다르게 세그먼트별로 잠금을 하기 때문에, 멀티 쓰레드 환경에서 HashTable보다 16배 효율적이라고 볼 수 있다.
 
 다음은 ConcurrentHashMap의 구조를 나타내는 그림이다.
+
 ![img](https://programmer.ink/images/think/5f38b9d73666c1cbcd89202cf1fea322.jpg)
 
 ### 1.2 JDK 1.8 이후 구현 변경점
@@ -85,7 +86,7 @@ public final native boolean compareAndSetReference(Object o, long offset,
 ```
 이 메서드는 native 함수로 자바에 구현되어 있지 않고 C11 atomic_compare_exchange_strong 메서드와
 기능이 동일하다.
-위 메서드는 객체가 가리키는 값과 예상되는 값이 같은지 원자적으로 비교하고, 비교 걸과가 참이라면
+위 메서드는 객체가 가리키는 값과 예상되는 값이 같은지 원자적으로 비교하고, 비교 결과가 참이라면
 이 메서드는 객체가 가리키는 값을 원하는 값으로 바꾼다. 한마디로 이 메서드가 CAS(Compare And Swap) 이다.
 
 만약 이미 노드가 존재하는 경우 synchronized 키워드를 이용해 하나의 쓰레드만 접근할 수 있도록
