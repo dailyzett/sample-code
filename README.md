@@ -5,6 +5,8 @@
 4. [웹 브라우저와 웹 서버](https://github.com/dailyzett/TIL/blob/main/JavaBasic/WebBrowserAndWebServer.md)
 5. [Request 기본 객체](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Request.md)
 6. [Response 기본 객체](https://github.com/dailyzett/TIL/blob/main/HttpBasic/Response.md)
+7. [JSP 처리 과정](https://github.com/dailyzett/TIL/blob/main/HttpBasic/JspProcess.md)
+8. [쿠키](https://github.com/dailyzett/TIL/blob/main/HttpBasic/cookie.md)
 
 ## Computer Science
 
