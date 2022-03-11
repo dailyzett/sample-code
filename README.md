@@ -7,6 +7,7 @@
 6. [Response 기본 객체](https://github.com/dailyzett/TIL/blob/main/HttpBasic/Response.md)
 7. [JSP의 처리 과정과 WAS 폴더 구성 및 URL](https://github.com/dailyzett/TIL/blob/main/HttpBasic/JspProcess.md)
 8. [쿠키](https://github.com/dailyzett/TIL/blob/main/HttpBasic/cookie.md)
+9. [세션](https://github.com/dailyzett/TIL/blob/main/HttpBasic/session.md)
 
 ## Computer Science
 
