@@ -28,9 +28,10 @@
    2. [Garbage Collection](https://github.com/dailyzett/TIL/blob/main/JavaBasic/GC.md)
 4. [예외](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Exception.md)
 5. [Enum](https://github.com/dailyzett/TIL/blob/main/JavaBasic/enum.md)
-6. [중첩 클래스](https://github.com/dailyzett/TIL/blob/main/JavaBasic/NestedClass.md)
-7. [제네릭(Generic)](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Generic.md)
-8. [컬렉션(Collection)](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Collection.md)
+6. [상속과 조합](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Inheritance&Composition.md)
+7. [중첩 클래스](https://github.com/dailyzett/TIL/blob/main/JavaBasic/NestedClass.md)
+8. [제네릭(Generic)](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Generic.md)
+9. [컬렉션(Collection)](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Collection.md)
    1. [List](https://github.com/dailyzett/TIL/blob/main/JavaBasic/List.md)
    2. [Stack](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Stack.md)
    3. [Set](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Set.md)
@@ -38,23 +39,23 @@
    5. [Map](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Map.md)
       1. [Map의 종류](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Map2.md)
       2. [ConcurrentHashMap 의 내부](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ConcurrentHashMap.md)
-9. [쓰레드](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Thread.md)
-   1. [생명주기](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ThreadLifeCycle.md)
-   2. [쓰레드풀](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ThreadPool.md)
-   3. [synchronized](https://github.com/dailyzett/TIL/blob/main/JavaBasic/synchronized.md)
-10. I/O
+10. [쓰레드](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Thread.md)
+    1. [생명주기](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ThreadLifeCycle.md)
+    2. [쓰레드풀](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ThreadPool.md)
+    3. [synchronized](https://github.com/dailyzett/TIL/blob/main/JavaBasic/synchronized.md)
+11. I/O
     1. [File](https://github.com/dailyzett/TIL/blob/main/JavaBasic/File.md)
     2. [InputStream&OutputStream](https://github.com/dailyzett/TIL/blob/main/JavaBasic/InputStream&OutputStream.md)
     3. [NIO](https://github.com/dailyzett/TIL/blob/main/JavaBasic/NIO.md)
     4. [Serializable](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Serializable.md)
-11. 네트워크 프로그래밍
+12. 네트워크 프로그래밍
     1. [용어](https://github.com/dailyzett/TIL/blob/main/JavaBasic/NetworkBasic.md)
     2. [Socket-TCP](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Socket.md)
     3. [Datagram-UDP](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Datagram.md)
-12. Java 7 
+13. Java 7 
     1. [변경](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Java7.md)
     2. [추가](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Java7Add.md)
-13. Java 8
+14. Java 8
     1. [Optional](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Optional.md)
     2. [Default Method](https://github.com/dailyzett/TIL/blob/main/JavaBasic/DefaultMethod.md)
     3. [날짜 관련 클래스](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Calendar.md)
