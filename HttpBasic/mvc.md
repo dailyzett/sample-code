@@ -242,3 +242,41 @@ public class HelloHandler implements CommandHandler {
 }
 ```
 
+#### 요청 URI를 명령어로 사용하기
+
+명령의 기반의 파라미터는 URL이 사용자에게 그대로 노출된다는 것이 단점이다.
+예를 들어 "http://localhost:8080/chap18/controllerUsingFile?cmd=hello"
+이런 식인데, 사용자는 이 명령어를 수동으로 변경해서 컨트롤러에 요청을 시도할 수 있다. 이런 불필요한
+것들을 방지하려면 요청 URI 자체를 명령어로 사용하는 것이 좋다.
+
+위의 process() 메서드에서 request.getParameter("cmd") 코드를 다음과 같이 변경하면 된다.
+
+```java
+String command = request.getParameterURI();
+if(command.indexOf(request.getContextPath()) == 0){
+    command = command.substring(request.getContextPath().length());
+}
+```
+
+request.getContextPath 부분을 제거하는 이유는 웹 애플리케이션 내에서의 요청 URI만을 사용하기 위함이다.
+예를 들어, http://localhost:8080/example/guest/list.do 가 있다고 가정해보자.
+해당 전체 요쳥 URI는 "/example/guest/list.do" 이지만, 웹 애플리케이션 경로를 제외한 나머지 URI는
+"/guest/list.do" 가 된다.
+
+여기서 *.do 확장자를 이용해 처리했는데, 특정 확장자를 가진 요청을 컨트롤러 서블릿에서 처리하도록 하려면
+web.xml에 servlet-mapping 정보를 추가해주어야 한다.
+
+```xml
+<servlet-mapping>
+    <servlet-name>ControllerUsingURI</servlet-name>
+    <url-pattern>*.do</url-pattern>
+</servlet-mapping>
+```
+
+이제 *.do로 오는 요청은 servlet-name 컨트롤러 서블릿으로 전달된다. 요청 URI를 명령어로 사용하는
+ControllerUsingURI에 알맞는 설정 파일은 다음과 같이 작성하면 된다.
+
+```properties
+/hello.do=mvc.hello.HelloHandler
+```
+

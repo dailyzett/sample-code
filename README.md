@@ -9,6 +9,7 @@
 8. [쿠키](https://github.com/dailyzett/TIL/blob/main/HttpBasic/cookie.md)
 9. [세션](https://github.com/dailyzett/TIL/blob/main/HttpBasic/session.md)
 10. [서블릿 기초](https://github.com/dailyzett/TIL/blob/main/HttpBasic/servletBasic.md)
+11. [MVC 기초](https://github.com/dailyzett/TIL/blob/main/HttpBasic/mvc.md)
 
 ## Computer Science
 
