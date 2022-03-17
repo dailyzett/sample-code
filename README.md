@@ -11,6 +11,7 @@
 10. [서블릿 기초](https://github.com/dailyzett/TIL/blob/main/HttpBasic/servletBasic.md)
 11. [MVC 기초](https://github.com/dailyzett/TIL/blob/main/HttpBasic/mvc.md)
 12. [필터](https://github.com/dailyzett/TIL/blob/main/HttpBasic/filter.md)
+13. [ServletContextListener](https://github.com/dailyzett/TIL/blob/main/HttpBasic/ServletContextListener.md)
 
 ## Computer Science
 
