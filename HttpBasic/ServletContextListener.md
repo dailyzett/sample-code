@@ -1,4 +1,4 @@
-## ServletContextListener 
+## ServletContextListener
 
 ### 1. 개요
 
