@@ -1,6 +1,7 @@
 ## 스프링 입문을 위한 자바 객체지향의 이해
 
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaProgrammingBasic.md)
+2. [자바와 객체 지향](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaAndOOP.md)
 
 ## Http Basic
 1. [URI](https://github.com/dailyzett/TIL/blob/main/JavaBasic/URI.md)
