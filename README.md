@@ -36,6 +36,7 @@
 3. [JDK, JRE and JVM](https://github.com/dailyzett/TIL/blob/main/JavaBasic/JDKJREJVM.md)
    1. [JVM](https://github.com/dailyzett/TIL/blob/main/JavaBasic/JVM.md)
    2. [Garbage Collection](https://github.com/dailyzett/TIL/blob/main/JavaBasic/GC.md)
+      1. [GC의 종류](https://github.com/dailyzett/TIL/blob/main/JavaBasic/typesOfGarbageCollector.md)
 4. [예외](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Exception.md)
 5. [Enum](https://github.com/dailyzett/TIL/blob/main/JavaBasic/enum.md)
 6. [상속과 조합](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Inheritance&Composition.md)
