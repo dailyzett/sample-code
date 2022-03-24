@@ -55,6 +55,7 @@
     1. [생명주기](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ThreadLifeCycle.md)
     2. [쓰레드풀](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ThreadPool.md)
     3. [synchronized](https://github.com/dailyzett/TIL/blob/main/JavaBasic/synchronized.md)
+       1. [동시성 문제를 해결하기 위해 자바에서 제공하는 것들](https://github.com/dailyzett/TIL/blob/main/JavaBasic/JavaSyncProvided.md)
 11. I/O
     1. [File](https://github.com/dailyzett/TIL/blob/main/JavaBasic/File.md)
     2. [InputStream&OutputStream](https://github.com/dailyzett/TIL/blob/main/JavaBasic/InputStream&OutputStream.md)
