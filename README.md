@@ -3,6 +3,7 @@
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaProgrammingBasic.md)
 2. [자바와 객체 지향](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaAndOOP.md)
 3. [객체 지향을 사용하기 위한 자바의 여러 키워드](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaOOPKeyword.md)
+4. [객체 지향 설계 5원칙 - SOLID](https://github.com/dailyzett/TIL/blob/main/SpringBasic/SOLID.md)
 
 ## Http Basic
 1. [URI](https://github.com/dailyzett/TIL/blob/main/JavaBasic/URI.md)
