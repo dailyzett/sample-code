@@ -153,7 +153,7 @@ getInstance() 전부를 동기화하지 않고 **인스턴스를 생성하는 �
 
 #### 2.4 Bill Pugh Singleton
 
-volatile 외의 해결 방법으로 나온 것은 Bill Pugh Singleton 이라고 불리는 방법론이다.
+멀티 쓰레드 환경에서 Double Checked Locking 외의 해결 방법으로 나온 것은 Bill Pugh Singleton 이라고 불리는 방법론이다.
 코드 구현은 다음과 같다.
 
 ```java
@@ -182,7 +182,10 @@ public class Singleton{
 
 Double Checked Locking 방식보다 구현이 간단하기 때문에 Bill Pugh Singleton 싱글톤 방식은 멀티 쓰레드 환경에서 많이 사용된다.
 
+### 참고 자료
 
+> https://www.geeksforgeeks.org/java-singleton-design-pattern-practices-examples/?ref=lbp
 
+> https://thisisnew-storage.tistory.com/9
 
-
+> https://yaboong.github.io/design-pattern/2018/09/28/thread-safe-singleton-patterns/
