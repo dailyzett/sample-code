@@ -7,7 +7,7 @@
 5. 디자인 패턴
    1. [어댑터 패턴(Adapter Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/AdapterPattern.md)
    2. [프록시 패턴(Proxy Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/ProxyPattern.md)
-   3. [싱글톤 페턴(Singleton Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/SingletonPattern.md)
+   3. [싱글톤 패턴(Singleton Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/SingletonPattern.md)
 
 
 ## Http Basic
