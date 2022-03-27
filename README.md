@@ -4,6 +4,11 @@
 2. [자바와 객체 지향](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaAndOOP.md)
 3. [객체 지향을 사용하기 위한 자바의 여러 키워드](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaOOPKeyword.md)
 4. [객체 지향 설계 5원칙 - SOLID](https://github.com/dailyzett/TIL/blob/main/SpringBasic/SOLID.md)
+5. 디자인 패턴
+   1. [어댑터 패턴(Adapter Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/AdapterPattern.md)
+   2. [프록시 패턴(Proxy Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/ProxyPattern.md)
+   3. [싱글톤 페턴(Singleton Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/SingletonPattern.md)
+
 
 ## Http Basic
 1. [URI](https://github.com/dailyzett/TIL/blob/main/JavaBasic/URI.md)
