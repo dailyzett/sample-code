@@ -8,6 +8,9 @@
    1. [어댑터 패턴(Adapter Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/AdapterPattern.md)
    2. [프록시 패턴(Proxy Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/ProxyPattern.md)
    3. [싱글톤 패턴(Singleton Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/SingletonPattern.md)
+   4. [템플릿 메서드 패턴(Template Method Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/TemplateMethodPattern.md)
+   5. [팩토리 메서드 패턴(Factory Method Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/FactoryMethodPattern.md)
+   6. [전략 패턴(StrategyPattern.md)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/StrategyPattern.md)
 
 
 ## Http Basic
