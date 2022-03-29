@@ -11,6 +11,7 @@
    4. [템플릿 메서드 패턴(Template Method Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/TemplateMethodPattern.md)
    5. [팩토리 메서드 패턴(Factory Method Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/FactoryMethodPattern.md)
    6. [전략 패턴(StrategyPattern.md)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/StrategyPattern.md)
+   7. [템플릿 콜백 패턴(Template Callback Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/TemplateCallbackPattern.md)
 
 
 ## Http Basic
