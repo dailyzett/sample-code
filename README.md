@@ -12,6 +12,7 @@
    5. [팩토리 메서드 패턴(Factory Method Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/FactoryMethodPattern.md)
    6. [전략 패턴(StrategyPattern.md)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/StrategyPattern.md)
    7. [템플릿 콜백 패턴(Template Callback Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/TemplateCallbackPattern.md)
+6. [스프링의 삼각형](https://github.com/dailyzett/TIL/blob/main/SpringBasic/SpringTriangle.md)
 
 
 ## Http Basic
