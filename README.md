@@ -18,7 +18,7 @@
 ## Http Basic
 1. [IP](https://github.com/dailyzett/TIL/blob/main/HttpBasic/IP.md)
 2. [TCP와 UDP](https://github.com/dailyzett/TIL/blob/main/HttpBasic/TCP&UDP.md)
-3. [URI](https://github.com/dailyzett/TIL/blob/main/HttpBasic/URI.md)
+3. [URI](https://github.com/dailyzett/TIL/blob/main/JavaBasic/URI.md)
 4. [HTTP](https://github.com/dailyzett/TIL/blob/main/HttpBasic/Http.md)
    1. [Http Method](https://github.com/dailyzett/TIL/blob/main/JavaBasic/HttpMethod.md)
 5. [RESTful API](https://github.com/dailyzett/TIL/blob/main/JavaBasic/RestfulAPI.md)
