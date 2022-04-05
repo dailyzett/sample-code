@@ -211,3 +211,7 @@ Host: aaa.com
 
 
 > 더 자세한 정보 : https://github.com/dailyzett/TIL/blob/main/HttpBasic/cookie.md
+
+### 7. 참고 자료
+
+> [모든 개발자를 위한 HTTP 웹 기본 지식](https://www.inflearn.com/course/http-웹-네트워크/dashboard)
