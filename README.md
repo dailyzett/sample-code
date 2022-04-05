@@ -23,6 +23,7 @@
    1. [HTTP 메서드](https://github.com/dailyzett/TIL/blob/main/HttpBasic/HttpMethod.md)
    2. [HTTP 메서드 활용](https://github.com/dailyzett/TIL/blob/main/HttpBasic/UseHttpMethod.md)
    3. [HTTP STATUS](https://github.com/dailyzett/TIL/blob/main/HttpBasic/HttpStatus.md)
+   4. [HTTP 헤더](https://github.com/dailyzett/TIL/blob/main/HttpBasic/HttpHeader.md)
 5. [RESTful API](https://github.com/dailyzett/TIL/blob/main/JavaBasic/RestfulAPI.md)
 6. [웹 브라우저와 웹 서버](https://github.com/dailyzett/TIL/blob/main/JavaBasic/WebBrowserAndWebServer.md)
 7. [Request 기본 객체](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Request.md)
