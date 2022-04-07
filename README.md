@@ -1,5 +1,7 @@
-## 스프링 입문을 위한 자바 객체지향의 이해
+## 토비의 스프링
+1. [오브젝트와 의존 관계](https://github.com/dailyzett/TIL/blob/main/TobiSpring/ObjectAndDependency.md)
 
+## 스프링 입문을 위한 자바 객체지향의 이해
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaProgrammingBasic.md)
 2. [자바와 객체 지향](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaAndOOP.md)
 3. [객체 지향을 사용하기 위한 자바의 여러 키워드](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaOOPKeyword.md)
