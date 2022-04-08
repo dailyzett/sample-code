@@ -1,5 +1,7 @@
 ## 토비의 스프링
 1. [오브젝트와 의존 관계](https://github.com/dailyzett/TIL/blob/main/TobiSpring/ObjectAndDependency.md)
+   1. [싱글톤 레지스트리와 오브젝트 스코프](https://github.com/dailyzett/TIL/blob/main/TobiSpring/SingletonAndObjectScope.md)
+   2. [의존 관계 주입](https://github.com/dailyzett/TIL/blob/main/TobiSpring/DependencyInjection.md)
 
 ## 스프링 입문을 위한 자바 객체지향의 이해
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaProgrammingBasic.md)

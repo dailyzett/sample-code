@@ -222,3 +222,6 @@ public class UserDaoTest {
 하나의 애플리케이션에서 보통 여러 개의 ApplicationContext 가 만들어진다.
 이 모든 ApplicationContext 를 스프링 컨테이터라고 부를 수 있다.
 
+### 2. 출처
+
+> 토비의 스프링 1권
