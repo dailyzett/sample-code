@@ -197,3 +197,96 @@ public void add(final User user) throws SQLException {
     }
 ```
 
+### 1.3.1 JdbcContext의 특별한 DI
+
+JdbcContext 를 따로 클래스를 생성한다.
+
+```java
+public class JdbcContext {
+    private DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    public void workWithStatementStrategy(StatementStrategy stmt) throws SQLException {
+        Connection c = null;
+        PreparedStatement ps = null;
+
+        try {
+            c = dataSource.getConnection();
+            ps = stmt.makePreparedStatement(c);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if(ps != null) { try {ps.close(); }catch (SQLException e){}}
+            if(c != null){ try {c.close(); }catch (SQLException e){}}
+        }
+    }
+}
+```
+
+#### 스프링 빈으로 DI
+
+```xml
+<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+    <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost/testdb?useUnicode=True&amp;serverTimezone=Asia/Seoul"/>
+    <property name="username" value="sejun"/>
+    <property name="password" value="1234"/>
+</bean>
+
+<bean id="jdbcContext" class="dao.JdbcContext">
+    <property name="dataSource" ref="dataSource" />
+</bean>
+
+<bean id="userDao" class="dao.UserDao">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="jdbcContext" ref="jdbcContext"/>
+</bean>
+```
+
+JdbcContext 는 내부적으로 DataSource 를 주입받아야 한다.
+그리고 이것을 사용하는 UserDao 클래스에 setJdbcContext 메서드를 추가하면 아래의 그림과 같은 관계가 된다.
+
+![](Untitled%20Diagram.jpg)
+
+자세히 보면 UserDao 와 JdbcContext 가 주입받고 있지만 서로 강하게 결합되어 있다.
+DI 개념을 충실히 따르면, 인터페이스를 사이에 둬서 클래스 레벨에서는 의존관계가 고정되지 않게 하고,
+런타임 시에 의존할 오브젝트와의 관계를 다이내믹하게 주입해주는 것이 맞다.
+
+그러나 스프링 DI를 넓게 보면 객체의 생성과 관계설정에 대한 제어권한을 오브젝트에서 제거하고 외부로 위임했다는 IoC라는 개념을 포괄한다.
+그런 의미에서 JdbcContext를 스프링을 이용해 UserDao 객체에서 사용하게 주입했다는 건 DI의 기본을 따르고 있다고 볼 수 있다.
+
+실제로 스프링에서는 드물지만 이렇게 **인터페이스를 사용하지 않는 클래스를 직접 의존하는 DI**가 등장하는 경우도 있다.
+비록 클래스는 구분되어 있지만 UserDao 와 JdbcContext 는 서로 강한 응집도를 가지고 있다.
+JdbcContext는 달리 테스트에서도 다른 구현으로 대체해서 사용할 일이 없기 때문에 가능한 일이다.
+
+이런 경우에, 싱글톤으로 만드는 것과 JdbcContext에 대한 DI 필요성을 위해 스프링 빈으로 등록해서 UserDao에 DI 되도록 만들어도 좋다.
+
+
+#### 코드를 이용하는 수동 DI
+
+이 방법을 쓰러면 JdbcContext 를 싱글톤으로 만들려는 것은 포기해야 한다.
+JdbcContext 를 스프링 빈으로 등록하지 않으면 이 클래스의 제어권은 UserDao 가 갖는 것이 맞다.
+이것을 구현하려면 기존 application-context.xml 에 JdbcContext 와 관련된 설정 정보를 제외하고,
+UserDao의 set 메서드에 아래와 같이 작성한다.
+
+```java
+public class UserDao {
+    private DataSource dataSource;
+    private JdbcContext jdbcContext;
+
+    public void setDataSource(DataSource dataSource) {
+        this.jdbcContext = new JdbcContext(); // JdbcContext 생성(IoC)
+        this.jdbcContext.setDataSource(dataSource); // 의존 오브젝트 주입(DI)
+        this.dataSource = dataSource; // 아직 JdbcContext를 적용하지 않은 메서드를 위해 존재함
+    }
+    ...
+}
+```
+
+이 방법의 장점은 굳이 인터페이스를 두지 않아도 될 만큼 긴밀한 관계를 갖는 DAO 클래스와 JdbcContext를 어색하게 따로 빈으로 분리하지 않고 내부에서 직접 만들어 사용하면서도 DI를 적용할 수 있다는 점이다.
+이렇게 한 오브젝트의 수정자 메서드에서 다른 오브젝트를 초기화하고 코드를 이용해 DI 하는 것은 스프링에서 종종 사용되는 기법이다.
+
