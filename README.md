@@ -4,6 +4,7 @@
    2. [의존 관계 주입](https://github.com/dailyzett/TIL/blob/main/TobiSpring/DependencyInjection.md)
 2. [테스트](https://github.com/dailyzett/TIL/blob/main/TobiSpring/Test.md)
 3. [템플릿](https://github.com/dailyzett/TIL/blob/main/TobiSpring/Template.md)
+   1. [템플릿과 콜백](https://github.com/dailyzett/TIL/blob/main/TobiSpring/templateAndCallback.md)
 
 ## 스프링 입문을 위한 자바 객체지향의 이해
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaProgrammingBasic.md)
