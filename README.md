@@ -7,6 +7,7 @@
    1. [템플릿과 콜백](https://github.com/dailyzett/TIL/blob/main/TobiSpring/templateAndCallback.md)
 4. [예외](https://github.com/dailyzett/TIL/blob/main/TobiSpring/tobiexception.md)
    1. [예외 전환](https://github.com/dailyzett/TIL/blob/main/TobiSpring/예외전환.md)
+5. [서비스 추상화](https://github.com/dailyzett/TIL/blob/main/TobiSpring/서비스추상화.md)
 
 ## 스프링 입문을 위한 자바 객체지향의 이해
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaProgrammingBasic.md)
