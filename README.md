@@ -7,7 +7,12 @@
    1. [템플릿과 콜백](https://github.com/dailyzett/TIL/blob/main/TobiSpring/templateAndCallback.md)
 4. [예외](https://github.com/dailyzett/TIL/blob/main/TobiSpring/tobiexception.md)
    1. [예외 전환](https://github.com/dailyzett/TIL/blob/main/TobiSpring/예외전환.md)
-5. [서비스 추상화](https://github.com/dailyzett/TIL/blob/main/TobiSpring/서비스추상화.md)
+5. 서비스 추상화
+   1. [사용자 레벨 관리 기능 추가](https://github.com/dailyzett/TIL/blob/main/TobiSpring/사용자레벨관리기능추가.md)
+   2. [트랜잭션 서비스 추상화](https://github.com/dailyzett/TIL/blob/main/TobiSpring/트랜잭션서비스추상화.md)
+   3. [서비스 추상화와 단일 책임 원칙](https://github.com/dailyzett/TIL/blob/main/TobiSpring/서비스추상화와단일책임원칙.md)
+   4. [메일 서비스 추상화](https://github.com/dailyzett/TIL/blob/main/TobiSpring/메일서비스추상화.md)
+   5. [정리](https://github.com/dailyzett/TIL/blob/main/TobiSpring/정리.md)
 
 ## 스프링 입문을 위한 자바 객체지향의 이해
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaProgrammingBasic.md)
