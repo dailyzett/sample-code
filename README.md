@@ -12,6 +12,15 @@
    2. [트랜잭션 서비스 추상화](https://github.com/dailyzett/TIL/blob/main/TobiSpring/트랜잭션서비스추상화.md)
    3. [서비스 추상화와 단일 책임 원칙](https://github.com/dailyzett/TIL/blob/main/TobiSpring/서비스추상화와단일책임원칙.md)
    4. [메일 서비스 추상화](https://github.com/dailyzett/TIL/blob/main/TobiSpring/메일서비스추상화.md)
+6. AOP
+   1. [트랜잭션 코드의 분리](https://github.com/dailyzett/TIL/blob/main/TobiSpring/트랜잭션코드의분리.md)
+   2. [고립된 단위 테스트]()
+   3. [다이내믹 프록시와 팩토리 빈]()
+   4. [스프링의 프록시 팩토리 빈]()
+   5. [스프링 AOP]()
+   6. [트랜잭션 속성]()
+   7. [애노테이션 트랜잭션 속성과 포인트컷]()
+   8. [트랜잭션 지원 테스트]()
 
 ## 스프링 입문을 위한 자바 객체지향의 이해
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaProgrammingBasic.md)
