@@ -14,7 +14,7 @@
    4. [메일 서비스 추상화](https://github.com/dailyzett/TIL/blob/main/TobiSpring/메일서비스추상화.md)
 6. AOP
    1. [트랜잭션 코드의 분리](https://github.com/dailyzett/TIL/blob/main/TobiSpring/트랜잭션코드의분리.md)
-   2. [고립된 단위 테스트]()
+   2. [고립된 단위 테스트](https://github.com/dailyzett/TIL/blob/main/TobiSpring/고립된단위테스트.md)
    3. [다이내믹 프록시와 팩토리 빈]()
    4. [스프링의 프록시 팩토리 빈]()
    5. [스프링 AOP]()
