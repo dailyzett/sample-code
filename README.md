@@ -16,7 +16,7 @@
    1. [트랜잭션 코드의 분리](https://github.com/dailyzett/TIL/blob/main/TobiSpring/트랜잭션코드의분리.md)
    2. [고립된 단위 테스트](https://github.com/dailyzett/TIL/blob/main/TobiSpring/고립된단위테스트.md)
    3. [다이내믹 프록시와 팩토리 빈](https://github.com/dailyzett/TIL/blob/main/TobiSpring/다이내믹프록시와팩토리빈.md)
-   4. [스프링의 프록시 팩토리 빈]()
+   4. [스프링의 프록시 팩토리 빈](https://github.com/dailyzett/TIL/blob/main/TobiSpring/스프링의프록시팩토리빈.md)
    5. [스프링 AOP]()
    6. [트랜잭션 속성]()
    7. [애노테이션 트랜잭션 속성과 포인트컷]()
