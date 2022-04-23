@@ -18,7 +18,7 @@
    3. [다이내믹 프록시와 팩토리 빈](https://github.com/dailyzett/TIL/blob/main/TobiSpring/다이내믹프록시와팩토리빈.md)
    4. [스프링의 프록시 팩토리 빈](https://github.com/dailyzett/TIL/blob/main/TobiSpring/스프링의프록시팩토리빈.md)
    5. [스프링 AOP](https://github.com/dailyzett/TIL/blob/main/TobiSpring/스프링_AOP.md)
-   6. [트랜잭션 속성]()
+   6. [트랜잭션 속성](https://github.com/dailyzett/TIL/blob/main/TobiSpring/트랜잭션_속성.md)
    7. [애노테이션 트랜잭션 속성과 포인트컷]()
    8. [트랜잭션 지원 테스트]()
 
