@@ -19,7 +19,7 @@
    4. [스프링의 프록시 팩토리 빈](https://github.com/dailyzett/TIL/blob/main/TobiSpring/스프링의프록시팩토리빈.md)
    5. [스프링 AOP](https://github.com/dailyzett/TIL/blob/main/TobiSpring/스프링_AOP.md)
    6. [트랜잭션 속성](https://github.com/dailyzett/TIL/blob/main/TobiSpring/트랜잭션_속성.md)
-   7. [애노테이션 트랜잭션 속성과 포인트컷]()
+   7. [애노테이션 트랜잭션 속성과 포인트컷](https://github.com/dailyzett/TIL/blob/main/TobiSpring/애트속포.md)
    8. [트랜잭션 지원 테스트]()
 
 ## 스프링 입문을 위한 자바 객체지향의 이해
