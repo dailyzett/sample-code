@@ -16,7 +16,7 @@
 빈 후처리기는 이름 그대로 스프링 빈 오브젝트로 만들어지고 난 후에, 빈 오브젝트를 다시 가공할 수 있게 해준다.
 빈 후처리기 중 하나인 DefaultAdvisorAutoProxyCreator는 어드바이저를 이용한 자동 프록시 생성기이다.
 
-![img_10.png](img_10.png)
+![img_10.png](image1/img_10.png)
 
 DefaultAdvisorAutoProxyCreator 빈 후처리기가 등록되어 있으면 스프링은 빈 오브젝트를 만들 때마다 후처리기에게 빈을 보낸다.
 DefaultAdvisorAutoProxyCreator는 빈으로 등록된 모든 어드바이저 내의 포인트컷을 이용해 전달받은 빈이 프록시 적용 대상인지 확인한다.
@@ -171,7 +171,7 @@ static class TestUserServiceImpl extends UserServiceImpl {
 AspectJ 포인트컷 표현식은 주로 포인트컷 지시자를 이용해 작성한다.
 포인트컷 지시자 중에서 가장 대표적으로 사용되는 것은 **execution()**이다.
 
-![img_11.png](img_11.png)
+![img_11.png](image1/img_11.png)
 
 [] 괄호는 옵션항목이기 때문에 생략 가능하며 | 는 OR 조건을 의미한다.
 포인트컷 지시자는 메서드의 풀 시그니처를 문자열로 비교하는 개념이다.

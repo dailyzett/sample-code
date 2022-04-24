@@ -313,6 +313,6 @@ public void 문자열연결() throws IOException {
 }
 ```
 
-![img_3.png](img_3.png)
+![img_3.png](image1/img_3.png)
 
 최종적으로, 템플릿/콜백과 제네릭을 이용해 범용성과 재사용성, 가독성을 모두 잡았다.

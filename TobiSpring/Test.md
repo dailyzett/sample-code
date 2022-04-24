@@ -78,7 +78,7 @@ DI를 적용하면서 테스트를 진행하는 데는 3가지 방식이 있다.
 
 ##### 테스트용 applicationContext 파일 새로 생성
 
-![img_2.png](img_2.png)
+![img_2.png](image1/img_2.png)
 
 ```java
 @ExtendWith(SpringExtension.class)
