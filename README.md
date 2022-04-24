@@ -22,7 +22,8 @@
    7. [애노테이션 트랜잭션 속성과 포인트컷](https://github.com/dailyzett/TIL/blob/main/TobiSpring/애트속포.md)
    8. [트랜잭션 지원 테스트](https://github.com/dailyzett/TIL/blob/main/TobiSpring/트지테.md)
 7. 스프링 핵심 기술의 응용
-   1. [SQL과 DAO의 분리]()
+   1. [SQL과 DAO의 분리](https://github.com/dailyzett/TIL/blob/main/TobiSpring/sqlanddaoseparation.md)
+   2. [인터페이스의 분리와 자기참조 빈](https://github.com/dailyzett/TIL/blob/main/TobiSpring/interfaceandselfrefbean.md)
 
 ## 스프링 입문을 위한 자바 객체지향의 이해
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaProgrammingBasic.md)
