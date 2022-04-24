@@ -1,13 +1,3 @@
-<style>
-mark{
-    color:red;
-}
-</style>
-
-<mark>what is DataBase</mark>
-
-ㅇㄹㅇㄹㅇㄹ
-
 <details>
 <summary><b>토비의 스프링</b></summary>
 <div markdown="1">
