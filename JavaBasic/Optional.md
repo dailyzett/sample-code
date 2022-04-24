@@ -1,4 +1,4 @@
-## Optional
+# 1. Optional
 
 
 > null 체크를 하지 않고 NullPointerException 을 피하기는 거의 불가능한 일이지만, 너무 많은 null 체킹이 일어나면 코드가 번잡해진다.
@@ -104,4 +104,32 @@ System.out.println(value2.isPresent());
 //banana
 //false
 ```
+
+## 1.1 Optional 사용 시 주의점
+
+<code>Optional</code>은 NullPointerException을 방지하기 위해 Java 8부터 지원하는 객체이다.
+메서드가 반환할 결과값이 '없음'을 명확하게 표현할 필요가 있고 <code>null</code>을 반환하면 에러를 유발할 가능성이 높은
+상황에서 메서드의 반환 타입으로 <code>Optional</code>을 사용하자는 것이 <code>Optional</code>을 만든 주 목적이다.
+
+그런데 <code>Optional</code>은 모든 NullPointerException을 처리하기 위해 만들어진 것이 아니기 때문에
+사용할 때 주의할 점이 있다.
+
+<code>Optional</code>을 사용하면 안 되는 상황은 아래와 같다.
+
+- 도메인 모델 계층(<code>Optional</code>은 직렬화 인터페이스 미구현)
+- DTO(도메인 모델 계층과 같은 이유)
+- 메서드의 입력 매개 변수
+- 생성자 매개 변수
+
+### Serializable 미구현
+
+<code>Optional</code>는 설계할 때부터 필드 사용을 염두해두지 않았다. 따라서 직렬화 인터페이스를 구현하지 않았다.
+만약 필드에 <code>Optional</code>이 등장하는 경우, 직렬화를 사용하는 라이브러리나 프레임워크에서 문제가 생길 수 있다.
+
+### 생성자와 메서드 매개 변수
+
+<code>Optional</code>을 입력 매개 변수로 사용하는 경우 호출할 때마다 <code>Optional</code>을 생성해서
+인자로 전달해줘야 한다. 하지만 호출되는 쪽에서는 인자가 <code>Optional</code>이든 <code>null</code>이든
+값을 체크해주는게 중요하다. 그리고 null 타입 체크에 비해 <code>Optional</code> 은 생성 비용이 크다.
+따라서 이런 경우, <code>null</code> 체크만 진행하는 것이 옳다.
 

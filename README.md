@@ -1,6 +1,5 @@
-<details>
-<summary><b>토비의 스프링</b></summary>
-<div markdown="1">
+
+# 토비의 스프링
 
 1. [오브젝트와 의존 관계](https://github.com/dailyzett/TIL/blob/main/TobiSpring/ObjectAndDependency.md)
     1. [싱글톤 레지스트리와 오브젝트 스코프](https://github.com/dailyzett/TIL/blob/main/TobiSpring/SingletonAndObjectScope.md)
@@ -28,14 +27,11 @@
     1. [SQL과 DAO의 분리](https://github.com/dailyzett/TIL/blob/main/TobiSpring/sqlanddaoseparation.md)
     2. [인터페이스의 분리와 자기참조 빈](https://github.com/dailyzett/TIL/blob/main/TobiSpring/interfaceandselfrefbean.md)
 
-</div>
-</details>
 
 
 
-<details>
-<summary><b>스프링 입문을 위한 자바 객체지향의 이해</b></summary>
-<div markdown="1">
+
+# 스프링 입문을 위한 자바 객체지향의 이해
 
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaProgrammingBasic.md)
 2. [자바와 객체 지향](https://github.com/dailyzett/TIL/blob/main/SpringBasic/JavaAndOOP.md)
@@ -51,12 +47,8 @@
     7. [템플릿 콜백 패턴(Template Callback Pattern)](https://github.com/dailyzett/TIL/blob/main/SpringBasic/TemplateCallbackPattern.md)
 6. [스프링의 삼각형](https://github.com/dailyzett/TIL/blob/main/SpringBasic/SpringTriangle.md)
 
-</div>
-</details>
 
-<details>
-<summary><b>Http 기초</b></summary>
-<div markdown="1">
+# HTTP 기초
 
 1. [IP](https://github.com/dailyzett/TIL/blob/main/HttpBasic/IP.md)
 2. [TCP와 UDP](https://github.com/dailyzett/TIL/blob/main/HttpBasic/TCP&UDP.md)
@@ -79,21 +71,11 @@
 13. [필터](https://github.com/dailyzett/TIL/blob/main/HttpBasic/filter.md)
 14. [ServletContextListener](https://github.com/dailyzett/TIL/blob/main/HttpBasic/ServletContextListener.md)
 
-</div>
-</details>
-
-<details>
-<summary><b>컴퓨터 과학</b></summary>
-<div markdown="1">
+# 컴퓨터 과학
 
 1. [캐시란?](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Interview5.md)
 
-</div>
-</details>
-
-<details>
-<summary><b>JAVA 기초</b></summary>
-<div markdown="1">
+# 자바 기초
 
 1. Versus
     1. [Abstract Class vs Interface](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Interview1.md)
@@ -147,6 +129,4 @@
     5. [StringJoiner](https://github.com/dailyzett/TIL/blob/main/JavaBasic/StringJoiner.md)
     6. [람다 표현식 & Stream](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Lambda.md)
 
-</div>
-</details>
 
