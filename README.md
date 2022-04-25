@@ -26,6 +26,7 @@
 7. 스프링 핵심 기술의 응용
     1. [SQL과 DAO의 분리](https://github.com/dailyzett/TIL/blob/main/TobiSpring/sqlanddaoseparation.md)
     2. [인터페이스의 분리와 자기참조 빈](https://github.com/dailyzett/TIL/blob/main/TobiSpring/interfaceandselfrefbean.md)
+    3. [서비스 추상화 적용](https://github.com/dailyzett/TIL/blob/main/TobiSpring/serviceabstract.md)
 
 
 
