@@ -1,3 +1,10 @@
+# 스프링 MVC
+
+1. 웹 애플리케이션 이해
+   1. [웹 서버, 웹 애킆리케이션 서버](https://github.com/dailyzett/TIL/blob/main/springMVC/webServerAndWebApplication.md)
+   2. [서블릿](https://github.com/dailyzett/TIL/blob/main/springMVC/servlet.md)
+
+
 
 # 토비의 스프링
 
