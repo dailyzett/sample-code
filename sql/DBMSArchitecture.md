@@ -1,6 +1,6 @@
 # 1. DBMS 아키텍처
 
-![img.png](img.png)
+<img src="img.png" width="50%" height="50%">
 
 ### 쿼리 평가 엔진
 
