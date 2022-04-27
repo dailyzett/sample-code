@@ -124,10 +124,10 @@ A second reason that a throwable may have a cause is that the method that throws
 
 > `Throwable`이 원인을 가질 수 있는 두 번째 이유는 `Throwable`을 던지는 메서드가 원인을 직접 던지는 것을 허용하지 않는
 > 범용 인터페이스의 규칙을 따라야하기 때문이다.
-> 예를 들어 영속성 컬렉션이 `Collection` 인터페이스로 구현되어있고 영속성(persistence)이 java.io 위에 구현되어 있다고 가정해보자.
+> 예를 들어 영속적 컬렉션이 `Collection` 인터페이스로 구현되어있고 영속성(persistence)이 java.io 위에 구현되어 있다고 가정해보자.
 > 그리고 `add()` 메서드의 내부가 `IOException`을 던질 수 있다고 가정한다.
 > 구현된 클래스는 `IOException`이 적절한 unchecked exception에 래핑하여 `Collection` 인터페이스의 규칙을 지키면서 `IOException`
-> 의 세부 정보를 호출자에게 전달할 수 있다. (영속성 컬렉션에 대한 사양은 이러한 예외를 던질 수 있음을 나타내야 한다.)
+> 의 세부 정보를 호출자에게 전달할 수 있다. (영속적 컬렉션에 대한 사양은 이러한 예외를 던질 수 있음을 나타내야 한다.)
 
 A cause can be associated with a throwable in two ways: via a constructor that takes the cause as an argument, or via the initCause(Throwable) method. New throwable classes that wish to allow causes to be associated with them should provide constructors that take a cause and delegate (perhaps indirectly) to one of the Throwable constructors that takes a cause. Because the initCause method is public, it allows a cause to be associated with any throwable, even a "legacy throwable" whose implementation predates the addition of the exception chaining mechanism to Throwable.
 
