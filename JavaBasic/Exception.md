@@ -107,7 +107,7 @@ A throwable contains a snapshot of the execution stack of its thread at the time
 > 시간이 지나면서 `Throwable`은 다른 `Throwable`이 전파되는 것을 막을 수 있다.
 > 그리고 `Throwable`은 다음과 같은 원인을 포함할 수 있다 : 이 `Throwable`이 생성한 또다른 `Throwable` 클래스.
 > 이렇게 예외가 발생하는 원인 자체에 다른 원인이 있을 수 있고 기타 등등에 의해 발생하는 예외의 연쇄(chain)으로 이어질 수 있기 때문에
-> 이것을 **연결 예외 기능(chained exception facility)** 라고 한다.
+> 이것을 **연결된 예외 기능(chained exception facility)** 라고 한다.
 
 One reason that a throwable may have a cause is that the class that throws it is built atop a lower layered abstraction, and an operation on the upper layer fails due to a failure in the lower layer. It would be bad design to let the throwable thrown by the lower layer propagate outward, as it is generally unrelated to the abstraction provided by the upper layer. Further, doing so would tie the API of the upper layer to the details of its implementation, assuming the lower layer's exception was a checked exception. Throwing a "wrapped exception" (i.e., an exception containing a cause) allows the upper layer to communicate the details of the failure to its caller without incurring either of these shortcomings. It preserves the flexibility to change the implementation of the upper layer without changing its API (in particular, the set of exceptions thrown by its methods).
 
