@@ -5,6 +5,10 @@
    2. [서블릿](https://github.com/dailyzett/TIL/blob/main/springMVC/servlet.md)
 
 
+# SQL
+
+1. [DBMS 아키텍처](https://github.com/dailyzett/TIL/blob/main/sql/DBMSArchitecture.md)
+
 
 # 토비의 스프링
 
