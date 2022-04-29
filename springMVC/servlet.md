@@ -2,7 +2,7 @@
 
 ## HTML Form 데이터 전송
 
-![img_4.png](img_4.png)
+![img_4.png](image_1/img_4.png)
 
 Form 을 통해 POST 요청을 보냈다고 가정한다.
 이 때 웹 서버를 개발자가 전부 구현해야 된다면 어떻게 될까?
@@ -46,7 +46,7 @@ public class HelloServlet extends HttpServlet{
 
 URL 요청과 서블릿이 하는 작업들을 그림으로 표현하면 아래와 같다.
 
-![img_5.png](img_5.png)
+![img_5.png](image_1/img_5.png)
 
 1. 요청 메시지를 기반으로 request/response 객체를 새로 만든다.
 2. 서블릿 컨테이너에서 `helloServet` 을 실행한다.

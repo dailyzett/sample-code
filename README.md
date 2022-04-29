@@ -4,6 +4,8 @@
    1. [웹 서버, 웹 애플리케이션 서버](https://github.com/dailyzett/TIL/blob/main/springMVC/webServerAndWebApplication.md)
    2. [서블릿](https://github.com/dailyzett/TIL/blob/main/springMVC/servlet.md)
    3. [동시 요청 - 멀티 쓰레드](https://github.com/dailyzett/TIL/blob/main/springMVC/multithread.md)
+   4. [HTML, HTTP API, CSR, SSR](https://github.com/dailyzett/TIL/blob/main/springMVC/1_4.md)
+   5. [자바 백엔드 웹 기술 역사](https://github.com/dailyzett/TIL/blob/main/springMVC/1_5.md)
 
 
 # SQL
