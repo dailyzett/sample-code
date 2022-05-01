@@ -6,6 +6,9 @@
    3. [동시 요청 - 멀티 쓰레드](https://github.com/dailyzett/TIL/blob/main/springMVC/multithread.md)
    4. [HTML, HTTP API, CSR, SSR](https://github.com/dailyzett/TIL/blob/main/springMVC/1_4.md)
    5. [자바 백엔드 웹 기술 역사](https://github.com/dailyzett/TIL/blob/main/springMVC/1_5.md)
+2. 서블릿
+   1. [HttpServletRequest](https://github.com/dailyzett/TIL/blob/main/springMVC/2_1.md)
+   2. [HttpServletResponse](https://github.com/dailyzett/TIL/blob/main/springMVC/2_2.md)
 
 
 # SQL
