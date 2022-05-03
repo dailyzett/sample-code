@@ -9,7 +9,8 @@
 2. 서블릿
    1. [HttpServletRequest](https://github.com/dailyzett/TIL/blob/main/springMVC/2_1.md)
    2. [HttpServletResponse](https://github.com/dailyzett/TIL/blob/main/springMVC/2_2.md)
-
+3. 서블릿, JSP, MVC 패턴
+   1. [MVC 패턴 적용](https://github.com/dailyzett/TIL/blob/main/springMVC/3_1.md)
 
 # SQL
 
