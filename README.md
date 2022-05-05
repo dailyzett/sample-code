@@ -12,6 +12,9 @@
 3. 서블릿, JSP, MVC 패턴
    1. [MVC 패턴 적용](https://github.com/dailyzett/TIL/blob/main/springMVC/3_1.md)
    2. [프론트 컨트롤러](https://github.com/dailyzett/TIL/blob/main/springMVC/3_2.md)
+4. 스프링 MVC
+   1. [스프링 MVC 전체 구조](https://github.com/dailyzett/TIL/blob/main/springMVC/4_1.md)
+   2. [핸들러 매핑, 핸들러 어댑터, 뷰 리졸버](https://github.com/dailyzett/TIL/blob/main/springMVC/4_2.md)
 
 # SQL
 
