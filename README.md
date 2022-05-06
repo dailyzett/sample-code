@@ -17,6 +17,7 @@
    2. [핸들러 매핑, 핸들러 어댑터, 뷰 리졸버](https://github.com/dailyzett/TIL/blob/main/springMVC/4_2.md)
 5. 스프링 MVC 기본 기능
    1. [로깅](https://github.com/dailyzett/TIL/blob/main/springMVC/5_1.md)
+   2. [요청 매핑](https://github.com/dailyzett/TIL/blob/main/springMVC/5_2.md)
 
 # SQL
 
