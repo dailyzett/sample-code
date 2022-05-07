@@ -18,6 +18,7 @@
 5. 스프링 MVC 기본 기능
    1. [로깅](https://github.com/dailyzett/TIL/blob/main/springMVC/5_1.md)
    2. [요청 매핑](https://github.com/dailyzett/TIL/blob/main/springMVC/5_2.md)
+   3. [HTTP 요청 - 기본, 헤더 조회](https://github.com/dailyzett/TIL/blob/main/springMVC/5_3.md)
 
 # SQL
 
