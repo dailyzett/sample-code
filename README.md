@@ -19,6 +19,8 @@
    1. [로깅](https://github.com/dailyzett/TIL/blob/main/springMVC/5_1.md)
    2. [요청 매핑](https://github.com/dailyzett/TIL/blob/main/springMVC/5_2.md)
    3. [HTTP 요청 - 기본, 헤더 조회](https://github.com/dailyzett/TIL/blob/main/springMVC/5_3.md)
+   4. [HTTP 요청 - @ModelAttribute](https://github.com/dailyzett/TIL/blob/main/springMVC/5_4.md)
+   5. [HTTP 요청 - 단순 텍스트, JSON](https://github.com/dailyzett/TIL/blob/main/springMVC/5_5.md)
 
 # SQL
 
