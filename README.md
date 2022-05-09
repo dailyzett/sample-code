@@ -21,6 +21,8 @@
    3. [HTTP 요청 - 기본, 헤더 조회](https://github.com/dailyzett/TIL/blob/main/springMVC/5_3.md)
    4. [HTTP 요청 - @ModelAttribute](https://github.com/dailyzett/TIL/blob/main/springMVC/5_4.md)
    5. [HTTP 요청 - 단순 텍스트, JSON](https://github.com/dailyzett/TIL/blob/main/springMVC/5_5.md)
+   6. [HTTP 응답 - 정적 리소스, 뷰 템플릿](https://github.com/dailyzett/TIL/blob/main/springMVC/5_6.md)
+   7. [HTTP 메시지 컨버터](https://github.com/dailyzett/TIL/blob/main/springMVC/5_7.md)
 
 # SQL
 
