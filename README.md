@@ -23,6 +23,7 @@
    5. [HTTP 요청 - 단순 텍스트, JSON](https://github.com/dailyzett/TIL/blob/main/springMVC/5_5.md)
    6. [HTTP 응답 - 정적 리소스, 뷰 템플릿](https://github.com/dailyzett/TIL/blob/main/springMVC/5_6.md)
    7. [HTTP 메시지 컨버터](https://github.com/dailyzett/TIL/blob/main/springMVC/5_7.md)
+   8. [RedirectAttributes](https://github.com/dailyzett/TIL/blob/main/springMVC/5_8.md)
 
 # SQL
 
