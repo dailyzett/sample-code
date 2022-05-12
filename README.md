@@ -25,6 +25,10 @@
    7. [HTTP 메시지 컨버터](https://github.com/dailyzett/TIL/blob/main/springMVC/5_7.md)
    8. [RedirectAttributes](https://github.com/dailyzett/TIL/blob/main/springMVC/5_8.md)
 
+# 타임 리프
+
+1. [타임 리프 사용법 정리](https://github.com/dailyzett/TIL/blob/main/thymeleaf/1_1.md)
+
 # SQL
 
 1. [DBMS 아키텍처](https://github.com/dailyzett/TIL/blob/main/sql/DBMSArchitecture.md)
