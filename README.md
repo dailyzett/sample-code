@@ -26,6 +26,7 @@
    8. [RedirectAttributes](https://github.com/dailyzett/TIL/blob/main/springMVC/5_8.md)
 6. 스프링 검증
    1. [검증1 - Validation](https://github.com/dailyzett/TIL/blob/main/springvalidation/6_1.md)
+   2. [검증2 - Bean Validation](https://github.com/dailyzett/TIL/blob/main/springvalidation/6_2.md)
 
 # 타임 리프
 
