@@ -28,6 +28,8 @@
    1. [검증1 - Validation](https://github.com/dailyzett/TIL/blob/main/springvalidation/6_1.md)
    2. [검증2 - Bean Validation](https://github.com/dailyzett/TIL/blob/main/springvalidation/6_2.md)
    3. [로그인 처리 - 쿠키 세션](https://github.com/dailyzett/TIL/blob/main/springvalidation/6_3.md)
+   4. [로그인 처리2 - 필터, 인터셉터](https://github.com/dailyzett/TIL/blob/main/springvalidation/6_4.md)
+   5. [로그인 처리3 - ArgumentResolver 활용](https://github.com/dailyzett/TIL/blob/main/springvalidation/6_5.md)
 
 # 타임 리프
 
