@@ -30,6 +30,9 @@
    3. [로그인 처리 - 쿠키 세션](https://github.com/dailyzett/TIL/blob/main/springvalidation/6_3.md)
    4. [로그인 처리2 - 필터, 인터셉터](https://github.com/dailyzett/TIL/blob/main/springvalidation/6_4.md)
    5. [로그인 처리3 - ArgumentResolver 활용](https://github.com/dailyzett/TIL/blob/main/springvalidation/6_5.md)
+7. 예외 처리와 오류 페이지
+   1. [서블릿 예외 처리](https://github.com/dailyzett/TIL/blob/main/springvalidation/7_1.md)
+   2. [스프링 부트 예외 처리](https://github.com/dailyzett/TIL/blob/main/springvalidation/7_2.md)
 
 # 타임 리프
 
