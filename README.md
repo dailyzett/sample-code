@@ -33,6 +33,7 @@
 7. 예외 처리와 오류 페이지
    1. [서블릿 예외 처리](https://github.com/dailyzett/TIL/blob/main/springvalidation/7_1.md)
    2. [스프링 부트 예외 처리](https://github.com/dailyzett/TIL/blob/main/springvalidation/7_2.md)
+   3. [API 예외 처리](https://github.com/dailyzett/TIL/blob/main/springvalidation/7_3.md)
 
 # 타임 리프
 
