@@ -35,6 +35,10 @@
    2. [스프링 부트 예외 처리](https://github.com/dailyzett/TIL/blob/main/springvalidation/7_2.md)
    3. [API 예외 처리](https://github.com/dailyzett/TIL/blob/main/springvalidation/7_3.md)
 
+# GitHub Actions
+
+1. [GitHub Actions 의 이해](https://github.com/dailyzett/TIL/blob/main/actions/1_1.md)
+
 # 타임 리프
 
 1. [타임 리프 사용법 정리](https://github.com/dailyzett/TIL/blob/main/thymeleaf/1_1.md)
