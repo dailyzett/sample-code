@@ -34,6 +34,9 @@
    1. [서블릿 예외 처리](https://github.com/dailyzett/TIL/blob/main/springvalidation/7_1.md)
    2. [스프링 부트 예외 처리](https://github.com/dailyzett/TIL/blob/main/springvalidation/7_2.md)
    3. [API 예외 처리](https://github.com/dailyzett/TIL/blob/main/springvalidation/7_3.md)
+8. 스프링 타입 컨버터
+   1. [스프링 타입 컨버터](https://github.com/dailyzett/TIL/blob/main/spring/1_1.md)
+   2. [스프링 포맷터](https://github.com/dailyzett/TIL/blob/main/spring/1_2.md)
 
 # GitHub Actions
 
