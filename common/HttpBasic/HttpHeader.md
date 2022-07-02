@@ -210,7 +210,7 @@ Host: aaa.com
 쿠키는 클라이언트에 저장되는 특성때문에 보안에 민감한 데이터는 저장하면 안 된다.
 
 
-> 더 자세한 정보 : https://github.com/dailyzett/TIL/blob/main/HttpBasic/cookie.md
+> 더 자세한 정보 : https://github.com/dailyzett/TIL/blob/main/common/HttpBasic/cookie.md
 
 ### 7. 참고 자료
 

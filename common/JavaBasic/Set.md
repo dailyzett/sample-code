@@ -11,7 +11,7 @@ Set Interface를 구현한 주요 클래스는 HashSet, TreeSet, LinkedHashSet�
 
 ### TreeSet
 > 저장된 데이터의 값에 따라 정렬되는 Set. red-black이라는 트리 타입으로 값이 저장된다.
-> [Red Black 트리란?](https://github.com/dailyzett/TIL/blob/main/JavaBasic/ReadBlackTree.md)
+> [Red Black 트리란?](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/ReadBlackTree.md)
 
 ### LinkedSet
 > 연결된 목록 타입으로 구현된 해시 테이블에 데이터를 저장. 저장된 순서에 따라 값이 정렬

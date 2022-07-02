@@ -12,7 +12,7 @@ public class Demo{
     }
 }
 ```
-Java 8 에서는 parallelSort() 정렬 메소드가 제공되고, Java 7 에서 등장한 [Fork-Join](https://github.com/dailyzett/TIL/blob/main/JavaBasic/Java7Add.md) 프레임워크가 사용된다.
+Java 8 에서는 parallelSort() 정렬 메소드가 제공되고, Java 7 에서 등장한 [Fork-Join](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Java7Add.md) 프레임워크가 사용된다.
 
 기존 sort 의 경우 단일 쓰레드로 수행되지만 parallelSort() 는 필요에 따라 여러 개의 쓰레드로 나뉘어 작업이
 수행 된다. 따라서 속도는 parallelSort()가 더 빠르다.
