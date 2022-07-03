@@ -46,6 +46,10 @@
 
 1. [타임 리프 사용법 정리](https://github.com/dailyzett/TIL/blob/main/common/thymeleaf/1_1.md)
 
+# JPA
+
+1. [영속성 관리](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_1.md)
+
 # SQL
 
 1. [DBMS 아키텍처](https://github.com/dailyzett/TIL/blob/main/common/sql/DBMSArchitecture.md)
