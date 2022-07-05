@@ -48,8 +48,8 @@
 
 # JPA
 
-1. [영속성 관리](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_1.md)
-2. [엔티티 매핑](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_2.md)
+1. [영속성 관리](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_1.md#목차)
+2. [엔티티 매핑](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_2.md#목차)
 
 # SQL
 
