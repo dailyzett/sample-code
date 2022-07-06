@@ -53,8 +53,9 @@
 
 # SQL
 
-1. [DBMS 아키텍처](https://github.com/dailyzett/TIL/blob/main/common/sql/DBMSArchitecture.md)
-2. [DBMS와 실행 계획](https://github.com/dailyzett/TIL/blob/main/common/sql/2_1.md)
+1. [DBMS 아키텍처](https://github.com/dailyzett/TIL/blob/main/common/sql/DBMSArchitecture.md#목차)
+2. [DBMS와 실행 계획](https://github.com/dailyzett/TIL/blob/main/common/sql/2_1.md#목차)
+3. [실행 계획과 SQL 구문](https://github.com/dailyzett/TIL/blob/main/common/sql/2_2.md#목차)
 
 
 # 토비의 스프링
