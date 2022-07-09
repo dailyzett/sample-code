@@ -51,6 +51,7 @@
 1. [영속성 관리](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_1.md#목차)
 2. [엔티티 매핑](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_2.md#목차)
 3. [연관관계 매핑](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_3.md#목차)
+4. [프록시와 연관관계 관리](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_4.md#목차)
 
 # SQL
 
@@ -91,11 +92,7 @@
     2. [인터페이스의 분리와 자기참조 빈](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/interfaceandselfrefbean.md)
     3. [서비스 추상화 적용](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/serviceabstract.md)
     4. [인터페이스 상속을 통한 안전한 기능 확장](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/interfaceimplementssafety.md)
-
-
-
-
-
+    
 # 스프링 입문을 위한 자바 객체지향의 이해
 
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaProgrammingBasic.md)
