@@ -52,6 +52,7 @@
 2. [엔티티 매핑](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_2.md#목차)
 3. [연관관계 매핑](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_3.md#목차)
 4. [프록시와 연관관계 관리](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_4.md#목차)
+5. [고급 주제와 성능 최적화](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_5.md#목차)
 
 # SQL
 
