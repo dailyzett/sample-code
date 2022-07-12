@@ -162,7 +162,7 @@
 8. [제네릭(Generic)](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Generic.md)
 9. [컬렉션(Collection)](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Collection.md)
     1. [List](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/List.md)
-    2. [Stack](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Stack.md)
+    2. [Stack & Queue](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Stack.md)
     3. [Set](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Set.md)
     4. [LinkedList](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/LinkedList.md)
     5. [Map](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Map.md)
