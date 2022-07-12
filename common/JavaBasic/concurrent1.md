@@ -32,14 +32,22 @@ _Executor_ 는 태스크 실행이 비동기일 것을 엄격하게 요구하지
 가장 간단한 케이스로 _Executor_ 는 호출 쓰레드에서 제출된 태스크를 즉시 호출할 수 있다.
 
 ```java
-public class Main {
-
-	public static void main(String[] args) {
-		Executor executor = new Invoker();
-		executor.execute(() -> {
-			System.out.println("Hello");
-		});
-	}
+public class Invoker implements Executor {
+    @Override
+    public void execute(Runnable command) {
+	command.run();
+    }
 }
 ```
+
+```java
+public void execute() {
+    Executor executor = new Invoker();
+    executor.execute(() -> {
+        System.out.println("Hello");
+    });
+}
+```
+
+
 
