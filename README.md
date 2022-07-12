@@ -69,7 +69,7 @@
 1. [오브젝트와 의존 관계](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/ObjectAndDependency.md#목차)
     1. [싱글톤 레지스트리와 오브젝트 스코프](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/SingletonAndObjectScope.md#목차)
     2. [의존 관계 주입](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/DependencyInjection.md#목차)
-2. [테스트](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/Test.md)
+2. [테스트](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/Test.md#목차)
 3. [템플릿](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/Template.md)
     1. [템플릿과 콜백](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/templateAndCallback.md)
 4. [예외](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/tobiexception.md)
