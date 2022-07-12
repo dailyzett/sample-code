@@ -49,5 +49,20 @@ public void execute() {
 }
 ```
 
+## 2.2 ExecutorService
 
+- _ExecutorService_ 는 비동기 처리를 위해 사용한다.
+- 메모리 내 대기열을 관리하고 쓰레드 가용성에 따라 제출된 작업을 실행한다.
+
+_ExecutorService_ 를 생성하려면 _Runnable_ 인터페이스를 구현해야 한다.
+
+```java
+public class Task implements Runnable{
+
+	@Override
+	public void run() {
+		
+	}
+}
+```
 
