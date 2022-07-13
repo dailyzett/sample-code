@@ -73,10 +73,11 @@
 1. [DBMS 아키텍처](https://github.com/dailyzett/TIL/blob/main/common/sql/DBMSArchitecture.md#목차)
 2. [DBMS와 실행 계획](https://github.com/dailyzett/TIL/blob/main/common/sql/2_1.md#목차)
 3. [실행 계획과 SQL 구문](https://github.com/dailyzett/TIL/blob/main/common/sql/2_2.md#목차)
-4. SQL 기초
+4. [트랜잭션과 락](https://github.com/dailyzett/TIL/blob/main/common/sql/6.md#목차)
+5. SQL 기초
    1. [SELECT 구문](https://github.com/dailyzett/TIL/blob/main/common/sql/4_1.md#목차)
    2. [조건 분기, 집합 연산, 윈도우 함수, 갱신](https://github.com/dailyzett/TIL/blob/main/common/sql/4_2.md#목차)
-
+6. [시퀀스 객체, IDENTITY 필드, 채번 테이블](https://github.com/dailyzett/TIL/blob/main/common/sql/5.md#목차)
 
 # 토비의 스프링
 
