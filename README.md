@@ -147,7 +147,8 @@
 11. [서블릿 기초](https://github.com/dailyzett/TIL/blob/main/common/HttpBasic/servletBasic.md)
 12. [MVC 기초](https://github.com/dailyzett/TIL/blob/main/common/HttpBasic/mvc.md)
 13. [필터](https://github.com/dailyzett/TIL/blob/main/common/HttpBasic/filter.md)
-14. [ServletContextListener](https://github.com/dailyzett/TIL/blob/main/common/HttpBasic/ServletContextListener.md)
+14. [웹 브라우저에 URL을 입력했을 때의 과정](https://github.com/dailyzett/TIL/blob/main/common/HttpBasic/web.md#목차)
+15. [ServletContextListener](https://github.com/dailyzett/TIL/blob/main/common/HttpBasic/ServletContextListener.md)
 
 # 컴퓨터 과학
 
