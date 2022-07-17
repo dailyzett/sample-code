@@ -2,7 +2,7 @@
 
 - JPA 연습 개발 리포지토리
 
-# 사용 기술
+## 사용 기술
 
 - Java 17
 - Spring Boot
@@ -10,6 +10,8 @@
 - JaCoCo
 - GitHub Actions
 - H2 DB
+
+## 규칙
 
 - 목표 테스트 커버리지 : **70% 이상**
 
