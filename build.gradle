@@ -24,6 +24,7 @@ jacocoTestReport {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     "jpabook/jpashop/**Application.class",
+                    "jpabook/jpashop/domain/**"
             ])
         }))
     }
@@ -50,6 +51,7 @@ jacocoTestCoverageVerification {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     "jpabook/jpashop/**Application.class",
+                    "jpabook/jpashop/domain/**"
             ])
         }))
     }
