@@ -11,3 +11,8 @@
 - GitHub Actions
 - H2 DB
 
+- 목표 테스트 커버리지 : **LINE** 기준, **70% 이상**
+
+|                 실시간 측정                 |      
+|:--------------------------------------:|
+| ![coverage](.github/badges/jacoco.svg) |
