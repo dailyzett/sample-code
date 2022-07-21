@@ -15,7 +15,7 @@ test {
      * 테스트 할 때 JaCoCo 를 함께 실행하도록 구성.
      * 개별 테스트 실행 시 covered ratio 가 낮게 나오기 때문에 전체 테스트일 때만 finalizedBy 주석을 제거한다.
      */
-//    finalizedBy 'jacocoTestReport'
+    finalizedBy 'jacocoTestReport'
 }
 
 jacocoTestReport {
