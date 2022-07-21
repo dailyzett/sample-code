@@ -1,12 +1,11 @@
 package jpabook.jpashop.service;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.repository.MemberRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +51,27 @@ class MemberServiceTest {
 			//then
 			memberService.join(initMember2);
 		}).isInstanceOf(IllegalStateException.class);
+	}
+
+	@Test
+	@DisplayName("회원 리스트 조회")
+	void findList() {
+		//given
+		Member initMember1 = new Member();
+		Member initMember2 = new Member();
+
+		initMember1.setName("park");
+		initMember2.setName("kim");
+
+		memberService.join(initMember1);
+		memberService.join(initMember2);
+
+		//when
+		List<Member> members = memberService.findMembers();
+
+		//then
+		assertThat(members).hasSize(2);
+		assertThat(members.get(0).getName()).isEqualTo(initMember1.getName());
+		assertThat(members.get(1).getName()).isEqualTo(initMember2.getName());
 	}
 }
