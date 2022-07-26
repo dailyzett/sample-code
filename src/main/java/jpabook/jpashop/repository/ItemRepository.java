@@ -4,8 +4,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import jpabook.jpashop.domain.item.Item;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class ItemRepository {
@@ -14,8 +16,10 @@ public class ItemRepository {
 
 	public void save(Item item) {
 		if (item.getId() == null) {
+			log.info(":::persist:::");
 			em.persist(item);
 		} else {
+			log.info(":::merge:::");
 			em.merge(item);
 		}
 	}

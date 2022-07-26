@@ -35,6 +35,15 @@ GET: `localhost:8080/members/`
 ![img_2.png](img_2.png)
 </details>
 
+<details>
+  <summary><b>아이템 정보 수정</b><br/></summary>
+
+PATCH: `localhost:8080/items/{id}`
+
+![img_3.png](img_3.png)
+
+</details>
+
 ## 기술적 이슈 해결 과정
 
 <details>
