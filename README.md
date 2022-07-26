@@ -27,6 +27,14 @@ POST: `localhost:8080/members/new`
 ![img.png](img.png)
 </details>
 
+<details>
+  <summary><b>회원 리스트 조회</b><br/></summary>
+
+GET: `localhost:8080/members/`
+
+![img_2.png](img_2.png)
+</details>
+
 ## 기술적 이슈 해결 과정
 
 <details>
