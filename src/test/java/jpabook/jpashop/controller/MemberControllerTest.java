@@ -46,8 +46,8 @@ class MemberControllerTest {
 			//then
 			.andDo(print())
 			.andExpect(jsonPath("$.name").value(request.getName()))
-			.andExpect(jsonPath("$.city").value(request.getCity()))
-			.andExpect(jsonPath("$.street").value(request.getStreet()));
+			.andExpect(jsonPath("$.address.city").value(request.getCity()))
+			.andExpect(jsonPath("$.address.street").value(request.getStreet()));
 	}
 
 	@Test
