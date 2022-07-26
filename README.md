@@ -139,7 +139,7 @@ void exceptionTest1() throws Exception {
 - 회원 가입할 때 _Member_ 엔티티의 _orders_ 정보는 입력하지 않는다.
 - 롬복의 _@Builder_ 는 필드를 사용하는 생성자와 각 필드의 setter 메서드로 구성된 inner 클래스를
 하나 만들어서 내부에서 원본 클래스의 인스턴스를 반환한다.
-- _Order_ 는 객체 타입 필드이므로 이런 객체 타입을 초기화하는 코드는 당연히 존재하지 않으므로
+- _Order_ 는 사용자 정의 객체이므로 이런 객체 타입을 초기화하는 코드는 _@Builder_ 에 당연히 존재하지 않는다.
 `new ArrayList<>()` 로 초기화했다고 하더라도 _@Builder_ 가 적용되는 순간 null 로 초기화 된다.
 - 따라서 정상적인 empty List 로 초기화하려면 _@Builder.Default_ 어노테이션이 필요.
 
