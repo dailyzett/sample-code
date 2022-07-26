@@ -34,6 +34,7 @@ public class Member {
 	@Embedded
 	private Address address;
 
+	@Builder.Default
 	@OneToMany(mappedBy = "member")
 	private List<Order> orders = new ArrayList<>();
 }
