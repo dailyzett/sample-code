@@ -1,5 +1,7 @@
 package jpabook.jpashop.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -34,7 +36,7 @@ class ItemControllerTest {
 	@DisplayName("POST /items/new")
 	void test1() throws Exception {
 		//given
-		BookRequest request = createBookInfo("테스트 북");
+		BookRequest request = createBookInfo("테스트 북", "author1", "3335-1131", 10000, 50);
 
 		//when
 		mockMvc.perform(post("/items/new")
@@ -51,13 +53,51 @@ class ItemControllerTest {
 			.andExpect(jsonPath("$.isbn").value(request.getIsbn()));
 	}
 
-	private BookRequest createBookInfo(String name) {
+	@Test
+	@DisplayName("GET /items")
+	void test2() throws Exception {
+		//given
+		BookRequest book1 = createBookInfo("테스트 북1", "author1", "3335-1131", 10000, 50);
+		BookRequest book2 = createBookInfo("테스트 북2", "author1", "3335-1131", 10000, 50);
+		itemService.saveItem(book1.toEntity());
+		itemService.saveItem(book2.toEntity());
+
+		//when
+		mockMvc.perform(get("/items"))
+			//then
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$[0].name").value(book1.getName()))
+			.andExpect(jsonPath("$[1].name").value(book2.getName()))
+			.andExpect(jsonPath("$.length()").value(2));
+	}
+
+	@Test
+	@DisplayName("PATCH /items/{id}")
+	void test3() throws Exception {
+		//given
+		BookRequest book = createBookInfo("초기 북", "author1", "3335-1131", 10000, 50);
+		Long id = itemService.saveItem(book.toEntity());
+		BookRequest modifiedBook = createBookInfo("수정된 북", "수정된 author", "1234-56", 100, 15);
+
+		//when
+		mockMvc.perform(patch("/items/" + id)
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(modifiedBook)))
+			//then
+			.andDo(print())
+			.andExpect(status().is3xxRedirection());
+	}
+
+	private BookRequest createBookInfo(String name, String author, String isbn, int price,
+		int stock) {
 		return BookRequest.builder()
 			.name(name)
-			.price(10000)
-			.stockQuantity(50)
-			.author("author1")
-			.isbn("3335-1131")
+			.price(price)
+			.stockQuantity(stock)
+			.author(author)
+			.isbn(isbn)
 			.build();
 	}
 }

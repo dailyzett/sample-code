@@ -5,11 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class BookRequest {
 
 	private Long id;
@@ -21,8 +23,13 @@ public class BookRequest {
 	private String author;
 	private String isbn;
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Book toEntity() {
 		Book book = new Book();
+		book.setId(id);
 		book.setName(name);
 		book.setPrice(price);
 		book.setStockQuantity(stockQuantity);

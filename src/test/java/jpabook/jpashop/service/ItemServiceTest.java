@@ -55,6 +55,23 @@ class ItemServiceTest {
 	}
 
 	@Test
+	@DisplayName("아이템 수정")
+	void updateItem() {
+		//given
+		Long id = itemService.saveItem(book);
+		em.flush();
+		em.clear();
+
+		//when
+		Item item = itemService.updateItem(id, "수정된 책이름", 100, 50);
+
+		//then
+		assertThat(item.getName()).isEqualTo("수정된 책이름");
+		assertThat(item.getPrice()).isEqualTo(100);
+		assertThat(item.getStockQuantity()).isEqualTo(50);
+	}
+
+	@Test
 	@DisplayName("아이템 목록 출력")
 	void findItems() {
 		//given
