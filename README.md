@@ -44,6 +44,14 @@ PATCH: `localhost:8080/items/{id}`
 
 </details>
 
+<details>
+  <summary><b>상품 주문</b><br/></summary>
+
+POST: `localhost:8080/order`
+
+![img_4.png](img_4.png)
+</details>
+
 ## 기술적 이슈 해결 과정
 
 <details>
