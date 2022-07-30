@@ -154,6 +154,7 @@
 # 컴퓨터 과학
 
 1. [캐시란?](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview5.md)
+2. [Circuit Breaker 패턴]((https://github.com/dailyzett/TIL/blob/main/common/etc/1.md))
 
 # 자바
 
