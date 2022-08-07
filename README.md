@@ -163,3 +163,92 @@ private List<Order> orders = new ArrayList<>();
 ```
 
 </details>
+
+<details>
+  <summary><b>회원 정보 조회 시 유연한 확장 고려</b><br/></summary>
+
+```java
+@GetMapping("api/v1/members")
+public List<Member> membersV1() {
+    return memberService.findMembers();
+}
+```
+
+멤버 객체들을 찾아 그대로 멤버 엔티티를 리턴하면 코드를 작성할 땐 편하지만 큰 문제가 발생한다.
+
+1. 조회에 필요 없는 필드값들도 같이 들어간다.
+2. JSON API 명세에 값이 추가되었을 때 유연한 확장이 불가능하다.
+
+```json
+[
+  "count": 2 // ????
+    {
+        "id": 1,
+        "name": "new-hello",
+        "address": null,
+        "orders": []
+    },
+    {
+        "id": 2,
+        "name": "new-hello2",
+        "address": null,
+        "orders": []
+    }
+]
+```
+
+멤버 엔티티 리스트들을 그대로 반환해서 보여주다보니 모든 필드가 그대로 보여진다.
+또한 API 명세가 멤버 필드만 출력하는 것이 아니라 총 몇개인지 `count`를 출력해달라고 한다면
+JSON 스펙이 깨져버리는 문제가 발생한다.
+
+따라서 확장을 고려하기 위해 `Result<T>`가 필요하고 필요한 정보만을 보여주기 위해 `MemberDto` 가 필요하다.
+
+```java
+@GetMapping("api/v2/members")
+public Result membersV2() {
+    List<Member> members = memberService.findMembers();
+    List<MemberDto> collect = members.stream()
+        .map(m -> new MemberDto(m.getName()))
+        .collect(Collectors.toList());
+
+    return new Result(collect.size(), collect);
+}
+
+@Data
+@AllArgsConstructor
+static class Result<T> {
+
+    private int count;
+    private T data;
+}
+
+@Data
+@AllArgsConstructor
+static class MemberDto {
+
+    private String name;
+}
+```
+
+멤버를 조회 후 stream api로 Member 엔티티들을 MemberDto 로 바꾸는 코드이다.
+코드 변경 후 ResponseEntity 는 아래와 같이 출력된다.
+
+추후에 API 명세가 바뀌더라도 Result 클래스에 확장이 필요한 필드만 추가하면 되고
+Member 엔티티에서 필요한 정보만을 담는 `MemberDto`가 있기 때문에 확장 및 정보 은닉에 유리해졌다.
+
+```json
+{
+    "count": 2,
+    "data": [
+        {
+            "name": "new-hello"
+        },
+        {
+            "name": "new-hello2"
+        }
+    ]
+}
+```
+
+
+</details>
