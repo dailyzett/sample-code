@@ -15,7 +15,7 @@ test {
      * 테스트 할 때 JaCoCo 를 함께 실행하도록 구성.
      * 개별 테스트 실행 시 covered ratio 가 낮게 나오기 때문에 전체 테스트일 때만 finalizedBy 주석을 제거한다.
      */
-    finalizedBy 'jacocoTestReport'
+//    finalizedBy 'jacocoTestReport'
 }
 
 jacocoTestReport {
@@ -102,9 +102,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0'
-    implementation "io.springfox:springfox-boot-starter:3.0.0"
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
