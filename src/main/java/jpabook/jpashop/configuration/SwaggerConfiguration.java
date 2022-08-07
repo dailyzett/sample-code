@@ -27,20 +27,6 @@ public class SwaggerConfiguration {
 			.select()
 			.apis(RequestHandlerSelectors.any())
 			.paths(PathSelectors.ant("/members/**"))
-			.build()
-			.apiInfo(apiInfo());
-	}
-
-	private ApiInfo apiInfo() {
-		return new ApiInfo(
-			"Title",
-			"Description",
-			"version 1.0",
-			"https://naver.com",
-			new Contact("Contact Me", "https://daum.net", "colt@colt.com"),
-			"Edit Licenses",
-			"https://naver.com",
-			new ArrayList<>()
-		);
+			.build();
 	}
 }
