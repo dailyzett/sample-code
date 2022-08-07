@@ -12,6 +12,9 @@ spring:
       hibernate:
 #        show_sql: true
         format_sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 
 decorator:
@@ -22,3 +25,9 @@ decorator:
 logging:
   level:
     org.hibernate.SQL: debug
+
+server:
+  port: ${PORT:8080}
+  error:
+    whitelabel:
+      enabled: false
