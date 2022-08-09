@@ -60,7 +60,7 @@
 
 1. [타임 리프 사용법 정리](https://github.com/dailyzett/TIL/blob/main/common/thymeleaf/1_1.md)
 
-# JPA
+# JPA 이론
 
 1. [영속성 관리](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_1.md#목차)
 2. [엔티티 매핑](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_2.md#목차)
@@ -68,6 +68,10 @@
    1. [엔티티 설계 시 주의점](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_31.md#목차)
 4. [프록시와 연관관계 관리](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_4.md#목차)
 5. [고급 주제와 성능 최적화](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_5.md#목차)
+
+# JPA 실습
+
+1. [조회 성능 최적화 - DTO](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/1.md#목차)
 
 # SQL
 
