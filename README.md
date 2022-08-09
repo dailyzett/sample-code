@@ -252,3 +252,120 @@ Member 엔티티에서 필요한 정보만을 담는 `MemberDto`가 있기 때�
 
 
 </details>
+
+<details>
+  <summary><b>json 응답 객체로 변경 시 무한 반복 문제</b><br/></summary>
+
+```java
+@GetMapping("/api/v1/simple-orders")
+public List<Order> ordersV1() {
+    return orderRepository.findAllByString(new OrderSearch());
+}
+```
+
+연관관계가 맺어진 _Order_ 객체 내부에는 다음과 같이 Member 객체가 있다.
+
+```java
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "member_id")
+private Member member;
+```
+순환 참조가 생기는 이유는 아래와 같다.
+1. jackson 라이브러리가 Order 객체를 JSON 으로 변환 시도한다.
+2. 그런데 양방향 매핑관계이므로 Member 객체에도 Order 리스트가 있다.
+
+```java
+@Builder.Default
+@OneToMany(mappedBy = "member")
+private List<Order> orders = new ArrayList<>();
+```
+
+3. jackson orders 객체도 json 으로 변환하려고 한다.
+4. 그런데 orders 는 결국 Order의 리스트이다. Order 객체를 가보니 또 Member 가 있다.
+5. 이것이 무한 반복되면서 결국 에러가 발생한다.
+
+이것을 해결하려면 참조하는 객체에 _@JsonIgnore_ 어노테이션을 붙여줘야한다.
+
+```java
+@JsonIgnore
+@Builder.Default
+@OneToMany(mappedBy = "member")
+private List<Order> orders = new ArrayList<>();
+```
+
+하지만 이렇게 하면 또 다른 문제가 발생한다.
+
+```json
+{
+  "timestamp": "2022-08-08T21:54:28.186+00:00",
+  "status": 500,
+  "error": "Internal Server Error",
+  "trace": "org.springframework.http.converter.HttpMessageConversionException: Type definition error: [simple type, class org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor]; nested exception is com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer found for class org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: java.util.ArrayList[0]->jpabook.jpashop.domain.Order[\"member\"]->jpabook.jpashop.domain.Member$HibernateProxy$hXF0jkbi[\"hibernateLazyInitializer\"])\r\n\tat org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.writeInternal(AbstractJackson2HttpMessageConverter.java:462)\r\n\tat org.springframework.http.converter.AbstractGenericHttpMessageConverter.write(AbstractGenericHttpMessageConverter.java:104)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:290)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.handleReturnValue(RequestResponseBodyMethodProcessor.java:183)\r\n\tat org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:135)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)\r\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)\r\n\tat org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\r\n\tat org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)\r\n\tat org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)\r\n\tat org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)\r\n\tat org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)\r\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:655)\r\n\tat org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)\r\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:764)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)\r\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)\r\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)\r\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\r\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\r\n\tat org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)\r\n\tat org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)\r\n\tat org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)\r\n\tat org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)\r\n\tat org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)\r\n\tat org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)\r\n\tat org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)\r\n\tat org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)\r\n\tat org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)\r\n\tat org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:890)\r\n\tat org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1787)\r\n\tat org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\r\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)\r\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)\r\n\tat org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\r\n\tat java.base/java.lang.Thread.run(Thread.java:833)\r\nCaused by: com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer found for class org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: java.util.ArrayList[0]->jpabook.jpashop.domain.Order[\"member\"]->jpabook.jpashop.domain.Member$HibernateProxy$hXF0jkbi[\"hibernateLazyInitializer\"])\r\n\tat com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:77)\r\n\tat com.fasterxml.jackson.databind.SerializerProvider.reportBadDefinition(SerializerProvider.java:1300)\r\n\tat com.fasterxml.jackson.databind.DatabindContext.reportBadDefinition(DatabindContext.java:400)\r\n\tat com.fasterxml.jackson.databind.ser.impl.UnknownSerializer.failForEmpty(UnknownSerializer.java:46)\r\n\tat com.fasterxml.jackson.databind.ser.impl.UnknownSerializer.serialize(UnknownSerializer.java:29)\r\n\tat com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:728)\r\n\tat com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:774)\r\n\tat com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)\r\n\tat com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:728)\r\n\tat com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:774)\r\n\tat com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)\r\n\tat com.fasterxml.jackson.databind.ser.std.CollectionSerializer.serializeContents(CollectionSerializer.java:145)\r\n\tat com.fasterxml.jackson.databind.ser.std.CollectionSerializer.serialize(CollectionSerializer.java:107)\r\n\tat com.fasterxml.jackson.databind.ser.std.CollectionSerializer.serialize(CollectionSerializer.java:25)\r\n\tat com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:480)\r\n\tat com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:400)\r\n\tat com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1514)\r\n\tat com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1007)\r\n\tat org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.writeInternal(AbstractJackson2HttpMessageConverter.java:456)\r\n\t... 48 more\r\n",
+  "message": "Type definition error: [simple type, class org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor]; nested exception is com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer found for class org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: java.util.ArrayList[0]->jpabook.jpashop.domain.Order[\"member\"]->jpabook.jpashop.domain.Member$HibernateProxy$hXF0jkbi[\"hibernateLazyInitializer\"])",
+  "path": "/api/v1/simple-orders"
+}
+```
+
+proxy.pojo.bytebuddy 예외를 터뜨리는데, 답은 _FetchType_ 에 있다.
+
+1. Order 엔티티에 접근 후 Member 엔티티를 가져오려고 하는데 `@ManyToOne(fetch = FetchType.LAZY)`가 붙어있다.
+2. 지연 로딩일 때 접근하는 것은 원본 엔티티가 아니라 프록시 타입이다.
+3. 프록시는 초기화될 때 내부적으로 bytebuddy 라이브러리를 사용해서 프록시 타입으로 초기화한다.
+4. 즉 jackson 입장에서는 Member 타입을 찾아야 하는데 Member 의 프록시 타입이 반환되서 해당 예외가 발생한 것이다.
+
+프록시 타입에 관계없이 JSON 응답을 출력하려면 아래의 종속성을 추가해줘야 한다.
+
+```gradle
+implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+```
+
+이후 부트 진입점에 _Hibernate5Module_ 을 등록해준다.
+
+```java
+@Bean
+Hibernate5Module hibernate5Module() {
+    return new Hibernate5Module();
+}
+```
+
+```json
+[
+  {
+    "id": 4,
+    "member": null,
+    "orderItems": null,
+    "delivery": null,
+    "orderDate": "2022-08-09T07:10:30.029686",
+    "status": "ORDER",
+    "totalPrice": 50000
+  },
+  {
+    "id": 11,
+    "member": null,
+    "orderItems": null,
+    "delivery": null,
+    "orderDate": "2022-08-09T07:10:30.062604",
+    "status": "ORDER",
+    "totalPrice": 220000
+  }
+]
+```
+
+"기본 설정은 지연 로딩을 모두 무시하고 null 로 출력하라" 이므로 지연 로딩된 엔티티들은
+아래처럼 null 로 표시된다. null 로 표현하기 싫다면 아래 처럼옵션을 설정해주면 된다.
+
+```java
+@Bean
+Hibernate5Module hibernate5Module() {
+    Hibernate5Module hibernate5Module = new Hibernate5Module();
+    hibernate5Module.configure(Feature.FORCE_LAZY_LOADING, true);
+    return hibernate5Module;
+}
+```
+
+하지만 이렇게 엔티티를 직접 노출시키는 방법은 문제가 많다.
+
+- 간단한 조회인데도 다른 엔티티를 모조리 끌고 오기 때문에 성능 문제가 발생한다.
+- API 명세가 바뀌어서 엔티티를 직접 변경하는 경우 그 엔티티를 사용하던 다른 서비스에도 지대한 영향을 끼친다.
+
+</details>
