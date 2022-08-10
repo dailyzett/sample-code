@@ -71,7 +71,8 @@
 
 # JPA 실습
 
-1. [조회 성능 최적화 - DTO](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/1.md#목차)
+1. [조회 성능 최적화](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/1.md#목차)
+2. [컬렉션 조회 최적화](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/2.md#목차)
 
 # SQL
 
