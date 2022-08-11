@@ -191,7 +191,7 @@
     2. [쓰레드풀](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/ThreadPool.md)
     3.  [synchronized](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/synchronized.md)
     4.  [동시성 문제를 해결하기 위해 자바에서 제공하는 것들](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/JavaSyncProvided.md)
-10. **동시성 기초**
+10. 동시성 기초
     1. [java.util.concurrent](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/concurrent1.md#목차)
     2. [Future](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/concurrent2.md#목차)
 11. I/O
