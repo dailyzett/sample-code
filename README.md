@@ -165,27 +165,19 @@
 
 # 자바
 
-1. Versus
-    1. [Abstract Class vs Interface](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview1.md)
-    2. [시간 복잡도 vs 공간 복잡도](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview2.md)
-    3. [ArrayList vs Map](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview3.md)
-    4. [String a = "hello" vs String b = new String("hello")](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview4.md)
-    5. [Static Nested Class vs None Static Nested Class](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/versusNestedClass.md)
-    6. [HashMap vs HashTable vs ConcurrentHashMap](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/versusMaps.md)
-    7. [동기/비동기 vs 블로킹/논블로킹](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/synchronousAndBlocking.md)
-2. 자료형
+1. 자료형
     1. [BigDecimal, BigInteger](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/BigDecimal.md)
-3. [JDK, JRE and JVM](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/JDKJREJVM.md)
+2. [JDK, JRE and JVM](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/JDKJREJVM.md)
     1. [JVM](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/JVM.md)
     2. [Garbage Collection](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/GC.md)
         1. [GC의 종류](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/typesOfGarbageCollector.md)
         2. [Java 레퍼런스와 GC](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/reference.md)
-4. [예외](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Exception.md)
-5. [Enum](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/enum.md)
-6. [상속과 조합](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Inheritance&Composition.md)
-7. [중첩 클래스](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/NestedClass.md)
-8. [제네릭(Generic)](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Generic.md)
-9. [컬렉션(Collection)](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Collection.md)
+3. [예외](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Exception.md)
+4. [Enum](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/enum.md)
+5. [상속과 조합](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Inheritance&Composition.md)
+6. [중첩 클래스](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/NestedClass.md)
+7. [제네릭(Generic)](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Generic.md)
+8. [컬렉션(Collection)](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Collection.md)
     1. [List](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/List.md)
     2. [Arrays](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Arrays.md#목차)
     3. [Stack & Queue](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Stack.md#목차)
@@ -194,35 +186,43 @@
     6. [Map](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Map.md)
         1. [Map의 종류](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Map2.md)
         2. [ConcurrentHashMap 의 내부](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/ConcurrentHashMap.md)
-10. [쓰레드](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Thread.md)
+9.  [쓰레드](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Thread.md)
     1. [생명주기](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/ThreadLifeCycle.md)
     2. [쓰레드풀](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/ThreadPool.md)
     3.  [synchronized](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/synchronized.md)
     4.  [동시성 문제를 해결하기 위해 자바에서 제공하는 것들](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/JavaSyncProvided.md)
-11. **동시성 기초**
+10. **동시성 기초**
     1. [java.util.concurrent](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/concurrent1.md#목차)
     2. [Future](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/concurrent2.md#목차)
-12. I/O
+11. I/O
     1. [File](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/File.md)
     2. [InputStream&OutputStream](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/InputStream&OutputStream.md)
     3. [NIO](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/NIO.md)
     4. [Serializable](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Serializable.md)
-13. 네트워크 프로그래밍
+12. 네트워크 프로그래밍
     1. [용어](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/NetworkBasic.md)
     2. [Socket-TCP](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Socket.md)
     3. [Datagram-UDP](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Datagram.md)
-14. Java 7
+13. Java 7
     1. [변경](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Java7.md)
     2. [추가](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Java7Add.md)
-15. Java 8
+14. Java 8
     1. [Optional](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Optional.md)
     2. [Default Method](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/DefaultMethod.md)
     3. [날짜 관련 클래스](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Calendar.md)
     4. [Parallel array sorting](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/ParallelArray.md)
     5. [StringJoiner](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/StringJoiner.md)
     6. [람다 표현식 & Stream](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Lambda.md)
-16. [리플렉션](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/1.md#목차)
-17. [애노테이션 프로세서](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/2.md#목차)
+15. [리플렉션](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/1.md#목차)
+16. [애노테이션 프로세서](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/2.md#목차)
+17. ETC
+    1. [Abstract Class vs Interface](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview1.md)
+    2. [시간 복잡도 vs 공간 복잡도](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview2.md)
+    3. [ArrayList vs Map](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview3.md)
+    4. [String a = "hello" vs String b = new String("hello")](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview4.md)
+    5. [Static Nested Class vs None Static Nested Class](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/versusNestedClass.md)
+    6. [HashMap vs HashTable vs ConcurrentHashMap](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/versusMaps.md)
+    7. [동기/비동기 vs 블로킹/논블로킹](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/synchronousAndBlocking.md)
 
 # Tag: Interview
 
