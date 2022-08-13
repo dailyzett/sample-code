@@ -75,6 +75,8 @@
 
 1. [조회 성능 최적화](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/1.md#목차)
 2. [컬렉션 조회 최적화](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/2.md#목차)
+3. [스프링 데이터 JPA - 쿼리 메서드 기능](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/3.md#목차)
+4. [스프링 데이터 JPA - 페이징과 정렬](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/4.md#목차)
 
 # SQL
 
