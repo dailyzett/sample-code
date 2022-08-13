@@ -70,6 +70,7 @@
    1. [엔티티 설계 시 주의점](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_31.md#목차)
 4. [프록시와 연관관계 관리](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_4.md#목차)
 5. [고급 주제와 성능 최적화](https://github.com/dailyzett/TIL/blob/main/common/jpa/1_5.md#목차)
+6. [트랜잭션과 락, 2차 캐시](https://github.com/dailyzett/TIL/blob/main/common/jpa/2.md#목차)
 
 # JPA 실습
 
@@ -77,6 +78,7 @@
 2. [컬렉션 조회 최적화](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/2.md#목차)
 3. [스프링 데이터 JPA - 쿼리 메서드 기능](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/3.md#목차)
 4. [스프링 데이터 JPA - 페이징과 정렬](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/4.md#목차)
+5. [스프링 데이터 JPA - 벌크, Entity Graph, JPA Hint & Lock](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/5.md#목차)
 
 # SQL
 
