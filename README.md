@@ -79,6 +79,7 @@
 3. [스프링 데이터 JPA - 쿼리 메서드 기능](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/3.md#목차)
 4. [스프링 데이터 JPA - 페이징과 정렬](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/4.md#목차)
 5. [스프링 데이터 JPA - 벌크, Entity Graph, JPA Hint & Lock](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/5.md#목차)
+6. [스프링 데이터 JPA - 확장 기능](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/6.md#목차)
 
 # SQL
 
