@@ -53,6 +53,8 @@
 8. 스프링 타입 컨버터
    1. [스프링 타입 컨버터](https://github.com/dailyzett/TIL/blob/main/common/spring/1_1.md)
    2. [스프링 포맷터](https://github.com/dailyzett/TIL/blob/main/common/spring/1_2.md)
+9. 스프링 트랜잭션
+   1. [트랜잭션 관리](https://github.com/dailyzett/TIL/blob/main/common/spring/transaction_1.md)
 
 # GitHub Actions
 
