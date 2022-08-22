@@ -93,7 +93,8 @@
 5. SQL 기초
    1. [SELECT 구문](https://github.com/dailyzett/TIL/blob/main/common/sql/4_1.md#목차)
    2. [조건 분기, 집합 연산, 윈도우 함수, 갱신](https://github.com/dailyzett/TIL/blob/main/common/sql/4_2.md#목차)
-6. [시퀀스 객체, IDENTITY 필드, 채번 테이블](https://github.com/dailyzett/TIL/blob/main/common/sql/5.md#목차)
+6. [결합](https://github.com/dailyzett/TIL/blob/main/common/sql/결합.md#목차)
+7. [시퀀스 객체, IDENTITY 필드, 채번 테이블](https://github.com/dailyzett/TIL/blob/main/common/sql/5.md#목차)
 
 # 토비의 스프링
 
