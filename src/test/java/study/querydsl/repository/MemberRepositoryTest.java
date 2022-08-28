@@ -1,6 +1,7 @@
 package study.querydsl.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static study.querydsl.entity.QMember.member;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -103,5 +104,20 @@ class MemberRepositoryTest {
 		em.persist(member2);
 		em.persist(member3);
 		em.persist(member4);
+	}
+
+	/**
+	 * QuerydslPredicateExecutor<Member> 를 상속받으면 where 절에 바로 predicate 적용 가능.
+	 * 하지만 조인이 안됨.
+	 * 클라이언트가 Querydsl 에 의존해야 한다. 서비스 클래스가 Querydsl 이라는 구현 기술에 의존해야 한다.
+	 * 그래서 실무 환경에서 사용하기에는 한계가 명확하다.
+	 */
+	@Test
+	void querydslPredicateExecutorTest() {
+		Iterable<Member> result = memberRepository.findAll(
+			member.age.between(10, 40).and(member.username.eq("member1")));
+		for (Member member1 : result) {
+			System.out.println("member1 = " + member1);
+		}
 	}
 }

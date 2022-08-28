@@ -23,6 +23,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 
 	@Override
 	public List<MemberTeamDto> search(MemberSearchCondition condition) {
+
 		return queryFactory
 			.select(new QMemberTeamDto(
 				member.id.as("memberId"),
