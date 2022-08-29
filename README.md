@@ -14,6 +14,10 @@
 - [자바](#자바)
 - [Tag: Interview](#tag-interview)
 
+# AWS
+
+1. [AWS Elastic Beanstalk](https://github.com/dailyzett/TIL/blob/main/common/aws/aws_1.md#목차)
+
 # 스프링 MVC
 
 1. 웹 애플리케이션 이해
