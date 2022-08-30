@@ -1,18 +1,16 @@
-# 목차
-
-- [목차](#목차)
+# 순서
+- [순서](#순서)
 - [AWS](#aws)
-- [스프링 MVC](#스프링-mvc)
-- [GitHub Actions](#github-actions)
-- [타임 리프](#타임-리프)
+- [스프링](#스프링)
+- [토비의 스프링](#토비의-스프링)
+- [SQL](#sql)
 - [JPA 이론](#jpa-이론)
 - [JPA 실습](#jpa-실습)
-- [SQL](#sql)
-- [토비의 스프링](#토비의-스프링)
-- [스프링 입문을 위한 자바 객체지향의 이해](#스프링-기초)
 - [HTTP 기초](#http-기초)
-- [컴퓨터 과학](#컴퓨터-과학)
 - [자바](#자바)
+- [컴퓨터 과학](#컴퓨터-과학)
+- [GitHub Actions](#github-actions)
+- [타임 리프](#타임-리프)
 - [Tag: Interview](#tag-interview)
 - [Tag: Algorithm](#tag-algorithm)
 
@@ -20,7 +18,7 @@
 
 1. [AWS Elastic Beanstalk](https://github.com/dailyzett/TIL/blob/main/common/aws/aws_1.md#목차)
 
-# 스프링 기초
+# 스프링
 
 1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaProgrammingBasic.md)
 2. [자바와 객체 지향](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaAndOOP.md)
@@ -35,48 +33,45 @@
     6. [전략 패턴(StrategyPattern.md)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/StrategyPattern.md)
     7. [템플릿 콜백 패턴(Template Callback Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/TemplateCallbackPattern.md)
 6. [스프링의 삼각형](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/SpringTriangle.md)
-
-# 스프링 MVC
-
-1. 웹 애플리케이션 이해
+7. 웹 애플리케이션 이해
    1. [웹 서버, 웹 애플리케이션 서버](https://github.com/dailyzett/TIL/blob/main/common/springMVC/webServerAndWebApplication.md)
    2. [서블릿](https://github.com/dailyzett/TIL/blob/main/common/springMVC/servlet.md)
    3. [동시 요청 - 멀티 쓰레드](https://github.com/dailyzett/TIL/blob/main/common/springMVC/multithread.md)
    4. [HTML, HTTP API, CSR, SSR](https://github.com/dailyzett/TIL/blob/main/common/springMVC/1_4.md)
    5. [자바 백엔드 웹 기술 역사](https://github.com/dailyzett/TIL/blob/main/common/springMVC/1_5.md)
-2. 서블릿
+8. 서블릿
    1. [HttpServletRequest](https://github.com/dailyzett/TIL/blob/main/common/springMVC/2_1.md)
    2. [HttpServletResponse](https://github.com/dailyzett/TIL/blob/main/common/springMVC/2_2.md)
-3. 서블릿, JSP, MVC 패턴
+9. 서블릿, JSP, MVC 패턴
    1. [MVC 패턴 적용](https://github.com/dailyzett/TIL/blob/main/common/springMVC/3_1.md)
    2. [프론트 컨트롤러](https://github.com/dailyzett/TIL/blob/main/common/springMVC/3_2.md)
-4. 스프링 MVC
-   1. [스프링 MVC 전체 구조](https://github.com/dailyzett/TIL/blob/main/common/springMVC/4_1.md)
-   2. [핸들러 매핑, 핸들러 어댑터, 뷰 리졸버](https://github.com/dailyzett/TIL/blob/main/common/springMVC/4_2.md)
-5. 스프링 MVC 기본 기능
-   1. [로깅](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_1.md)
-   2. [요청 매핑](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_2.md)
-   3. [HTTP 요청 - 기본, 헤더 조회](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_3.md)
-   4. [HTTP 요청 - @ModelAttribute](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_4.md)
-   5. [HTTP 요청 - 단순 텍스트, JSON](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_5.md)
-   6. [HTTP 응답 - 정적 리소스, 뷰 템플릿](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_6.md)
-   7. [HTTP 메시지 컨버터](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_7.md)
-   8. [RedirectAttributes](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_8.md)
-6. 스프링 검증
-   1. [검증1 - Validation](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/6_1.md)
-   2. [검증2 - Bean Validation](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/6_2.md)
-   3. [로그인 처리 - 쿠키 세션](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/6_3.md)
-   4. [로그인 처리2 - 필터, 인터셉터](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/6_4.md)
-   5. [로그인 처리3 - ArgumentResolver 활용](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/6_5.md)
-7. 예외 처리와 오류 페이지
-   1. [서블릿 예외 처리](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/7_1.md)
-   2. [스프링 부트 예외 처리](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/7_2.md)
-   3. [API 예외 처리](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/7_3.md)
-8. 스프링 타입 컨버터
-   1. [스프링 타입 컨버터](https://github.com/dailyzett/TIL/blob/main/common/spring/1_1.md)
-   2. [스프링 포맷터](https://github.com/dailyzett/TIL/blob/main/common/spring/1_2.md)
-9. 스프링 트랜잭션
-   1. [트랜잭션 관리](https://github.com/dailyzett/TIL/blob/main/common/spring/transaction_1.md#목차)
+10. 스프링 MVC
+    1. [스프링 MVC 전체 구조](https://github.com/dailyzett/TIL/blob/main/common/springMVC/4_1.md)
+    2. [핸들러 매핑, 핸들러 어댑터, 뷰 리졸버](https://github.com/dailyzett/TIL/blob/main/common/springMVC/4_2.md)
+11. 스프링 MVC 기본 기능
+    1. [로깅](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_1.md)
+    2. [요청 매핑](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_2.md)
+    3. [HTTP 요청 - 기본, 헤더 조회](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_3.md)
+    4. [HTTP 요청 - @ModelAttribute](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_4.md)
+    5. [HTTP 요청 - 단순 텍스트, JSON](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_5.md)
+    6. [HTTP 응답 - 정적 리소스, 뷰 템플릿](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_6.md)
+    7. [HTTP 메시지 컨버터](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_7.md)
+    8. [RedirectAttributes](https://github.com/dailyzett/TIL/blob/main/common/springMVC/5_8.md)
+12. 스프링 검증
+    1. [검증1 - Validation](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/6_1.md)
+    2. [검증2 - Bean Validation](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/6_2.md)
+    3. [로그인 처리 - 쿠키 세션](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/6_3.md)
+    4. [로그인 처리2 - 필터, 인터셉터](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/6_4.md)
+    5. [로그인 처리3 - ArgumentResolver 활용](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/6_5.md)
+13. 예외 처리와 오류 페이지
+    1. [서블릿 예외 처리](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/7_1.md)
+    2. [스프링 부트 예외 처리](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/7_2.md)
+    3. [API 예외 처리](https://github.com/dailyzett/TIL/blob/main/common/springvalidation/7_3.md)
+14. 스프링 타입 컨버터
+    1. [스프링 타입 컨버터](https://github.com/dailyzett/TIL/blob/main/common/spring/1_1.md)
+    2. [스프링 포맷터](https://github.com/dailyzett/TIL/blob/main/common/spring/1_2.md)
+15. 스프링 트랜잭션
+    1. [트랜잭션 관리](https://github.com/dailyzett/TIL/blob/main/common/spring/transaction_1.md#목차)
 
 # 토비의 스프링
 
@@ -108,14 +103,17 @@
     3. [서비스 추상화 적용](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/serviceabstract.md#목차)
     4. [인터페이스 상속을 통한 안전한 기능 확장](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/interfaceimplementssafety.md#목차)
 
+# SQL
 
-# GitHub Actions
-
-1. [GitHub Actions 의 이해](https://github.com/dailyzett/TIL/blob/main/common/actions/1_1.md)
-
-# 타임 리프
-
-1. [타임 리프 사용법 정리](https://github.com/dailyzett/TIL/blob/main/common/thymeleaf/1_1.md)
+1. [DBMS 아키텍처](https://github.com/dailyzett/TIL/blob/main/common/sql/DBMSArchitecture.md#목차)
+2. [DBMS와 실행 계획](https://github.com/dailyzett/TIL/blob/main/common/sql/2_1.md#목차)
+3. [실행 계획과 SQL 구문](https://github.com/dailyzett/TIL/blob/main/common/sql/2_2.md#목차)
+4. [트랜잭션과 락](https://github.com/dailyzett/TIL/blob/main/common/sql/6.md#목차)
+5. SQL 기초
+    1. [SELECT 구문](https://github.com/dailyzett/TIL/blob/main/common/sql/4_1.md#목차)
+    2. [조건 분기, 집합 연산, 윈도우 함수, 갱신](https://github.com/dailyzett/TIL/blob/main/common/sql/4_2.md#목차)
+6. [결합](https://github.com/dailyzett/TIL/blob/main/common/sql/결합.md#목차)
+7. [시퀀스 객체, IDENTITY 필드, 채번 테이블](https://github.com/dailyzett/TIL/blob/main/common/sql/5.md#목차)
 
 # JPA 이론
 
@@ -136,18 +134,6 @@
 5. [스프링 데이터 JPA - 벌크, Entity Graph, JPA Hint & Lock](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/5.md#목차)
 6. [스프링 데이터 JPA - 확장 기능](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/6.md#목차)
 7. [스프링 데이터 JPA - JPA 구현체와 새로운 엔티티의 구별](https://github.com/dailyzett/TIL/blob/main/common/jpa-pr/7.md#목차)
-
-# SQL
-
-1. [DBMS 아키텍처](https://github.com/dailyzett/TIL/blob/main/common/sql/DBMSArchitecture.md#목차)
-2. [DBMS와 실행 계획](https://github.com/dailyzett/TIL/blob/main/common/sql/2_1.md#목차)
-3. [실행 계획과 SQL 구문](https://github.com/dailyzett/TIL/blob/main/common/sql/2_2.md#목차)
-4. [트랜잭션과 락](https://github.com/dailyzett/TIL/blob/main/common/sql/6.md#목차)
-5. SQL 기초
-   1. [SELECT 구문](https://github.com/dailyzett/TIL/blob/main/common/sql/4_1.md#목차)
-   2. [조건 분기, 집합 연산, 윈도우 함수, 갱신](https://github.com/dailyzett/TIL/blob/main/common/sql/4_2.md#목차)
-6. [결합](https://github.com/dailyzett/TIL/blob/main/common/sql/결합.md#목차)
-7. [시퀀스 객체, IDENTITY 필드, 채번 테이블](https://github.com/dailyzett/TIL/blob/main/common/sql/5.md#목차)
 
 # HTTP 기초
 
@@ -172,11 +158,6 @@
 13. [필터](https://github.com/dailyzett/TIL/blob/main/common/HttpBasic/filter.md)
 14. [웹 브라우저에 URL을 입력했을 때의 과정](https://github.com/dailyzett/TIL/blob/main/common/HttpBasic/web.md#목차)
 15. [ServletContextListener](https://github.com/dailyzett/TIL/blob/main/common/HttpBasic/ServletContextListener.md)
-
-# 컴퓨터 과학
-
-1. [캐시란?](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview5.md)
-2. [Circuit Breaker 패턴](https://github.com/dailyzett/TIL/blob/main/common/etc/1.md#목차)
 
 # 자바
 
@@ -238,6 +219,20 @@
     5. [Static Nested Class vs None Static Nested Class](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/versusNestedClass.md)
     6. [HashMap vs HashTable vs ConcurrentHashMap](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/versusMaps.md)
     7. [동기/비동기 vs 블로킹/논블로킹](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/synchronousAndBlocking.md)
+
+# 컴퓨터 과학
+
+1. [캐시란?](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview5.md)
+2. [Circuit Breaker 패턴](https://github.com/dailyzett/TIL/blob/main/common/etc/1.md#목차)
+
+# GitHub Actions
+
+1. [GitHub Actions 의 이해](https://github.com/dailyzett/TIL/blob/main/common/actions/1_1.md)
+
+# 타임 리프
+
+1. [타임 리프 사용법 정리](https://github.com/dailyzett/TIL/blob/main/common/thymeleaf/1_1.md)
+
 
 # Tag: Interview
 
