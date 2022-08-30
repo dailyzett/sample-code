@@ -9,7 +9,7 @@
 - [JPA 실습](#jpa-실습)
 - [SQL](#sql)
 - [토비의 스프링](#토비의-스프링)
-- [스프링 입문을 위한 자바 객체지향의 이해](#스프링-입문을-위한-자바-객체지향의-이해)
+- [스프링 입문을 위한 자바 객체지향의 이해](#스프링-기초)
 - [HTTP 기초](#http-기초)
 - [컴퓨터 과학](#컴퓨터-과학)
 - [자바](#자바)
@@ -19,6 +19,22 @@
 # AWS
 
 1. [AWS Elastic Beanstalk](https://github.com/dailyzett/TIL/blob/main/common/aws/aws_1.md#목차)
+
+# 스프링 기초
+
+1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaProgrammingBasic.md)
+2. [자바와 객체 지향](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaAndOOP.md)
+3. [객체 지향을 사용하기 위한 자바의 여러 키워드](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaOOPKeyword.md)
+4. [객체 지향 설계 5원칙 - SOLID](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/SOLID.md)
+5. 디자인 패턴
+    1. [어댑터 패턴(Adapter Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/AdapterPattern.md)
+    2. [프록시 패턴(Proxy Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/ProxyPattern.md)
+    3. [싱글톤 패턴(Singleton Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/SingletonPattern.md)
+    4. [템플릿 메서드 패턴(Template Method Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/TemplateMethodPattern.md)
+    5. [팩토리 메서드 패턴(Factory Method Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/FactoryMethodPattern.md)
+    6. [전략 패턴(StrategyPattern.md)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/StrategyPattern.md)
+    7. [템플릿 콜백 패턴(Template Callback Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/TemplateCallbackPattern.md)
+6. [스프링의 삼각형](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/SpringTriangle.md)
 
 # 스프링 MVC
 
@@ -62,6 +78,37 @@
 9. 스프링 트랜잭션
    1. [트랜잭션 관리](https://github.com/dailyzett/TIL/blob/main/common/spring/transaction_1.md#목차)
 
+# 토비의 스프링
+
+1. [오브젝트와 의존 관계](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/ObjectAndDependency.md#목차)
+    1. [싱글톤 레지스트리와 오브젝트 스코프](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/SingletonAndObjectScope.md#목차)
+    2. [의존 관계 주입](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/DependencyInjection.md#목차)
+2. [테스트](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/Test.md#목차)
+3. [템플릿](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/Template.md#목차)
+    1. [템플릿과 콜백](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/templateAndCallback.md#목차)
+4. [예외](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/tobiexception.md#목차)
+    1. [예외 전환](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/예외전환.md#목차)
+5. 서비스 추상화
+    1. [사용자 레벨 관리 기능 추가](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/사용자레벨관리기능추가.md#목차)
+    2. [트랜잭션 서비스 추상화](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/트랜잭션서비스추상화.md#목차)
+    3. [서비스 추상화와 단일 책임 원칙](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/서비스추상화와단일책임원칙.md#목차)
+    4. [메일 서비스 추상화](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/메일서비스추상화.md#목차)
+6. AOP
+    1. [트랜잭션 코드의 분리](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/트랜잭션코드의분리.md#목차)
+    2. [고립된 단위 테스트](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/고립된단위테스트.md#목차)
+    3. [다이내믹 프록시와 팩토리 빈](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/다이내믹프록시와팩토리빈.md#목차)
+    4. [스프링의 프록시 팩토리 빈](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/스프링의프록시팩토리빈.md#목차)
+    5. [스프링 AOP](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/스프링_AOP.md#목차)
+    6. [트랜잭션 속성](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/트랜잭션_속성.md#목차)
+    7. [애노테이션 트랜잭션 속성과 포인트컷](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/애트속포.md#목차)
+    8. [트랜잭션 지원 테스트](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/트지테.md#목차)
+7. 스프링 핵심 기술의 응용
+    1. [SQL과 DAO의 분리](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/sqlanddaoseparation.md#목차)
+    2. [인터페이스의 분리와 자기참조 빈](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/interfaceandselfrefbean.md#목차)
+    3. [서비스 추상화 적용](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/serviceabstract.md#목차)
+    4. [인터페이스 상속을 통한 안전한 기능 확장](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/interfaceimplementssafety.md#목차)
+
+
 # GitHub Actions
 
 1. [GitHub Actions 의 이해](https://github.com/dailyzett/TIL/blob/main/common/actions/1_1.md)
@@ -101,53 +148,6 @@
    2. [조건 분기, 집합 연산, 윈도우 함수, 갱신](https://github.com/dailyzett/TIL/blob/main/common/sql/4_2.md#목차)
 6. [결합](https://github.com/dailyzett/TIL/blob/main/common/sql/결합.md#목차)
 7. [시퀀스 객체, IDENTITY 필드, 채번 테이블](https://github.com/dailyzett/TIL/blob/main/common/sql/5.md#목차)
-
-# 토비의 스프링
-
-1. [오브젝트와 의존 관계](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/ObjectAndDependency.md#목차)
-    1. [싱글톤 레지스트리와 오브젝트 스코프](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/SingletonAndObjectScope.md#목차)
-    2. [의존 관계 주입](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/DependencyInjection.md#목차)
-2. [테스트](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/Test.md#목차)
-3. [템플릿](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/Template.md#목차)
-    1. [템플릿과 콜백](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/templateAndCallback.md#목차)
-4. [예외](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/tobiexception.md#목차)
-    1. [예외 전환](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/예외전환.md#목차)
-5. 서비스 추상화
-    1. [사용자 레벨 관리 기능 추가](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/사용자레벨관리기능추가.md#목차)
-    2. [트랜잭션 서비스 추상화](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/트랜잭션서비스추상화.md#목차)
-    3. [서비스 추상화와 단일 책임 원칙](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/서비스추상화와단일책임원칙.md#목차)
-    4. [메일 서비스 추상화](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/메일서비스추상화.md#목차)
-6. AOP
-    1. [트랜잭션 코드의 분리](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/트랜잭션코드의분리.md#목차)
-    2. [고립된 단위 테스트](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/고립된단위테스트.md#목차)
-    3. [다이내믹 프록시와 팩토리 빈](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/다이내믹프록시와팩토리빈.md#목차)
-    4. [스프링의 프록시 팩토리 빈](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/스프링의프록시팩토리빈.md#목차)
-    5. [스프링 AOP](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/스프링_AOP.md#목차)
-    6. [트랜잭션 속성](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/트랜잭션_속성.md#목차)
-    7. [애노테이션 트랜잭션 속성과 포인트컷](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/애트속포.md#목차)
-    8. [트랜잭션 지원 테스트](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/트지테.md#목차)
-7. 스프링 핵심 기술의 응용
-    1. [SQL과 DAO의 분리](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/sqlanddaoseparation.md#목차)
-    2. [인터페이스의 분리와 자기참조 빈](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/interfaceandselfrefbean.md#목차)
-    3. [서비스 추상화 적용](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/serviceabstract.md#목차)
-    4. [인터페이스 상속을 통한 안전한 기능 확장](https://github.com/dailyzett/TIL/blob/main/common/TobiSpring/interfaceimplementssafety.md#목차)
-    
-# 스프링 입문을 위한 자바 객체지향의 이해
-
-1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaProgrammingBasic.md)
-2. [자바와 객체 지향](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaAndOOP.md)
-3. [객체 지향을 사용하기 위한 자바의 여러 키워드](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaOOPKeyword.md)
-4. [객체 지향 설계 5원칙 - SOLID](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/SOLID.md)
-5. 디자인 패턴
-    1. [어댑터 패턴(Adapter Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/AdapterPattern.md)
-    2. [프록시 패턴(Proxy Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/ProxyPattern.md)
-    3. [싱글톤 패턴(Singleton Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/SingletonPattern.md)
-    4. [템플릿 메서드 패턴(Template Method Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/TemplateMethodPattern.md)
-    5. [팩토리 메서드 패턴(Factory Method Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/FactoryMethodPattern.md)
-    6. [전략 패턴(StrategyPattern.md)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/StrategyPattern.md)
-    7. [템플릿 콜백 패턴(Template Callback Pattern)](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/TemplateCallbackPattern.md)
-6. [스프링의 삼각형](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/SpringTriangle.md)
-
 
 # HTTP 기초
 
