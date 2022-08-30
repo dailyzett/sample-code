@@ -14,6 +14,7 @@
 - [컴퓨터 과학](#컴퓨터-과학)
 - [자바](#자바)
 - [Tag: Interview](#tag-interview)
+- [Tag: Algorithm](#tag-algorithm)
 
 # AWS
 
@@ -250,4 +251,4 @@
 
 # Tag: Algorithm
 
-1. [DP]()
+1. [DP](https://github.com/dailyzett/TIL/blob/main/common/algorithm/dp_1.md#목차)
