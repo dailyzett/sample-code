@@ -100,25 +100,25 @@ class Solution {
 
 ```java
 class Solution {
-	private Map<Integer, Integer> memo = new HashMap<>();
+    private Map<Integer, Integer> memo = new HashMap<>();
 
-	private int helper(int i) {
-		if(i <= 2) {
-			return i;
-		}
+    private int helper(int i) {
+        if(i <= 2) {
+            return i;
+        }
 
         //helper(i-1) + helper(i-2) 를 리턴하는 대신에 값을 계산하고
         // 그 값을 이후 스택 프레임에 사용하기 위해 해시 맵에 저장한다.
-		if(!memo.containsKey(i)) {
-			memo.put(i, helper(i-1) + helper(i-2));
-		}
+        if(!memo.containsKey(i)) {
+            memo.put(i, helper(i-1) + helper(i-2));
+        }
 
-		return memo.get(i);
-	}
+        return memo.get(i);
+    }
 
-	public int climbStairs(int n) {
-		return helper(n);
-	}
+    public int climbStairs(int n) {
+        return helper(n);
+    }
 }
 ```
 
