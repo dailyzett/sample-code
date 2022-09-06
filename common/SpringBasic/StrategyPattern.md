@@ -110,19 +110,19 @@ public class Main {
 ```java
 public class ContextV1 {
 
-	private Strategy strategy;
+    private Strategy strategy;
 
-	public ContextV1(Strategy strategy) {
-		this.strategy = strategy;
-	}
+    public ContextV1(Strategy strategy) {
+        this.strategy = strategy;
+    }
 
-	public void execute() {
-		long startTime = System.currentTimeMillis();
-		strategy.call();
-		long endTime = System.currentTimeMillis();
-		long resultTime = endTime - startTime;
-		log.info("resultTime={}", resultTime);
-	}
+    public void execute() {
+        long startTime = System.currentTimeMillis();
+        strategy.call();
+        long endTime = System.currentTimeMillis();
+        long resultTime = endTime - startTime;
+        log.info("resultTime={}", resultTime);
+    }
 }
 ```
 
@@ -142,13 +142,13 @@ public class ContextV1 {
 @Slf4j
 public class ContextV2 {
 
-	public void execute(Strategy strategy) {
-		long startTime = System.currentTimeMillis();
-		strategy.call();
-		long endTime = System.currentTimeMillis();
-		long resultTime = endTime - startTime;
-		log.info("resultTime={}", resultTime);
-	}
+    public void execute(Strategy strategy) {
+        long startTime = System.currentTimeMillis();
+        strategy.call();
+        long endTime = System.currentTimeMillis();
+        long resultTime = endTime - startTime;
+        log.info("resultTime={}", resultTime);
+    }
 }
 ```
 
