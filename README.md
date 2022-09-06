@@ -29,9 +29,9 @@
     1. [어댑터 패턴](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/AdapterPattern.md)
     2. [프록시 패턴](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/ProxyPattern.md)
     3. [싱글톤 패턴](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/SingletonPattern.md)
-    4. [템플릿 메서드 패턴](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/TemplateMethodPattern.md)
+    4. [템플릿 메서드 패턴](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/TemplateMethodPattern.md#목차)
     5. [팩토리 메서드 패턴](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/FactoryMethodPattern.md)
-    6. [전략 패턴](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/StrategyPattern.md)
+    6. [전략 패턴](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/StrategyPattern.md#목차)
     7. [템플릿 콜백 패턴](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/TemplateCallbackPattern.md)
 6. [스프링의 삼각형](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/SpringTriangle.md)
 7. 웹 애플리케이션 이해
