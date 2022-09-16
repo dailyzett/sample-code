@@ -9,7 +9,7 @@
 - [JPA 이론](#jpa-이론)
 - [JPA 실습](#jpa-실습)
 - [HTTP 기초](#http-기초)
-- [자바](#자바)
+- [자바](#자바) 
 - [컴퓨터 과학](#컴퓨터-과학)
 - [GitHub Actions](#github-actions)
 - [타임 리프](#타임-리프)
