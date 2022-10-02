@@ -74,6 +74,9 @@
     2. [스프링 포맷터](https://github.com/dailyzett/TIL/blob/main/common/spring/1_2.md)
 15. 스프링 트랜잭션
     1. [트랜잭션 관리](https://github.com/dailyzett/TIL/blob/main/common/spring/transaction_1.md#목차)
+16. 스프링 AOP
+    1. [프록시 팩토리 빈](https://github.com/dailyzett/TIL/blob/main/common/spring/proxyfactory.md#목차)
+    2. [포인트컷, 어드바이스, 어드바이저](https://github.com/dailyzett/TIL/blob/main/common/spring/pointcut_advice_advisor.md#목차)
 
 # 토비의 스프링
 
