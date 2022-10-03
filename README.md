@@ -77,6 +77,7 @@
 16. 스프링 AOP
     1. [프록시 팩토리 빈](https://github.com/dailyzett/TIL/blob/main/common/spring/proxyfactory.md#목차)
     2. [포인트컷, 어드바이스, 어드바이저](https://github.com/dailyzett/TIL/blob/main/common/spring/pointcut_advice_advisor.md#목차)
+    3. [빈후처리기](https://github.com/dailyzett/TIL/blob/main/common/spring/BeanPostProcessor.md#목차)
 
 # 토비의 스프링
 

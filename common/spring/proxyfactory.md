@@ -15,14 +15,14 @@
 
 이런 문제들을 해결하기 위해 스프링은 **프록시 팩토리** 기능을 제공한다.
 
-![img_2.png](img_2.png)
+![img_2.png](image/img_2.png)
 
 프록시 팩토리는 인터페이스가 있으면 JDK 동적 프록시를, 없으면 CGLIB 를 사용한다.
 이것이 가능한 이유는 스프링이 _Advice_ 라는 새로운 개념을 도입했기 때문이다.
 
 개발자는 JDK 동적 프록시이든 CGLIB 이든 _Advice_ 만 만들면 된다.
 
-![img_3.png](img_3.png)
+![img_3.png](image/img_3.png)
 
 # 프록시 팩토리 - 예제 코드 1
 

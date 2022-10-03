@@ -221,7 +221,7 @@ _TransactionInterceptor_ 는 명령형 및 반응형 프로그래밍 모델에 �
 
 아래 이미지는 트랜잭션 프록시에서 메서드를 호출하는 것을 설명하는 그림이다.
 
-![](1.png)
+![](image/1.png)
 
 ### 1.4.2 트랜잭션 전파
 
@@ -232,7 +232,7 @@ _TransactionInterceptor_ 는 명령형 및 반응형 프로그래밍 모델에 �
 
 - **PROPAGATION_REQUIRED**
 
-![img.png](img.png)
+![img.png](image/img.png)
 
 1. 트랜잭션이 커밋되거나 롤백으로 인해 생성되서 _Transactional method 1_ 이 생성된다.
 2. _Transaction method 2_ 는 이미 실행되고 있는 트랜잭션 내부에서 실행된다.
@@ -257,7 +257,7 @@ rollback-only 상태를 개별적으로 지정할 수 있다.
 
 - **PROPAGATION_REQUIRES_NEW**
 
-![img_1.png](img_1.png)
+![img_1.png](image/img_1.png)
 
 1. 트랜잭션이 생성된다.
 2. 메서드 2는 새로운 트랜잭션에서 실행되고 외부 트랜잭션은 일시 중단된다.
