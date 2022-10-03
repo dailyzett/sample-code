@@ -2,7 +2,7 @@
 
 - [목차](#목차)
 - [1. Aspect AOP](#1-aspect-aop)
-	- [1.1 @Aspect 프록시 - 동작 원리](#11-aspect-프록시---동작-원리)
+  - [1.1 @Aspect 프록시 - 동작 원리](#11-aspect-프록시---동작-원리)
 
 # 1. Aspect AOP
 
@@ -21,25 +21,25 @@
 @RequiredArgsConstructor
 public class LogTraceAspect {
 
-	private final LogTrace logTrace;
+  private final LogTrace logTrace;
 
-	@Around("execution(* hello.proxy.app..*(..))")
-	public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
-		TraceStatus status = null;
-		try {
-			String message = joinPoint.getSignature().toShortString();
-			status = logTrace.begin(message);
+  @Around("execution(* hello.proxy.app..*(..))")
+  public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
+    TraceStatus status = null;
+    try {
+      String message = joinPoint.getSignature().toShortString();
+      status = logTrace.begin(message);
 
-			//로직 호출
-			Object result = joinPoint.proceed();
+      //로직 호출
+      Object result = joinPoint.proceed();
 
-			logTrace.end(status);
-			return result;
-		} catch (Exception e) {
-			logTrace.exception(status, e);
-			throw e;
-		}
-	}
+      logTrace.end(status);
+      return result;
+    } catch (Exception e) {
+      logTrace.exception(status, e);
+      throw e;
+    }
+  }
 }
 ```
 
@@ -56,10 +56,10 @@ public class LogTraceAspect {
 @Import({AppV1Config.class, AppV2Config.class})
 public class AopConfig {
 
-	@Bean
-	public LogTraceAspect logTraceAspect(LogTrace logTrace) {
-		return new LogTraceAspect(logTrace);
-	}
+  @Bean
+  public LogTraceAspect logTraceAspect(LogTrace logTrace) {
+    return new LogTraceAspect(logTrace);
+  }
 }
 ```
 
