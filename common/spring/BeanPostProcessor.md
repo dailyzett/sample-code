@@ -33,65 +33,65 @@ _@Bean_ 이나 컴포넌트 스캔으로 스프링 빈을 등록하면, 스프�
 @Slf4j
 public class BasicTest {
 
-	@Test
-	void basicConfig() {
-		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-			BasicConfig.class);
+  @Test
+  void basicConfig() {
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+      BasicConfig.class);
 
-		//B는 빈으로 등록
-		B b = applicationContext.getBean("beanA", B.class);
-		b.helloB();
+    //B는 빈으로 등록
+    B b = applicationContext.getBean("beanA", B.class);
+    b.helloB();
 
-		//A는 빈으로 등록 X
-		assertThatThrownBy(() -> {
-			applicationContext.getBean(A.class);
-		}).isInstanceOf(NoSuchBeanDefinitionException.class);
-	}
+    //A는 빈으로 등록 X
+    assertThatThrownBy(() -> {
+      applicationContext.getBean(A.class);
+    }).isInstanceOf(NoSuchBeanDefinitionException.class);
+  }
 
-	@Slf4j
-	@Configuration
-	static class BasicConfig {
+  @Slf4j
+  @Configuration
+  static class BasicConfig {
 
-		@Bean(name = "beanA")
-		public A a() {
-			return new A();
-		}
+    @Bean(name = "beanA")
+    public A a() {
+      return new A();
+    }
 
-		@Bean
-		public AToBPostProcessor helloPostProcessor() {
-			return new AToBPostProcessor();
-		}
-	}
+    @Bean
+    public AToBPostProcessor helloPostProcessor() {
+      return new AToBPostProcessor();
+    }
+  }
 
-	@Slf4j
-	static class A {
+  @Slf4j
+  static class A {
 
-		public void helloA() {
-			log.info("hello A");
-		}
-	}
+    public void helloA() {
+      log.info("hello A");
+    }
+  }
 
-	@Slf4j
-	static class B {
+  @Slf4j
+  static class B {
 
-		public void helloB() {
-			log.info("hello B");
-		}
-	}
+    public void helloB() {
+      log.info("hello B");
+    }
+  }
 
-	@Slf4j
-	static class AToBPostProcessor implements BeanPostProcessor {
+  @Slf4j
+  static class AToBPostProcessor implements BeanPostProcessor {
 
-		@Override
-		public Object postProcessAfterInitialization(Object bean, String beanName)
-			throws BeansException {
-			log.info("beanName={} bean={}", beanName, bean);
-			if(bean instanceof A) {
-				return new B();
-			}
-			return bean;
-		}
-	}
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName)
+      throws BeansException {
+      log.info("beanName={} bean={}", beanName, bean);
+      if(bean instanceof A) {
+        return new B();
+      }
+      return bean;
+    }
+  }
 }
 ```
 
