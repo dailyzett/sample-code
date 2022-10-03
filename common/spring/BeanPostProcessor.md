@@ -148,7 +148,6 @@ implementation 'org.springframework.boot:spring-boot-starter-aop'
 
 - 프록시가 호출되었을 때, 부가 기능인 어드바이스를 적용할지 말지 포인트컷을 보고 판단한다.
 
-
 > **참고.**
 >
 > 프록시를 모든 곳에 생성하는 것은 리소스 낭비이다. 꼭 필요한 곳에 최소한의 프록시를 적용해야 한다.
