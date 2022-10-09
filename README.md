@@ -80,6 +80,7 @@
     3. [빈후처리기](https://github.com/dailyzett/TIL/blob/main/common/spring/BeanPostProcessor.md#목차)
     4. [@Aspect AOP](https://github.com/dailyzett/TIL/blob/main/common/spring/AspectAOP.md#목차)
     5. [스프링 AOP의 기능](https://github.com/dailyzett/TIL/blob/main/common/spring/SpringAopFunction.md#목차)
+    6. [포인트컷](https://github.com/dailyzett/TIL/blob/main/common/spring/SpringPointcut.md#목차)
 
 # 토비의 스프링
 
