@@ -11,8 +11,6 @@
 - [HTTP 기초](#http-기초)
 - [자바](#자바)
 - [컴퓨터 과학](#컴퓨터-과학)
-- [GitHub Actions](#github-actions)
-- [타임 리프](#타임-리프)
 - [Tag: Interview](#tag-interview)
 - [Tag: Algorithm](#tag-algorithm)
 
@@ -81,6 +79,7 @@
     4. [@Aspect AOP](https://github.com/dailyzett/TIL/blob/main/common/spring/AspectAOP.md#목차)
     5. [스프링 AOP의 기능](https://github.com/dailyzett/TIL/blob/main/common/spring/SpringAopFunction.md#목차)
     6. [포인트컷](https://github.com/dailyzett/TIL/blob/main/common/spring/SpringPointcut.md#목차)
+    7. [주의사항](https://github.com/dailyzett/TIL/blob/main/common/spring/SpringAopWarning.md#목차)
 
 # 토비의 스프링
 
@@ -236,14 +235,6 @@
 
 1. [캐시란?](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview5.md)
 2. [Circuit Breaker 패턴](https://github.com/dailyzett/TIL/blob/main/common/etc/1.md#목차)
-
-# GitHub Actions
-
-1. [GitHub Actions 의 이해](https://github.com/dailyzett/TIL/blob/main/common/actions/1_1.md)
-
-# 타임 리프
-
-1. [타임 리프 사용법 정리](https://github.com/dailyzett/TIL/blob/main/common/thymeleaf/1_1.md)
 
 # Tag: Interview
 
