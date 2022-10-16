@@ -20,7 +20,7 @@
 
 # 코틀린 인 액션
 
-1. [코틀린 기초](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/basic#목차)
+1. [코틀린 기초](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/basic.md#목차)
 
 # 스프링
 
