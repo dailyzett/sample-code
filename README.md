@@ -21,6 +21,7 @@
 # 코틀린 인 액션
 
 1. [코틀린 기초](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/basic.md#목차)
+2. [함수 정의와 호출](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/functionDefAndCall.md#목차)
 
 # 스프링
 
