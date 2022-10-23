@@ -14,6 +14,8 @@ fun <T> joinToString(
     return result.toString()
 }
 
+fun String.lastChar(): Char = this[this.length - 1]
+
 var opCount = 0
 const val UNIX_LINE_SEPARATOR = "\n"
 
