@@ -12,7 +12,6 @@ fun User.validateBeforeSave() {
     }
 
     validate(name, "Name")
-    validate(address, "Address")
 }
 
 fun saveUser(user: User) {
