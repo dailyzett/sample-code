@@ -1,5 +1,6 @@
 package com.begin.three
 
+import com.begin.four.one.Button
 import org.junit.jupiter.api.Test
 import strings.UNIX_LINE_SEPARATOR
 import strings.joinToString
@@ -42,5 +43,18 @@ class ThreeOne {
         println("Hello! $UNIX_LINE_SEPARATOR World")
     }
 
+    @Test
+    fun test6() {
+        Button().click()
+        Button().showOff()
+    }
+
+    @Test
+    fun test7() {
+        val button = Button()
+        button.showOff()
+        button.setFocus(true)
+        button.click()
+    }
 
 }
