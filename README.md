@@ -22,6 +22,7 @@
 
 1. [코틀린 기초](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/basic.md#목차)
 2. [함수 정의와 호출](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/functionDefAndCall.md#목차)
+3. [클래스, 객체, 인터페이스](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/classObjectInterface.md#목차)
 
 # 스프링
 
