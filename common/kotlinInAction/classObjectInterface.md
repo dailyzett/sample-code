@@ -104,3 +104,96 @@ fun eval(e: Expr): Int =
 *sealed class* 는 클래스 외부에 자신이 확장한 클래스를 둘 수 없기 때문에 나중에 *sealed* 클래스의 하위 계층에 새로운 클래스를 추가해도 *when* 식이 컴파일되지 않는다. 따라서 *when* 식을 고쳐야한다는 점을 쉽게 알 수 있다.
 
 참고로 *Expr* 생성자는 *private* 생성자를 가지고 그 생성자는 클래스 내부에서만 호출할 수 있다.
+
+# 2. 생성자와 프로퍼티를 갖는 클래스 선언
+
+## 2.1 클래스 초기화: 주 생성자와 초기화 블록
+
+코틀린에는 주 생성자와 부 생성자가 있다.
+
+주 생성자를 생성하는 방법은 간단하다
+
+```kotlin
+class User(val nickname: String)
+```
+
+이렇게 클래스 이름 뒤에 괄호로 둘러싸인 코드를 **주 생성자**라고 한다.
+
+만약 어떤 클래스가 슈퍼 클래스를 구현한 클래스라면 어떻게 해야 될까? 주 생성자에서 슈퍼 클래스의 생성자를 호출해야할 필요가 있다.
+
+```kotlin
+open class User(val nickname: String)
+
+class TwitterUser(nickname: String) : User(nickname) {}
+```
+
+서브 클래스 *TwitterUser* 를 보면 슈퍼 클래스인 *User* 뒤에 생성자 인자인 *nickname* 을 넘기고 있음을 볼 수 있다.
+
+그런데 *User* 클래스의 생성자가 하나도 없는 상태라면?
+
+```kotlin
+open class User()
+class TwitterUser : User()
+```
+
+이 규칙으로 인해 슈퍼 클래스 이름 뒤에는 꼭 빈 괄호가 들어간다. 인터페이스는 생성자가 없기 때문에 아무 괄호가 없다. 즉 괄호의 유무로 이것이 확장한 것인지 구현한 것인지 쉽게 파악할 수 있다.
+
+어떤 클래스를 외부에서 인스턴스화하지 못하게 막으려면 주 생성자에 private 키워드를 붙이면 된다.
+
+```kotlin
+class PrivateClass private constructor() {}
+```
+
+주 생성자는 생성하기도 쉽고 알아보기도 간편해서 이것만 사용하면 될 것 같지만 실제로는 어려움이 따르기 마련이다. 그래서 코틀린은 필요에 따라 생성자를 정의하는 여러 방법을 제공한다.
+
+## 2.2 부 생성자: 상위 클래스를 다른 방식으로 초기화
+
+일반적으로 코틀린에서 생성자가 여럿 있는 경우는 자바보다 훨씬 적다.
+
+> **Tip.**
+>
+> 인자(Argument)에 대한 디폴트 값을 제공하기 위해 부 생성자를 여럿 만들지 말고, 파라미터의 디폴트 값을 생성자 시그니처에 직접 명시하자.
+
+```kotlin
+open class View { 
+    constructor(viewName: String) {
+        //TODO
+    }
+  
+    constructor(viewName: String, isSubs: Boolean) {
+        //TODO
+    }
+}
+```
+
+부 생성자는 *constuctor* 키워드로 여러개 생성할 수 있다. 이 클래스를 확장하면서 똑같은 부 생성자를 만들 수 있다.
+
+```kotlin
+class SubView : View {
+    constructor(viewName: String) : super(viewName) {
+        //TODO
+    }
+
+    constructor(viewName: String, isSubs: Boolean) : super(viewName, isSubs) {
+        //TODO
+    }
+}
+```
+
+보다시피 슈퍼 클래스와 서브 클래스 간의 생성자들이 각각 대응된다. super 키워드를 통해 상위 클래스 생성자를 호출하는 것이다. 자바와 마찬가지로 *this* 로 자기 자신의 다른 생성자를 호출할 수도 있다.
+
+```kotlin
+class SubView : View {
+    constructor(viewName: String) : this(viewName, isSubs = false) {
+        //TODO
+    }
+```
+
+*SubView* 클래스의 생성자 중 하나가 파라미터의 디폴트 값을 넘겨서 같은 클래스의 다른 생성자에게 생성을 위임한다.
+
+부 생성자가 필요한 이유:
+
+- 자바 상호 운용성
+- 클래스 인스턴스를 생성할 때 파라미터 목록이 다른 생성 방법이 여럿 존재하면 부 생성자를 여러개 둘 수 밖에 없기 때문에
+
+## 2.3 인터페이스에 선언된 프로퍼티 구현
