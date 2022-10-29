@@ -197,3 +197,71 @@ class SubView : View {
 - 클래스 인스턴스를 생성할 때 파라미터 목록이 다른 생성 방법이 여럿 존재하면 부 생성자를 여러개 둘 수 밖에 없기 때문에
 
 ## 2.3 인터페이스에 선언된 프로퍼티 구현
+
+```kotlin
+interface User {
+    val nickname: String
+}
+```
+
+코틀린에서는 인터페이스에 추상 프로퍼티 선언을 넣을 수 있다.
+
+```kotlin
+class PrivateUser(override val nickname: String) : User
+
+class SubscribingUser(val email: String) : User {
+    override val nickname: String
+     get() = email.substringBefore('@')
+}
+```
+
+- *PrivateUser* : 주 생성자에 있는 프로퍼티
+- *SubscribingUser* : 커스텀 게터 구현
+
+인터페이스에는 추상 프로퍼티뿐만 아니라 게터와 세터가 있는 프로퍼티를 선언할 수도 있다.
+
+```kotlin
+fun main() {
+ 	println(PrivateUser("test@kotlin.org").email)
+    println(PrivateUser("test@kotlin.org").nickname)
+}
+
+interface User {
+    val email: String
+    val nickname: String
+    	get() = email.substringBefore('@')
+}
+
+class PrivateUser(val example: String) : User {
+    override val email : String
+    	get() = example
+}
+```
+
+하위 클래스는 추상 프로퍼티인 *email* 을 반드시 오버라이드해야 한다. 반면 *nickname* 은 오버라이드하지 않고 상속할 수 있다. 인터페이스에 선언된 프로퍼티와 달리 클래스에 구현된 프로퍼티는 뒷받침하는 필드를 원하는 대로 사용할 수 있다.
+
+### 2.3.1 게터와 세터에서 Backing Field에 접근
+
+코틀린의 *Backing Field*는 게터 세터에 기본적으로 생성되는 프로퍼티이다. 클래스 내의 프로퍼티에 값을 할당할 때 내부적으로 세터가 불러올 때는 게터가 호출된다.
+
+예제 코드로 프로퍼티에 저장된 값의 변경 이력을 로그에 남기기 위한 코드를 작성한다.
+
+- 변경 가능한 프로퍼티를 제공해야 한다.
+- 세터에서 프로퍼티 값을 바꿀 때마다 약간의 코드를 추가로 실행해야 한다.
+
+```kotlin
+fun main() {
+   val user = User("Alice")
+   user.address = "Elesenhi 47, 60684 Muenchen"
+}
+
+class User(val name: String) {
+    var address: String = "unspecified"
+    	set(value: String) {
+           	println("$field -> $value")
+            field = value
+        }
+}
+```
+
+*field* 키워드는 프로퍼티의 실제 값을 저장하는 변수를 지칭한다. 이 프로퍼티의 값을 저장하는 *field*를 *backing field*라고 한다.
