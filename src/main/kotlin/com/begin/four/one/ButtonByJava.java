@@ -13,8 +13,9 @@ public class ButtonByJava implements View {
 
 	@Override
 	public void restoreState(@NotNull State state) {
-		View.super.restoreState(state);
+
 	}
+
 
 	public static class ButtonState implements State {}
 }

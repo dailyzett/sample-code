@@ -1,6 +1,7 @@
 package com.begin.three
 
 import com.begin.four.one.Button
+import com.begin.four.two.*
 import org.junit.jupiter.api.Test
 import strings.UNIX_LINE_SEPARATOR
 import strings.joinToString
@@ -57,4 +58,26 @@ class ThreeOne {
         button.click()
     }
 
+    @Test
+    fun sealedClassTest() {
+        println(eval(Expr.Sum(Expr.Num(3), Expr.Num(5))))
+    }
+
+    @Test
+    fun test10() {
+        val user = User("Alice")
+        user.address = "kotlin@naver.com"
+    }
+
+    @Test
+    fun test11() {
+        val lengthCounter = LengthCounter(3)
+        lengthCounter.addWord("Hello!")
+        println(lengthCounter.paramCounter)
+    }
+
+    @Test
+    fun test12() {
+        println(Client("Hello", 33))
+    }
 }
