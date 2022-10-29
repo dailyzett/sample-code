@@ -265,3 +265,5 @@ class User(val name: String) {
 ```
 
 *field* 키워드는 프로퍼티의 실제 값을 저장하는 변수를 지칭한다. 이 프로퍼티의 값을 저장하는 *field*를 *backing field*라고 한다.
+
+### 2.3.2 접근자의 가시성 변경
