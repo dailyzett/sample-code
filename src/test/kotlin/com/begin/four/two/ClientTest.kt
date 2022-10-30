@@ -20,7 +20,7 @@ internal class ClientTest {
 
     @Test
     fun copyTest() {
-        val lee = Client("한글", 2323)
-        println(lee)
+        val lee = Client("Lee", 322)
+        println(lee.copy(postalCode = 4000))
     }
 }
