@@ -3,6 +3,7 @@ package com.begin.four.two
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.File
+import java.util.*
 
 internal class CountingSetTest {
     @Test
@@ -66,6 +67,69 @@ internal class CountingSetTest {
         printProblemCounts(responses)
     }
 
+    private fun salute() = println("Salute!")
+
+    @Test
+    fun test8() {
+        run(::salute)
+    }
+
+    @Test
+    fun test9() {
+        val list = listOf(1, 2, 3, 4)
+        println(list.filter { it % 2 == 0 })
+    }
+
+    @Test
+    fun test10() {
+        val list = listOf(1, 2, 3, 4)
+        println(list.map { it * it })
+    }
+
+    @Test
+    fun test11() {
+        val people = listOf(Person3("Bob", 33), Person3("Alice", 29), Person3("Hello", 99))
+        println(people.filter { it.age > 30 }.map { it.age })
+        val numbers = mapOf(0 to "zero", 1 to "one")
+        println(numbers.mapValues { it.value.uppercase(Locale.getDefault()) })
+    }
+
+    @Test
+    fun test12() {
+        val canBeInClub27 = {p: Person3 -> p.age <= 27}
+        val people = listOf(Person3("Alice", 27), Person3("Bob", 31))
+        println(people.all(canBeInClub27))
+    }
+
+    private fun alphabet() = buildString {
+        for (letter in 'A'..'Z') {
+            append(letter)
+        }
+        append("\nNow I know the alphabet!")
+    }
+
+
+    @Test
+    fun alphaTest() {
+        println(alphabet())
+    }
+
+    @Test
+    fun test13() {
+
+    }
+
+    private fun printAllCaps(s: String?) {
+        val allCaps: String? = s?.uppercase(Locale.getDefault())
+    }
+
+    @Test
+    fun test14() {
+        val ceo = Employee("Da Boss", null)
+        val developer = Employee("Bob Smith", ceo)
+        println(managerName(developer))
+        println(managerName(ceo))
+    }
 }
 
 class A {
