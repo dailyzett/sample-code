@@ -26,6 +26,7 @@
 3. [클래스, 객체, 인터페이스](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/classObjectInterface.md#목차)
 4. [람다 프로그래밍](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/lambda.md#목차)
 5. [코틀린 타입 시스템](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/kotlinTypeSystem.md#목차)
+6. [연산자 오버로딩, 기타관례](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/overloadingAndEtc.md#목차)
 
 # 스프링
 
