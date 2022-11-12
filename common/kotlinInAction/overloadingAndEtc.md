@@ -84,3 +84,75 @@ Comparable의 compareTo에도 operator 연산자가 붙어있으므로 하위 �
 
 # 3. 컬렉션과 범위에 대해 쓸 수 있는 관례
 
+## 3.1 구조 분해 선언과 component 함수
+
+구조 분해 선언은 여러 값을 반환할 때 유용하다.
+
+```kotlin
+data class NameComponents(val name: String, val extension: String)
+
+fun splitFileName(fullName: String): NameComponents {
+    val result = fullName.split('.', limit = 2)
+    return NameComponents(result[0], result[1]) // 파일 이름, 확장자명 반환
+}
+```
+
+```kotlin
+@Test
+fun test() {
+    val (name, extension) = splitFileName("example.kt") // 한꺼번에 반환받을 수 있다.
+    println(name)
+    println(extension)
+}
+```
+
+배열이나 컬렉션에도 구조 분해 선언이 있기 때문에 이 코드를 더 최적화할 수 있다.
+
+특히 크기가 정해진 컬렉션을 다루는 경우 더 유용하다. 예를 들어 split은 두 개의 원소로 이뤄진 리스트를 반환한다.
+
+```kotlin
+fun splitFileName(fullName: String): NameComponents {
+    //변수 선언부터 구조 분해 선언으로 값을 할당한다.
+    val (name, extension) = fullName.split('.', limit = 2)
+    return NameComponents(name, extension)
+}
+```
+
+## 3.2 구조 분해 선언과 루프
+
+변수가 들어갈 수 있는 곳 어디든 구조 분해 선언을 사용할 수 있다.
+
+Map의 원소에 대해 이터레이션할 때 구조 분해 선언이 유용하다.
+
+```kotlin
+fun printEntries(map: Map<String, String>) {
+    for ((key, value) in map) {
+        println("$key -> $value")
+    }
+}
+```
+
+이 함수에 사용된 관례:
+
+- 객체를 이터레이션하는 관례, Map 원소에 대한 이터레이터를 반환
+- 구조 분해 선언
+
+# 4. 프로퍼티 접근자 로직 재활용: 위임 프로퍼티
+
+delegated properties(위임 프로퍼티)를 이용하면 값을 뒷받침하는 필드에 단순히 저장하는 것보다 더 복잡한 방식으로 작동하는
+프로퍼티를 쉽게 구현할 수 있다.
+
+**위임**은 객체가 직접 작업을 수행하지 않고 다른 도우미 객체가 그 작업을 처리하게 맡기는 디자인 패턴을 말한다.
+
+## 4.1 위임 프로퍼티 소개
+
+```kotlin
+class Foo {
+    var p: Type by Delegate()
+}
+```
+
+
+
+
+
