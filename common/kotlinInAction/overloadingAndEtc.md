@@ -1,5 +1,20 @@
 # 목차
 
+- [목차](#목차)
+- [1. 산술 연산자 오버로딩](#1-산술-연산자-오버로딩)
+  - [1.1 이항 산술 연산 오버로딩](#11-이항-산술-연산-오버로딩)
+  - [1.2 복합 대입 연산자 오버로딩](#12-복합-대입-연산자-오버로딩)
+  - [1.3 단항 연산자 오버로딩](#13-단항-연산자-오버로딩)
+- [2. 비교 연산자 오버로딩](#2-비교-연산자-오버로딩)
+  - [2.1 동등성 연산자: equals](#21-동등성-연산자-equals)
+  - [2.2 순서 연산자: compareTo](#22-순서-연산자-compareto)
+- [3. 컬렉션과 범위에 대해 쓸 수 있는 관례](#3-컬렉션과-범위에-대해-쓸-수-있는-관례)
+  - [3.1 구조 분해 선언과 component 함수](#31-구조-분해-선언과-component-함수)
+  - [3.2 구조 분해 선언과 루프](#32-구조-분해-선언과-루프)
+- [4. 프로퍼티 접근자 로직 재활용: 위임 프로퍼티](#4-프로퍼티-접근자-로직-재활용-위임-프로퍼티)
+  - [4.1 위임 프로퍼티 소개](#41-위임-프로퍼티-소개)
+  - [4.2 프로퍼티 값을 맵에 저장](#42-프로퍼티-값을-맵에-저장)
+
 # 1. 산술 연산자 오버로딩
 
 ## 1.1 이항 산술 연산 오버로딩
@@ -148,11 +163,90 @@ delegated properties(위임 프로퍼티)를 이용하면 값을 뒷받침하는
 
 ```kotlin
 class Foo {
-    var p: Type by Delegate()
+    var p: Type by Delegate() //by 키워드는 프로퍼티와 위임 객체를 연결한다.
 }
 ```
 
+- p 프로퍼티는 접근자 로직을 다른 객체에게 위임한다. 
+- 여기서는 Delegate 클래스의 인스턴스를 위임 객체로 사용한다.
+- *by* 뒤에 있는 식을 계산해서 위임에 쓰일 객체를 얻는다.
+
+```kotlin
+class Foo {
+    private val delegate = Delegate() //컴파일러가 생성한 도우미 프로퍼티
+    var p: Type //p 프로퍼티를 위해 컴파일러가 생성한 접근자는 getValue와 setValue 메서드를 호출
+    set(value: Type) = delegate.setValue(TODO(), value)
+    get() = delegate.getValue(TODO())
+}
+```
+
+```kotlin
+@Test
+fun test() {
+    val foo = Foo()
+    val oldValue = foo.p
+    foo.p = newValue
+}
+```
+
+p의 게터나 세터는 Delegate 타입의 위임 프로퍼티 객체에 있는 메서드를 호출한다.
+
+코틀린 라이브러리는 프로퍼티 위임을 사용해 프로퍼티 초기화를 지연시켜줄 수 있다.
+
+## 4.2 프로퍼티 값을 맵에 저장
+
+자신의 프로퍼티를 동적으로 정의할 수 있는 객체를 만들 때 위임 프로퍼티를 활용하는 경우가 자주 있다.
+이런 객체를 *expando object*라고 부르기도 한다.
 
 
+> Ex) 연락처 관리 시스템에서 연락처별로 임의의 정보를 저장할 수 있게 허용하는 경우를 살펴본다.
 
+- 시스템에 저장된 연락처에는 일부 필수 정보가 있다.
+- 여기에는 사람마다 달라질 수 있는 추가 정보도 있다.
 
+이를 구현하기 위해서 정보를 모두 맵에 저장하되, 맵을 통해 처리하는 프로퍼티를 이용해 필수 정보를 제공하는 방법이 있다.
+
+- 추가 데이터를 저장하기 위해 일반적인 API를 사용한다.
+- 특정 프로퍼티(name)을 처리하기 위해 구체적인 개별 API를 사용한다.
+
+```kotlin
+class Person {
+    //추가 정보
+    private val _attributes = hashMapOf<String, String>()
+
+    fun setAttribute(attrName: String, value: String) {
+        _attributes[attrName] = value
+    }
+
+    //필수 정보
+    val name: String
+    get() = _attributes["name"]!!
+}
+```
+
+```kotlin
+class DelegatedPropertyTest {
+    
+    @Test
+    fun test() {
+        val p = Person()
+        val data = mapOf("name" to "Dmitry", "company" to "JetBrains")
+        for((attrName, value) in data)
+            p.setAttribute(attrName, value)
+        println(p.name)
+    }
+}
+```
+
+이 코드를 위임 프로퍼티의 *by* 키워드로 바꾸면 아래와 같다.
+
+```kotlin
+//필수 정보
+val name: String by _attributes
+```
+
+이 코드가 작동하는 이유는 표준 라이브러리가 *Map*과 *MutableMap* 인터페이스에 대해 *getValue*와 *setValue* 확장
+함수를 제공하기 때문이다. *getValue*에서 맵에 프로퍼티 값을 저장할 때는 자동으로 프로퍼티 이름을 키로 활용한다.
+
+`p.name`은 `_attributes.getValue(p, prop)` 라는 호출을 대신하고,
+`_attributes.getValue(p, prop)`는 다시 `_attributes[prop.name]`을 통해 구현된다.
