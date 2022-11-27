@@ -28,6 +28,7 @@
 5. [코틀린 타입 시스템](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/코틀린_타입_시스템.md#목차)
 6. [연산자 오버로딩, 기타관례](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/연산자_오버로딩과_기타_관례.md#목차)
 7. [고차 함수: 파라미터와 반환 값으로 람다 사용](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/고차_함수_파라미터와_반환_값으로_람다_사용.md#목차)
+8. [제네릭스](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/제네릭스.md#목차)
 
 # 스프링
 
