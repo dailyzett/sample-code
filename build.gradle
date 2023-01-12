@@ -40,6 +40,19 @@ subprojects {
         options.encoding = 'UTF-8'
     }
 
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-integration'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        compileOnly 'org.projectlombok:lombok:1.18.24'
+        annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+        testCompileOnly 'org.projectlombok:lombok:1.18.24'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+    }
+
     sourceSets.each {
         it.resources.srcDirs = ["src/${it.name}/resources", "src/${it.name}/java"]
     }
@@ -49,11 +62,7 @@ project('tcp-broadcast') {
     apply plugin: 'org.springframework.boot'
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springframework.boot:spring-boot-starter-integration'
         implementation 'org.springframework.integration:spring-integration-ip'
-
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
     springBoot {
@@ -65,17 +74,4 @@ project('tcp-broadcast') {
         classpath = sourceSets.main.runtimeClasspath
     }
 }
-
-
-//group = 'com.example'
-//version = '0.0.1-SNAPSHOT'
-//sourceCompatibility = '17'
-
-//    implementation 'org.springframework.boot:spring-boot-starter-integration'
-//    implementation 'org.springframework.boot:spring-boot-starter-web'
-//    implementation 'org.springframework.integration:spring-integration-http'
-//    compileOnly 'org.projectlombok:lombok'
-//    annotationProcessor 'org.projectlombok:lombok'
-//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//    testImplementation 'org.springframework.integration:spring-integration-test'
 
