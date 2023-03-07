@@ -1,11 +1,11 @@
 package deepboot.deep
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 
-@SpringBootApplication
 class DeepApplication
 
 fun main(args: Array<String>) {
-	runApplication<DeepApplication>(*args)
+	val serverFactory = TomcatServletWebServerFactory()
+	val webServer = serverFactory.getWebServer()
+	webServer.start()
 }
