@@ -17,6 +17,7 @@ class DeepApplication
 fun main(args: Array<String>) {
     val context = GenericApplicationContext()
     context.registerBean("helloController") { HelloController() }
+    context.refresh()
 
     val serverFactory = TomcatServletWebServerFactory()
     val webServer = serverFactory.getWebServer(ServletContextInitializer {
@@ -25,7 +26,7 @@ fun main(args: Array<String>) {
 
                 if (req?.requestURI == "/hello" && req.method == HttpMethod.GET.name) {
                     resp?.apply {
-                        val name = req.getParameter("name") ?: "default"
+                        val name = req.getParameter("name")
                         val helloController = context.getBean("helloController") as HelloController
                         val ret = helloController.hello(name)
 
