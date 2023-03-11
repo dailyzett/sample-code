@@ -3,8 +3,8 @@ package deepboot.deep
 import deepboot.deep.controller.HelloController
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.boot.web.servlet.ServletContextInitializer
-import org.springframework.context.ApplicationContext
 import org.springframework.context.support.GenericApplicationContext
+import org.springframework.context.support.registerBean
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -16,6 +16,7 @@ class DeepApplication
 
 fun main(args: Array<String>) {
     val context = GenericApplicationContext()
+    context.registerBean("helloController") { HelloController() }
 
     val serverFactory = TomcatServletWebServerFactory()
     val webServer = serverFactory.getWebServer(ServletContextInitializer {
@@ -25,7 +26,7 @@ fun main(args: Array<String>) {
                 if (req?.requestURI == "/hello" && req.method == HttpMethod.GET.name) {
                     resp?.apply {
                         val name = req.getParameter("name") ?: "default"
-                        val helloController = context.getBean(HelloController)
+                        val helloController = context.getBean("helloController") as HelloController
                         val ret = helloController.hello(name)
 
                         resp.contentType = MediaType.TEXT_PLAIN_VALUE
