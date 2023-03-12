@@ -11,14 +11,19 @@ import org.springframework.web.servlet.DispatcherServlet
 class DeepApplication
 
 fun main(args: Array<String>) {
-    val context = GenericWebApplicationContext()
+    val context = object : GenericWebApplicationContext() {
+        override fun onRefresh() {
+            super.onRefresh()
+
+            val serverFactory = TomcatServletWebServerFactory()
+            val webServer = serverFactory.getWebServer(ServletContextInitializer {
+                it.addServlet("dispatcherServlet", DispatcherServlet(this))
+                    .addMapping("/*")
+            })
+            webServer.start()
+        }
+    }
+
     context.registerBean("helloController") { HelloController(SimpleHelloService()) }
     context.refresh()
-
-    val serverFactory = TomcatServletWebServerFactory()
-    val webServer = serverFactory.getWebServer(ServletContextInitializer {
-        it.addServlet("dispatcherServlet", DispatcherServlet(context)).addMapping("/*")
-    })
-
-    webServer.start()
 }
