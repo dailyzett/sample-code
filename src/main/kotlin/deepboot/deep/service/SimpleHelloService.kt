@@ -1,7 +1,11 @@
 package deepboot.deep.service
 
-class SimpleHelloService {
-    fun sayHello(name: String): String {
+interface HelloService {
+    fun sayHello(name: String): String
+}
+
+class SimpleHelloService : HelloService {
+    override fun sayHello(name: String): String {
         return "Hello $name"
     }
 }
