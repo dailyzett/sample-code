@@ -1,17 +1,34 @@
 package deepboot.deep
 
 import deepboot.deep.controller.HelloController
+import deepboot.deep.service.HelloService
 import deepboot.deep.service.SimpleHelloService
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.boot.web.servlet.ServletContextInitializer
-import org.springframework.context.support.registerBean
-import org.springframework.web.context.support.GenericWebApplicationContext
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext
 import org.springframework.web.servlet.DispatcherServlet
 
-class DeepApplication
 
-fun main(args: Array<String>) {
-    val context = object : GenericWebApplicationContext() {
+@Configuration
+class DeepApplication {
+    @Bean
+    fun helloController(helloService: HelloService) = HelloController(helloService)
+
+    @Bean
+    fun helloService() = SimpleHelloService()
+}
+
+fun main() {
+
+    val applicationContext = object : AnnotationConfigWebApplicationContext() {
+
+        @Suppress("ACCIDENTAL_OVERRIDE")
+        override fun setClassLoader(classLoader: ClassLoader) {
+            super.setClassLoader(classLoader)
+        }
+
         override fun onRefresh() {
             super.onRefresh()
 
@@ -24,6 +41,7 @@ fun main(args: Array<String>) {
         }
     }
 
-    context.registerBean("helloController") { HelloController(SimpleHelloService()) }
-    context.refresh()
+    applicationContext.register(DeepApplication::class.java)
+    applicationContext.refresh()
 }
+
