@@ -1,12 +1,12 @@
 package deepboot.deep.controller
 
-import deepboot.deep.annotation.MyAnnotation
 import deepboot.deep.service.HelloService
+import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 
-@MyAnnotation
+@Controller
 @RequestMapping("/hello")
 class HelloController(
     private val helloService: HelloService

@@ -1,12 +1,12 @@
 package deepboot.deep.service
 
-import deepboot.deep.annotation.MyAnnotation
+import org.springframework.stereotype.Service
 
 interface HelloService {
     fun sayHello(name: String): String
 }
 
-@MyAnnotation
+@Service
 class SimpleHelloService : HelloService {
     override fun sayHello(name: String): String {
         return "Hello $name"
