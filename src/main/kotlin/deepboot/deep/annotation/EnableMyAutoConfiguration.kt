@@ -1,14 +1,10 @@
 package deepboot.deep.annotation
 
-import deepboot.deep.config.autoconfig.DispatcherServletConfig
-import deepboot.deep.config.autoconfig.TomcatWebServerConfig
+import deepboot.deep.config.autoconfig.MyAutoConfigImportSelector
 import org.springframework.context.annotation.Import
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.TYPE, AnnotationTarget.CLASS)
-@Import(
-    DispatcherServletConfig::class,
-    TomcatWebServerConfig::class
-)
+@Import(MyAutoConfigImportSelector::class)
 annotation class EnableMyAutoConfiguration {
 }
