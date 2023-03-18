@@ -1,16 +1,11 @@
-package deepboot.deep.config
+package deepboot.deep.config.autoconfig
 
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.servlet.DispatcherServlet
 
 @Configuration
-class Config {
-
+class TomcatWebServerConfig {
     @Bean
     fun servletWebServerFactory() = TomcatServletWebServerFactory()
-
-    @Bean
-    fun dispatcherServlet() = DispatcherServlet()
 }
