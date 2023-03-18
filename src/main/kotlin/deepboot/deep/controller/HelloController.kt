@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController
 class HelloController(
     private val helloService: HelloService,
 ) {
-
     @GetMapping("/hello")
     fun hello(name: String?): String {
         if (name.isNullOrEmpty()) {
