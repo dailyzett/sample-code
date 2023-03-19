@@ -1,13 +1,18 @@
 package deepboot.deep.config.autoconfig
 
+import deepboot.deep.annotation.MyAutoConfiguration
+import org.springframework.boot.context.annotation.ImportCandidates
 import org.springframework.context.annotation.DeferredImportSelector
 import org.springframework.core.type.AnnotationMetadata
+import java.util.stream.StreamSupport
 
-class MyAutoConfigImportSelector : DeferredImportSelector {
+class MyAutoConfigImportSelector(
+    private val classLoader: ClassLoader,
+) : DeferredImportSelector {
     override fun selectImports(importingClassMetadata: AnnotationMetadata): Array<String> {
-        return arrayOf(
-            "deepboot.deep.config.autoconfig.DispatcherServletConfig",
-            "deepboot.deep.config.autoconfig.TomcatWebServerConfig"
-        )
+        val candidates = ImportCandidates.load(MyAutoConfiguration::class.java, classLoader)
+        return StreamSupport.stream(candidates.spliterator(), false).toArray { size ->
+            arrayOfNulls<String>(size)
+        }
     }
 }
