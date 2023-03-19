@@ -1,2 +1,3 @@
 deepboot.deep.config.autoconfig.DispatcherServletConfig
 deepboot.deep.config.autoconfig.TomcatWebServerConfig
+deepboot.deep.config.autoconfig.JettyWebServerConfig

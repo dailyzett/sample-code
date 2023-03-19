@@ -6,6 +6,6 @@ import org.springframework.context.annotation.Bean
 
 @MyAutoConfiguration
 class TomcatWebServerConfig {
-    @Bean
+    @Bean("tomcatWebServerFactory")
     fun servletWebServerFactory() = TomcatServletWebServerFactory()
 }
