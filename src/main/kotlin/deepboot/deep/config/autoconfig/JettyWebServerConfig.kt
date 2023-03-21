@@ -2,6 +2,7 @@ package deepboot.deep.config.autoconfig
 
 import deepboot.deep.annotation.ConditionalMyOnClass
 import deepboot.deep.annotation.MyAutoConfiguration
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory
 import org.springframework.context.annotation.Bean
 
@@ -9,5 +10,6 @@ import org.springframework.context.annotation.Bean
 @ConditionalMyOnClass("org.eclipse.jetty.server.Server")
 class JettyWebServerConfig {
     @Bean("jettyWebServerFactory")
+    @ConditionalOnMissingBean
     fun servletWebServerFactory() = JettyServletWebServerFactory()
 }
