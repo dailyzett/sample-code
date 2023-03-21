@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Condition
 import org.springframework.context.annotation.ConditionContext
 import org.springframework.context.annotation.Conditional
 import org.springframework.core.type.AnnotatedTypeMetadata
+import org.springframework.util.ClassUtils
 
 @MyAutoConfiguration
 @Conditional(TomcatWebServerConfig.Companion.TomcatCondition::class)
@@ -17,7 +18,10 @@ class TomcatWebServerConfig {
     companion object {
         class TomcatCondition : Condition {
             override fun matches(context: ConditionContext, metadata: AnnotatedTypeMetadata): Boolean {
-                return false
+                return ClassUtils.isPresent(
+                    "org.apache.catalina.startup.Tomcat",
+                    context.classLoader
+                )
             }
         }
     }
