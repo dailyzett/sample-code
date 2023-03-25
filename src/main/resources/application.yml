@@ -1,0 +1,4 @@
+context:
+  path: /app
+
+port: 9090

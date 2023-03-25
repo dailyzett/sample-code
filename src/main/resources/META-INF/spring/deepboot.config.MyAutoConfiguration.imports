@@ -1,0 +1,6 @@
+deepboot.config.autoconfig.DispatcherServletConfig
+deepboot.config.autoconfig.TomcatWebServerConfig
+deepboot.config.autoconfig.JettyWebServerConfig
+
+deepboot.config.autoconfig.PropertyPlaceHolderConfig
+deepboot.config.autoconfig.PropertyPostProcessorConfig

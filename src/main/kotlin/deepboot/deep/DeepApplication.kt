@@ -1,6 +1,6 @@
 package deepboot.deep
 
-import deepboot.deep.annotation.MySpringBootApplication
+import deepboot.config.MySpringBootApplication
 import org.springframework.boot.runApplication
 
 

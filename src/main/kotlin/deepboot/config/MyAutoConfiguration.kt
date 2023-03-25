@@ -1,4 +1,4 @@
-package deepboot.deep.annotation
+package deepboot.config
 
 import org.springframework.context.annotation.Configuration
 

@@ -1,6 +1,6 @@
-package deepboot.config
+package deepboot.config.autoconfig
 
-import deepboot.deep.annotation.MyAutoConfiguration
+import deepboot.config.MyAutoConfiguration
 import org.springframework.boot.context.annotation.ImportCandidates
 import org.springframework.context.annotation.DeferredImportSelector
 import org.springframework.core.type.AnnotationMetadata

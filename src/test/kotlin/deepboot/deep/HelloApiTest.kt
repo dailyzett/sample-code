@@ -15,7 +15,7 @@ class HelloApiTest {
         val rest = TestRestTemplate()
 
         val res: ResponseEntity<String> = rest.getForEntity(
-            "http://localhost:8080/app/hello?name={spring}",
+            "http://localhost:9090/app/hello?name={spring}",
             String::class.java,
             arrayOf("Spring")
         )
