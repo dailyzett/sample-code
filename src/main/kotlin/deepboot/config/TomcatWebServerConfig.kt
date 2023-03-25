@@ -1,4 +1,4 @@
-package deepboot.deep.config.autoconfig
+package deepboot.config
 
 import deepboot.deep.annotation.ConditionalMyOnClass
 import deepboot.deep.annotation.MyAutoConfiguration
@@ -20,8 +20,7 @@ class TomcatWebServerConfig() {
     @ConditionalOnMissingBean
     fun servletWebServerFactory(env: Environment): ServletWebServerFactory {
         val factory = TomcatServletWebServerFactory()
-        println("contextPath: $contextPath")
-        factory.contextPath = this.contextPath
+        factory.contextPath = "/app"
         return factory
     }
 }

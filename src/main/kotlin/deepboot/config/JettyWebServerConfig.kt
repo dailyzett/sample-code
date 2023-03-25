@@ -1,4 +1,4 @@
-package deepboot.deep.config.autoconfig
+package deepboot.config
 
 import deepboot.deep.annotation.ConditionalMyOnClass
 import deepboot.deep.annotation.MyAutoConfiguration

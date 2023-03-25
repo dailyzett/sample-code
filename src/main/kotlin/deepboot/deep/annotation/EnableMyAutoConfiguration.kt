@@ -1,6 +1,6 @@
 package deepboot.deep.annotation
 
-import deepboot.deep.config.autoconfig.MyAutoConfigImportSelector
+import deepboot.config.MyAutoConfigImportSelector
 import org.springframework.context.annotation.Import
 
 @Retention(AnnotationRetention.RUNTIME)
