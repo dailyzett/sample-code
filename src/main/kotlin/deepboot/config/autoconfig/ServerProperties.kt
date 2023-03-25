@@ -1,10 +1,8 @@
 package deepboot.config.autoconfig
 
 import deepboot.config.MyConfigurationProperties
-import org.springframework.stereotype.Component
 
-@Component
-@MyConfigurationProperties
+@MyConfigurationProperties(prefix = "server")
 class ServerProperties {
 
     var contextPath: String = ""
