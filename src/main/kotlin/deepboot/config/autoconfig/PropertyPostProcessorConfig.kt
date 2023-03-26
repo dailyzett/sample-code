@@ -17,10 +17,12 @@ class PropertyPostProcessorConfig {
         return object : BeanPostProcessor {
             @Throws(BeansException::class)
             override fun postProcessAfterInitialization(bean: Any, beanName: String): Any? {
-                val annotation = findAnnotation(bean.javaClass, MyConfigurationProperties::class.java) ?: return bean
+                val annotation = findAnnotation(bean::class.java, MyConfigurationProperties::class.java) ?: return bean
+
                 val attrs = getAnnotationAttributes(annotation)
                 val prefix = attrs["prefix"] as String?
-                return Binder.get(env).bindOrCreate(prefix, bean.javaClass)
+
+                return Binder.get(env).bindOrCreate(prefix, bean::class.java)
             }
         }
     }

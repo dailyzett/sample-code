@@ -4,3 +4,4 @@ deepboot.config.autoconfig.JettyWebServerConfig
 
 deepboot.config.autoconfig.PropertyPlaceHolderConfig
 deepboot.config.autoconfig.PropertyPostProcessorConfig
+deepboot.config.autoconfig.DataSourceConfig
