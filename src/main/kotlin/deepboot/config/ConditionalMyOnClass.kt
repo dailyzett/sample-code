@@ -9,11 +9,7 @@ import org.springframework.util.ClassUtils
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.TYPE, AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
 @Conditional(MyOnClassCondition::class)
-annotation class ConditionalMyOnClass(
-    val value: String,
-) {
-
-}
+annotation class ConditionalMyOnClass(val value: String)
 
 class MyOnClassCondition : Condition {
     override fun matches(context: ConditionContext, metadata: AnnotatedTypeMetadata): Boolean {

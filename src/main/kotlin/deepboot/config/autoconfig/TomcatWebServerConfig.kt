@@ -14,10 +14,12 @@ import org.springframework.context.annotation.Bean
 class TomcatWebServerConfig() {
     @Bean("tomcatWebServerFactory")
     @ConditionalOnMissingBean
-    fun servletWebServerFactory(serverProperties: ServerProperties): ServletWebServerFactory {
+    fun servletWebServerFactory(properties: ServerProperties): ServletWebServerFactory {
         val factory = TomcatServletWebServerFactory()
-        factory.contextPath = serverProperties.contextPath
-        factory.port = serverProperties.port
+
+        factory.contextPath = properties.contextPath
+        factory.port = properties.port
+
         return factory
     }
 }

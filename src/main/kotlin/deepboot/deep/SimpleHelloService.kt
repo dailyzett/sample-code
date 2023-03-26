@@ -1,4 +1,4 @@
-package deepboot.deep.service
+package deepboot.deep
 
 import org.springframework.stereotype.Service
 

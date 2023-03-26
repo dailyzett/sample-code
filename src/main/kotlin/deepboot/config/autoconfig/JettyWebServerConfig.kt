@@ -11,5 +11,7 @@ import org.springframework.context.annotation.Bean
 class JettyWebServerConfig {
     @Bean("jettyWebServerFactory")
     @ConditionalOnMissingBean
-    fun servletWebServerFactory() = JettyServletWebServerFactory()
+    fun servletWebServerFactory(): JettyServletWebServerFactory {
+        return JettyServletWebServerFactory()
+    }
 }

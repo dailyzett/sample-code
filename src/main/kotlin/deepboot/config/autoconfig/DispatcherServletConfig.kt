@@ -7,5 +7,7 @@ import org.springframework.web.servlet.DispatcherServlet
 @MyAutoConfiguration
 class DispatcherServletConfig {
     @Bean
-    fun dispatcherServlet() = DispatcherServlet()
+    fun dispatcherServlet(): DispatcherServlet {
+        return DispatcherServlet()
+    }
 }
