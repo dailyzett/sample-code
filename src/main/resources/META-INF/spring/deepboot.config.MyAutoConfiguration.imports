@@ -1,10 +1,6 @@
-deepboot.config.autoconfig.DataSourceConfig
-deepboot.config.autoconfig.PropertyPostProcessorConfig
-deepboot.config.autoconfig.PropertyPlaceHolderConfig
-
+deepboot.config.autoconfig.DispatcherServletConfig
 deepboot.config.autoconfig.TomcatWebServerConfig
 deepboot.config.autoconfig.JettyWebServerConfig
-deepboot.config.autoconfig.DispatcherServletConfig
 
-
-
+deepboot.config.autoconfig.PropertyPlaceHolderConfig
+deepboot.config.autoconfig.PropertyPostProcessorConfig
