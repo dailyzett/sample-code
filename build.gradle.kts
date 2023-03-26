@@ -22,6 +22,10 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://repo.clojars.org")
+        name = "Clojars"
+    }
 }
 
 dependencies {
@@ -31,6 +35,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("mysql:mysql-connector-java:8.0.32")
+    implementation("hikari-cp:hikari-cp:3.0.1")
+
     runtimeOnly("com.h2database:h2:2.1.214")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
