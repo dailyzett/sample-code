@@ -1,6 +1,5 @@
-package deepboot.deep.controller
+package deepboot.deep
 
-import deepboot.deep.service.HelloService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 

@@ -1,3 +1,10 @@
 server:
   contextPath: /app
   port: 9090
+
+
+data:
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/test
+  username: root
+  password:

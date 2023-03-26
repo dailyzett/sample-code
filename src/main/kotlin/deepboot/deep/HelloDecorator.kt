@@ -1,6 +1,5 @@
-package deepboot.deep.controller
+package deepboot.deep
 
-import deepboot.deep.service.HelloService
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Service
 
