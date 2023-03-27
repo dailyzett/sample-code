@@ -11,6 +11,10 @@ class HelloControllerTest {
             override fun sayHello(name: String): String {
                 return name
             }
+
+            override fun countOf(name: String): Int {
+                return name.length
+            }
         })
 
         val ret = helloController.hello("Test")
@@ -23,6 +27,10 @@ class HelloControllerTest {
             override fun sayHello(name: String): String {
                 return name
             }
+
+            override fun countOf(name: String): Int {
+                return name.length
+            }
         })
 
         assertThatThrownBy { helloController.hello(null) }
@@ -31,4 +39,6 @@ class HelloControllerTest {
         assertThatThrownBy { helloController.hello("") }
             .isInstanceOf(IllegalArgumentException::class.java)
     }
+
+
 }

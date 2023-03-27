@@ -12,4 +12,8 @@ class HelloDecorator(
     override fun sayHello(name: String): String {
         return "*" + helloService.sayHello(name) + "*"
     }
+
+    override fun countOf(name: String): Int {
+        return helloService.countOf(name)
+    }
 }

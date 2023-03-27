@@ -13,9 +13,17 @@ annotation class UnitTest {
 class HelloServiceTest {
     @UnitTest
     fun simpleTest() {
-        val helloService = SimpleHelloService()
-
+        val helloService = SimpleHelloService(getHelloRepository())
         val ret = helloService.sayHello("Test")
-        assertThat(ret).isEqualTo(ret)
+        assertThat(ret).isEqualTo("Hello Test")
+    }
+
+    private fun getHelloRepository() = object : HelloRepository {
+        override fun findHello(name: String): Hello? {
+            return null
+        }
+
+        override fun increaseCount(name: String) {
+        }
     }
 }
