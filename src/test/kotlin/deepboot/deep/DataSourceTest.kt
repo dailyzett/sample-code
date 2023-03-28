@@ -2,10 +2,11 @@ package deepboot.deep
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest
 import javax.sql.DataSource
 
 
-@MyTransactionTest
+@JdbcTest
 class DataSourceTest {
 
     @Autowired
