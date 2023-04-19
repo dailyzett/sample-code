@@ -87,3 +87,28 @@ LIMIT 10;
 select /*+ NO_MERGE(sub)*/ *
 FROM (SELECT * FROM employees WHERE first_name = 'Matt') sub
 LIMIT 10;
+
+/**
+  INDEX_MERGE & NO_INDEX_MERGE
+ */
+
+SELECT /*+ NO_INDEX_MERGE(employees PRIMARY) */ *
+FROM employees
+WHERE first_name = 'Georgi' AND emp_no BETWEEN 10000 AND 20000;
+
+/**
+  인덱스 컨디션 푸시다운은 가능하면 사용하는 것이 큰 성능의 이점을 가져다 준다.
+  하지만 ICP 로 인해, 잘못된 실행 계획이 수립될 수 있다.
+
+  - A 인덱스와 B 인덱스가 있다.
+  - A는 ICP가 가능해서 A 인덱스를 사용하는 것이 비용이 낮게 예측됐다고 가정한다.
+  - 하지만 실제 서비스는 B 인덱스를 사용하는 것이 효율적일 수 있다.
+
+  - A 인덱스를 완전히 사용하지 못하게하거나 B 인덱스를 선호하는 것은 좋지 않은 방법이다.
+  - 데이터 분포는 항상 균등하지 않으므로 쿼리 검색 범위에 따라 효율성이 달라지기 때문이다.
+  - 이럴 때만 ICP 를 끄는 방식으로 힌트를 작성할 수 있다.
+ */
+
+
+SELECT /*+ NO_ICP(employees ix_lastname_firstname) */*
+from employees WHERE last_name = 'Action' AND first_name LIKE '$sal';
