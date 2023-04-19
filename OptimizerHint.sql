@@ -71,3 +71,19 @@ FROM employees e
          JOIN dept_emp de ON e.emp_no = de.emp_no
          JOIN departments d ON de.dept_no = d.dept_no;
 
+/**
+  MERGE & NO_MERGE
+
+  FROM 절의 서브쿼리를 외부 쿼리로 최대한 병합한다.
+  때로는 옵티마이저가 병합하지 못할 때 이 힌트를 사용한다.
+
+  아래 예제(MERGE)는 힌트를 적용 하나 안하나 결과는 똑같다.
+ */
+
+SELECT /*+ MERGE(sub)*/ *
+FROM (SELECT * FROM employees WHERE first_name = 'Matt') sub
+LIMIT 10;
+
+select /*+ NO_MERGE(sub)*/ *
+FROM (SELECT * FROM employees WHERE first_name = 'Matt') sub
+LIMIT 10;
