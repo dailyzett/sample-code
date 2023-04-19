@@ -111,4 +111,4 @@ WHERE first_name = 'Georgi' AND emp_no BETWEEN 10000 AND 20000;
 
 
 SELECT /*+ NO_ICP(employees ix_lastname_firstname) */*
-from employees WHERE last_name = 'Action' AND first_name LIKE '$sal';
+from employees WHERE last_name = 'Ac트tion' AND first_name LIKE '%sal';
