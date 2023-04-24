@@ -98,14 +98,39 @@ GROUP BY e.hire_date
 SELECT e.emp_no, e.first_name, s.from_date, s.salary
 FROM employees e,
      salaries s
-WHERE e.emp_no = s.emp_no LIMIT 10;
+WHERE e.emp_no = s.emp_no
+LIMIT 10;
 
 -- 3개의 SELECT 쿼리로 구성돼있음
 -- ID 각각 분배
-SELECT
-    ((SELECT COUNT(*) FROM employees) + (SELECT COUNT(*) FROM departments)) AS total_count
+SELECT ((SELECT COUNT(*) FROM employees) + (SELECT COUNT(*) FROM departments)) AS total_count
 
--- select_type 칼럼
+-- select_type 칼럼.. DRIVED, UNION
 
+SELECT *
+FROM ((SELECT emp_no FROM employees e1 LIMIT 10)
+      UNION ALL
+      (SELECT emp_no FROM employees e2 LIMIT 10)
+      UNION ALL
+      (SELECT emp_no FROM employees e3 LIMIT 10)) tb;
 
+-- UNION RESULT
 
+SELECT emp_no
+FROM salaries
+WHERE salary > 100000
+UNION
+DISTINCT
+SELECT emp_no
+FROM dept_emp
+WHERE from_date > '2001-01-01'
+
+-- SUBQUERY (FROM 절이 아닌 서브쿼리만을 말한다)
+
+SELECT e.first_name,
+       (SELECT COUNT(*)
+        FROM dept_emp de,
+             dept_manager dm
+        WHERE dm.dept_no = de.dept_no) AS cnt
+FROM employees e
+WHERE e.emp_no = 10001;
