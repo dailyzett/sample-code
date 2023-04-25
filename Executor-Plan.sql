@@ -134,3 +134,62 @@ SELECT e.first_name,
         WHERE dm.dept_no = de.dept_no) AS cnt
 FROM employees e
 WHERE e.emp_no = 10001;
+
+-- DEPENDENT SUBQUERY
+
+SELECT e.first_name,
+       (SELECT COUNT(*)
+        FROM dept_emp de,
+             dept_manager dm
+        WHERE de.dept_no = dm.dept_no AND de.emp_no = dm.emp_no) AS cnt
+FROM employees e
+WHERE e.first_name = 'Matt';
+
+-- DERIVED
+
+SELECT COUNT(*)
+FROM (SELECT de.emp_no FROM dept_emp de GROUP BY de.emp_no) tb,
+     employees e
+WHERE e.emp_no = tb.emp_no;
+
+-- (2) DERIVED 를 JOIN 으로 최적화해보기
+
+SELECT COUNT(DISTINCT de.emp_no)
+FROM dept_emp de
+JOIN employees e ON e.emp_no = de.emp_no
+
+-- DEPENDENT DERIVED
+-- 레터럴 조인
+-- Extra Rematerialize (<derived2>)
+SELECT *
+FROM employees e
+LEFT JOIN LATERAL (
+    SELECT *
+    FROM salaries s
+    WHERE s.emp_no = e.emp_no
+    ORDER BY s.from_date DESC LIMIT 2
+    ) AS s2 ON s2.emp_no = e.emp_no
+
+
+-- MATERIALIZED
+-- 주로 FROM절이나 IN 서브쿼리 최적화를 위해 사용
+SELECT * FROm employees e
+WHERE e.emp_no IN (SELECT emp_no FROM salaries WHERE salary BETWEEN 100 AND 1000);
+
+
+/**
+  table 컬럼
+ */
+SELECT *
+FROM (SELECT de.emp_no FROM dept_emp de GROUP BY de.emp_no) tb, employees e
+WHERE e.emp_no = tb.emp_no
+
+
+/**
+  type 칼럼
+ */
+
+SELECT *
+FROM employees e, dept_emp de
+WHERE e.emp_no = de.emp_no
+AND de.dept_no = 'd005';
