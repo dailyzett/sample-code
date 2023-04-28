@@ -156,24 +156,26 @@ WHERE e.emp_no = tb.emp_no;
 
 SELECT COUNT(DISTINCT de.emp_no)
 FROM dept_emp de
-JOIN employees e ON e.emp_no = de.emp_no
+         JOIN employees e ON e.emp_no = de.emp_no
 
 -- DEPENDENT DERIVED
 -- 레터럴 조인
 -- Extra Rematerialize (<derived2>)
 SELECT *
 FROM employees e
-LEFT JOIN LATERAL (
+         LEFT JOIN LATERAL (
     SELECT *
     FROM salaries s
     WHERE s.emp_no = e.emp_no
-    ORDER BY s.from_date DESC LIMIT 2
+    ORDER BY s.from_date DESC
+    LIMIT 2
     ) AS s2 ON s2.emp_no = e.emp_no
 
 
 -- MATERIALIZED
 -- 주로 FROM절이나 IN 서브쿼리 최적화를 위해 사용
-SELECT * FROm employees e
+SELECT *
+FROM employees e
 WHERE e.emp_no IN (SELECT emp_no FROM salaries WHERE salary BETWEEN 100 AND 1000);
 
 
@@ -181,7 +183,8 @@ WHERE e.emp_no IN (SELECT emp_no FROM salaries WHERE salary BETWEEN 100 AND 1000
   table 컬럼
  */
 SELECT *
-FROM (SELECT de.emp_no FROM dept_emp de GROUP BY de.emp_no) tb, employees e
+FROM (SELECT de.emp_no FROM dept_emp de GROUP BY de.emp_no) tb,
+     employees e
 WHERE e.emp_no = tb.emp_no
 
 
@@ -190,6 +193,32 @@ WHERE e.emp_no = tb.emp_no
  */
 
 SELECT *
-FROM employees e, dept_emp de
+FROM employees e,
+     dept_emp de
 WHERE e.emp_no = de.emp_no
-AND de.dept_no = 'd005';
+  AND de.dept_no = 'd005';
+
+/**
+  UNIQUE_SUBQUERY
+ */
+
+SET OPTIMIZER_SWITCH = 'semijoin=on';
+
+-- ix_empno_fromdate dept_emp (emp_no, from_date);
+SELECT *
+FROM departments
+WHERE dept_no IN (SELECT dept_no FROM dept_emp WHERE emp_no = 10001);
+
+/**
+  index_merge:
+
+  first_name = ix_first_name,
+  emp_no = PRIMARY
+ */
+
+SELECT *
+FROM employees
+WHERE emp_no BETWEEN 10001 AND 11000
+   OR first_name = 'Smith';
+
+
