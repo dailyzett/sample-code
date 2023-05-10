@@ -221,4 +221,26 @@ FROM employees
 WHERE emp_no BETWEEN 10001 AND 11000
    OR first_name = 'Smith';
 
+/**
+  key_len 칼럼
+
+  dept_no char(4)
+  utf8mb4 집합에서는 문자 하나 당 4 바이트로 계산,
+  4바이트 X 4바이트 = 16바이트
+ */
+SELECT *
+FROM dept_emp WHERE dept_no='d005';
+
+/**
+  ref 칼럼
+
+  평소엔 크게 신경쓰지 않아도 되지만 func 일때는 유심히 볼 필요가 있다.
+ */
+
+SELECT *
+FROM employees e,
+     dept_emp de
+WHERE e.emp_no = (de.emp_no - 1)
+
+
 
