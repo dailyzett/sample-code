@@ -141,7 +141,8 @@ SELECT e.first_name,
        (SELECT COUNT(*)
         FROM dept_emp de,
              dept_manager dm
-        WHERE de.dept_no = dm.dept_no AND de.emp_no = dm.emp_no) AS cnt
+        WHERE de.dept_no = dm.dept_no
+          AND de.emp_no = dm.emp_no) AS cnt
 FROM employees e
 WHERE e.first_name = 'Matt';
 
@@ -229,7 +230,8 @@ WHERE emp_no BETWEEN 10001 AND 11000
   4바이트 X 4바이트 = 16바이트
  */
 SELECT *
-FROM dept_emp WHERE dept_no='d005';
+FROM dept_emp
+WHERE dept_no = 'd005';
 
 /**
   ref 칼럼
@@ -242,5 +244,50 @@ FROM employees e,
      dept_emp de
 WHERE e.emp_no = (de.emp_no - 1)
 
+/**
+  filtered 컬럼
+ */
 
+SELECT *
+FROM employees e,
+     salaries s
+WHERE e.first_name = 'Matt'
+  AND e.hire_date BETWEEN '1990-01-01' AND '1991-01-01'
+  AND s.emp_no = e.emp_no
+  AND s.from_date BETWEEN '1990-01-01' AND '1991-01-01'
+  AND s.salary BETWEEN 50000 AND 60000;
+
+SELECT *
+FROM dept_emp de
+WHERE de.emp_no = (SELECT e.emp_no FROM employees e WHERE e.first_name = 'Georgi' AND e.last_name = 'Facello' LIMIT 1);
+
+SELECT *
+FROM departments d
+WHERE dept_no IN (SELECT de.dept_no FROM dept_emp de)
+
+/**
+  Extra - Not exists
+ */
+
+SELECT *
+FROM dept_emp de
+         LEFT JOIN departments d ON de.dept_no = d.dept_no
+WHERE d.dept_no IS NULL;
+
+SELECT *
+FROM departments;
+
+SELECT *
+FROM dept_emp de
+         LEFT JOIN departments d ON de.dept_no = d.dept_no;
+
+/**
+  Rematerialize
+ */
+
+SELECT *
+FROM employees e
+         LEFT JOIN LATERAL (SELECT * FROM salaries s WHERE s.emp_no = e.emp_no ORDER BY s.from_date DESC LIMIT 2) s2
+                   ON s2.emp_no = e.emp_no
+WHERE e.first_name = 'Matt';
 
