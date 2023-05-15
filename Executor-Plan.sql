@@ -291,3 +291,12 @@ FROM employees e
                    ON s2.emp_no = e.emp_no
 WHERE e.first_name = 'Matt';
 
+/**
+  루스 인덱스 스캔을 위한 GROUP BY 처리
+ */
+
+SELECT emp_no, MIN(from_date)
+FROM salaries
+GROUP BY emp_no;
+
+
