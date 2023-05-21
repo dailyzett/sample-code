@@ -88,14 +88,30 @@ FROM salaries
 WHERE emp_no = 10001;
 
 -- 윈도우 함수 프레임
-SELECT emp_no, from_date, salary,
+SELECT emp_no,
+       from_date,
+       salary,
        -- 현재 레코드의 from_date 를 기준으로 1년 전부터 지금까지 급여 중 최소 급여
-       MIN(salary) OVER (ORDER BY from_date RANGE INTERVAL 1 YEAR PRECEDING) AS min_1,
+       MIN(salary) OVER (ORDER BY from_date RANGE INTERVAL 1 YEAR PRECEDING)                               AS min_1,
        -- 현재 레코드의 from_date 를 기준으로 1년 전부터 2년 후까지의 급여 중 최대 급여
-       MAX(salary) OVER (ORDER BY from_date RANGE BETWEEN INTERVAL 1 YEAR PRECEDING AND INTERVAL 2 YEAR FOLLOWING) AS max_2,
+       MAX(salary)
+           OVER (ORDER BY from_date RANGE BETWEEN INTERVAL 1 YEAR PRECEDING AND INTERVAL 2 YEAR FOLLOWING) AS max_2,
        -- from_date 칼럼으로 정렬 후, 첫 번째 레코드로부터 현재 레코드까지의 평균
-        AVG(salary) OVER (ORDER BY from_date ROWS UNBOUNDED PRECEDING) AS avg_1,
+       AVG(salary) OVER (ORDER BY from_date ROWS UNBOUNDED PRECEDING)                                      AS avg_1,
        -- from_date 칼럼으로 정렬 후, 현재 레코드를 기준으로 이전 건부터 이후 레코드까지의 급여 평균
-        AVG(salary) OVER (ORDER BY from_date ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS avg_2
+       AVG(salary)
+           OVER (ORDER BY from_date ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING)                              AS avg_2
 FROM salaries
-WHERE emp_no = 10001
+WHERE emp_no = 10001;
+
+/**
+  FOR SHARE, FOR UPDATE
+  공유 잠금, 배타 잠금
+ */
+
+SELECT *
+FROM employees e
+         JOIN dept_emp de ON e.emp_no = de.emp_no
+         JOIN departments d ON de.dept_no = d.dept_no
+    FOR
+UPDATE OF e;
