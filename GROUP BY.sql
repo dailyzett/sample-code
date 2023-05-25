@@ -20,6 +20,9 @@ SELECT dept_no, COUNT(*) AS emp_count
 FROM dept_emp
 GROUP BY dept_no;
 
+SELECT *
+FROM dept_emp;
+
 SELECT SUM(CASE WHEN dept_no = 'd001' THEN emp_count ELSE 0 END) AS count_d001,
        SUM(CASE WHEN dept_no = 'd002' THEN emp_count ELSE 0 END) AS count_d002,
        SUM(CASE WHEN dept_no = 'd003' THEN emp_count ELSE 0 END) AS count_d003,
@@ -43,10 +46,11 @@ FROM dept_emp
 GROUP BY dept_no;
 
 SELECT de.dept_no,
-SUM(CASE WHEN e.hire_date BETWEEN '1980-01-01' AND '1989-12-31' THEN 1 ELSE 0 END) AS count_1980,
-SUM(CASE WHEN e.hire_date BETWEEN '1990-01-01' AND '1999-12-31' THEN 1 ELSE 0 END) AS count_1990,
-SUM(CASE WHEN e.hire_date BETWEEN '2000-01-01' AND '2009-12-31' THEN 1 ELSE 0 END) AS count_2000,
-COUNT(*) AS cnt_total
-FROM dept_emp de, employees e
+       SUM(CASE WHEN e.hire_date BETWEEN '1980-01-01' AND '1989-12-31' THEN 1 ELSE 0 END) AS count_1980,
+       SUM(CASE WHEN e.hire_date BETWEEN '1990-01-01' AND '1999-12-31' THEN 1 ELSE 0 END) AS count_1990,
+       SUM(CASE WHEN e.hire_date BETWEEN '2000-01-01' AND '2009-12-31' THEN 1 ELSE 0 END) AS count_2000,
+       COUNT(*)                                                                           AS cnt_total
+FROM dept_emp de,
+     employees e
 WHERE de.emp_no = e.emp_no
 GROUP BY de.dept_no
