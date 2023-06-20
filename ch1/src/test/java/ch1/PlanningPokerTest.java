@@ -48,6 +48,21 @@ public class PlanningPokerTest {
                 .containsExactlyInAnyOrder("Mauricio", "Frank");
     }
 
+    @Test
+    void towEstimates_me() {
+        //given
+        List<Estimate> list = Arrays.asList(
+                new Estimate("Mauricio", 10),
+                new Estimate("Frank", 5)
+        );
+
+        //when
+        List<String> strings = new PlanningPoker().identifyExtremes(list);
+
+        //then
+        assertThat(strings).containsExactlyInAnyOrder("Mauricio", "Frank");
+    }
+
     // this test was later deleted by Eleanor, as the property based testing
     // replaces this one.
     @Test
@@ -83,7 +98,7 @@ public class PlanningPokerTest {
         Arbitrary<Integer> values = Arbitraries.integers().between(2, 99);
 
         Arbitrary<Estimate> estimates = Combinators.combine(names, values)
-                .as((name, value) -> new Estimate(name, value));
+                .as(Estimate::new);
 
         return estimates.list().ofMinSize(1);
     }

@@ -19,8 +19,8 @@ public class InvoiceFilterTest {
         Invoice steve = new Invoice("Steve", 99);
         Invoice frank = new Invoice("Frank", 100);
 
-        List<Invoice> listOfInvoices = Arrays.asList(mauricio, steve, frank);
-        when(issuedInvoices.all()).thenReturn(listOfInvoices);
+        List<Invoice> listOfInvoices = Arrays.asList(mauricio, steve, frank); // Array 로 선언
+        when(issuedInvoices.all()).thenReturn(listOfInvoices); // .all() 호출하면 listOfInvoices 를 리턴하라
 
         InvoiceFilter filter = new InvoiceFilter(issuedInvoices);
 

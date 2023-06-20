@@ -12,8 +12,7 @@ public class InvoiceToSapInvoiceConverter {
         int value = invoice.getValue();
         String sapId = generateId(invoice);
 
-        SapInvoice sapInvoice = new SapInvoice(customer, value, sapId);
-        return sapInvoice;
+        return new SapInvoice(customer, value, sapId);
     }
 
     private String generateId(Invoice invoice) {
