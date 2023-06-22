@@ -30,4 +30,12 @@ class ChristmasDiscountTest {
         //then
         assertThat(result).isEqualTo(100.0)
     }
+
+    @Test
+    fun `applyDiscount, don't use dependency`() {
+        //given
+
+        //when
+        //then
+    }
 }
