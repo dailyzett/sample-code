@@ -40,7 +40,7 @@ class Ch3_1MethodKtTest {
 
     @Test
     fun `same instance return`() {
-       val str = "sameStr"
-       assertThat(leftPad(str, 5, "-")).isSameAs(str)
+        val str = "sameStr"
+        assertThat(leftPad(str, 5, "-")).isSameAs(str)
     }
 }
