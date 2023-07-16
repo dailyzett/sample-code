@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Repository
 @RequiredArgsConstructor
@@ -16,7 +16,7 @@ public class UserRepository {
 
     @Transactional
     public void save() {
-        User user = new User("ssu30@inavi.kr", "수현", new Date());
+        User user = new User("ssu30@inavi.kr", "수현", LocalDateTime.now());
         em.persist(user);
     }
 
