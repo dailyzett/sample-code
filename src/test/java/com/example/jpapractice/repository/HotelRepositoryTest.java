@@ -4,6 +4,7 @@ import com.example.jpapractice.entity.Hotel;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,10 +15,12 @@ class HotelRepositoryTest {
     private HotelRepository hotelRepository;
 
     @Test
+    @Transactional
     void save() {
         hotelRepository.save();
         Hotel hotel = hotelRepository.findByName("호텔");
+        String name = hotel.getName();
 
-        assertThat(hotel.getName()).isEqualTo("호텔");
+        assertThat(name).isEqualTo("호텔");
     }
 }
