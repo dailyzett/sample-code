@@ -7,13 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Embeddable
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
-public class Address {
-    private String street;
-    private String city;
-    private String state;
-    private String zipCode;
+public class Intro {
+    private String contentType;
+    private String content;
 }
