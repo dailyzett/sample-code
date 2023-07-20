@@ -39,4 +39,10 @@ public class HotelRepository {
                 .setParameter("name", name)
                 .getSingleResult();
     }
+
+    public Hotel findByYear(int year) {
+        return em.createQuery("select h from Hotel h where h.year = :year", Hotel.class)
+                .setParameter("year", year)
+                .getSingleResult();
+    }
 }

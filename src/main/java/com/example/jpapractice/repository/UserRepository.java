@@ -3,6 +3,7 @@ package com.example.jpapractice.repository;
 import com.example.jpapractice.entity.MembershipCard;
 import com.example.jpapractice.entity.User;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +43,17 @@ public class UserRepository {
     public String findCardNumber() {
         MembershipCard membershipCard = em.find(MembershipCard.class, "8888111133332222");
         return membershipCard.getCardNumber();
+    }
+
+    public User findUser(String email) {
+        var cb = em.getCriteriaBuilder();
+        var cq = cb.createQuery(User.class);
+
+        Root<User> root = cq.from(User.class);
+        cq.select(root);
+        cq.where(cb.equal(root.get("email"), email));
+        cq.orderBy(cb.asc(root.get("createDate")));
+
+        return em.createQuery(cq).getSingleResult();
     }
 }
