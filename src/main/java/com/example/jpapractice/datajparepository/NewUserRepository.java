@@ -11,4 +11,6 @@ public interface NewUserRepository extends Repository<User, String> {
     User findByEmail(String email);
 
     void delete(User user);
+
+    Optional<User> findByName(String name);
 }

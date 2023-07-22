@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,5 +35,11 @@ class NewUserRepositoryTest {
     void find() {
         User user = newUserRepository.findByEmail("new@email.com");
         assertThat(user.getName()).isEqualTo("new");
+    }
+
+    @Test
+    void findByName() {
+        Optional<User> user = newUserRepository.findByName("new");
+        user.ifPresent(u -> assertThat(u.getEmail()).isEqualTo("new@email.com"));
     }
 }
