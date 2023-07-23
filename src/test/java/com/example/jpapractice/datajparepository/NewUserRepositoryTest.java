@@ -1,17 +1,16 @@
 package com.example.jpapractice.datajparepository;
 
 import com.example.jpapractice.entity.User;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class NewUserRepositoryTest {
@@ -41,5 +40,11 @@ class NewUserRepositoryTest {
     void findByName() {
         Optional<User> user = newUserRepository.findByName("new");
         user.ifPresent(u -> assertThat(u.getEmail()).isEqualTo("new@email.com"));
+    }
+
+    @Test
+    void findByOrderBy() {
+        Sort sortBy = Sort.by("createDate").descending();
+        newUserRepository.findByEmail("new@email.com", sortBy);
     }
 }
