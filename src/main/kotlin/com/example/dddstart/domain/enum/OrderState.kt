@@ -22,7 +22,7 @@ enum class OrderState {
         }
     },
 
-    SHIPPED, DELIVERING, DELIVERY_COMPLETE;
+    SHIPPED, DELIVERING, DELIVERY_COMPLETE, CANCELED;
 
     open fun isShippingChangeable(): Boolean {
         return false
