@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+
+
+.memberOne {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.memberOne td, .memberOne th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+.memberOne th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	width: 200px;
+	text-align: center;
+	background-color: #f2f2f2;
+	color: black;
+}
+
+.modifyButtonDiv {
+	float: right;
+	margin-top: 30px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 18px;
+	}
+}
+
+.loginTitle {
+	padding: 15px 10px 15px 0px;
+	border-right: 0.5px solid rgba(0, 0, 0, .1);
+	display: table;
+	float: left;
+}
+
+.loginTitle h1 {
+	display: inline;
+}
+
+.loginSubTitle {
+	padding-left: 10px;
+	float: left;
+	width: 72%;
+	font-weight: bold;
+	font-size: 14px;
+	color: #a0a0a0;
+}
+
+.line {
+	border: 5px dashed rgba(0, 0, 0, .1);
+	position: absolute;
+	margin-top: 30px;
+	width: 44.2%;
+}
+
+.line2 {
+	border: 5px dashed rgba(0, 0, 0, .1);
+	position: absolute;
+	margin-top: 97px;
+	width: 44.2%;
+}
+
+.idpwForm {
+	width: 70%;
+	display: inline-block;
+	margin-top: 80px;
+}
+
+.loginform a:link, .loginform a:hover
+.loginform a:visited {
+	color: black;
+	font-size: 12px; font-weight : bold;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.loginform a:hover {
+	font-weight: bold;
+	color: green;
+	text-decoration: none;
+}

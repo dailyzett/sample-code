@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="questionBoardNS">
+
+
+	<insert id="insertBoard">
+	<selectKey keyProperty="qb_id" resultType="int" order="BEFORE">
+		select qboard_seq.NEXTVAL from DUAL
+	</selectKey>
+		insert into question_board values(#{qb_id}, #{qb_fk_id}, #{qb_title}, #{qb_content}, sysdate, 
+		0, #{writer_id}, #{writer_name}, #{writer_email}, #{park_name}, 0)
+	</insert>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from question_board where qb_id=#{qb_id}
+	</delete>
+	
+	<select id="selectBoardCount" resultType="int">
+		select count(*) from question_board
+	</select>
+
+
+	<select id="selectWriterSearchCount" resultType="int">
+		select count(*) from question_board where UPPER(writer_name) like UPPER('%' || #{writer_name} || '%')
+	</select> 
+	
+	<select id="selectTitleSearchCount" resultType="int">
+		select count(*) from question_board where UPPER(qb_title) like UPPER('%' || #{qb_title} || '%')
+	</select>
+
+	<select id="selectAllBoardPaging" resultType="QuestionBoard" parameterType="hashmap">
+		SELECT qb_id, qb_title, qb_date, qb_hit, writer_name, park_name, status  FROM (
+		 SELECT SEQ, qb_id, qb_title, qb_date, qb_hit, writer_name, park_name,status  FROM (
+		  SELECT ROWNUM AS SEQ, qb_id, qb_title, qb_date, qb_hit, writer_name, park_name,status  FROM (
+		   SELECT * FROM question_board ORDER BY qb_id DESC )
+		   ) WHERE SEQ <![CDATA[  >=  ]]> #{seq}
+		   ) WHERE ROWNUM <![CDATA[  <=    ]]> #{rownum}
+	</select>
+	
+	<select id="selectWriterSearchBoardPaging" resultType="QuestionBoard" parameterType="hashMap">
+	SELECT qb_id, qb_title, qb_date, qb_hit, writer_name, park_name, status  FROM (
+		 SELECT SEQ, qb_id, qb_title, qb_date, qb_hit, writer_name, park_name,status  FROM (
+		  SELECT ROWNUM AS SEQ, qb_id, qb_title, qb_date, qb_hit, writer_name, park_name,status  FROM (
+		   SELECT * FROM question_board where UPPER(writer_name) like UPPER('%' || #{writer_name} || '%') and park_name = #{park_name} ORDER BY qb_id DESC )
+		   ) WHERE SEQ <![CDATA[  >=  ]]> #{seq}
+		   ) WHERE ROWNUM <![CDATA[  <=    ]]> #{rownum}
+	</select>
+	
+	<select id="selectTitleSearchBoardPaging" resultType="QuestionBoard" parameterType="hashMap">
+		SELECT qb_id, qb_title, qb_date, qb_hit, writer_name, park_name, status  FROM (
+		 SELECT SEQ, qb_id, qb_title, qb_date, qb_hit, writer_name, park_name,status  FROM (
+		  SELECT ROWNUM AS SEQ, qb_id, qb_title, qb_date, qb_hit, writer_name, park_name,status  FROM (
+		   SELECT * FROM question_board where UPPER(qb_title) like UPPER('%' || #{qb_title} || '%') and park_name = #{park_name} ORDER BY qb_id DESC )
+		   ) WHERE SEQ <![CDATA[  >=  ]]> #{seq}
+		   ) WHERE ROWNUM <![CDATA[  <=    ]]> #{rownum}
+	</select>	
+	<update id="updateHit">
+		update question_board set qb_hit = qb_hit + 1 where qb_id=#{qb_id}
+	</update>
+	
+	<select id="selectAllById" resultType="QuestionBoard">
+		select * from question_board where qb_id=#{qb_id}
+	</select>
+	
+	<select id="selectStatusById" resultType="int">
+		select status from question_board where qb_id= #{qb_id}
+	</select>
+	
+	<update id="updateBoard" parameterType="QuestionBoard">
+		update question_board set qb_title = #{qb_title}, qb_content = #{qb_content}, park_name = #{park_name}
+		 where qb_id = #{qb_id}
+	</update>
+	
+	<update id="updateBoardStatus">
+		update question_board set status = 1 where qb_id = #{qb_id}
+	</update>
+	
+	<insert id="insertReplyBoard">
+	<selectKey keyProperty="re_board_id" resultType="int" order="BEFORE">
+		select reply_seq.NEXTVAL from DUAL
+	</selectKey>
+		insert into re_board values (#{re_board_id},#{content},#{re_fk_id})
+	</insert>
+	
+	<select id="selectReplyById" resultType="ReplyBoard" parameterType="int">
+		select * from re_board where re_fk_id=#{qb_id}
+	</select>
+	
+</mapper>
