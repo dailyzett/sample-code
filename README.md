@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 공부한 프로젝트 & 샘플 코드 정리 리포지토리
 
 ## 1. campus-project
@@ -63,3 +64,6 @@
 ## 15. wanted-pre-onboarding-challenger
 
 원티드 온보딩 챌린지 - 시스템 설계 관련
+=======
+# TIL
+>>>>>>> 5b9b4815a (Initial commit)
