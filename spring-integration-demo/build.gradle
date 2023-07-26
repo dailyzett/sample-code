@@ -1,0 +1,77 @@
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+    }
+}
+
+plugins {
+}
+
+apply plugin: 'base'
+apply plugin: 'idea'
+
+allprojects {
+    group = 'com.example'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    compileJava {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    compileTestJava {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+        options.encoding = 'UTF-8'
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-integration'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        compileOnly 'org.projectlombok:lombok:1.18.24'
+        annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+        testCompileOnly 'org.projectlombok:lombok:1.18.24'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+    }
+
+    sourceSets.each {
+        it.resources.srcDirs = ["src/${it.name}/resources", "src/${it.name}/java"]
+    }
+}
+
+project('tcp-broadcast') {
+    apply plugin: 'org.springframework.boot'
+
+    dependencies {
+        implementation 'org.springframework.integration:spring-integration-ip'
+    }
+
+    springBoot {
+        mainClass = 'com.example.tcpbroadcast.TcpBroadcastApplication'
+    }
+
+    task run(type: JavaExec) {
+        main 'com.example.tcpbroadcast.TcpBroadcastApplication'
+        classpath = sourceSets.main.runtimeClasspath
+    }
+}
+
