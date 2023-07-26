@@ -1,0 +1,62 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="css/menu.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+</head>
+<body>
+<header role="banner" class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle pull-left"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        </div>
+        <div class="navbar-inverse side-collapse in">
+            <nav role="navigation" class="navbar-collapse">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="/members">Users</a></li>
+                    <li><a href="/notice">Notice</a></li>
+                    <li><a href="/place_history">History</a></li>
+                    <li><a href="https://ko.online-qrcode-generator.com/">QR Code Generate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<div class="container side-collapse-container">
+    <div class="container">
+        <div th:replace="fragments/bodyBoardHeader :: bodyBoardHeader" />
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="post : ${postAll}">
+                    <td th:text="${post.id}"></td>
+                    <td>
+                    <a th:href="@{'/post/' + ${post.id}}">
+                        <span th:text="${post.title}"></span>
+                    </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div align="right">
+            <button class="btn">
+            <a th:href="@{/post}"> 글쓰기 </a>
+            </button>
+        </div>
+        <div th:replace="fragments/footer :: footer" />
+    </div>
+</div>
+</body>
+
+</html>
