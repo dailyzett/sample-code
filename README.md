@@ -69,6 +69,4 @@ Today I Learned
 ## 15. wanted-pre-onboarding-challenger
 
 원티드 온보딩 챌린지 - 시스템 설계 관련
-=======
-# TIL
->>>>>>> 5b9b4815a (Initial commit)
+
