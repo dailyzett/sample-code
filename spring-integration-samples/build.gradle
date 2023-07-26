@@ -1,0 +1,1569 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		gradlePluginPortal()
+		maven { url 'https://repo.spring.io/plugins-release-local' }
+		maven { url 'https://repo.spring.io/milestone' }
+		maven { url 'https://repo.spring.io/snapshot' }
+	}
+	dependencies {
+		classpath 'io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE'
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+		classpath 'gradle.plugin.org.gretty:gretty:2.3.1'
+	}
+}
+plugins {
+	id 'org.sonarqube' version '2.8'
+}
+
+description = 'Spring Integration Samples'
+
+apply plugin: 'base'
+apply plugin: 'idea'
+
+ext {
+	linkHomepage = 'https://projects.spring.io/spring-integration'
+	linkCi = 'https://build.spring.io/browse/INTSAMPLES'
+	linkIssue = 'https://github.com/spring-projects/spring-integration-samples/issues'
+	linkScmUrl = 'https://github.com/spring-projects/spring-integration-samples'
+	linkScmConnection = 'scm:git:git://github.com/spring-projects/spring-integration-samples.git'
+	linkScmDevConnection = 'scm:git:ssh://git@github.com:spring-projects/spring-integration-samples.git'
+}
+
+allprojects {
+	group = 'org.springframework.integration.samples'
+
+	repositories {
+		mavenCentral()
+		maven { url 'https://repo.spring.io/release' }
+		maven { url 'https://repo.spring.io/milestone' }
+		maven { url 'https://repo.spring.io/snapshot' }
+//		maven { url 'https://repo.spring.io/libs-staging-local' }
+	}
+
+}
+
+subprojects { subproject ->
+
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
+
+	eclipse {
+		project {
+			natures += 'org.springframework.ide.eclipse.core.springnature'
+		}
+	}
+
+	if (!(subproject.name in ['advanced', 'applications', 'basic', 'intermediate', 'dsl', 'cafe'])) {
+
+		apply plugin: 'java-library'
+		apply plugin: 'jacoco'
+		apply plugin: 'io.spring.dependency-management'
+		apply plugin: 'maven-publish'
+
+		tasks.withType(GenerateModuleMetadata) {
+			enabled = false
+		}
+
+		model {
+			tasks.generatePomFileForMavenJavaPublication {
+				destination = file('pom.xml')
+			}
+		}
+
+		task generatePom(dependsOn: 'generatePomFileForMavenJavaPublication')
+
+		publishing {
+			publications {
+				mavenJava(MavenPublication) {
+					suppressAllPomMetadataWarnings()
+					from components.java
+					pom {
+						name = project.description
+						description = project.description
+						url = linkScmUrl
+						organization {
+							name = 'Spring IO'
+							url = 'https://spring.io/projects/spring-integration'
+						}
+						licenses {
+							license {
+								name = 'Apache License, Version 2.0'
+								url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+								distribution = 'repo'
+							}
+						}
+						scm {
+							url = linkScmUrl
+							connection = 'scm:git:' + linkScmConnection
+							developerConnection = 'scm:git:' + linkScmDevConnection
+						}
+						developers {
+							developer {
+								id = 'artembilan'
+								name = 'Artem Bilan'
+								email = 'abilan@vmware.com'
+								roles = ['project lead']
+							}
+							developer {
+								id = 'garyrussell'
+								name = 'Gary Russell'
+								email = 'grussell@vmware.com'
+								roles = ['project lead emeritus']
+							}
+							developer {
+								id = 'markfisher'
+								name = 'Mark Fisher'
+								email = 'markfisher@vmware.com'
+								roles = ['project founder and lead emeritus']
+							}
+						}
+						issueManagement {
+							system = 'GitHub'
+							url = linkIssue
+						}
+						withXml {
+							if (subproject.plugins.hasPlugin('org.akhikhl.gretty')) {
+								asNode().appendNode('packaging', 'war')
+								def plugins = asNode().build?.find()?.plugins?.find()
+								if (!plugins) {
+									plugins = asNode().appendNode('build').appendNode('plugins')
+								}
+								plugins.appendNode('plugin')
+										.with {
+											appendNode('groupId', 'org.mortbay.jetty')
+											appendNode('artifactId', 'jetty-maven-plugin')
+											appendNode('version', '8.1.14.v20131031')
+											appendNode('configuration')
+													.appendNode('webAppConfig')
+													.appendNode('contextPath', '/' + subproject.name)
+										}
+							}
+							if (subproject.plugins.hasPlugin('org.springframework.boot')) {
+								def plugins = asNode().build?.find()?.plugins?.find()
+								if (!plugins) {
+									plugins = asNode().appendNode('build').appendNode('plugins')
+								}
+								plugins.appendNode('plugin')
+										.with {
+											appendNode('groupId', 'org.springframework.boot')
+											appendNode('artifactId', 'spring-boot-maven-plugin')
+										}
+							}
+							if (subproject.plugins.hasPlugin('org.springframework.boot')) {
+								asNode().appendNode('parent').with {
+									appendNode('groupId', 'org.springframework.boot')
+									appendNode('artifactId', 'spring-boot-starter-parent')
+									appendNode('version', property('springBootVersion'))
+								}
+							}
+
+							if (subproject.plugins.hasPlugin('java-library')) {
+								def repositories = asNode().appendNode('repositories')
+								repositories.appendNode('repository')
+										.with {
+											appendNode('id', 'repo.spring.io.milestone')
+											appendNode('name', 'Spring Framework Maven Milestone Repository')
+											appendNode('url', 'https://repo.spring.io/milestone')
+										}
+								repositories.appendNode('repository')
+										.with {
+											appendNode('id', 'repo.spring.io.snapshot')
+											appendNode('name', 'Spring Framework Maven Snapshot Repository')
+											appendNode('url', 'https://repo.spring.io/snapshot')
+										}
+							}
+
+							def pomDeps = asNode().dependencies.find()
+							if (!pomDeps) {
+								pomDeps = asNode().appendNode('dependencies')
+							}
+							subproject.configurations.testImplementation.dependencies.each { dep ->
+								pomDeps.appendNode('dependency').with {
+									appendNode('groupId', dep.group)
+									appendNode('artifactId', dep.name)
+									if (dep.version) {
+										appendNode('version', dep.version)
+									}
+									appendNode('scope', 'test')
+								}
+							}
+							subproject.configurations.testRuntimeOnly.dependencies.each { dep ->
+								pomDeps.appendNode('dependency').with {
+									appendNode('groupId', dep.group)
+									appendNode('artifactId', dep.name)
+									if (dep.version) {
+										appendNode('version', dep.version)
+									}
+									appendNode('scope', 'runtime')
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		jacoco {
+			toolVersion = '0.8.7'
+		}
+
+		compileJava {
+			sourceCompatibility = JavaVersion.VERSION_17
+			targetCompatibility = JavaVersion.VERSION_17
+		}
+
+		compileTestJava {
+			sourceCompatibility = JavaVersion.VERSION_17
+			targetCompatibility = JavaVersion.VERSION_17
+			options.encoding = 'UTF-8'
+		}
+
+		ext {
+			apacheSshdVersion = '2.9.1'
+			artemisVersion = '2.26.0'
+			aspectjVersion = '1.9.9.1'
+			commonsDigesterVersion = '2.1'
+			commonsDbcpVersion = '2.9.0'
+			commonsFileUploadVersion = '1.4'
+			commonsIoVersion = '2.11.0'
+			commonsLangVersion = '3.12.0'
+			commonsPoolVersion = '2.11.1'
+			c3p0Version = '0.9.5.5'
+			derbyVersion = '10.16.1.1'
+			hamcrestVersion = '2.2'
+			hibernateVersion = '6.1.5.Final'
+			hibernateValidatorVersion = '8.0.0.Final'
+			ftpServerVersion = '1.1.2'
+			flexjsonVersion = '2.0'
+			groovyVersion = '4.0.6'
+			hsqldbVersion = '2.7.1'
+			h2Version = '2.1.214'
+			jacksonVersion = '2.13.4'
+			mailVersion = '2.0.1'
+			jaxbVersion = '2.3.3'
+			jodaTimeVersion = '1.6'
+			jtaVersion = '2.0.0'
+			jtdsVersion = '1.2.6'
+			jmsApiVersion = '3.0.0'
+			jrubyVersion = '9.2.14.0'
+			jpaApiVersion = '3.0.2'
+			jstlVersion = '1.2'
+			junitVersion = '4.13.2'
+			junitJupiterVersion = '5.9.1'
+			jythonVersion = '2.7.3'
+			log4jVersion = '2.19.0'
+			mockitoVersion = '4.8.0'
+			mongoDriverVersion = '4.7.2'
+			openJpaVersion = '2.4.0'
+			oracleDriverVersion = '19.3.0.0'
+			postgresVersion = '42.5.0'
+			slf4jVersion = '1.7.30'
+			springCloudVersion = '2022.0.0'
+			springIntegrationVersion = '6.0.1'
+			set('spring-integration.version', "$springIntegrationVersion")
+			springIntegrationSocialTwiterVersion = '1.0.1.BUILD-SNAPSHOT'
+			springIntegrationSplunkVersion = '1.2.0.BUILD-SNAPSHOT'
+			springVersion = '6.0.3'
+			springSecurityVersion = '6.0.1'
+			springWebFlowVersion = '2.3.3.RELEASE'
+			testcontainersVersion = '1.17.6'
+			tilesJspVersion = '2.2.1'
+		}
+
+		sourceSets.each {
+			it.resources.srcDirs = ["src/${it.name}/resources", "src/${it.name}/java"]
+		}
+
+		dependencyManagement {
+			imports {
+				mavenBom "org.springframework.integration:spring-integration-bom:$springIntegrationVersion"
+				mavenBom "org.springframework:spring-framework-bom:$springVersion"
+				mavenBom "com.fasterxml.jackson:jackson-bom:$jacksonVersion"
+				mavenBom "org.junit:junit-bom:$junitJupiterVersion"
+			}
+		}
+
+		// dependencies that are common across all java projects
+		dependencies {
+			testImplementation("junit:junit:$junitVersion") {
+				exclude group: 'org.hamcrest'
+			}
+			testImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
+			testImplementation("org.mockito:mockito-core:$mockitoVersion") {
+				exclude group: 'org.hamcrest'
+			}
+			testImplementation 'org.junit.jupiter:junit-jupiter-api'
+			testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+			testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+			// To support JUnit 4 tests
+			testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
+			testImplementation 'org.springframework.integration:spring-integration-test'
+		}
+
+		// enable all compiler warnings; individual projects may customize further
+		ext.xLintArg = '-Xlint:all,-options,-processing'
+		[compileJava, compileTestJava]*.options*.compilerArgs = [xLintArg]
+
+		jacocoTestReport {
+			reports {
+				xml.enabled true
+				csv.enabled false
+				html.enabled false
+				xml.destination file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+			}
+		}
+
+		test {
+			// suppress all console output during testing unless running `gradle -i`
+			logging.captureStandardOutput(LogLevel.INFO)
+			jacoco {
+				destinationFile = file("$buildDir/jacoco.exec")
+			}
+			if (System.properties['sonar.host.url']) {
+				finalizedBy jacocoTestReport
+			}
+		}
+	}
+
+	task cleanTarget(type: Delete) {
+		delete 'target'
+	}
+
+	clean.dependsOn cleanTarget
+}
+
+project('advanced-testing-examples') {
+	description = 'Advanced Testing Examples'
+
+	dependencies {
+		api "jakarta.jms:jakarta.jms-api:$jmsApiVersion"
+		api 'org.springframework.integration:spring-integration-jms'
+		api 'org.springframework.integration:spring-integration-groovy'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('dynamic-ftp') {
+	description = 'Dynamic FTP Demo'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-ftp'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('cafe-si') {
+	description = 'Cafe - Pure Spring Integration'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.cafe.xml.CafeDemoApp'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-stream'
+		api 'com.fasterxml.jackson.core:jackson-databind'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('cafe-amqp') {
+	description = 'Cafe - With AMQP Message Broker'
+
+	dependencies {
+		api project(':cafe-si')
+		api 'org.springframework.integration:spring-integration-amqp'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('cafe-jms') {
+	description = 'Cafe - With JMS Message Broker'
+
+	dependencies {
+		api project(':cafe-si')
+		api("org.apache.activemq:artemis-server:$artemisVersion") {
+			exclude group: 'org.jboss.logmanager'
+		}
+		api "org.apache.activemq:artemis-jakarta-client:$artemisVersion"
+		api 'org.springframework.integration:spring-integration-jms'
+		api "jakarta.jms:jakarta.jms-api:$jmsApiVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('cafe-scripted') {
+	description = 'Cafe Sample (Scripted Implementation)'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-stream'
+		api 'org.springframework.integration:spring-integration-groovy'
+		api 'org.springframework.integration:spring-integration-jmx'
+		api 'org.springframework.integration:spring-integration-rsocket'
+		api "org.jruby:jruby-complete:$jrubyVersion"
+		api "org.python:jython-standalone:$jythonVersion"
+		api "org.apache.groovy:groovy-jsr223:$groovyVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+	task runCafeDemoApp(type: JavaExec) {
+		main 'org.springframework.integration.samples.cafe.demo.CafeDemoApp'
+		args project.hasProperty('lang') ? project.lang : ''
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	task runControlBus(type: JavaExec) {
+		main 'org.springframework.integration.samples.cafe.demo.ControlBusMain'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+}
+
+project('loan-broker') {
+	description = 'Loan Broker Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.loanbroker.demo.LoanBrokerDemo'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-ip'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+	task runLoanBrokerSharkDetectorDemo(type: JavaExec) {
+		main 'org.springframework.integration.samples.loanbroker.demo.LoanBrokerSharkDetectorDemo'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+}
+
+project('loanshark') {
+	description = 'Loan Shark Sample'
+
+	apply plugin: 'war'
+	apply plugin: 'org.gretty'
+	apply plugin: 'eclipse-wtp'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-ip'
+		api 'org.springframework:spring-webmvc'
+		api 'org.springframework:spring-orm'
+		api 'org.springframework:spring-aop'
+		api 'org.springframework:spring-aspects'
+		api "org.aspectj:aspectjtools:$aspectjVersion"
+		api 'org.springframework:spring-jdbc'
+		api 'org.springframework:spring-tx'
+		api 'org.springframework:spring-context'
+		api "commons-fileupload:commons-fileupload:$commonsFileUploadVersion"
+		api "org.apache.commons:commons-dbcp2:$commonsDbcpVersion"
+		api "commons-digester:commons-digester:$commonsDigesterVersion"
+		api "org.apache.commons:commons-pool2:$commonsPoolVersion"
+		api "org.apache.tiles:tiles-jsp:$tilesJspVersion"
+		api "joda-time:joda-time:$jodaTimeVersion"
+		api "jakarta.transaction:jakarta.transaction-api:$jtaVersion"
+		api "org.hsqldb:hsqldb:$hsqldbVersion"
+		api "net.sf.flexjson:flexjson:$flexjsonVersion"
+		api "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
+		api "org.eclipse.persistence:org.eclipse.persistence.jpa:$jpaApiVersion"
+		api "org.hibernate.orm:hibernate-core:$hibernateVersion"
+		api "org.springframework.webflow:spring-js:$springWebFlowVersion"
+		api "org.slf4j:slf4j-api:$slf4jVersion"
+
+		runtimeOnly "org.apache.logging.log4j:log4j-core:$log4jVersion"
+		runtimeOnly "org.slf4j:slf4j-log4j12:$slf4jVersion"
+		runtimeOnly "org.slf4j:jcl-over-slf4j:$slf4jVersion"
+	}
+
+}
+
+project('amqp') {
+	description = 'AMQP Basic Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-stream'
+		api 'org.springframework.integration:spring-integration-amqp'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+		runtimeOnly "org.slf4j:slf4j-jcl:$slf4jVersion"
+	}
+
+	task runSimple(type: JavaExec) {
+		main 'org.springframework.integration.samples.amqp.SampleSimple'
+		classpath = sourceSets.main.runtimeClasspath
+		standardInput = System.in
+		// 	useful for debugging the GradleWorkerMain
+		//		jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=8000"
+
+	}
+
+	task runPubConfirmsReturns(type: JavaExec) {
+		main 'org.springframework.integration.samples.amqp.SamplePubConfirmsReturns'
+		classpath = sourceSets.main.runtimeClasspath
+		standardInput = System.in
+		// 	useful for debugging the GradleWorkerMain
+		//		jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=8000"
+
+	}
+
+}
+
+project('barrier') {
+	description = 'Barrier Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-web'
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api 'org.springframework.boot:spring-boot-starter-amqp'
+		api 'org.springframework.integration:spring-integration-amqp'
+		api 'org.springframework.integration:spring-integration-http'
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.barrier.Application'
+	}
+
+	task run(type: JavaExec) {
+		main 'org.springframework.integration.samples.barrier.Application'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+}
+
+project('control-bus') {
+	description = 'Control Bus Basic Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-core'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('enricher') {
+	description = 'Enricher Basic Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.enricher.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-core'
+		api "com.h2database:h2:$h2Version"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('feed') {
+	description = 'Feed (RSS/ATOM) Basic Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-feed'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('file') {
+	description = 'File Copy Basic Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-file'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('ftp') {
+	description = 'FTP Basic Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-ftp'
+		api "commons-io:commons-io:$commonsIoVersion"
+		api "org.apache.ftpserver:ftpserver-core:$ftpServerVersion"
+		api "org.slf4j:slf4j-api:$slf4jVersion"
+
+		runtimeOnly "org.slf4j:slf4j-log4j12:$slf4jVersion"
+
+		testImplementation "org.apache.logging.log4j:log4j-core:$log4jVersion"
+		testImplementation 'org.springframework.integration:spring-integration-test'
+	}
+
+	test {
+		include '**/TestSuite*'
+	}
+}
+
+project('helloworld') {
+	description = 'Hello World Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-core'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+	task runHelloWorldApp(type: JavaExec) {
+		main 'org.springframework.integration.samples.helloworld.HelloWorldApp'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	task runPollerApp(type: JavaExec) {
+		main 'org.springframework.integration.samples.helloworld.PollerApp'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+}
+
+project('http') {
+	description = 'HTTP Sample'
+
+	apply plugin: 'war'
+	apply plugin: 'application'
+	apply plugin: 'org.gretty'
+	apply plugin: 'eclipse-wtp'
+
+	mainClassName = 'org.springframework.integration.samples.http.HttpClientDemo'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-http'
+		api 'org.springframework.integration:spring-integration-mail'
+		api 'org.springframework:spring-webmvc'
+		api "commons-fileupload:commons-fileupload:$commonsFileUploadVersion"
+		api "commons-io:commons-io:$commonsIoVersion"
+		api "com.sun.mail:jakarta.mail:$mailVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+}
+
+/*project('splunk') {
+	description = 'Splunk Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api 'org.springframework.integration:spring-integration-core'
+		api "org.springframework.integration:spring-integration-splunk:$springIntegrationSplunkVersion"
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	springBoot  {
+        mainClass = 'org.springframework.integration.samples.splunk.Application'
+	}
+
+	task run(type: JavaExec) {
+		main 'org.springframework.integration.samples.splunk.Application'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+}*/
+
+project('kafka') {
+	description = 'Apache Kafka Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api('org.springframework.integration:spring-integration-kafka') {
+			exclude group: 'org.slf4j'
+		}
+		api 'org.springframework.integration:spring-integration-core'
+
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.kafka.Application'
+	}
+
+	task run(type: JavaExec) {
+		main 'org.springframework.integration.samples.kafka.Application'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+}
+
+project('mqtt') {
+	description = 'MQTT Basic Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api 'org.springframework.integration:spring-integration-stream'
+		api 'org.springframework.integration:spring-integration-mqtt'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation "org.springframework.integration:spring-integration-test"
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.mqtt.Application'
+	}
+
+	task run(type: JavaExec) {
+		main 'org.springframework.integration.samples.mqtt.Application'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	tasks.withType(JavaExec) {
+		standardInput = System.in
+	}
+
+}
+
+project('si4demo') {
+	description = 'Java Configuration/DSL Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-web'
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api 'org.springframework.integration:spring-integration-mail'
+		api "org.springframework.integration:spring-integration-social-twitter:$springIntegrationSocialTwiterVersion"
+		api 'org.springframework.integration:spring-integration-http'
+		api 'org.springframework.integration:spring-integration-ip'
+		api "com.sun.mail:jakarta.mail:$mailVersion"
+		api 'com.rometools:rome:1.18.0'
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.si4demo.dsl.Application'
+	}
+
+	tasks.withType(JavaExec) {
+		standardInput = System.in
+	}
+}
+
+project('cafe-dsl') {
+	description = 'Java DSL Cafe Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api project(":cafe-si")
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api 'org.springframework.integration:spring-integration-core'
+		api 'org.springframework.integration:spring-integration-stream'
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.dsl.cafe.lambda.Application'
+	}
+
+	tasks.withType(JavaExec) {
+		standardInput = System.in
+	}
+}
+
+
+project('jdbc') {
+	description = 'JDBC Basic Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.jdbc.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-jdbc'
+		api "com.h2database:h2:$h2Version"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('jms') {
+	description = 'JMS Basic Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.jms.Main'
+
+	dependencies {
+		api "jakarta.jms:jakarta.jms-api:$jmsApiVersion"
+		api 'org.springframework.integration:spring-integration-jms'
+		api 'org.springframework.integration:spring-integration-stream'
+		api("org.apache.activemq:artemis-server:$artemisVersion") {
+			exclude group: 'org.jboss.logmanager'
+		}
+		api "org.apache.activemq:artemis-jakarta-client:$artemisVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+
+		testImplementation 'org.springframework.integration:spring-integration-test'
+	}
+}
+
+project('jmx') {
+	description = 'JMX Basic Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-jmx'
+		api 'org.springframework.integration:spring-integration-stream'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('jpa') {
+	description = 'JPA Basic Sample'
+
+	apply plugin: 'application'
+	apply plugin: 'org.springframework.boot'
+
+	mainClassName = 'org.springframework.integration.samples.jpa.Main'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-data-jpa'
+		api 'org.springframework.integration:spring-integration-jpa'
+		api "com.h2database:h2:$h2Version"
+
+		runtimeOnly 'org.springframework:spring-instrument'
+		runtimeOnly "org.eclipse.persistence:org.eclipse.persistence.jpa:$jpaApiVersion"
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	tasks.withType(JavaExec) {
+		standardInput = System.in
+	}
+
+}
+
+project('mail') {
+	description = 'Mail (IMAP + POP3) Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-mail'
+		api 'org.springframework:spring-context'
+		api "com.sun.mail:jakarta.mail:$mailVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+	task runGmailInboundPop3AdapterTestApp(type: JavaExec) {
+		main 'org.springframework.integration.samples.mail.imapidle.GmailInboundPop3AdapterTestApp'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	task runGmailInboundImapIdleAdapterTestApp(type: JavaExec) {
+		main 'org.springframework.integration.samples.mail.imapidle.GmailInboundImapIdleAdapterTestApp'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+}
+
+project('mongodb') {
+	description = 'MongoDb Basic Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-mongodb'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+		api "org.mongodb:mongodb-driver-sync:$mongoDriverVersion"
+	}
+
+	task runMongoDbInboundAdapterDemo(type: JavaExec) {
+		main 'org.springframework.integration.samples.mongodb.inbound.MongoDbInboundAdapterDemo'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	task runMongoDbOutboundAdapterDemo(type: JavaExec) {
+		main 'org.springframework.integration.samples.mongodb.inbound.MongoDbOutboundAdapterDemo'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+}
+
+project('oddeven') {
+	description = 'Odd-Even Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-core'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+	task runCronOddEvenDemo(type: JavaExec) {
+		main 'org.springframework.integration.samples.oddeven.CronOddEvenDemo'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	task runIntervalOddEvenDemoTestApp(type: JavaExec) {
+		main 'org.springframework.integration.samples.oddeven.IntervalOddEvenDemoTestApp'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+}
+
+project('quote') {
+	description = 'Quote Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-stream'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('sftp') {
+	description = 'SFTP Basic Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-sftp'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+		testImplementation "org.apache.sshd:sshd-sftp:$apacheSshdVersion"
+	}
+}
+
+project('tcp-amqp') {
+	description = 'TCP-AMQP Basic Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.tcpamqp.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-amqp'
+		api 'org.springframework.integration:spring-integration-ip'
+		api "org.slf4j:slf4j-api:$slf4jVersion"
+
+		runtimeOnly "org.apache.logging.log4j:log4j-core:$log4jVersion"
+		runtimeOnly "org.slf4j:slf4j-log4j12:$slf4jVersion"
+	}
+}
+
+project('tcp-broadcast') {
+	description = 'TCP Client Broadcast Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-web'
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api 'org.springframework.integration:spring-integration-ip'
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.tcpbroadcast.TcpBroadcastApplication'
+	}
+
+	task run(type: JavaExec) {
+		main 'org.springframework.integration.samples.tcpbroadcast.TcpBroadcastApplication'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+}
+
+project('tcp-client-server') {
+	description = 'TCP Client Server Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.tcpclientserver.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-ip'
+		api "org.apache.commons:commons-lang3:$commonsLangVersion"
+		api 'org.springframework.integration:spring-integration-test'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('testcontainers-rabbitmq') {
+	description = 'Testcontainers RabbitMQ Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.testcontainersrabbitmq.TestcontainersRabbitmqApplication'
+	}
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api 'org.springframework.integration:spring-integration-amqp'
+		api 'org.springframework.boot:spring-boot-starter-json'
+
+		testImplementation('org.springframework.boot:spring-boot-starter-test') {
+			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		}
+		testImplementation 'org.springframework.integration:spring-integration-test'
+		testImplementation 'org.springframework.amqp:spring-rabbit-test'
+		testImplementation 'org.springframework.cloud:spring-cloud-starter'
+
+		testImplementation "org.testcontainers:junit-jupiter:$testcontainersVersion"
+		testImplementation 'com.playtika.testcontainers:embedded-rabbitmq:2.0.19'
+
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+		}
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+
+}
+
+project('testing-examples') {
+	description = 'Testing Examples'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.testing.externalgateway.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-file'
+		api 'org.springframework.integration:spring-integration-http'
+		api 'org.springframework.integration:spring-integration-ws'
+		api 'org.springframework:spring-webmvc'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+
+		testImplementation 'org.springframework.integration:spring-integration-test'
+	}
+}
+
+project('twitter') {
+	description = 'Twitter Basic Sample'
+
+	dependencies {
+		api "org.springframework.integration:spring-integration-social-twitter:$springIntegrationSocialTwiterVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+	test {
+		exclude '**/*Sample*'
+	}
+}
+
+project('ws-inbound-gateway') {
+	description = 'WS Inbound Gateway Sample'
+
+	apply plugin: 'war'
+	apply plugin: 'org.gretty'
+	apply plugin: 'eclipse-wtp'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-xml'
+		api 'org.springframework.integration:spring-integration-ws'
+		api 'org.springframework:spring-webmvc'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+	test {
+		exclude '**/InContainerTests*'
+	}
+}
+
+project('ws-outbound-gateway') {
+	description = 'WS Outbound Gateway Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.ws.WebServiceDemoTestApp'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-stream'
+		api 'org.springframework.integration:spring-integration-ws'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('xml') {
+	description = 'XML Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.xml.BookOrderProcessingTestApp'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-xml'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('xmpp') {
+	description = 'XMPP Basic Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-xmpp'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+	test {
+		exclude '**/*Sample*'
+	}
+}
+
+project('async-gateway') {
+	description = 'Async Gateway Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-core'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('dynamic-poller') {
+	description = 'Dynamic Poller Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.poller.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-core'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('errorhandling') {
+	description = 'Error Handling Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-stream'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('file-processing') {
+	description = 'File Processing Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-file'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('mail-attachments') {
+	description = 'Mail Attachment Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.mailattachments.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-mail'
+		api 'org.springframework.integration:spring-integration-file'
+		api "com.sun.mail:jakarta.mail:$mailVersion"
+		api "commons-io:commons-io:$commonsIoVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+
+		testImplementation 'org.springframework.integration:spring-integration-test'
+
+	}
+}
+
+project('monitoring') {
+	description = 'Monitoring Application'
+
+	apply plugin: 'war'
+	apply plugin: 'org.gretty'
+	apply plugin: 'application'
+	apply plugin: 'eclipse-wtp'
+
+	mainClassName = 'org.springintegration.SpringIntegrationTest'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-jmx'
+		api "org.springframework.integration:spring-integration-social-twitter:$springIntegrationSocialTwiterVersion"
+		api 'org.springframework.integration:spring-integration-groovy'
+		api 'org.springframework:spring-webmvc'
+		api "javax.servlet:jstl:$jstlVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('multipart-http') {
+	description = 'HTTP Multipart Demo'
+
+	apply plugin: 'war'
+	apply plugin: 'org.gretty'
+	apply plugin: 'eclipse-wtp'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-http'
+		api 'org.springframework:spring-webmvc'
+		api 'com.fasterxml.jackson.core:jackson-databind'
+		api "commons-fileupload:commons-fileupload:$commonsFileUploadVersion"
+		api "commons-io:commons-io:$commonsIoVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('rest-http') {
+	description = 'Spring Integration Rest HTTP Path Usage Demo'
+
+	apply plugin: 'war'
+	apply plugin: 'org.gretty'
+	apply plugin: 'eclipse-wtp'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-http'
+		api 'org.springframework:spring-webmvc'
+		api 'org.springframework:spring-oxm'
+		api 'org.springframework:spring-tx'
+		api 'org.springframework:spring-jdbc'
+		api 'org.springframework:spring-context'
+		api 'org.springframework:spring-aop'
+		api 'com.fasterxml.jackson.core:jackson-databind'
+		api "org.springframework.security:spring-security-web:$springSecurityVersion"
+		api "org.springframework.security:spring-security-config:$springSecurityVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+		api "com.sun.xml.bind:jaxb-impl:$jaxbVersion"
+	}
+
+	test {
+		exclude '**/RestHttpClientTest*'
+	}
+
+}
+
+project('retry-and-more') {
+	description = 'Retry and More Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-stream'
+		api 'org.springframework.integration:spring-integration-amqp'
+		api 'org.springframework.integration:spring-integration-ftp'
+		api 'org.springframework.integration:spring-integration-file'
+		api("org.mockito:mockito-core:$mockitoVersion") {
+			exclude group: 'org.hamcrest'
+		}
+		api "org.hamcrest:hamcrest-library:$hamcrestVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+	task runCircuitBreakerDemo(type: JavaExec) {
+		main 'org.springframework.integration.samples.advice.CircuitBreakerDemo'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	task runFileTransferDeleteAfterSuccessDemo(type: JavaExec) {
+		main 'org.springframework.integration.samples.advice.FileTransferDeleteAfterSuccessDemo'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	task runFileTransferRenameAfterFailureDemo(type: JavaExec) {
+		main 'org.springframework.integration.samples.advice.FileTransferRenameAfterFailureDemo'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	task runStatefulRetryDemo(type: JavaExec) {
+		main 'org.springframework.integration.samples.advice.StatefulRetryDemo'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	task runStatelessRetryDemo(type: JavaExec) {
+		main 'org.springframework.integration.samples.advice.StatelessRetryDemo'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+}
+
+project('splitter-aggregator-reaper') {
+	description = 'Splitter-Aggregator-Reaper Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.splitteraggregator.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-core'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+
+project('stored-procedures-derby') {
+	description = 'Derby Stored Procedures Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.storedprocedure.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-jdbc'
+		api "org.apache.derby:derby:$derbyVersion"
+		api "org.apache.derby:derbytools:$derbyVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('stored-procedures-oracle') {
+	description = 'Oracle Stored Procedures Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.storedprocedure.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-jdbc'
+		api "com.oracle.ojdbc:ojdbc8:$oracleDriverVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+	test {
+		exclude '**/StringConversionServiceTest*'
+	}
+}
+
+project('stored-procedures-ms') {
+	description = 'MS SQLServer Stored Procedures Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.storedprocedure.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-jdbc'
+		api "net.sourceforge.jtds:jtds:$jtdsVersion"
+		api "com.mchange:c3p0:$c3p0Version"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+
+	test {
+		exclude '**/StringConversionServiceTest*'
+	}
+}
+
+project('stored-procedures-postgresql') {
+	description = 'PostgreSQL Stored Procedures Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.storedprocedure.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-jdbc'
+		api "org.postgresql:postgresql:$postgresVersion"
+		api "org.apache.commons:commons-dbcp2:$commonsDbcpVersion"
+		api "org.apache.commons:commons-pool2:$commonsPoolVersion"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('tcp-async-bi-directional') {
+	description = 'Bi-Directional TCP Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api "org.springframework.integration:spring-integration-ip"
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation "org.springframework.integration:spring-integration-test"
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.tcpasyncbi.TcpAsyncBiDirectionalApplication'
+	}
+
+	task run(type: JavaExec) {
+		main 'org.springframework.integration.samples.tcpasyncbi.TcpAsyncBiDirectionalApplication'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+
+}
+
+project('tcp-client-server-multiplex') {
+	description = 'TCP Client Server Multiplexing Sample'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-ip'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+
+		testImplementation 'org.springframework.integration:spring-integration-test'
+	}
+}
+
+project('travel') {
+	description = 'Travel Services Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.travel.Main'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-ws'
+		api 'org.springframework.integration:spring-integration-http'
+		api 'org.springframework:spring-web'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('tx-synch') {
+	description = 'Transaction Synchronization Sample'
+
+	apply plugin: 'application'
+
+	mainClassName = 'org.springframework.integration.samples.advice.TransactionSynchronizationDemo'
+
+	dependencies {
+		api 'org.springframework.integration:spring-integration-jdbc'
+		api 'org.springframework.integration:spring-integration-file'
+		api "com.h2database:h2:$h2Version"
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+	}
+}
+
+project('web-sockets') {
+	description = 'Web Sockets Basic Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-websocket'
+		api "org.springframework.integration:spring-integration-websocket"
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.websocket.standard.server.Application'
+	}
+
+	tasks.withType(JavaExec) {
+		standardInput = System.in
+	}
+}
+
+project('stomp-chat') {
+	description = 'Web Sockets Stomp Chat Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-websocket'
+		api 'org.springframework.integration:spring-integration-websocket'
+		api 'org.springframework.integration:spring-integration-event'
+		api 'org.springframework.integration:spring-integration-groovy'
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.chat.stomp.server.Application'
+	}
+
+	tasks.withType(JavaExec) {
+		standardInput = System.in
+	}
+}
+
+project('kafka-dsl') {
+	description = 'Java DSL Kafka Sample'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api 'org.springframework.integration:spring-integration-core'
+		api 'org.springframework.integration:spring-integration-kafka'
+		api "org.apache.logging.log4j:log4j-core:$log4jVersion"
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.dsl.kafka.Application'
+	}
+
+	task run(type: JavaExec) {
+		main 'org.springframework.integration.samples.dsl.kafka.Application'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	tasks.withType(JavaExec) {
+		standardInput = System.in
+	}
+}
+
+project('file-split-ftp') {
+	description = 'File Split FTP'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-web'
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api 'org.springframework.integration:spring-integration-ftp'
+		api 'org.springframework.integration:spring-integration-http'
+		api 'org.springframework.integration:spring-integration-mail'
+		api "com.sun.mail:jakarta.mail:$mailVersion"
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation 'org.springframework.integration:spring-integration-test'
+		testImplementation "com.icegreen:greenmail:2.0.0-alpha-2"
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.filesplit.Application'
+	}
+
+	task run(type: JavaExec) {
+		main 'org.springframework.integration.samples.filesplit.Application'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+}
+
+project('dynamic-tcp-client') {
+	description = 'Dynamic TCP Client'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api 'org.springframework.integration:spring-integration-ip'
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.dynamictcp.DynamicTcpClientApplication'
+	}
+
+	task run(type: JavaExec) {
+		main 'org.springframework.integration.samples.dynamictcp.DynamicTcpClientApplication'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+}
+
+project('tcp-with-headers') {
+	description = 'TCP Send/Receive with headers'
+
+	apply plugin: 'org.springframework.boot'
+
+	dependencies {
+		api 'org.springframework.boot:spring-boot-starter-integration'
+		api 'org.springframework.integration:spring-integration-ip'
+		api 'com.fasterxml.jackson.core:jackson-databind'
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	springBoot {
+		mainClass = 'org.springframework.integration.samples.tcpheaders.TcpWithHeadersApplication'
+	}
+
+	task run(type: JavaExec) {
+		main 'org.springframework.integration.samples.tcpheaders.TcpWithHeadersApplication'
+		classpath = sourceSets.main.runtimeClasspath
+	}
+
+	tasks.withType(JavaExec) {
+		standardInput = System.in
+	}
+}
+
+sonarqube {
+	properties {
+		property 'sonar.links.homepage', linkHomepage
+		property 'sonar.links.ci', linkCi
+		property 'sonar.links.issue', linkIssue
+		property 'sonar.links.scm', linkScmUrl
+		property 'sonar.links.scm_dev', linkScmDevConnection
+	}
+}

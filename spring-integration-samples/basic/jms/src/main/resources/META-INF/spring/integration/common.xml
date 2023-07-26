@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:integration="http://www.springframework.org/schema/integration"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+			https://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/integration
+			https://www.springframework.org/schema/integration/spring-integration.xsd
+			http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+	<util:constant id="jmsConnectionFactory"
+				   static-field="org.springframework.integration.samples.jms.ActiveMQMultiContextTests.connectionFactory"/>
+
+	<bean id="requestQueue" class="org.apache.activemq.artemis.jms.client.ActiveMQQueue">
+		<constructor-arg value="queue.demo"/>
+	</bean>
+
+	<bean id="requestTopic" class="org.apache.activemq.artemis.jms.client.ActiveMQTopic">
+		<constructor-arg value="topic.demo"/>
+	</bean>
+
+	<bean id="replyQueue" class="org.apache.activemq.artemis.jms.client.ActiveMQQueue">
+		<constructor-arg value="queue.reply"/>
+	</bean>
+
+	<integration:poller id="poller" default="true" fixed-delay="1000"/>
+
+</beans>
