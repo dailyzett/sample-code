@@ -1,5 +1,10 @@
-<<<<<<< HEAD
+
 # 공부한 프로젝트 & 샘플 코드 정리 리포지토리
+
+## 0. TIL
+
+Today I Learned
+: 써드파티 앱으로 공부 이후 작성 중단
 
 ## 1. campus-project
 
