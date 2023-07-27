@@ -2,16 +2,32 @@ package com.example.dddstart.domain
 
 import com.example.dddstart.domain.enum.OrderState
 import com.example.dddstart.domain.value.Money
+import com.example.dddstart.domain.value.OrderNo
 
 class Order {
+    private var id: OrderNo? = null
+    private var orderer: Orderer? = null
     private var orderLines: List<OrderLine>? = null
     private var totalAmounts: Money? = null
     private var state: OrderState? = null
     private var shippingInfo: ShippingInfo? = null
 
-    constructor(orderLines: List<OrderLine>, shippingInfo: ShippingInfo) {
+    constructor(
+        orderer: Orderer,
+        orderLines: List<OrderLine>,
+        shippingInfo: ShippingInfo,
+        orderState: OrderState
+    ) {
+        setOrderer(orderer)
         setOrderLines(orderLines)
         setShippingInfo(shippingInfo)
+    }
+
+    private fun setOrderer(orderer: Orderer?) {
+        if (orderer == null) {
+            throw IllegalArgumentException("no Orderer")
+        }
+        this.orderer = orderer
     }
 
     private fun setShippingInfo(shippingInfo: ShippingInfo?) {
