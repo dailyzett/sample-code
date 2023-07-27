@@ -1,5 +1,7 @@
 package com.example.dddstart.domain
 
+import com.example.dddstart.domain.value.Product
+
 class OrderLine(
     private val product: Product,
     private val price: Int,

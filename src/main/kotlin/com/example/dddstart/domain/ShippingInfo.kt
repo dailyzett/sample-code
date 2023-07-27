@@ -1,10 +1,10 @@
 package com.example.dddstart.domain
 
+import com.example.dddstart.domain.value.Address
+import com.example.dddstart.domain.value.Receiver
+
 class ShippingInfo(
-    private val receiverName: String,
-    private val receiverPhoneNumber: String,
-    private val shippingAddress1: String,
-    private val shippingAddress2: String,
-    private val shippingZipcode: String
+    private val receiver: Receiver,
+    private val address: Address
 ) {
 }

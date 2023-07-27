@@ -1,6 +1,7 @@
 package com.example.dddstart.domain
 
 import com.example.dddstart.domain.enum.OrderState
+import com.example.dddstart.domain.value.Money
 
 class Order {
     private var orderLines: List<OrderLine>? = null
