@@ -1,4 +1,4 @@
-package com.example.dddstart.domain.value
+package com.example.dddstart.order.command.domain
 
 data class Money(
     private val value: Int

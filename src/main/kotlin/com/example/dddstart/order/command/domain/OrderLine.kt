@@ -1,6 +1,6 @@
-package com.example.dddstart.domain
+package com.example.dddstart.order.command.domain
 
-import com.example.dddstart.domain.value.Product
+import com.example.dddstart.catalog.command.domain.Product
 
 class OrderLine(
     private val product: Product,

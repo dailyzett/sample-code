@@ -1,8 +1,4 @@
-package com.example.dddstart.domain
-
-import com.example.dddstart.domain.enum.OrderState
-import com.example.dddstart.domain.value.Money
-import com.example.dddstart.domain.value.OrderNo
+package com.example.dddstart.order.command.domain
 
 class Order {
     private var id: OrderNo? = null
@@ -30,11 +26,11 @@ class Order {
         this.orderer = orderer
     }
 
-    private fun setShippingInfo(shippingInfo: ShippingInfo?) {
-        if (shippingInfo == null) {
+    private fun setShippingInfo(newShippingInfo: ShippingInfo?) {
+        if (newShippingInfo == null) {
             throw IllegalArgumentException("no ShippingInfo")
         }
-        this.shippingInfo = shippingInfo
+        this.shippingInfo = newShippingInfo
     }
 
     private fun setOrderLines(orderLines: List<OrderLine>?) {

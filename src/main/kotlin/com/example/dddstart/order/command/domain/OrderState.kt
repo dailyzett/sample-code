@@ -1,4 +1,4 @@
-package com.example.dddstart.domain.enum
+package com.example.dddstart.order.command.domain
 
 /**
  * 주문 상태
