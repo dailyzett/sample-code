@@ -1,11 +1,33 @@
 package com.example.dddstart.order.command.domain
 
+import com.example.dddstart.common.jpa.MoneyConverter
+import jakarta.persistence.*
+
+@Entity
+@Table(name = "purchase_order")
+@Access(AccessType.FIELD)
 class Order {
+
+    @EmbeddedId
     private var id: OrderNo? = null
+
+    @Embedded
     private var orderer: Orderer? = null
+
+    @OrderColumn(name = "line_idx")
+    @CollectionTable(name = "order_line", joinColumns = [JoinColumn(name = "order_number")])
+    @ElementCollection(fetch = FetchType.LAZY)
     private var orderLines: List<OrderLine>? = null
+
+    @Convert(converter = MoneyConverter::class)
+    @Column(name = "total_amounts")
     private var totalAmounts: Money? = null
+
+    @Column(name = "state")
+    @Enumerated(EnumType.STRING)
     private var state: OrderState? = null
+
+    @Embedded
     private var shippingInfo: ShippingInfo? = null
 
     constructor(
@@ -46,10 +68,7 @@ class Order {
     }
 
     private fun calculateTotalAmounts() {
-        val sum = orderLines!!.stream()
-            .mapToInt { obj: OrderLine -> obj.getAmounts() }
-            .sum()
-        this.totalAmounts = Money(sum)
+        totalAmounts = Money(orderLines!!.stream().mapToInt { x: OrderLine -> x.getAmounts().getValue() }.sum())
     }
 
     fun changeShippingInfo(newShippingInfo: ShippingInfo) {

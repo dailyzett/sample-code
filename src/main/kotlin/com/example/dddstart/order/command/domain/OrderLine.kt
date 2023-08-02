@@ -1,18 +1,28 @@
 package com.example.dddstart.order.command.domain
 
-import com.example.dddstart.catalog.command.domain.Product
+import com.example.dddstart.catalog.command.domain.ProductId
+import com.example.dddstart.common.jpa.MoneyConverter
+import jakarta.persistence.Convert
+import jakarta.persistence.Embeddable
+import jakarta.persistence.Embedded
 
+@Embeddable
 class OrderLine(
-    private val product: Product,
-    private val price: Int,
+    @Embedded
+    private val productId: ProductId,
+
+    @Convert(converter = MoneyConverter::class)
+    private val price: Money,
     private val quantity: Int,
-    private val amounts: Int
+
+    @Convert(converter = MoneyConverter::class)
+    private val amounts: Money
 ) {
-    private fun calculateAmounts(): Int {
+    private fun calculateAmounts(): Money {
         return price * quantity
     }
 
-    fun getAmounts(): Int {
+    fun getAmounts(): Money {
         return amounts
     }
 }

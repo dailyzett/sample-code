@@ -10,4 +10,8 @@ data class Money(
     operator fun times(other: Int): Money {
         return Money(value * other)
     }
+
+    fun getValue(): Int {
+        return value
+    }
 }
