@@ -1,5 +1,7 @@
 package com.example.dddstart.order.command.domain
 
+import com.example.dddstart.common.event.Events
+import com.example.dddstart.common.event.OrderCanceledEvent
 import com.example.dddstart.common.jpa.MoneyConverter
 import jakarta.persistence.*
 
@@ -9,7 +11,7 @@ import jakarta.persistence.*
 class Order {
 
     @EmbeddedId
-    private var id: OrderNo? = null
+    private var number: OrderNo? = null
 
     @Embedded
     private var orderer: Orderer? = null
@@ -79,6 +81,7 @@ class Order {
     fun cancel() {
         verifyNotYetShipped()
         this.state = OrderState.CANCELED
+        Events.raise(OrderCanceledEvent(number!!.getNumber()))
     }
 
     private fun verifyNotYetShipped() {
