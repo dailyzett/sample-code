@@ -12,7 +12,7 @@ Today I Learned
 
 ## 2. deep
 
-토비의 스프링 부트 강의를 읽고..
+토비의 스프링 부트 강의 수강
 
 ## 3. effective-software-testing
 
@@ -32,7 +32,7 @@ Today I Learned
 
 ## 6. mykotlin
 
-이펙티브 코틀린을 읽으면서 코드 작성
+이펙티브 코틀린을 읽으면서 코드 작성 연습
 
 ## 7. park-reservation
 
@@ -50,23 +50,6 @@ Today I Learned
 
 스프링 aop 관련 공부
 
-## 11. spring-batch-demo
+## 11. DDD-Start
 
-스프링 배치 데모 샘플 코드
-
-## 12. spring-batch
-
-스프링 공식 레퍼런스 샘플 코드 fork
-
-## 13. spring-intergration-demo
-
-실무에서 사용하는 스프링 intergration 을 이해하기 위해 만든 프로젝트
-
-## 14. spring-intergration-sample
-
-스프링 레퍼런스 샘플 코드 fork
-
-## 15. wanted-pre-onboarding-challenger
-
-원티드 온보딩 챌린지 - 시스템 설계 관련
-
+최범균의 도메인 주도 개발 시작하기 관련 공부
