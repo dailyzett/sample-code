@@ -3,11 +3,11 @@ package com.jun.config
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.core.userdetails.User
 import org.springframework.security.crypto.password.NoOpPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import org.springframework.security.provisioning.JdbcUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
+import javax.sql.DataSource
 
 @Configuration(proxyBeanMethods = false)
 class ProjectSecurityConfig {
@@ -31,33 +31,8 @@ class ProjectSecurityConfig {
     }
 
     @Bean
-    fun userDetamilService(): InMemoryUserDetailsManager {
-        /* InMemoryUserDetailsManager is deprecated. Use User.withDefaultPasswordEncoder() instead. */
-        /*val admin = User.withDefaultPasswordEncoder()
-            .username("admin")
-            .password("12345")
-            .roles("ADMIN")
-            .build()
-
-        val genericMember = User.withDefaultPasswordEncoder()
-            .username("genericMember")
-            .password("12345")
-            .roles("read")
-            .build()
-        return InMemoryUserDetailsManager(admin, genericMember)*/
-
-        val admin = User
-            .withUsername("admin")
-            .password("12345")
-            .roles("ADMIN")
-            .build()
-
-        val genericMember = User
-            .withUsername("genericMember")
-            .password("12345")
-            .roles("read")
-            .build()
-        return InMemoryUserDetailsManager(admin, genericMember)
+    fun userDetailService(dataSource: DataSource): JdbcUserDetailsManager {
+        return JdbcUserDetailsManager(dataSource)
     }
 
     /**
@@ -67,4 +42,34 @@ class ProjectSecurityConfig {
     fun passwordEncoder(): PasswordEncoder {
         return NoOpPasswordEncoder.getInstance()
     }
+
+    /*    @Bean
+        fun userDetamilService(): InMemoryUserDetailsManager {
+             InMemoryUserDetailsManager is deprecated. Use User.withDefaultPasswordEncoder() instead.
+            val admin = User.withDefaultPasswordEncoder()
+                .username("admin")
+                .password("12345")
+                .roles("ADMIN")
+                .build()
+
+            val genericMember = User.withDefaultPasswordEncoder()
+                .username("genericMember")
+                .password("12345")
+                .roles("read")
+                .build()
+            return InMemoryUserDetailsManager(admin, genericMember)
+
+            val admin = User
+                .withUsername("admin")
+                .password("12345")
+                .roles("ADMIN")
+                .build()
+
+            val genericMember = User
+                .withUsername("genericMember")
+                .password("12345")
+                .roles("read")
+                .build()
+            return InMemoryUserDetailsManager(admin, genericMember)
+        }*/
 }
