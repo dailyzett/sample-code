@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 @RestController
 class LoginController(
@@ -23,6 +24,7 @@ class LoginController(
         try {
             val hashPwd = passwordEncoder.encode(customer.pwd)
             customer.pwd = hashPwd
+            customer.createDt = Date(System.currentTimeMillis())
             val savedCustomer = customerRepository.save(customer)
             if (savedCustomer.id > 0) {
                 return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully")

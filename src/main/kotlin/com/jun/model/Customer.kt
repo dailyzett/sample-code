@@ -3,6 +3,7 @@ package com.jun.model
 import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.persistence.*
 import org.hibernate.annotations.GenericGenerator
+import java.util.*
 
 @Entity
 @Table(name = "customer")
@@ -25,5 +26,5 @@ class Customer(
     val role: String? = null,
 
     @Column(name = "create_dt")
-    var createDt: String? = null,
+    var createDt: Date? = null,
 )
