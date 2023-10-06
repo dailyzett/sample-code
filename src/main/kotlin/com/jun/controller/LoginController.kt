@@ -22,7 +22,7 @@ class LoginController(
             val hashPwd = passwordEncoder.encode(customer.pwd)
             customer.pwd = hashPwd
             val savedCustomer = customerRepository.save(customer)
-            if (savedCustomer.id!! > 0) {
+            if (savedCustomer.id > 0) {
                 return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully")
             }
         } catch (e: Exception) {
