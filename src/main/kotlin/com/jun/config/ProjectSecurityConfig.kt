@@ -17,7 +17,8 @@ class ProjectSecurityConfig {
         http
             .authorizeHttpRequests { request ->
                 request
-                    .requestMatchers("/myAccount/**", "/myBalance/**", "/myLoans/**", "/myCards/**").authenticated()
+                    .requestMatchers("/myAccount/**", "/myBalance/**", "/myLoans/**", "/myCards/**", "/user")
+                    .authenticated()
                     .requestMatchers("/notices", "/contact", "/register").permitAll()
             }
             .formLogin { formLogin ->
