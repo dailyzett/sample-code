@@ -1,5 +1,6 @@
 package com.jun.config
 
+import com.jun.model.Authority
 import com.jun.repository.CustomerRepository
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.BadCredentialsException
@@ -22,15 +23,25 @@ class EazyBankUsernamePwdAuthenticationProvider(
         val customerList = customerRepository.findByEmail(username!!)
         if (customerList.isNotEmpty()) {
             if (passwordEncoder.matches(pwd, customerList[0].pwd)) {
-                val authorities = mutableListOf<GrantedAuthority>()
-                authorities.add(SimpleGrantedAuthority(customerList[0].role!!))
-                return UsernamePasswordAuthenticationToken(username, pwd, authorities)
+                return UsernamePasswordAuthenticationToken(
+                    username,
+                    pwd,
+                    getGrantedAuthority(customerList[0].authorities!!)
+                )
             } else {
                 throw BadCredentialsException("Invalid password")
             }
         } else {
             throw BadCredentialsException("User not found")
         }
+    }
+
+    fun getGrantedAuthority(authroties: Set<Authority>): List<GrantedAuthority> {
+        val authorities = mutableListOf<GrantedAuthority>()
+        authroties.forEach {
+            authorities.add(SimpleGrantedAuthority(it.name))
+        }
+        return authorities
     }
 
     override fun supports(authentication: Class<*>?): Boolean {
