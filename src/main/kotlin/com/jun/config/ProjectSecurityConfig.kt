@@ -24,17 +24,15 @@ class ProjectSecurityConfig {
     fun defaultSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
         val requestHandler = CsrfTokenRequestAttributeHandler()
         requestHandler.setCsrfRequestAttributeName("_csrf")
-        http.securityContext { context: SecurityContextConfigurer<HttpSecurity?> ->
-            context
+        http.securityContext {
+            it
                 .requireExplicitSave(false)
         }
-            .sessionManagement { session: SessionManagementConfigurer<HttpSecurity?> ->
-                session.sessionCreationPolicy(
-                    SessionCreationPolicy.ALWAYS
-                )
+            .sessionManagement {
+                it.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
             }
-            .cors { corsCustomizer: CorsConfigurer<HttpSecurity?> ->
-                corsCustomizer.configurationSource {
+            .cors {
+                it.configurationSource {
                     val config = CorsConfiguration()
                     config.allowedOrigins = listOf("http://localhost:4200")
                     config.setAllowedMethods(listOf("*"))
@@ -43,14 +41,19 @@ class ProjectSecurityConfig {
                     config.maxAge = 3600L
                     return@configurationSource config
                 }
-            }.csrf { csrf: CsrfConfigurer<HttpSecurity?> ->
-                csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact", "/register")
+            }.csrf {
+                it
+                    .csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact", "/register")
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
             }
             .addFilterAfter(CsrfCookieFilter(), BasicAuthenticationFilter::class.java)
-            .authorizeHttpRequests { requests ->
-                requests
-                    .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards", "/user").authenticated()
+            .authorizeHttpRequests {
+                it
+                    .requestMatchers("/myAccount").hasAuthority("VIEWACCOUNT")
+                    .requestMatchers("/myBalance").hasAnyAuthority("VIEWBALANCE", "VIEWACCOUNT")
+                    .requestMatchers("/myLoans").hasAuthority("VIEWLOANS")
+                    .requestMatchers("/myCards").hasAuthority("VIEWCARDS")
+                    .requestMatchers("/user").authenticated()
                     .requestMatchers("/notices", "/contact", "/register").permitAll()
             }
             .formLogin(Customizer.withDefaults())
