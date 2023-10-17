@@ -1,6 +1,7 @@
 package com.jun.config
 
 import com.jun.filter.CsrfCookieFilter
+import com.jun.filter.RequestValidationBeforeFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.Customizer
@@ -47,12 +48,13 @@ class ProjectSecurityConfig {
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
             }
             .addFilterAfter(CsrfCookieFilter(), BasicAuthenticationFilter::class.java)
+            .addFilterBefore(RequestValidationBeforeFilter(), BasicAuthenticationFilter::class.java)
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/myAccount").hasAuthority("VIEWACCOUNT")
-                    .requestMatchers("/myBalance").hasAnyAuthority("VIEWBALANCE", "VIEWACCOUNT")
-                    .requestMatchers("/myLoans").hasAuthority("VIEWLOANS")
-                    .requestMatchers("/myCards").hasAuthority("VIEWCARDS")
+                    .requestMatchers("/myAccount").hasRole("USER")
+                    .requestMatchers("/myBalance").hasAnyRole("USER", "ADMIN")
+                    .requestMatchers("/myLoans").hasRole("USER")
+                    .requestMatchers("/myCards").hasRole("USER")
                     .requestMatchers("/user").authenticated()
                     .requestMatchers("/notices", "/contact", "/register").permitAll()
             }
