@@ -1,5 +1,7 @@
 package com.jun.config
 
+import com.jun.filter.AuthoritiesLoggingAfterFilter
+import com.jun.filter.AuthoritiesLoggingAtFilter
 import com.jun.filter.CsrfCookieFilter
 import com.jun.filter.RequestValidationBeforeFilter
 import org.springframework.context.annotation.Bean
@@ -24,7 +26,6 @@ class ProjectSecurityConfig {
     @Throws(Exception::class)
     fun defaultSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
         val requestHandler = CsrfTokenRequestAttributeHandler()
-        requestHandler.setCsrfRequestAttributeName("_csrf")
         http.securityContext {
             it
                 .requireExplicitSave(false)
@@ -49,6 +50,8 @@ class ProjectSecurityConfig {
             }
             .addFilterAfter(CsrfCookieFilter(), BasicAuthenticationFilter::class.java)
             .addFilterBefore(RequestValidationBeforeFilter(), BasicAuthenticationFilter::class.java)
+            .addFilterAfter(AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter::class.java)
+            .addFilterAt(AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter::class.java)
             .authorizeHttpRequests {
                 it
                     .requestMatchers("/myAccount").hasRole("USER")
@@ -60,6 +63,7 @@ class ProjectSecurityConfig {
             }
             .formLogin(Customizer.withDefaults())
             .httpBasic(Customizer.withDefaults())
+        requestHandler.setCsrfRequestAttributeName("_csrf")
         return http.build()
     }
 
