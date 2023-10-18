@@ -33,4 +33,8 @@ class Cards(
 
     @Column(name = "create_dt")
     var createDt: Date? = null,
-)
+) {
+    override fun toString(): String {
+        return "Cards(cardId=$cardId, customerId=$customerId, cardNumber=$cardNumber, cardType=$cardType, totalLimit=$totalLimit, amountUsed=$amountUsed, availableAmount=$availableAmount, createDt=$createDt)"
+    }
+}
