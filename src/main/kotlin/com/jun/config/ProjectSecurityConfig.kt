@@ -48,6 +48,7 @@ class ProjectSecurityConfig {
             .addFilterAt(AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter::class.java)
             .addFilterAfter(AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter::class.java)
             .addFilterAfter(JwtTokenGeneratorFilter(), BasicAuthenticationFilter::class.java)
+            .addFilterBefore(JwtTokenValidatorFilter(), BasicAuthenticationFilter::class.java)
             .addFilterAfter(CsrfCookieFilter(), BasicAuthenticationFilter::class.java)
             .authorizeHttpRequests {
                 it
