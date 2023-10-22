@@ -1,9 +1,6 @@
 package com.jun.config
 
-import com.jun.filter.AuthoritiesLoggingAfterFilter
-import com.jun.filter.AuthoritiesLoggingAtFilter
-import com.jun.filter.CsrfCookieFilter
-import com.jun.filter.RequestValidationBeforeFilter
+import com.jun.filter.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.Customizer
@@ -30,9 +27,7 @@ class ProjectSecurityConfig {
             it
                 .requireExplicitSave(false)
         }
-            .sessionManagement {
-                it.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-            }
+            .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .cors {
                 it.configurationSource {
                     val config = CorsConfiguration()
@@ -41,6 +36,7 @@ class ProjectSecurityConfig {
                     config.allowCredentials = true
                     config.allowedHeaders = listOf("*")
                     config.maxAge = 3600L
+                    config.exposedHeaders = listOf("Authorization")
                     return@configurationSource config
                 }
             }.csrf {
@@ -48,10 +44,11 @@ class ProjectSecurityConfig {
                     .csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact", "/register")
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
             }
-            .addFilterAfter(CsrfCookieFilter(), BasicAuthenticationFilter::class.java)
             .addFilterBefore(RequestValidationBeforeFilter(), BasicAuthenticationFilter::class.java)
-            .addFilterAfter(AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter::class.java)
             .addFilterAt(AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter::class.java)
+            .addFilterAfter(AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter::class.java)
+            .addFilterAfter(JwtTokenGeneratorFilter(), BasicAuthenticationFilter::class.java)
+            .addFilterAfter(CsrfCookieFilter(), BasicAuthenticationFilter::class.java)
             .authorizeHttpRequests {
                 it
                     .requestMatchers("/myAccount").hasRole("USER")
