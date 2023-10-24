@@ -7,12 +7,11 @@ class LoansTest {
     fun loanTest() {
         var remainingLoanAmount = 20_106_591  // 대출 원금
         val annualInterestRate = 0.0584  // 연 이자율
-        val monthlyPayment = 1_300_000  // 매달 지불 금액
+        val monthlyPayment = 1_900_000  // 매달 지불 금액
 
         var totalPayment = 0
-
-        // 2023년 10월 21일부터 2024년 8월 21일까지는 총 10개월입니다.
-        for (month in 1..10) {
+        
+        for (month in 1..12) {
             // 매달 이자 계산
             val monthlyInterest = remainingLoanAmount * (annualInterestRate / 12)
             // 이자를 제외한 원금 상환액 계산

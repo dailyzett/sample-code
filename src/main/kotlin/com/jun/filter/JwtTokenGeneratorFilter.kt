@@ -34,7 +34,7 @@ class JwtTokenGeneratorFilter : OncePerRequestFilter() {
     }
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
-        return request.servletPath != ("/user")
+        return request.servletPath != "/user"
     }
 
     private fun populateAuthorities(collection: Collection<GrantedAuthority>): String {
