@@ -2,6 +2,7 @@ package com.jun.controller
 
 import com.jun.model.Contact
 import com.jun.repository.ContactRepository
+import org.springframework.security.access.prepost.PreFilter
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -13,10 +14,16 @@ class ContactController(
 ) {
 
     @PostMapping("/contact")
-    fun saveContactInquiryDetails(@RequestBody contact: Contact): Contact {
+    @PreFilter("filterObject.contactName != 'Test'")
+    fun saveContactInquiryDetails(@RequestBody contacts: List<Contact>): List<Contact> {
+        var contact = contacts[0]
         contact.contactId = getServiceReqNumber()
         contact.createDt = Date(System.currentTimeMillis())
-        return contactRepository.save(contact)
+        contact = contactRepository.save(contact)
+
+        val returnContacts: MutableList<Contact> = mutableListOf()
+        returnContacts.add(contact)
+        return returnContacts
     }
 
     private fun getServiceReqNumber(): String {
