@@ -1,15 +1,12 @@
 package com.jun.config
 
-import com.jun.filter.*
+import com.jun.filter.CsrfCookieFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configurers.*
 import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository
@@ -20,7 +17,6 @@ import org.springframework.web.cors.CorsConfiguration
 @EnableWebSecurity
 class ProjectSecurityConfig {
     @Bean
-    @Throws(Exception::class)
     fun defaultSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
         val requestHandler = CsrfTokenRequestAttributeHandler()
         http.securityContext {
@@ -44,11 +40,6 @@ class ProjectSecurityConfig {
                     .csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact", "/register")
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
             }
-            .addFilterBefore(RequestValidationBeforeFilter(), BasicAuthenticationFilter::class.java)
-            .addFilterAt(AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter::class.java)
-            .addFilterAfter(AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter::class.java)
-            .addFilterAfter(JwtTokenGeneratorFilter(), BasicAuthenticationFilter::class.java)
-            .addFilterBefore(JwtTokenValidatorFilter(), BasicAuthenticationFilter::class.java)
             .addFilterAfter(CsrfCookieFilter(), BasicAuthenticationFilter::class.java)
             .authorizeHttpRequests {
                 it
@@ -63,14 +54,5 @@ class ProjectSecurityConfig {
             .httpBasic(Customizer.withDefaults())
         requestHandler.setCsrfRequestAttributeName("_csrf")
         return http.build()
-    }
-
-
-    /**
-     * NoOpPasswordEncoder is deprecated. Use BCryptPasswordEncoder instead.
-     */
-    @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
     }
 }
