@@ -21,7 +21,7 @@
 
 # 코틀린 인 액션
 
-1. [코틀린 기초](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/코틀린_기초.md#목차)
+1. [코틀린 기초](https://github.com/dailyzett/study/TIL/blob/main/common/kotlinInAction/코틀린_기초.md#목차)
 2. [함수 정의와 호출](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/함수정의와_호출.md#목차)
 3. [클래스, 객체, 인터페이스](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/코틀린_클래스.md#목차)
 4. [람다 프로그래밍](https://github.com/dailyzett/TIL/blob/main/common/kotlinInAction/람다로_프로그래밍.md#목차)
