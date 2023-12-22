@@ -21,7 +21,7 @@
 
 # 코틀린 인 액션
 
-1. [코틀린 기초](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/코틀린_기초.md#목차)
+1. [코틀린 기초](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/%EC%BD%94%ED%8B%80%EB%A6%B0_%EA%B8%B0%EC%B4%88.md)
 2. [함수 정의와 호출](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/함수정의와_호출.md#목차)
 3. [클래스, 객체, 인터페이스](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/코틀린_클래스.md#목차)
 4. [람다 프로그래밍](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/람다로_프로그래밍.md#목차)
@@ -33,10 +33,10 @@
 
 # 스프링
 
-1. [자바 메모리 구조](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaProgrammingBasic.md)
-2. [자바와 객체 지향](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaAndOOP.md)
-3. [객체 지향을 사용하기 위한 자바의 여러 키워드](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/JavaOOPKeyword.md)
-4. [객체 지향 설계 5원칙 - SOLID](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/SOLID.md)
+1. [자바 메모리 구조](https://github.com/dailyzett/study/blob/main/TIL/common/SpringBasic/JavaProgrammingBasic.md)
+2. [자바와 객체 지향](https://github.com/dailyzett/study/blob/main/TIL/common/SpringBasic/JavaAndOOP.md)
+3. [객체 지향을 사용하기 위한 자바의 여러 키워드](https://github.com/dailyzett/study/blob/main/TIL/common/SpringBasic/JavaOOPKeyword.md)
+4. [객체 지향 설계 5원칙 - SOLID](https://github.com/dailyzett/study/blob/main/TIL/common/SpringBasic/SOLID.md)
 5. 디자인 패턴
    1. [어댑터 패턴](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/AdapterPattern.md)
    2. [프록시 패턴](https://github.com/dailyzett/TIL/blob/main/common/SpringBasic/ProxyPattern.md)
@@ -261,6 +261,6 @@
 
 # Tag: Algorithm
 
-1. [DP](https://github.com/dailyzett/TIL/blob/main/common/algorithm/dp_1.md#목차)
-   1. [DP 문제에 대한 프레임 워크](https://github.com/dailyzett/TIL/blob/main/common/algorithm/dp_2.md#목차)
-   2. [Example. House Robber](https://github.com/dailyzett/TIL/blob/main/common/algorithm/dp_3.md#목차)
+1. [DP](https://github.com/dailyzett/study/blob/main/TIL/common/algorithm/dp_1.md#목차)
+   1. [DP 문제에 대한 프레임 워크](https://github.com/dailyzett/study/blob/main/TIL/common/algorithm/dp_2.md#목차)
+   2. [Example. House Robber](https://github.com/dailyzett/study/blob/main/TIL/common/algorithm/dp_3.md#목차)
