@@ -17,19 +17,19 @@
 
 # AWS
 
-1. [AWS Elastic Beanstalk](https://github.com/dailyzett/study/TIL/blob/main/common/aws/aws_1.md#목차)
+1. [AWS Elastic Beanstalk](https://github.com/dailyzett/study/blob/main/TIL/common/aws/aws_1.md#목차)
 
 # 코틀린 인 액션
 
-1. [코틀린 기초](https://github.com/dailyzett/study/TIL/blob/main/common/kotlinInAction/코틀린_기초.md#목차)
-2. [함수 정의와 호출](https://github.com/dailyzett/study/TIL/blob/main/common/kotlinInAction/함수정의와_호출.md#목차)
-3. [클래스, 객체, 인터페이스](https://github.com/dailyzett/study/TIL/blob/main/common/kotlinInAction/코틀린_클래스.md#목차)
-4. [람다 프로그래밍](https://github.com/dailyzett/study/TIL/blob/main/common/kotlinInAction/람다로_프로그래밍.md#목차)
-5. [코틀린 타입 시스템](https://github.com/dailyzett/study/TIL/blob/main/common/kotlinInAction/코틀린_타입_시스템.md#목차)
-6. [연산자 오버로딩, 기타관례](https://github.com/dailyzett/study/TIL/blob/main/common/kotlinInAction/연산자_오버로딩과_기타_관례.md#목차)
-7. [고차 함수: 파라미터와 반환 값으로 람다 사용](https://github.com/dailyzett/study/TIL/blob/main/common/kotlinInAction/고차_함수_파라미터와_반환_값으로_람다_사용.md#목차)
-8. [제네릭스](https://github.com/dailyzett/TIL/study/blob/main/common/kotlinInAction/제네릭스.md#목차)
-9. [DSL(Domain-Specific Language)](https://github.com/dailyzett/study/TIL/blob/main/common/kotlinInAction/DSL.md#목차)
+1. [코틀린 기초](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/코틀린_기초.md#목차)
+2. [함수 정의와 호출](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/함수정의와_호출.md#목차)
+3. [클래스, 객체, 인터페이스](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/코틀린_클래스.md#목차)
+4. [람다 프로그래밍](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/람다로_프로그래밍.md#목차)
+5. [코틀린 타입 시스템](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/코틀린_타입_시스템.md#목차)
+6. [연산자 오버로딩, 기타관례](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/연산자_오버로딩과_기타_관례.md#목차)
+7. [고차 함수: 파라미터와 반환 값으로 람다 사용](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/고차_함수_파라미터와_반환_값으로_람다_사용.md#목차)
+8. [제네릭스](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/제네릭스.md#목차)
+9. [DSL(Domain-Specific Language)](https://github.com/dailyzett/study/blob/main/TIL/common/kotlinInAction/DSL.md#목차)
 
 # 스프링
 
