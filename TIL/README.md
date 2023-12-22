@@ -242,7 +242,7 @@
     4. [String a = "hello" vs String b = new String("hello")](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/Interview4.md)
     5. [Static Nested Class vs None Static Nested Class](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/versusNestedClass.md)
     6. [HashMap vs HashTable vs ConcurrentHashMap](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/versusMaps.md)
-    7. [동기/비동기 vs 블로킹/논블로킹](https://github.com/dailyzett/TIL/blob/main/common/JavaBasic/synchronousAndBlocking.md)
+    7. [동기/비동기 vs 블로킹/논블로킹](https://github.com/dailyzett/study/blob/main/TIL/common/JavaBasic/synchronousAndBlocking.md)
 
 # 컴퓨터 과학
 
