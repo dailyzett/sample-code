@@ -9,13 +9,13 @@ class Member (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    val id: Long = 0L,
+    val id: Int = 0,
 
     @Column(name = "name", nullable = false)
     val name: String,
 
     @Column(name = "score", nullable = false)
-    val score: Int = 0,
+    var score: Int = 0,
 
     @Column(name = "created_dt", nullable = false)
     val createdDt: LocalDateTime = LocalDateTime.now(),
