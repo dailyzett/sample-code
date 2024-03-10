@@ -1,5 +1,6 @@
 package org.example.redisexample.domain.entity
 
+import io.netty.channel.local.LocalAddress
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
@@ -15,11 +16,16 @@ class Member (
     val name: String,
 
     @Column(name = "score", nullable = false)
-    var score: Int = 0,
+    private var score: Int = 0,
 
     @Column(name = "created_dt", nullable = false)
     val createdDt: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "updated_dt")
-    val updatedDt: LocalDateTime? = null
-)
+    private var updatedDt: LocalDateTime? = null
+) {
+    fun updatedScore(inputScore: Int) {
+        score += inputScore
+        updatedDt = LocalDateTime.now()
+    }
+}
