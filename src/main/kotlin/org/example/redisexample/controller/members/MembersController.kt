@@ -2,8 +2,10 @@ package org.example.redisexample.controller.members
 
 import org.example.redisexample.domain.req.MemberReq
 import org.example.redisexample.service.MembersRegistrationService
+import org.example.redisexample.service.RankReaderService
 import org.example.redisexample.service.ScoresModifyService
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 class MembersController(
     private val membersRegistrationService: MembersRegistrationService,
     private val scoresModifyService: ScoresModifyService,
+    private val rankReaderService: RankReaderService,
 ) {
 
     @PostMapping
@@ -28,5 +31,10 @@ class MembersController(
     fun updateUserScore(@RequestParam score: Int): ResponseEntity<String> {
         val membersId = scoresModifyService.plusScoreByMember(score)
         return ResponseEntity.ok("멤버 PK: $membersId 추가된 점수: $score")
+    }
+
+    @GetMapping("/rank")
+    fun memberRankDetails(@RequestParam memberName: String): Set<String> {
+        return rankReaderService.findRelativeLeaderBoardRank(memberName) ?: setOf()
     }
 }
