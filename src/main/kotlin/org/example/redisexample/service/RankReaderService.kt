@@ -1,9 +1,11 @@
 package org.example.redisexample.service
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import org.example.redisexample.domain.res.MembersRankRes
 import org.example.redisexample.repository.MemberRepository
 import org.example.redisexample.util.DailyScoreKeyGenerator
 import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.data.redis.core.ZSetOperations
 import org.springframework.stereotype.Service
 import kotlin.math.min
 
@@ -14,7 +16,8 @@ class RankReaderService(
 ) {
 
     private val log = KotlinLogging.logger {}
-    fun findRelativeLeaderBoardRank(memberName: String): Set<String>? {
+
+    fun findRelativeLeaderBoardRank(memberName: String): MembersRankRes {
         val searchedMember = memberRepository.findMemberByName(memberName)
 
         val zSetOperations = redisTemplate.opsForZSet()
@@ -22,7 +25,6 @@ class RankReaderService(
         val memberRank = zSetOperations.reverseRank(key, searchedMember.id)?.toInt() ?: 0
         val totalMembers = zSetOperations.zCard(key)?.toInt() ?: 0
 
-        log.info { "key: $key memberId: ${searchedMember.id}" }
         log.info { "member rank: $memberRank totalMember: $totalMembers" }
         val startIndex = when {
             memberRank < 2 -> 0
@@ -31,7 +33,15 @@ class RankReaderService(
         }
 
         val endIndex = min(startIndex + 4, totalMembers - 1)
-        log.info { "startIndex: $startIndex endIndex: $endIndex" }
-        return zSetOperations.reverseRange(key, startIndex.toLong(), endIndex.toLong())
+
+        val leaderBoardInfo = zSetOperations.reverseRangeWithScores(key, startIndex.toLong(), endIndex.toLong())
+        val nameList = findMemberNameWithOrder(leaderBoardInfo)
+        return MembersRankRes.of(leaderBoardInfo, nameList)
+    }
+
+    private fun findMemberNameWithOrder(infoList: Set<ZSetOperations.TypedTuple<String>>?): List<String> {
+        val convertedIds = infoList?.map { it.value?.toInt() }?.toList() ?: listOf()
+        val unOrderedMembers = memberRepository.findAllById(convertedIds)
+        return convertedIds.mapNotNull { id -> unOrderedMembers.find { it.id == id }?.name }
     }
 }

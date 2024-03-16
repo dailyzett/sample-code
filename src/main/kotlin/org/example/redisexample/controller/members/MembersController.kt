@@ -1,6 +1,7 @@
 package org.example.redisexample.controller.members
 
 import org.example.redisexample.domain.req.MemberReq
+import org.example.redisexample.domain.res.MembersRankRes
 import org.example.redisexample.service.MembersRegistrationService
 import org.example.redisexample.service.RankReaderService
 import org.example.redisexample.service.ScoresModifyService
@@ -34,7 +35,8 @@ class MembersController(
     }
 
     @GetMapping("/rank")
-    fun memberRankDetails(@RequestParam memberName: String): Set<String> {
-        return rankReaderService.findRelativeLeaderBoardRank(memberName) ?: setOf()
+    fun memberRankDetails(@RequestParam memberName: String): ResponseEntity<MembersRankRes> {
+        val membersRankRes = rankReaderService.findRelativeLeaderBoardRank(memberName)
+        return ResponseEntity.ok(membersRankRes)
     }
 }
