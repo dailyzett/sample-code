@@ -1,7 +1,7 @@
 package org.example.redisexample.util
 
-object DailyScoreKeyGenerator {
-    fun generateKey(): String {
+object KeyGenerator {
+    fun generateDailyScoreKey(): String {
         return "daily-score:${getCurrentDate()}"
     }
 }

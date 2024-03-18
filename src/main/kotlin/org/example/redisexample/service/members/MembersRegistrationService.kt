@@ -1,4 +1,4 @@
-package org.example.redisexample.service
+package org.example.redisexample.service.members
 
 import org.example.redisexample.domain.entity.Member
 import org.example.redisexample.repository.MemberRepository

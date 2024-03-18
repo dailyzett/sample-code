@@ -1,9 +1,9 @@
-package org.example.redisexample.service
+package org.example.redisexample.service.members
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.example.redisexample.domain.res.MembersRankRes
 import org.example.redisexample.repository.MemberRepository
-import org.example.redisexample.util.DailyScoreKeyGenerator
+import org.example.redisexample.util.KeyGenerator
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.core.ZSetOperations
 import org.springframework.stereotype.Service
@@ -21,7 +21,7 @@ class RankReaderService(
         val searchedMember = memberRepository.findMemberByName(memberName)
 
         val zSetOperations = redisTemplate.opsForZSet()
-        val key = DailyScoreKeyGenerator.generateKey()
+        val key = KeyGenerator.generateDailyScoreKey()
         val memberRank = zSetOperations.reverseRank(key, searchedMember.id)?.toInt() ?: 0
         val totalMembers = zSetOperations.zCard(key)?.toInt() ?: 0
 

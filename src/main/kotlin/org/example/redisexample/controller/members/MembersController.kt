@@ -2,17 +2,11 @@ package org.example.redisexample.controller.members
 
 import org.example.redisexample.domain.req.MemberReq
 import org.example.redisexample.domain.res.MembersRankRes
-import org.example.redisexample.service.MembersRegistrationService
-import org.example.redisexample.service.RankReaderService
-import org.example.redisexample.service.ScoresModifyService
+import org.example.redisexample.service.members.MembersRegistrationService
+import org.example.redisexample.service.members.RankReaderService
+import org.example.redisexample.service.members.ScoresModifyService
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/members")
