@@ -1,7 +1,9 @@
 package org.example.redisexample.controller.members
 
+import org.example.redisexample.domain.entity.Member
 import org.example.redisexample.domain.req.MemberReq
 import org.example.redisexample.domain.res.MembersRankRes
+import org.example.redisexample.service.members.MembersReaderService
 import org.example.redisexample.service.members.MembersRegistrationService
 import org.example.redisexample.service.members.RankReaderService
 import org.example.redisexample.service.members.ScoresModifyService
@@ -14,6 +16,7 @@ class MembersController(
     private val membersRegistrationService: MembersRegistrationService,
     private val scoresModifyService: ScoresModifyService,
     private val rankReaderService: RankReaderService,
+    private val membersReaderService: MembersReaderService,
 ) {
 
     @PostMapping
@@ -32,5 +35,11 @@ class MembersController(
     fun memberRankDetails(@RequestParam memberName: String): ResponseEntity<MembersRankRes> {
         val membersRankRes = rankReaderService.findRelativeLeaderBoardRank(memberName)
         return ResponseEntity.ok(membersRankRes)
+    }
+
+    @GetMapping("/random")
+    fun randomMemberList(): ResponseEntity<List<Member>> {
+        val res = membersReaderService.findRandomTwoMembers()
+        return ResponseEntity.ok(res)
     }
 }

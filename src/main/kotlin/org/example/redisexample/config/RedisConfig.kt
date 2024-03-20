@@ -1,5 +1,6 @@
 package org.example.redisexample.config
 
+import org.example.redisexample.domain.entity.Member
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory
@@ -20,6 +21,14 @@ class RedisConfig {
         template.connectionFactory = connectionFactory
         template.keySerializer = StringRedisSerializer()
         template.valueSerializer = GenericToStringSerializer(Any::class.java)
+        return template
+    }
+
+    @Bean
+    fun redisTemplateMembers(connectionFactory: LettuceConnectionFactory): RedisTemplate<String, Member> {
+        val template = RedisTemplate<String, Member>()
+        template.connectionFactory = connectionFactory
+        template.keySerializer = StringRedisSerializer()
         return template
     }
 }
