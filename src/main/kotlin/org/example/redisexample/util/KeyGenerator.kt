@@ -12,4 +12,8 @@ object KeyGenerator {
     fun generateUserHashKey(): String {
         return "user:hash"
     }
+
+    fun generateDauKey(): String {
+        return "dau:${getCurrentDate()}"
+    }
 }
