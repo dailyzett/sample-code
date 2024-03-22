@@ -42,4 +42,9 @@ class MembersController(
         val res = membersReaderService.findRandomTwoMembers()
         return ResponseEntity.ok(res)
     }
+
+    @GetMapping("/attendance")
+    fun randomAttendance(@RequestParam id: Int) {
+        //TODO()
+    }
 }
