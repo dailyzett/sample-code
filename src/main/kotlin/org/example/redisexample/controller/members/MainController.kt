@@ -37,7 +37,7 @@ class MainController(
         @RequestParam periodDay: Int
     ): ResponseEntity<List<Int>> {
         log.info { "startDate: $startDate periodDay: $periodDay" }
-        val res = attendanceService.findContinuousCheckedInWeeks(startDate, periodDay)
+        val res = attendanceService.findContinuousCheckedInPeriod(startDate, periodDay)
         return ResponseEntity.ok(res)
     }
 }

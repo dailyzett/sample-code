@@ -21,11 +21,12 @@ class AttendanceService(
     }
 
     /**
-     * 일주일동안 특정 기간 연속 출석 체크한 userId 를 찾습니다. 특정 기간의 시작점은 startDate 로부터 startDate + periodDay 까지 입니다.
+     * 특정 기간 연속 출석 체크한 userId 를 찾습니다. 특정 기간의 시작점은 startDate 로부터 startDate + periodDay 까지 입니다.
      * @param startDate 시작일
      * @param periodDay 기간(일 단위)
+     * @return 특정 기간동안 연속 출석 체크한 userId 를 반환합니다.
      */
-    fun findContinuousCheckedInWeeks(startDate: LocalDate, periodDay: Int): List<Int> {
+    fun findContinuousCheckedInPeriod(startDate: LocalDate, periodDay: Int): List<Int> {
         val attendanceDates =
             List(periodDay) { "uv:${changeDateToString(startDate.plusDays(it.toLong()))}".toByteArray() }
 
