@@ -16,4 +16,8 @@ object KeyGenerator {
     fun generateDauKey(): String {
         return "dau:${getCurrentDate()}"
     }
+
+    fun generateUserAttendanceKey(daysBack: String): String {
+        return "uv:${daysBack}"
+    }
 }
