@@ -25,4 +25,10 @@ class MessageController(
         val subscribeChannels = messageService.publishObject(channel, messageReq)
         return ResponseEntity.ok("구독 채널 수: $subscribeChannels")
     }
+
+    @GetMapping("/publish/event/{key}")
+    fun publishEvent(@PathVariable key: String, @RequestParam text: String): ResponseEntity<Long> {
+        val eventsLength = messageService.publishEvent(key, text)
+        return ResponseEntity.ok(eventsLength)
+    }
 }

@@ -20,4 +20,8 @@ object KeyGenerator {
     fun generateUserAttendanceKey(daysBack: String): String {
         return "uv:${daysBack}"
     }
+
+    fun generateQueueKey(key: String): String {
+        return "queue:$key"
+    }
 }
