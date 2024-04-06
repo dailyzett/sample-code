@@ -1,4 +1,4 @@
-package org.example.redisexample.controller.message
+package org.example.redisexample.config
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.data.redis.connection.stream.MapRecord
