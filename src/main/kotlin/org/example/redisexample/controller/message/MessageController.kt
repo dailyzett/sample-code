@@ -33,7 +33,7 @@ class MessageController(
     }
 
     @GetMapping("/appending/{key}")
-    fun appendingMessage(@PathVariable key: String) {
-        messageService.appendingMessage(key)
+    fun appendingMessage(@PathVariable key: String, @RequestBody req: MessageReq) {
+        messageService.appendingMessage(key, req)
     }
 }

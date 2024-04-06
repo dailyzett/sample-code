@@ -44,9 +44,8 @@ class MessageService(
         }
     }
 
-    fun appendingMessage(key: String) {
-        val exampleMessage = MessageReq("testToken", "IOS", "010-0000-0000")
-        val streamRecord = StreamRecords.string(exampleMessage.toMap()).withStreamKey(key)
+    fun appendingMessage(key: String, req: MessageReq) {
+        val streamRecord = StreamRecords.string(req.toMap()).withStreamKey(key)
         stringRedisTemplate.opsForStream<String, String>().add(streamRecord)
     }
 }
