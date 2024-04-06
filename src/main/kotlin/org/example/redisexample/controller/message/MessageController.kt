@@ -31,4 +31,9 @@ class MessageController(
         val eventsLength = messageService.publishEvent(key, text)
         return ResponseEntity.ok(eventsLength)
     }
+
+    @GetMapping("/appending/{key}")
+    fun appendingMessage(@PathVariable key: String) {
+        messageService.appendingMessage(key)
+    }
 }

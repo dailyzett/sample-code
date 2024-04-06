@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.example.redisexample.domain.req.MessageReq
 import org.example.redisexample.util.KeyGenerator
+import org.example.redisexample.util.toMap
+import org.springframework.data.redis.connection.stream.StreamRecords
 import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
@@ -40,5 +42,11 @@ class MessageService(
             val value = stringRedisTemplate.opsForList().leftPop(key, 10, TimeUnit.NANOSECONDS)
             value?.let { log.info { "받은 문자열: $it" } }
         }
+    }
+
+    fun appendingMessage(key: String) {
+        val exampleMessage = MessageReq("testToken", "IOS", "010-0000-0000")
+        val streamRecord = StreamRecords.string(exampleMessage.toMap()).withStreamKey(key)
+        stringRedisTemplate.opsForStream<String, String>().add(streamRecord)
     }
 }
