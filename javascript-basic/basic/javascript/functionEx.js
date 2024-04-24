@@ -52,3 +52,18 @@ let resReduce = [1, 2, 3].reduce(function (acc, cur) {
 console.log(res);
 console.log(resMap);
 console.log(resReduce);
+
+let x = 1;
+let foo = function () {
+    let x = 10;
+    bar();
+};
+
+let bar = function () {
+    console.log(x);
+};
+
+foo();
+bar();
+
+
