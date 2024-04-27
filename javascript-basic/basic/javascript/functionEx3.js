@@ -19,6 +19,3 @@ function makeCounter(aux) {
 const increaser = makeCounter(auxs.increase)
 console.log(increaser());
 console.log(increaser());
-
-
-
