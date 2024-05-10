@@ -1,18 +1,13 @@
-function Person(name) {
-    this.name = name;
-}
+(function () {
+    'use strict'
 
-const me = new Person('Lee');
-
-const parent = {
-    constructor: Person,
-    sayHello: function () {
-        console.log(`Hello ${this.name}`);
+    function Foo() {
+        if (!new.target) {
+            return new Foo
+        }
+        console.log(this);
     }
-};
 
-Person.prototype = parent;
-Object.setPrototypeOf(me, parent);
-me.sayHello();
+    Foo();
+}());
 
-console.log(me.constructor === Person)
