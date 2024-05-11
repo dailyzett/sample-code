@@ -5,6 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-<script src="javascript/printTime.js"></script>
+<input id="user" type="text" value="ungmo2"/>
 </body>
+<script>
+    const $input = document.getElementById('user');
+
+    const inputValue = $input.getAttribute('type');
+    console.log(inputValue);
+
+    $input.setAttribute('value', 'hello world');
+</script>
 </html>

@@ -1,5 +1,8 @@
-const arr = [1, 2, 3];
+const map = new Map([['key1', 'key2'], ['key3', 'key4']]);
+const {size} = map;
 
-[one, two, three] = [1, 2, 3];
+map.set('newKey', 'newValue');
 
-console.log(two);
+for (const key of map.keys()) {
+    console.log(key);
+}
