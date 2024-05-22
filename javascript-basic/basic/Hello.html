@@ -5,14 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-<input id="user" type="text" value="ungmo2"/>
+<script>
+    async function wait() {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        return 10;
+    }
+
+    function f() {
+        wait().then(result => console.log(result));
+    }
+
+    f();
+</script>
 </body>
 <script>
-    const $input = document.getElementById('user');
 
-    const inputValue = $input.getAttribute('type');
-    console.log(inputValue);
-
-    $input.setAttribute('value', 'hello world');
 </script>
 </html>
