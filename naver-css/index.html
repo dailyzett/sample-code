@@ -1,27 +1,63 @@
-<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatiable" content="IE=edge">
-    <meta name="viewport" content="width=device-width" initial-scale="1.0" >
-    <title>Naver</title>
-</head>
-<style>
-    #header-top {
-        text-align: center;
-    }
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NAVER</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
 
-    #header-top-menu, #header-top-pay, #header-top-talk, #header-top-noti, #header-top-shopping {
-        display: inline-block;
-    }
-</style>
+        #wrap {
+            text-align: center;
+        }
+
+        #wrap-center {
+            display: inline-block;
+            width: 1280px;
+            background-color: aqua;
+        }
+
+        #main {
+            height: 5000px;
+        }
+
+        #header {
+            text-align: left;
+        }
+
+        #header-hamburger {
+            margin-top: 5px;
+            padding: 8px;
+            display: inline-block;
+        }
+
+        #header-hamburger > div {
+            background-image: url("/sp_main.png");
+            background-position: -326px -161px;
+            background-repeat: no-repeat;
+            background-size: 451px 441px;
+            width: 32px;
+            height: 32px;
+        }
+    </style>
+</head>
 <body>
-    <div id="header-top">
-        <div id="header-top-menu">TopAsideArea.menu_area</div>
-        <div id="header-top-pay">Top Pay Area</div>
-        <div id="header-top-talk">Top Talk Area</div>
-        <div id="header-top-noti">Top Noti Area</div>
-        <div id="header-top-shopping">Top shopping Area</div>
+<div id="wrap">
+    <div id="wrap-center">
+        <div id="header">
+            <div id="header-hamburger">
+                <div></div>
+            </div>
+        </div>
+        <div id="search"></div>
+        <div id="nav"></div>
+        <div id="main"></div>
     </div>
+</div>
 </body>
 </html>
