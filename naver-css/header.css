@@ -69,6 +69,11 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 10.5px;
+    line-height: 10.5px;
+}
+
 html, body, form {
     margin: 0;
     padding: 0;

@@ -1,6 +1,5 @@
 #search > form {
-    width: 706px;
-    height: 58px;
+    width: 708px;
     display: inline-flex;
     border: 1px solid #03c75a;
     border-radius: 33px;
@@ -8,11 +7,14 @@
     text-align: left;
 }
 
+#search > form:hover {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .12);
+}
+
 #search > form a {
     width: 67px;
     height: 58px;
     padding: 17px 16px 17px 27px;
-    margin-right: 12px;
 }
 
 #search > form svg {
@@ -24,13 +26,21 @@
     display: inline-flex;
     color: var(--color_search);
     width: 480px;
-    height: 54px;
+    height: 58px;
     padding: 17px 0;
     font-size: 2rem;
     line-height: 24px;
-    font-weight: bold;
     border: none;
     outline: none;
+}
+
+#search-input::placeholder {
+    font-weight: bold;
+    color: white;
+}
+
+#search-input:focus::placeholder {
+    color: rgb(230, 230, 230);
 }
 
 #search-svg {
@@ -38,7 +48,6 @@
     justify-content: center;
     align-items: center;
     width: 67px;
-    margin-right: 12px;
     height: 100%;
     padding-left: 10px;
 }
@@ -71,6 +80,10 @@
     background-repeat: no-repeat;
     width: 24px;
     height: 14px;
+}
+
+#search-keyboard:hover::before {
+    filter: brightness(0.7);
 }
 
 #search-recent::before {
