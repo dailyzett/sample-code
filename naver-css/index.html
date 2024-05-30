@@ -62,7 +62,191 @@
                 </div>
             </form>
         </div>
-        <div id="nav"></div>
+        <style>
+            ul {
+                margin: 0;
+                padding: 0;
+            }
+            #nav {
+                width: 676px;
+                margin: 3px auto 0;
+            }
+            #nav > ul {
+                display: flex;
+                list-style-type: none;
+            }
+
+            #nav a {
+                text-decoration: none;
+            }
+
+            #nav a:visited {
+                color:black;
+            }
+
+            #nav li {
+                width: 64px;
+            }
+
+            #nav a div  {
+                width: 44px;
+                height: 44px;
+                position: relative;
+                display: block;
+                margin: 5px auto;
+            }
+
+            #nav a div::before {
+                content: "";
+                position: absolute;
+                top: -1px;
+                left: -3px;
+                background-image: url("/sp_main.png");
+                background-size: 451px 441px;
+                background-position: -193px 0px;
+                background-repeat: no-repeat;
+                width: 50px;
+                height: 50px;
+            }
+
+            #nav a div::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                background-image: url("/sp_main.png");
+                background-size: 451px 441px;
+                background-repeat: no-repeat;
+                width: 40px;
+                height: 40px;
+            }
+
+            #nav li:nth-of-type(1) {
+                margin-left: 0;
+            }
+            #nav li:nth-of-type(2) {
+
+            }
+            #nav li:nth-of-type(1) a div::after{
+                background-position: -244px -41px;
+            }
+
+            #nav li:nth-of-type(2) a div::after{
+                background-position: -86px -184px;
+            }
+
+            #nav li:nth-of-type(3) a div::after{
+                background-position: -45px -184px
+            }
+
+            #nav li:nth-of-type(4) a div::after{
+                background-position: -164px -229px
+            }
+
+            #nav li:nth-of-type(5) a div::after{
+                background-position: -82px -229px
+            }
+
+            #nav li:nth-of-type(6) a div::after{
+                background-position: -205px -229px
+            }
+
+            #nav li:nth-of-type(7) a div::after{
+                background-position: -123px -229px
+            }
+
+            #nav li:nth-of-type(8) a div::after{
+                background-position: -244px -82px
+            }
+
+            #nav li:nth-of-type(9) a div::after{
+                background-position: -285px 0
+            }
+
+            #nav li:nth-of-type(10) a div::after{
+                background-position: -285px 0
+            }
+
+            #nav li:nth-of-type(11) a div::after{
+                background-position: 0 -229px
+            }
+
+            #nav a span {
+                width: 64px;
+            }
+        </style>
+        <div id="nav">
+            <ul>
+                <li>
+                    <a href="#">
+                        <div></div>
+                        <span>메일</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div></div>
+                        <span>카페</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div></div>
+                        <span>블로그</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div></div>
+                        <span>쇼핑</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div></div>
+                        <span>뉴스</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div></div>
+                        <span>증권</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div></div>
+                        <span>부동산</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div></div>
+                        <span>지도</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div></div>
+                        <span>웹툰</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div></div>
+                        <span>치지직</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div></div>
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div id="main"></div>
     </div>
 </div>
