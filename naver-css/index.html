@@ -1,14 +1,14 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>NAVER</title>
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
-    <link rel="stylesheet" type="text/css" href="./header.css">
-    <link rel="stylesheet" type="text/css" href="./search.css">
-    <link rel="stylesheet" type="text/css" href="./nav.css">
+    <link href="./favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="./header.css" rel="stylesheet" type="text/css">
+    <link href="./search.css" rel="stylesheet" type="text/css">
+    <link href="./nav.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="wrap">
@@ -20,7 +20,7 @@
             </button>
             <button id="header-pay">
                 <div></div>
-                <a href="https://order.pay.naver.com/home" class="link_pay" target="_blank"><span
+                <a class="link_pay" href="https://order.pay.naver.com/home" target="_blank"><span
                         class="blind">페이 바로가기</span></a>
             </button>
 
@@ -40,12 +40,12 @@
         <div id="search">
             <form action="">
                 <a href="#" id="search-svg">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.273 12.845 7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727v12.845z"></path>
                     </svg>
                 </a>
-                <label for="search-input" class="blind">검색창</label>
-                <input id="search-input" type="text" placeholder="검색어를 입력해 주세요." autocomplete="off">
+                <label class="blind" for="search-input">검색창</label>
+                <input autocomplete="off" id="search-input" placeholder="검색어를 입력해 주세요." type="text">
                 <div id="search-right">
                     <button id="search-keyboard">
                         <span class="blind">입력도구</span>
@@ -55,8 +55,8 @@
                     </button>
                     <button id="search-button" type="submit">
                         <span class="ico_btn_search_svg">
-                        <svg id="search-btn" viewBox="0 0 50 50"
-                             xmlns="http://www.w3.org/2000/svg" style="fill: #03c75a">
+                        <svg id="search-btn" style="fill: #03c75a"
+                             viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
                             <path d="M22.13.5c11.378 0 20.632 9.256 20.632 20.63 0 4.699-1.566 9.155-4.439 12.782l10.164 10.165a2.41 2.41 0 0 1-1.706 4.115 2.412 2.412 0 0 1-1.706-.705L33.31 35.719a2.41 2.41 0 0 1 0-3.41 15.71 15.71 0 0 0 4.628-11.178c0-8.718-7.09-15.808-15.807-15.808-8.718 0-15.808 7.09-15.808 15.808 0 7.15 4.817 13.43 11.714 15.273a2.41 2.41 0 0 1 1.705 2.954 2.41 2.41 0 0 1-2.95 1.705C7.788 38.658 1.5 30.46 1.5 21.131 1.5 9.756 10.756.5 22.13.5zm4.716 34.746a3.483 3.483 0 1 1 0 6.966 3.483 3.483 0 0 1 0-6.966z"></path> </svg> </span>
                         <span class="blind">검색</span>
                     </button>
@@ -147,11 +147,6 @@
                 width: 420px;
             }
 
-            #main-newstand {
-                height: 426px;
-                margin-top: 14px;
-            }
-
             section[id^=main] {
                 box-shadow: 0 0 0 1px #e3e5e8, 0 1px 2px 0 rgba(0, 0, 0, .04);
                 border-radius: 8px;
@@ -161,6 +156,79 @@
             #main-login {
                 height: 164px;
                 margin-top: -2px;
+                padding: 21px 20px 18px;
+                display: flex;
+                flex-flow: column;
+            }
+
+            #main-login > div:first-of-type {
+                line-height: 20px;
+            }
+
+            #main-login-button {
+                margin-top: 13px;
+                padding: 17px 0;
+                border: 1px solid rgba(0, 0, 0, .06);
+                border-radius: 4px;
+                background-color: #03c75a;
+                height: 56px;
+                font-size: 14.7px;
+                color: white;
+                text-decoration: none;
+                text-decoration-color: rgb(255, 255, 255);
+                text-decoration-style: solid;
+            }
+
+            #main-login-button > i {
+                background-image: url(./sp_main.png);
+                background-size: 451px 441px;
+                background-position: -142px -270px;
+                background-repeat: no-repeat;
+                width: 72px;
+                height: 14px;
+                display: inline-block;
+                margin: 3px 8px 0 0;
+                vertical-align: -1.3px;
+            }
+
+            #main-login > div:last-of-type {
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                font-size: 1.3rem;
+                width: 380px;
+                margin-top: 15px;
+                color: var(--color_caption2);
+            }
+
+            #main-login > div:last-of-type a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            #main-login > div:last-of-type a:nth-of-type(1),
+            #main-login > div:last-of-type a:nth-of-type(3) {
+                position: relative;
+                top: 2px;
+            }
+
+            #main-login > div:last-of-type a:nth-of-type(2) {
+                position: relative;
+                top: -0.5px;
+            }
+
+            #main-login > div:last-of-type a:hover {
+                text-decoration: underline;
+            }
+
+            #main-login > div:last-of-type > a:nth-of-type(2)::before,
+            #main-login > div:last-of-type > a:nth-of-type(2)::after {
+                content: '';
+                background-color: var(--color_dot_divider);
+                margin: 4px 12px 0;
+                display: inline-block;
+                width: 1px;
+                height: 12px;
             }
 
             #main-weather, #main-stock {
@@ -187,15 +255,92 @@
             #main-stock {
                 height: 236px;
             }
+
+            #main-newstand {
+                height: 426px;
+                margin-top: 14px;
+            }
+
+            #main-newstand a {
+                text-decoration: none;
+            }
+
+            #main-newstand a:hover {
+                text-decoration: underline;
+            }
         </style>
         <main id="main">
             <div id="main-left">
                 <aside></aside>
-                <section id="main-newstand"></section>
+                <section id="main-newstand">
+                    <div>
+                        <header>
+                            <a href="#">뉴스스탠드</a>
+                            <a href="#">언론사편</a>
+                            <a href="#">엔터</a>
+                            <a href="#">스포츠</a>
+                            <a href="#">경제</a>
+                            <a href="#">쇼핑투데이</a>
+                        </header>
+                        <div id="main-newstand-gray">
+                            <div>
+                                <a href="#">전체언론사</a>
+                                <a href="#">연합뉴스</a>
+                                <a href="#">[속보]네이버 사이트 학습 중 테스트 테스트 테스트 테스트 테스트 테스트 테스트</a>
+                            </div>
+                            <div>
+                                <a href="#">뉴스스탠드</a>
+                                <a href="#">뉴스홈</a>
+                            </div>
+                        </div>
+                        <div id="main-newstand-grid">
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                            <div>언론사</div>
+                        </div>
+                    </div>
+                    <footer>
+                        <button><span class="blind">이전</span></button>
+                        <div>언론사 더보기1페이지전체/4</div>
+                        <button><span class="blind">다음</span></button>
+                        <button><span class="blind">목록보기</span></button>
+                        <button><span class="blind">격자보기</span></button>
+                    </footer>
+                </section>
                 <section id="main-shopping"></section>
             </div>
             <div id="main-right">
-                <section id="main-login"></section>
+                <section id="main-login">
+                    <div>네이버를 더 안전하고 편리하게 이용하세요</div>
+                    <a href="#" id="main-login-button"><i></i>로그인</a>
+                    <div>
+                        <a href="#">아이디 찾기</a>
+                        <a href="#">비밀번호 찾기</a>
+                        <a href="#">회원가입</a>
+                    </div>
+                </section>
                 <aside id="main-right-ad"></aside>
                 <section id="main-weather">
                     <header>날씨</header>
