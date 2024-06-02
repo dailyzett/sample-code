@@ -554,10 +554,6 @@
                 position: relative;
             }
 
-            #main-shopping-gray {
-                height: 376px;
-            }
-
             #main-shopping-today-pick {
                 display: flex;
                 margin: 0 20px 18px;
@@ -661,6 +657,71 @@
                 border-left: 0;
                 border-radius: 0 4px 4px 0;
             }
+
+            #main-shopping-grid {
+                height: 376px;
+                padding: 0 20px 1px;
+                display: grid;
+                grid-template-rows: 88px 86px 185px;
+                grid-template-columns:  248px 1fr 1fr 1fr 1fr 1fr;
+                column-gap: 8px;
+            }
+
+            .item {
+                border: 1px solid rgba(0, 0, 0, .05);
+            }
+
+            .item:nth-child(1) {
+                grid-row: 1 / span 1;
+                padding: 9px 11px 4px;
+                border-radius: 4px;
+                background: rgba(245, 248, 251, .6);
+            }
+
+            .item:nth-child(2),
+            .item:nth-child(3),
+            .item:nth-child(4),
+            .item:nth-child(5),
+            .item:nth-child(6) {
+                grid-row: 1 / span 2;
+                padding: 9px;
+                border-radius: 4px;
+                background: rgba(245, 248, 251, .6);
+            }
+
+            .item:nth-child(7) {
+                margin-top: 12px;
+                padding: 9px;
+                border-radius: 4px;
+                background: rgba(245, 248, 251, .6);
+            }
+
+            .item:nth-child(9),
+            .item:nth-child(10),
+            .item:nth-child(11),
+            .item:nth-child(12),
+            .item:nth-child(13) {
+                margin-top: 12px;
+                background: rgba(245, 248, 251, .6);
+            }
+
+            .item:nth-child(8) {
+                border: none;
+                margin-top: 12px;
+            }
+
+            .item:nth-child(8) > div:nth-of-type(1) {
+                border: 1px solid rgba(0, 0, 0, .05);
+                background: rgba(245, 248, 251, .6);
+                border-radius: 4px;
+                height: 146px;
+            }
+
+            .item:nth-child(8) > div:nth-of-type(2) {
+                border: none;
+                margin-top: 8px;
+                height: 19px;
+            }
         </style>
         <main id="main">
             <div id="main-left">
@@ -738,14 +799,24 @@
                                 <button></button>
                             </div>
                         </header>
-                        <div id="main-shopping-gray">
-                            <div class="left">
-                                <div id="main-shopping-animation">
-                                    <a href="#">[속보]네이버 사이트 학습 중 테스트 테스트 테스트 테스트 테스트 테스트 테스트</a>
-                                </div>
+                        <div id="main-shopping-grid">
+                            <div class="item">1</div>
+                            <div class="item">2</div>
+                            <div class="item">3</div>
+                            <div class="item">4</div>
+                            <div class="item">5</div>
+                            <div class="item">6</div>
+                            <div class="item">7</div>
+                            <div class="item">
+                                <div>8</div>
+                                <div>신어보면 알아! 하루종일 편할걸</div>
                             </div>
+                            <div class="item">9</div>
+                            <div class="item">10</div>
+                            <div class="item">11</div>
+                            <div class="item">12</div>
+                            <div class="item">13</div>
                         </div>
-                        <div id="main-shopping-grid"></div>
                         <div id="main-shopping-today-pick"><span>오늘의 혜택</span>
                             <a href="#">9,900원 무료배송! 할인에 무료 배송 혜택까지!</a>
                         </div>
