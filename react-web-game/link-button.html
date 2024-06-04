@@ -12,7 +12,7 @@
 <script type="text/babel">
     'use strict'
 
-    class LikeButton extends React.Component {
+    /*class LikeButton extends React.Component {
         constructor(props) {
             super(props);
             this.state = {liked: false}
@@ -23,11 +23,11 @@
                 return 'You Like This'
             }
 
-            /*return React.createElement('button', {
+            /!*return React.createElement('button', {
                 onClick: () => {
                     this.setState({liked: true})
                 }
-            }, 'Like');*/
+            }, 'Like');*!/
 
             return (
                 <button onClick={() => this.setState({liked: true})}>
@@ -35,14 +35,25 @@
                 </button>
             );
         }
+    }*/
+
+    function LikeButton() {
+        const [liked, setLiked] = React.useState(true)
+        const [count, setCount] = React.useState(0)
+
+        function handleCount() {
+            setCount(count + 1);
+        }
+
+        return (
+            <button onClick={handleCount}>Like + {count}</button>
+        )
     }
 </script>
 <script type="text/babel">
     // ReactDOM.render(<LikeButton/>, document.querySelector('#root'));
     ReactDOM.createRoot(document.querySelector('#root')).render(
         <div>
-            <LikeButton/>
-            <LikeButton/>
             <LikeButton/>
         </div>
     );
