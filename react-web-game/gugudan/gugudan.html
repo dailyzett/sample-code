@@ -15,6 +15,7 @@
         const [numbers2, setNumber2] = React.useState(Math.floor(Math.random() * 9) + 1);
         const [isCorrect, setIsCorrect] = React.useState(false);
         const [answer, setAnswer] = React.useState("");
+        const [ret, setRet] = React.useState(0);
 
         function getRandomNum(array) {
             const randomIndex = Math.floor(Math.random() * array.length)
@@ -28,10 +29,13 @@
         function handleClick() {
             if (numbers1 * numbers2 === Number(answer)) {
                 setIsCorrect(true);
-                setNumber1(Math.floor(Math.random() * 9) + 1)
-                setNumber2(Math.floor(Math.random() * 9) + 1)
+                setNumber1(Math.floor(Math.random() * 9) + 1);
+                setNumber2(Math.floor(Math.random() * 9) + 1);
+                setAnswer('');
+                setRet(numbers1 * numbers2);
             } else {
                 setIsCorrect(false);
+                setAnswer('')
             }
         }
 
@@ -42,7 +46,9 @@
                     <input type="text" value={answer} onChange={handleChange}/>
                 </label>
                 <button onClick={handleClick}>입력</button>
-                <div>{isCorrect ? '맞았습니다' : '틀렸습니다'}</div>
+                <div>
+                    {isCorrect ? `맞았습니다. 정답: ${ret}` : '틀렸습니다'}
+                </div>
             </>
         );
     }
