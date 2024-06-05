@@ -11,6 +11,7 @@
 <div id="root"></div>
 <script type="text/babel">
     function Gugudan() {
+        const [initPages, setInitPages] = React.useState(true);
         const [numbers1, setNumber1] = React.useState(Math.floor(Math.random() * 9) + 1);
         const [numbers2, setNumber2] = React.useState(Math.floor(Math.random() * 9) + 1);
         const [isCorrect, setIsCorrect] = React.useState(false);
@@ -33,9 +34,11 @@
                 setNumber2(Math.floor(Math.random() * 9) + 1);
                 setAnswer('');
                 setRet(numbers1 * numbers2);
+                setInitPages(false)
             } else {
                 setIsCorrect(false);
                 setAnswer('')
+                setInitPages(false)
             }
         }
 
@@ -47,7 +50,7 @@
                 </label>
                 <button onClick={handleClick}>입력</button>
                 <div>
-                    {isCorrect ? `맞았습니다. 정답: ${ret}` : '틀렸습니다'}
+                    {!initPages && (isCorrect ? `맞았습니다. 정답: ${ret}` : '틀렸습니다')}
                 </div>
             </>
         );

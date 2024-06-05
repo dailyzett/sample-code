@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plus Button</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    function PlusButton() {
+        const [count, setCount] = React.useState(0);
+
+        function handleClick() {
+            setCount(count + 1);
+        }
+
+        return (
+            <button onClick={handleClick}>PlusButton #{count}</button>
+        )
+    }
+</script>
+<script type="text/babel">
+    ReactDOM.createRoot(document.querySelector('#root')).render(
+        <div>
+            <PlusButton/>
+        </div>
+    );
+</script>
+</body>
+</html>
