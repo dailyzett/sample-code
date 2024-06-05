@@ -17,6 +17,7 @@
         const [isCorrect, setIsCorrect] = React.useState(false);
         const [answer, setAnswer] = React.useState("");
         const [ret, setRet] = React.useState(0);
+        const inputRef = React.useRef(null);
 
         function getRandomNum(array) {
             const randomIndex = Math.floor(Math.random() * array.length)
@@ -32,21 +33,21 @@
                 setIsCorrect(true);
                 setNumber1(Math.floor(Math.random() * 9) + 1);
                 setNumber2(Math.floor(Math.random() * 9) + 1);
-                setAnswer('');
                 setRet(numbers1 * numbers2);
-                setInitPages(false)
             } else {
                 setIsCorrect(false);
-                setAnswer('')
-                setInitPages(false)
             }
+            setAnswer('');
+            setAnswer('');
+            setInitPages(false);
+            inputRef.current.focus();
         }
 
         return (
             <>
                 <div>{numbers1} 곱하기 {numbers2} 는?</div>
                 <label>
-                    <input type="text" value={answer} onChange={handleChange}/>
+                    <input type="text" value={answer} onChange={handleChange} ref={inputRef}/>
                 </label>
                 <button onClick={handleClick}>입력</button>
                 <div>
