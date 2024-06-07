@@ -32,7 +32,7 @@ function WorldRelay() {
     return (
         <>
             <div>{result}</div>
-            <input value={next} onChange={handleChange} onKeyPress={handleKeyPress} ref={inputRef}/>
+            <input value={next} onChange={handleChange} onKeyDown={handleKeyPress} ref={inputRef}/>
             <button onClick={handleClick}>입력</button>
         </>
     )
