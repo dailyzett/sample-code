@@ -1,5 +1,5 @@
 const React = require('react');
-const {createRef, useState} = require("react");
+const {createRef, useState, memo} = require("react");
 
 function NumberBaseball() {
     const generateNumbers = () => {
@@ -17,7 +17,7 @@ function NumberBaseball() {
     const [ball, setBall] = useState(0);
     const [strike, setStrike] = useState(0);
     const [isOut, setIsOut] = useState(false);
-    const [life, setLife] = useState(10);
+    const [life, setLife] = useState(3);
 
     const checkNumbers = () => {
         const inputNumbers = value.split('').map(Number);
@@ -47,15 +47,20 @@ function NumberBaseball() {
         }]);
     }
 
+    function resetGame() {
+        setHistory([]);
+        setLife(10);
+        setStrike(0);
+        setBall(0);
+        setRandomNumbers(generateNumbers());
+    }
+
     function handleSubmit(e) {
-        if (value.length < 4) return;
         e.preventDefault();
+        if (value.length === 0) return;
+        if (value.length < 4) return;
         if (life === 0 || strike === 4) {
-            setHistory([]);
-            setLife(10);
-            setStrike(0);
-            setBall(0);
-            setRandomNumbers(generateNumbers);
+            resetGame();
         } else {
             checkNumbers();
             setLife(life - 1);
@@ -67,27 +72,41 @@ function NumberBaseball() {
         setValue(e.target.value);
     }
 
+    function handleClick() {
+        resetGame();
+    }
+
     return (
         <>
             <div>
                 <div>남은 기회: {life}</div>
                 <form onSubmit={handleSubmit}>
-                    <input value={value} onChange={handleChange}/>
+                    <input value={value} onChange={handleChange} maxLength={4}/>
                     <button>입력</button>
                 </form>
             </div>
             <div>
                 <ul>
                     {history.map((item, index) => (
-                        <li key={index}>{item.value}&nbsp;
-                            <b>스트라이크: {item.strike}</b> 볼: {item.ball} {item.isOut ? '아웃!' : ''}
-                        </li>
+                        <Try key={index} item={item}/>
                     ))}
                 </ul>
             </div>
             <div>{life === 0 || strike === 4 ? `정답: ${randomNumbers}` : ''}</div>
+            <div>
+                {life === 0 && <button onClick={handleClick}>다시 시작하기</button>}
+            </div>
         </>
     )
 }
+
+const Try = memo(({item, index}) => {
+    return (
+        <li key={index}>
+            {item.value}&nbsp;
+            <b>스트라이크: {item.strike}</b> 볼: {item.ball} {item.isOut ? '아웃!' : ''}
+        </li>
+    )
+});
 
 module.exports = NumberBaseball;
