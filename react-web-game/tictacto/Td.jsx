@@ -1,11 +1,19 @@
-const React = require('react')
+import React, {useCallback} from 'react';
+import {CHANGE_TURN, CLICK_CELL} from './TicTacTo';
 
-const Td = () => {
+const Td = ({rowIndex, cellIndex, dispatch, cellData}) => {
+    const onClickTd = useCallback(() => {
+        console.log(CLICK_CELL);
+        console.log(rowIndex, cellIndex);
+        dispatch({type: CLICK_CELL, row: rowIndex, cell: cellIndex});
+        dispatch({type: CHANGE_TURN});
+    }, [cellData]);
+
     return (
         <>
-            <td>{' '}</td>
+            <td onClick={onClickTd}>{cellData}</td>
         </>
     )
 }
 
-module.exports = Td
+export default Td;
