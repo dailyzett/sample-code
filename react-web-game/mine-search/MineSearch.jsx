@@ -75,7 +75,28 @@ const reducer = (state, action) => {
             const tableData = [...state.tableData];
             tableData[action.row] = [...state.tableData[action.row]];
             tableData[action.row][action.cell] = CODE.OPENED;
-            let aroune = [];
+            const checked = [];
+
+            const checkAround = (row, cell) => {
+                if (row < 0 || row >= tableData.length || cell < 0 || cell >= tableData[0].length) {
+                    return;
+                } // 상하좌우 없는칸은 안 열기
+                let around = [
+                    tableData[row][cell - 1], tableData[row][cell + 1],
+                ];
+                if (tableData[row - 1]) {
+                    around = around.concat([tableData[row - 1][cell - 1], tableData[row - 1][cell], tableData[row - 1][cell + 1]]);
+                }
+                if (tableData[row + 1]) {
+                    around = around.concat([tableData[row + 1][cell - 1], tableData[row + 1][cell], tableData[row + 1][cell + 1]]);
+                }
+
+                const count = around.filter(function (v) {
+                    return [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(v);
+                }).length;
+                tableData[row][cell] = count;
+            }
+            checkAround(action.row, action.cell);
             return {
                 ...state,
                 tableData,
