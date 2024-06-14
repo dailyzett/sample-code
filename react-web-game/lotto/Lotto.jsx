@@ -3,7 +3,6 @@ const {useState, useEffect, useRef, useMemo, useCallback} = require("react");
 const Ball = require('./Ball.jsx');
 
 function getWinNumbers() {
-    console.log("로또 뽑기 함수 가동!");
     const candidate = Array(45).fill(0).map((v, i) => i + 1);
     const shuffle = [];
 
