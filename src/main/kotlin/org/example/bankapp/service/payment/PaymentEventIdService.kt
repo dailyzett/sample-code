@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 import java.time.Instant
 
 @Service
-class PaymentEventService {
+class PaymentEventIdService {
     fun createPaymentEventId(memberId: MemberId): PaymentEventId {
         return PaymentEventId("${Instant.now().epochSecond}-${memberId.id}")
     }

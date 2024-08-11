@@ -28,7 +28,7 @@ class PaymentEvent(
     )
 
     fun changePaymentDoneState() {
-        isPaymentDone = !isPaymentDone
+        isPaymentDone = true
     }
 
     fun getIsPaymentDone(): Boolean = isPaymentDone

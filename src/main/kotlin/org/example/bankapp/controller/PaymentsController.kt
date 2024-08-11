@@ -1,5 +1,7 @@
 package org.example.bankapp.controller
 
+import org.example.bankapp.domain.dto.CommonResponse
+import org.example.bankapp.domain.dto.PaymentCancelRequestDto
 import org.example.bankapp.domain.dto.PaymentRequestDto
 import org.example.bankapp.service.payment.PlacePaymentService
 import org.springframework.http.ResponseEntity
@@ -14,13 +16,14 @@ class PaymentsController(
     private val placePaymentService: PlacePaymentService
 ) {
     @PostMapping
-    fun processPayment(@RequestBody paymentRequestDto: PaymentRequestDto): ResponseEntity<String> {
-        placePaymentService.placePayment(paymentRequestDto)
-        return ResponseEntity.ok("SUCCESS")
+    fun processPayment(@RequestBody paymentRequestDto: PaymentRequestDto): ResponseEntity<CommonResponse> {
+        val response = placePaymentService.placePayment(paymentRequestDto)
+        return ResponseEntity.ok(response)
     }
 
     @PostMapping("/cancel")
-    fun cancelPayment() {
-        TODO()
+    fun cancelPayment(@RequestBody paymentCancelRequestDto: PaymentCancelRequestDto): ResponseEntity<String> {
+        placePaymentService.placePaymentCancel(paymentCancelRequestDto)
+        return ResponseEntity.ok("SUCCESS")
     }
 }

@@ -1,35 +1,25 @@
 package org.example.bankapp.service.payment.event
 
-import kotlinx.coroutines.*
-import org.example.bankapp.common.exception.PaymentExecutionTimeoutException
+import org.example.bankapp.service.payback.PaybackTargetService
 import org.example.bankapp.service.payment.PaymentExecutorService
-import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Service
-import org.springframework.transaction.event.TransactionPhase
-import org.springframework.transaction.event.TransactionalEventListener
+import org.springframework.stereotype.Component
 
-@Service
+@Component
 class PaymentEventHandler(
     private val paymentExecutorService: PaymentExecutorService,
-) {
+    private val paybackTargetService: PaybackTargetService,
+) : GenericEventHandler<PaymentEventsDto>() {
 
-    private val logger = LoggerFactory.getLogger(PaymentEventHandler::class.java)
+    override fun executeEvent(event: PaymentEventsDto) {
+        paymentExecutorService.executePaymentOrder(event)
+        paybackTargetService.addPaybackTarget(event)
+    }
 
-    @TransactionalEventListener(
-        classes = [PaymentEventsDto::class],
-        phase = TransactionPhase.AFTER_COMMIT
-    )
-    fun handle(paymentEventsDto: PaymentEventsDto) {
-        CoroutineScope(Dispatchers.Default).launch {
-            logger.info("[Payment Event Handle] :: ${paymentEventsDto.event.id}")
-            try {
-                withTimeout(5000) {
-                    delay(6000)
-                    paymentExecutorService.executePaymentOrder(paymentEventsDto)
-                }
-            } catch (e: TimeoutCancellationException) {
-                throw PaymentExecutionTimeoutException("")
-            }
-        }
+    override fun onFailure(event: PaymentEventsDto) {
+        paymentExecutorService.fail(event)
+    }
+
+    override fun isEventTypeSupported(event: Any): Boolean {
+        return event is PaymentEventsDto
     }
 }

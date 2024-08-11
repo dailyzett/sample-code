@@ -16,16 +16,22 @@ import org.example.bankapp.domain.payment.PaymentEventId
 import org.example.bankapp.domain.payment.PaymentOrder
 import org.example.bankapp.domain.payment.PaymentOrderStatus.EXECUTING
 import org.example.bankapp.domain.payment.PaymentOrderStatus.SUCCESS
-import org.example.bankapp.repository.payment.MemberRepository
-import org.example.bankapp.repository.payment.PaymentOrderRepository
+import org.example.bankapp.repository.payment.member.MemberRepository
+import org.example.bankapp.repository.payment.payment.PaymentEventRepository
+import org.example.bankapp.repository.payment.payment.PaymentOrderRepository
 import org.example.bankapp.service.payment.event.PaymentEventsDto
 import org.springframework.data.repository.findByIdOrNull
 
 class PaymentExecutorServiceTest : BehaviorSpec({
+    val paymentEventRepository = mockk<PaymentEventRepository>()
     val paymentOrderRepository = mockk<PaymentOrderRepository>()
     val memberRepository = mockk<MemberRepository>()
 
-    val paymentExecutorService = PaymentExecutorService(paymentOrderRepository, memberRepository)
+    val paymentExecutorService = PaymentExecutorService(
+        paymentEventRepository,
+        paymentOrderRepository,
+        memberRepository
+    )
 
     Given("결제 이벤트 정보가 담긴 DTO 가 주어질 때") {
         val memberId = MemberId(1L)
@@ -45,11 +51,12 @@ class PaymentExecutorServiceTest : BehaviorSpec({
             BalanceLimit(1000, 2000, 3000),
             Wallet(1500)
         )
-        val paymentOrder = PaymentOrder(1L, 300, paymentEvent, EXECUTING)
-        val secondPaymentOrder = PaymentOrder(1L, 300, paymentEvent, SUCCESS)
+        PaymentOrder(1L, 300, paymentEvent, EXECUTING)
+        PaymentOrder(1L, 300, paymentEvent, SUCCESS)
 
         every { memberRepository.findByIdOrNull(memberId.id) } returns foundMember
         every { paymentOrderRepository.save(any()) } returns PaymentOrder(1L, 300, paymentEvent, SUCCESS)
+        every { paymentEventRepository.findByIdOrNull(any()) } returns paymentEvent
 
         When("결제 실행 서비스가 완료되었을 때") {
             every { paymentOrderRepository.existsByPaymentEventAndPaymentOrderStatus(any(), any()) } returns false

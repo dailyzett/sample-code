@@ -35,9 +35,5 @@ class PaymentOrder(
         paymentEvent = paymentEvent,
         paymentOrderStatus = paymentOrderStatus,
         createdDt = LocalDateTime.now()
-    ) {
-        if (paymentOrderStatus == PaymentOrderStatus.SUCCESS) {
-            paymentEvent.changePaymentDoneState()
-        }
-    }
+    )
 }

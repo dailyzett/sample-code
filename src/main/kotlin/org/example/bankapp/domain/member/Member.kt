@@ -49,11 +49,19 @@ class Member(
         return true
     }
 
-    fun updateMemberBalanceInfo(amount: Int) {
+    fun subtractMemberBalanceInfo(amount: Int) {
         this.wallet = wallet.copy(currentBalance = this.wallet.currentBalance - amount)
         this.balanceLimit = balanceLimit.copy(
             dailyPaymentLimit = this.balanceLimit.dailyPaymentLimit - amount,
             monthlyPaymentLimit = this.balanceLimit.monthlyPaymentLimit - amount,
+        )
+    }
+
+    fun addMemberBalanceInfo(amount: Int) {
+        this.wallet = wallet.copy(currentBalance = this.wallet.currentBalance + amount)
+        this.balanceLimit = balanceLimit.copy(
+            dailyPaymentLimit = this.balanceLimit.dailyPaymentLimit + amount,
+            monthlyPaymentLimit = this.balanceLimit.monthlyPaymentLimit + amount,
         )
     }
 

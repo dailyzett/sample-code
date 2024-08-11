@@ -15,9 +15,16 @@ class DailyExceedLimitException(message: String?) : RuntimeException(message)
 class MonthlyExceedLimitException(message: String?) : RuntimeException(message)
 class UnknownException(message: String?) : RuntimeException(message)
 class DuplicatedPaymentException(message: String?) : RuntimeException(message)
+class DuplicatedPaymentCancelException(message: String?) : RuntimeException(message)
 class PaymentAlreadySuccessException(message: String?) : RuntimeException(message)
-class PaymentExecutionTimeoutException(message: String?) : RuntimeException(message)
-
+class EventExecutionTimeoutException(message: String?) : RuntimeException(message)
+class AlreadyCancelledPaymentException(message: String?) : RuntimeException(message)
+class PaymentOrderIsEmpty(message: String?) : RuntimeException(message)
+class NotFoundPaymentSuccessEvent(message: String?) : RuntimeException(message)
+class NotFoundPaymentEvent(message: String?) : RuntimeException(message)
+class NotFoundPaymentCancelEvent(message: String?) : RuntimeException(message)
+class PaymentNotCompletedException(message: String?) : RuntimeException(message)
+class PaymentCancelNotCompletedException(message: String?) : RuntimeException(message)
 
 @RestControllerAdvice
 class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
@@ -83,10 +90,58 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
                 message = "지불이 이미 성공했습니다"
             }
 
-            is PaymentExecutionTimeoutException -> {
+            is EventExecutionTimeoutException -> {
                 status = HttpStatus.REQUEST_TIMEOUT.name
                 httpStatus = HttpStatus.REQUEST_TIMEOUT
-                message = "지불 실행이 시간 초과되었습니다"
+                message = "이벤트 실행 시간 초과되었습니다"
+            }
+
+            is AlreadyCancelledPaymentException -> {
+                status = HttpStatus.BAD_REQUEST.name
+                httpStatus = HttpStatus.BAD_REQUEST
+                message = "이미 취소된 결제 건입니다."
+            }
+
+            is DuplicatedPaymentCancelException -> {
+                status = HttpStatus.BAD_REQUEST.name
+                httpStatus = HttpStatus.BAD_REQUEST
+                message = "중복 취소 요청이 감지되었습니다"
+            }
+
+            is PaymentOrderIsEmpty -> {
+                status = HttpStatus.BAD_REQUEST.name
+                httpStatus = HttpStatus.BAD_REQUEST
+                message = "결제 내역을 찾을 수 없습니다"
+            }
+
+            is NotFoundPaymentSuccessEvent -> {
+                status = HttpStatus.BAD_REQUEST.name
+                httpStatus = HttpStatus.BAD_REQUEST
+                message = "결제 성공 내역을 찾을 수 없습니다"
+            }
+
+            is PaymentNotCompletedException -> {
+                status = HttpStatus.BAD_REQUEST.name
+                httpStatus = HttpStatus.BAD_REQUEST
+                message = "완료되지 않은 결제건에 대한 환불은 진행할 수 없습니다"
+            }
+
+            is NotFoundPaymentEvent -> {
+                status = HttpStatus.BAD_REQUEST.name
+                httpStatus = HttpStatus.BAD_REQUEST
+                message = "결제 내역이 없습니다."
+            }
+
+            is NotFoundPaymentCancelEvent -> {
+                status = HttpStatus.BAD_REQUEST.name
+                httpStatus = HttpStatus.BAD_REQUEST
+                message = "결제 취소 내역이 없습니다"
+            }
+
+            is PaymentCancelNotCompletedException -> {
+                status = HttpStatus.BAD_REQUEST.name
+                httpStatus = HttpStatus.BAD_REQUEST
+                message = "결제 취소가 완료되지 않은 건입니다"
             }
 
             else -> {
