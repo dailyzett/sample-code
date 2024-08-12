@@ -1,18 +1,19 @@
-package org.example.bankapp.service.payment.event
+package org.example.bankapp.service.event
 
-import org.example.bankapp.service.payback.PaybackTargetService
+import org.example.bankapp.domain.dto.PaymentCancelEventsDto
+import org.example.bankapp.service.payback.PaybackOrderService
 import org.example.bankapp.service.refund.RefundService
 import org.springframework.stereotype.Component
 
 @Component
 class PaymentCancelEventHandler(
     private val refundService: RefundService,
-    private val paybackTargetService: PaybackTargetService,
+    private val paybackOrderService: PaybackOrderService,
 ) : GenericEventHandler<PaymentCancelEventsDto>() {
 
     override fun executeEvent(event: PaymentCancelEventsDto) {
         refundService.executeRefund(event)
-        paybackTargetService.excludeFromPaybackTarget(event)
+        paybackOrderService.excludeFromPaybackOrder(event)
     }
 
     override fun onFailure(event: PaymentCancelEventsDto) {

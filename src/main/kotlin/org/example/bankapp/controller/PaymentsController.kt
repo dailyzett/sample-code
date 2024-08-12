@@ -17,13 +17,13 @@ class PaymentsController(
 ) {
     @PostMapping
     fun processPayment(@RequestBody paymentRequestDto: PaymentRequestDto): ResponseEntity<CommonResponse> {
-        val response = placePaymentService.placePayment(paymentRequestDto)
-        return ResponseEntity.ok(response)
+        val paymentResponseDto = placePaymentService.placePaymentEvent(paymentRequestDto)
+        return ResponseEntity.ok(CommonResponse(data = paymentResponseDto))
     }
 
     @PostMapping("/cancel")
     fun cancelPayment(@RequestBody paymentCancelRequestDto: PaymentCancelRequestDto): ResponseEntity<String> {
-        placePaymentService.placePaymentCancel(paymentCancelRequestDto)
+        placePaymentService.placePaymentCancelEvent(paymentCancelRequestDto)
         return ResponseEntity.ok("SUCCESS")
     }
 }

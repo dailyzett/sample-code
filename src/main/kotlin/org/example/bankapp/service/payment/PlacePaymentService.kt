@@ -1,10 +1,7 @@
 package org.example.bankapp.service.payment
 
 import org.example.bankapp.common.event.Events
-import org.example.bankapp.domain.dto.CommonResponse
-import org.example.bankapp.domain.dto.PaymentCancelRequestDto
-import org.example.bankapp.domain.dto.PaymentRequestDto
-import org.example.bankapp.domain.dto.PaymentResponseDto
+import org.example.bankapp.domain.dto.*
 import org.example.bankapp.domain.member.Member
 import org.example.bankapp.domain.member.MemberId
 import org.example.bankapp.domain.payment.EventType
@@ -13,41 +10,40 @@ import org.example.bankapp.domain.payment.PaymentEventId
 import org.example.bankapp.domain.payment.PaymentOrder
 import org.example.bankapp.domain.payment.cancel.CancellingMember
 import org.example.bankapp.domain.payment.cancel.PaymentCancelEvent
-import org.example.bankapp.repository.payment.payment.PaymentJdbcRepository
-import org.example.bankapp.repository.payment.payment.PaymentOrderRepository
-import org.example.bankapp.service.payment.event.PaymentCancelEventsDto
-import org.example.bankapp.service.payment.event.PaymentEventsDto
+import org.example.bankapp.repository.EventJdbcRepository
+import org.example.bankapp.repository.payment.PaymentOrderRepository
+import org.example.bankapp.service.event.EventIdService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class PlacePaymentService(
-    private val paymentEventIdService: PaymentEventIdService,
+    private val eventIdService: EventIdService,
     private val payingMemberService: PayingMemberService,
     private val paymentOrderRepository: PaymentOrderRepository,
     private val paymentValidationService: PaymentValidationService,
-    private val paymentJdbcRepository: PaymentJdbcRepository,
+    private val eventJdbcRepository: EventJdbcRepository,
 ) {
     @Transactional
-    fun placePayment(paymentRequestDto: PaymentRequestDto): CommonResponse {
+    fun placePaymentEvent(paymentRequestDto: PaymentRequestDto): PaymentResponseDto {
         val createdPayingMember: Member = payingMemberService.createPayingMember(paymentRequestDto)
-        val eventId: PaymentEventId = paymentEventIdService.createPaymentEventId(MemberId(createdPayingMember.id))
+        val eventId: PaymentEventId = eventIdService.createPaymentEventId(MemberId(createdPayingMember.id))
 
         val paymentEvent = PaymentEvent(eventId, paymentRequestDto)
-        paymentJdbcRepository.insertPaymentEvent(paymentEvent)
+        eventJdbcRepository.insertPaymentEvent(paymentEvent)
 
         val paymentOrder = PaymentOrder(paymentRequestDto.amount, paymentEvent)
         paymentOrderRepository.save(paymentOrder)
 
         Events.raise(PaymentEventsDto(paymentEvent, paymentRequestDto.amount))
-        return CommonResponse(data = PaymentResponseDto.of(paymentEvent))
+        return PaymentResponseDto.of(paymentEvent)
     }
 
     @Transactional
-    fun placePaymentCancel(paymentCancelRequestDto: PaymentCancelRequestDto): PaymentCancelEvent {
+    fun placePaymentCancelEvent(paymentCancelRequestDto: PaymentCancelRequestDto): PaymentCancelEvent {
         val paymentEventId = PaymentEventId(paymentCancelRequestDto.paymentEventId)
         val cancellingMember = CancellingMember(paymentCancelRequestDto.cancellingMemberId)
-        val cancelEventId: PaymentEventId = paymentEventIdService.createPaymentEventId(cancellingMember.memberId)
+        val cancelEventId: PaymentEventId = eventIdService.createPaymentEventId(cancellingMember.memberId)
 
         paymentValidationService.checkPossibleCancelEvent(paymentEventId)
 
@@ -57,7 +53,7 @@ class PlacePaymentService(
             eventType = EventType.PAYMENT,
             paymentEventId = paymentEventId
         )
-        paymentJdbcRepository.insertPaymentCancelEvent(paymentCancelEvent)
+        eventJdbcRepository.insertPaymentCancelEvent(paymentCancelEvent)
 
         Events.raise(PaymentCancelEventsDto(paymentCancelEvent))
         return paymentCancelEvent

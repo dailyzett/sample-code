@@ -1,0 +1,80 @@
+package org.example.bankapp.service.payback
+
+import org.example.bankapp.common.exception.*
+import org.example.bankapp.domain.dto.PaybackEventsDto
+import org.example.bankapp.domain.member.MemberId
+import org.example.bankapp.domain.payback.PaybackOrder
+import org.example.bankapp.domain.payback.PaybackOrderStatus.*
+import org.example.bankapp.repository.member.MemberRepository
+import org.example.bankapp.repository.payback.PaybackEventRepository
+import org.example.bankapp.repository.payback.PaybackOrderRepository
+import org.springframework.data.repository.findByIdOrNull
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+
+@Service
+class PaybackExecutorService(
+    private val paybackEventRepository: PaybackEventRepository,
+    private val paybackOrderRepository: PaybackOrderRepository,
+    private val memberRepository: MemberRepository
+) {
+    @Transactional
+    fun addPaybackAmount(event: PaybackEventsDto) {
+        val paybackEventId = event.paybackEvent.id
+        val paymentEventId = event.paymentEventId
+        val paybackPercent = event.paybackPercent
+
+        val foundPaybackOrder = paybackOrderRepository.findTopByPaymentEventIdOrderByIdDesc(paymentEventId)
+            ?: throw NotFoundPaybackOrder("")
+
+        if (foundPaybackOrder.paybackOrderStatus == NOT_NEED_TO_PAYBACK) throw NotNeedToPayback("")
+        if (foundPaybackOrder.paybackOrderStatus == SUCCESS) throw AlreadyPaybackSuccessException("")
+
+        val paybackAmount = calculatePaybackAmount(foundPaybackOrder, paybackPercent)
+        updateMemberCurrentBalance(paybackAmount, foundPaybackOrder.paybackTargetId)
+
+        val paybackOrder = PaybackOrder(
+            paybackEventId = paybackEventId,
+            paymentEventId = foundPaybackOrder.paymentEventId,
+            paybackOrderStatus = SUCCESS,
+            paymentAmount = foundPaybackOrder.paymentAmount,
+            paybackAmount = paybackAmount,
+            paybackTargetId = foundPaybackOrder.paybackTargetId
+        )
+
+        paybackOrderRepository.save(paybackOrder)
+
+        val foundPaybackEvent = paybackEventRepository.findByIdOrNull(paybackEventId)!!
+        foundPaybackEvent.updateToPaybackDoneTrue()
+    }
+
+    private fun calculatePaybackAmount(paybackOrder: PaybackOrder, paybackPercent: Int): Int {
+        return (paybackOrder.paymentAmount * (paybackPercent.toDouble() / 100.0)).toInt()
+    }
+
+    private fun updateMemberCurrentBalance(paybackAmount: Int, paybackTargetId: MemberId) {
+        val foundMember = memberRepository.findByIdOrNull(paybackTargetId.id) ?: throw MemberNotFoundException("")
+        if (!foundMember.isRegistered) throw MemberNotRegisteredException("")
+        foundMember.addMemberWalletBalance(paybackAmount)
+    }
+
+    @Transactional
+    fun fail(event: PaybackEventsDto) {
+        val paybackEventId = event.paybackEvent.id
+        val paymentEventId = event.paymentEventId
+
+        val foundPaybackOrder = paybackOrderRepository.findTopByPaymentEventIdOrderByIdDesc(paymentEventId)
+            ?: throw NotFoundPaybackOrder("")
+
+        val paybackOrder = PaybackOrder(
+            paybackEventId = paybackEventId,
+            paymentEventId = paymentEventId,
+            paybackOrderStatus = FAILED,
+            paymentAmount = foundPaybackOrder.paymentAmount,
+            paybackAmount = 0,
+            paybackTargetId = foundPaybackOrder.paybackTargetId
+        )
+
+        paybackOrderRepository.save(paybackOrder)
+    }
+}

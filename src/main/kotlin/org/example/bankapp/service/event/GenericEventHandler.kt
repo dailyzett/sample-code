@@ -1,4 +1,4 @@
-package org.example.bankapp.service.payment.event
+package org.example.bankapp.service.event
 
 import org.example.bankapp.common.exception.EventExecutionTimeoutException
 import org.springframework.scheduling.annotation.Async

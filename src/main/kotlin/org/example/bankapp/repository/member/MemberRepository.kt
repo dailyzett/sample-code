@@ -1,4 +1,4 @@
-package org.example.bankapp.repository.payment.member
+package org.example.bankapp.repository.member
 
 import org.example.bankapp.domain.member.Member
 import org.springframework.data.jpa.repository.JpaRepository

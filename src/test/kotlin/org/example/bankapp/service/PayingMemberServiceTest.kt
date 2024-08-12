@@ -10,7 +10,7 @@ import org.example.bankapp.domain.member.BalanceLimit
 import org.example.bankapp.domain.member.Member
 import org.example.bankapp.domain.member.MemberId
 import org.example.bankapp.domain.member.Wallet
-import org.example.bankapp.repository.payment.member.MemberRepository
+import org.example.bankapp.repository.member.MemberRepository
 import org.example.bankapp.service.payment.PayingMemberService
 import org.springframework.data.repository.findByIdOrNull
 

@@ -1,4 +1,4 @@
-package org.example.bankapp.repository.payment.payment
+package org.example.bankapp.repository.payment
 
 import org.example.bankapp.domain.payment.PaymentEvent
 import org.example.bankapp.domain.payment.PaymentOrder

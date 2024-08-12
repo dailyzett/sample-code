@@ -4,8 +4,8 @@ import org.example.bankapp.common.exception.AlreadyCancelledPaymentException
 import org.example.bankapp.common.exception.NotFoundPaymentSuccessEvent
 import org.example.bankapp.common.exception.PaymentNotCompletedException
 import org.example.bankapp.domain.payment.PaymentEventId
-import org.example.bankapp.repository.payment.payment.PaymentCancelEventRepository
-import org.example.bankapp.repository.payment.payment.PaymentEventRepository
+import org.example.bankapp.repository.payment.PaymentCancelEventRepository
+import org.example.bankapp.repository.payment.PaymentEventRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 

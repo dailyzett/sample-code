@@ -15,6 +15,7 @@ class DailyExceedLimitException(message: String?) : RuntimeException(message)
 class MonthlyExceedLimitException(message: String?) : RuntimeException(message)
 class UnknownException(message: String?) : RuntimeException(message)
 class DuplicatedPaymentException(message: String?) : RuntimeException(message)
+class DuplicatedPaybackException(message: String?) : RuntimeException(message)
 class DuplicatedPaymentCancelException(message: String?) : RuntimeException(message)
 class PaymentAlreadySuccessException(message: String?) : RuntimeException(message)
 class EventExecutionTimeoutException(message: String?) : RuntimeException(message)
@@ -22,7 +23,10 @@ class AlreadyCancelledPaymentException(message: String?) : RuntimeException(mess
 class PaymentOrderIsEmpty(message: String?) : RuntimeException(message)
 class NotFoundPaymentSuccessEvent(message: String?) : RuntimeException(message)
 class NotFoundPaymentEvent(message: String?) : RuntimeException(message)
+class NotFoundPaybackOrder(message: String?) : RuntimeException(message)
 class NotFoundPaymentCancelEvent(message: String?) : RuntimeException(message)
+class NotNeedToPayback(message: String?) : RuntimeException(message)
+class AlreadyPaybackSuccessException(message: String?) : RuntimeException(message)
 class PaymentNotCompletedException(message: String?) : RuntimeException(message)
 class PaymentCancelNotCompletedException(message: String?) : RuntimeException(message)
 
@@ -40,6 +44,18 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
                 status = HttpStatus.BAD_REQUEST.name
                 httpStatus = HttpStatus.BAD_REQUEST
                 message = "찾을 수 없는 사용자"
+            }
+
+            is NotFoundPaybackOrder -> {
+                status = HttpStatus.BAD_REQUEST.name
+                httpStatus = HttpStatus.BAD_REQUEST
+                message = "찾을 수 없는 페이백 주문"
+            }
+
+            is NotNeedToPayback -> {
+                status = HttpStatus.BAD_REQUEST.name
+                httpStatus = HttpStatus.BAD_REQUEST
+                message = "페이백을 하지 않아도 되는 대상"
             }
 
             is MemberNotRegisteredException -> {

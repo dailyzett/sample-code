@@ -5,10 +5,10 @@ import org.example.bankapp.domain.payment.PaymentOrder
 import org.example.bankapp.domain.payment.PaymentOrderStatus.CANCELLED
 import org.example.bankapp.domain.payment.PaymentOrderStatus.SUCCESS
 import org.example.bankapp.domain.payment.cancel.PaymentCancelEvent
-import org.example.bankapp.repository.payment.member.MemberRepository
-import org.example.bankapp.repository.payment.payment.PaymentCancelEventRepository
-import org.example.bankapp.repository.payment.payment.PaymentOrderRepository
-import org.example.bankapp.service.payment.event.PaymentCancelEventsDto
+import org.example.bankapp.repository.member.MemberRepository
+import org.example.bankapp.repository.payment.PaymentCancelEventRepository
+import org.example.bankapp.repository.payment.PaymentOrderRepository
+import org.example.bankapp.domain.dto.PaymentCancelEventsDto
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Propagation

@@ -4,7 +4,7 @@ import org.example.bankapp.common.exception.MemberNotFoundException
 import org.example.bankapp.common.exception.UnknownException
 import org.example.bankapp.domain.dto.PaymentRequestDto
 import org.example.bankapp.domain.member.Member
-import org.example.bankapp.repository.payment.member.MemberRepository
+import org.example.bankapp.repository.member.MemberRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 

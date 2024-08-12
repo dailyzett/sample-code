@@ -14,8 +14,8 @@ import org.example.bankapp.domain.payment.PaymentEvent
 import org.example.bankapp.domain.payment.PaymentEventId
 import org.example.bankapp.domain.payment.cancel.CancellingMember
 import org.example.bankapp.domain.payment.cancel.PaymentCancelEvent
-import org.example.bankapp.repository.payment.payment.PaymentCancelEventRepository
-import org.example.bankapp.repository.payment.payment.PaymentEventRepository
+import org.example.bankapp.repository.payment.PaymentCancelEventRepository
+import org.example.bankapp.repository.payment.PaymentEventRepository
 import org.springframework.data.repository.findByIdOrNull
 
 class PaymentValidationServiceTest : BehaviorSpec({

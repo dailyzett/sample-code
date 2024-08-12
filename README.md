@@ -9,10 +9,16 @@
 1. 한 번의 결제 API 를 호출하면 하나의 결제 이벤트를 만들 수 있다.
 2. 하나의 결제 이벤트에서 여러 개의 결제 주문이 들어갈 수 있다. (상태 전환)
 3. 결제 주문(payment_order_status) 의 결제 상태는 아래의 상태가 존재한다.
-    - EXECUTING
-    - SUCCESS
-    - CANCELLED
-    - FAILED
+    - EXECUTING 주문 실행 중
+    - SUCCESS 결제 성공
+    - CANCELLED 결제 취소
+    - FAILED 결제 실패
+4. 페이백 주문의 상태
+    - NOT_STARTED 페이백 지급 이전. 결제가 완료되고 난 후 최초 상태
+    - SUCCESS 페이백 지급 성공
+    - CANCELLED 페이백 지급 취소
+    - FAILED 페이백 지급 실패
+    - NOT_NEED_TO_PAYBACK 페이백을 지급하기 전 결제 취소를 해서 지급할 필요가 없는 상태
 
 ---
 
@@ -50,21 +56,59 @@ _요청 본문_
 }
 ```
 
+_응답 본문_
+
+| 필드             | 설명         | 자료형    |
+|----------------|------------|--------|
+| eventId        | 결제 이벤트 아이디 | string |
+| payingMemberId | 결제한 멤버 아이디 | long   |
+
+```json
+{
+  "status": "OK",
+  "message": "성공",
+  "data": {
+    "eventId": "1723483238-1",
+    "payingMemberId": 1
+  }
+}
+```
+
 ### POST /payback
 
 결제 후 페이백 지급 API
 
 _요청 본문_
 
-| 필드       | 설명             | 자료형  |
-|----------|----------------|------|
-| memberId | 페이백 해줄 사용자 아이디 | long |
-| percent  | 페이백 해줄 퍼센트     | int  |
+| 필드             | 설명             | 자료형    |
+|----------------|----------------|--------|
+| memberId       | 페이백 해줄 사용자 아이디 | long   |
+| paymentEventId | 결제 이벤트 아이디     | string |
+| percent        | 페이백 해줄 퍼센트     | int    |
 
 ```json
 {
-  "memberId": 0,
-  "percent": 0
+  "memberId": 1,
+  "paymentEventId": {
+    "id": "1723537304-1"
+  },
+  "percent": 10
+}
+```
+
+_응답 본문_
+
+| 필드             | 설명             | 자료형    |
+|----------------|----------------|--------|
+| paybackEventId | 페이백 발행 이벤트 아이디 | string |
+
+```json
+{
+  "status": "OK",
+  "message": "성공",
+  "data": {
+    "paybackEventId": "1723537493-1"
+  }
 }
 ```
 
@@ -77,14 +121,14 @@ _요청 본문_
 | 필드                 | 설명              | 자료형    |
 |--------------------|-----------------|--------|
 | cancellingMemberId | 결제를 취소하려는 멤버 ID | object |
-| paymentEventId     | 결제 성공한 이벤트 ID   | string |
+| paybackEventId     | 페이백 발행 이벤트 ID   | string |
 
 ```json
 {
   "cancellingMemberId": {
     "id": 1
   },
-  "paymentEventId": "1723450314-1"
+  "paybackEventId": "1723450314-1"
 }
 ```
 
@@ -154,10 +198,13 @@ _요청 본문_
 ### 결제 후 페이백 지급 API 요구 사항
 
 - 이미 결제 성공한 이력이 있어야 한다.
+- 결제 성공한 단 건의 결제 이벤트 ID 를 받아서 처리한다.
+- 각 건에 대해 페이백 퍼센트를 조정하기 위해 퍼센트를 입력받는다.
 - 동일한 페이백 API 호출을 막아야 한다.
 - 페이백은 결제한 금액의 퍼센트 단위가 된다. 소숫점인 경우 뒤를 절삭한다
 - 페이백 API 는 5초 이내 완료되어야 한다. 5초가 지나면 이벤트를 취소한다.
 - 취소한 결제에 대해선 페이백을 적용하지 않는다.
 
+### 페이백 지급 API 취소 요구 사항
 
-
+- 

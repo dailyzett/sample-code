@@ -1,7 +1,9 @@
-package org.example.bankapp.repository.payment.payment
+package org.example.bankapp.repository
 
+import org.example.bankapp.common.exception.DuplicatedPaybackException
 import org.example.bankapp.common.exception.DuplicatedPaymentCancelException
 import org.example.bankapp.common.exception.DuplicatedPaymentException
+import org.example.bankapp.domain.payback.PaybackEvent
 import org.example.bankapp.domain.payment.PaymentEvent
 import org.example.bankapp.domain.payment.cancel.PaymentCancelEvent
 import org.springframework.dao.DuplicateKeyException
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
 
 @Repository
-class PaymentJdbcRepository(
+class EventJdbcRepository(
     private val jdbcTemplate: JdbcTemplate,
 ) {
     fun insertPaymentEvent(paymentEvent: PaymentEvent) {
@@ -50,6 +52,25 @@ class PaymentJdbcRepository(
             )
         } catch (e: DuplicateKeyException) {
             throw DuplicatedPaymentCancelException("")
+        }
+    }
+
+    fun insertPaybackEvent(paybackEvent: PaybackEvent) {
+        val sql = """
+            INSERT INTO T_PAYBACK_EVENT (id, is_payback_done, member_id, created_dt)
+            VALUES (?, ?, ?, ?)
+        """.trimIndent()
+
+        try {
+            jdbcTemplate.update(
+                sql,
+                paybackEvent.id.id,
+                paybackEvent.isPaybackDone,
+                paybackEvent.paybackTargetId.id,
+                paybackEvent.createdDt
+            )
+        } catch (e: DuplicateKeyException) {
+            throw DuplicatedPaybackException("")
         }
     }
 }

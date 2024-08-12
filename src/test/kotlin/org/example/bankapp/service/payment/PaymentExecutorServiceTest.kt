@@ -16,10 +16,10 @@ import org.example.bankapp.domain.payment.PaymentEventId
 import org.example.bankapp.domain.payment.PaymentOrder
 import org.example.bankapp.domain.payment.PaymentOrderStatus.EXECUTING
 import org.example.bankapp.domain.payment.PaymentOrderStatus.SUCCESS
-import org.example.bankapp.repository.payment.member.MemberRepository
-import org.example.bankapp.repository.payment.payment.PaymentEventRepository
-import org.example.bankapp.repository.payment.payment.PaymentOrderRepository
-import org.example.bankapp.service.payment.event.PaymentEventsDto
+import org.example.bankapp.repository.member.MemberRepository
+import org.example.bankapp.repository.payment.PaymentEventRepository
+import org.example.bankapp.repository.payment.PaymentOrderRepository
+import org.example.bankapp.domain.dto.PaymentEventsDto
 import org.springframework.data.repository.findByIdOrNull
 
 class PaymentExecutorServiceTest : BehaviorSpec({
