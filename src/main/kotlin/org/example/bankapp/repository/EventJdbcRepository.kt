@@ -1,8 +1,10 @@
 package org.example.bankapp.repository
 
+import org.example.bankapp.common.exception.DuplicatedPaybackCancelException
 import org.example.bankapp.common.exception.DuplicatedPaybackException
 import org.example.bankapp.common.exception.DuplicatedPaymentCancelException
 import org.example.bankapp.common.exception.DuplicatedPaymentException
+import org.example.bankapp.domain.payback.PaybackCancelEvent
 import org.example.bankapp.domain.payback.PaybackEvent
 import org.example.bankapp.domain.payment.PaymentEvent
 import org.example.bankapp.domain.payment.cancel.PaymentCancelEvent
@@ -71,6 +73,25 @@ class EventJdbcRepository(
             )
         } catch (e: DuplicateKeyException) {
             throw DuplicatedPaybackException("")
+        }
+    }
+
+    fun insertPaybackCancelEvent(paybackCancelEvent: PaybackCancelEvent) {
+        val sql = """
+            INSERT INTO T_PAYBACK_CANCEL_EVENT (id, is_cancel_done, payback_event_id, created_dt)
+            VALUES (?, ?, ?, ?)
+        """.trimIndent()
+
+        try {
+            jdbcTemplate.update(
+                sql,
+                paybackCancelEvent.id,
+                paybackCancelEvent.isCancelDone,
+                paybackCancelEvent.paybackEventId.id,
+                paybackCancelEvent.createdDt
+            )
+        } catch (e: DuplicateKeyException) {
+            throw DuplicatedPaybackCancelException("")
         }
     }
 }

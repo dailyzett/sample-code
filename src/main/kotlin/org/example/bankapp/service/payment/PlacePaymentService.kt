@@ -40,7 +40,7 @@ class PlacePaymentService(
     }
 
     @Transactional
-    fun placePaymentCancelEvent(paymentCancelRequestDto: PaymentCancelRequestDto): PaymentCancelEvent {
+    fun placePaymentCancelEvent(paymentCancelRequestDto: PaymentCancelRequestDto): PaymentCancelResponseDto {
         val paymentEventId = PaymentEventId(paymentCancelRequestDto.paymentEventId)
         val cancellingMember = CancellingMember(paymentCancelRequestDto.cancellingMemberId)
         val cancelEventId: PaymentEventId = eventIdService.createPaymentEventId(cancellingMember.memberId)
@@ -56,6 +56,6 @@ class PlacePaymentService(
         eventJdbcRepository.insertPaymentCancelEvent(paymentCancelEvent)
 
         Events.raise(PaymentCancelEventsDto(paymentCancelEvent))
-        return paymentCancelEvent
+        return PaymentCancelResponseDto(paymentCancelEvent.id)
     }
 }

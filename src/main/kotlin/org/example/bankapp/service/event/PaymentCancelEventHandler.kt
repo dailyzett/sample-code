@@ -12,7 +12,7 @@ class PaymentCancelEventHandler(
 ) : GenericEventHandler<PaymentCancelEventsDto>() {
 
     override fun executeEvent(event: PaymentCancelEventsDto) {
-        refundService.executeRefund(event)
+        refundService.executePaymentRefund(event)
         paybackOrderService.excludeFromPaybackOrder(event)
     }
 

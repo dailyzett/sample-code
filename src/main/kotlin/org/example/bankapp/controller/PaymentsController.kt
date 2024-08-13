@@ -22,8 +22,8 @@ class PaymentsController(
     }
 
     @PostMapping("/cancel")
-    fun cancelPayment(@RequestBody paymentCancelRequestDto: PaymentCancelRequestDto): ResponseEntity<String> {
-        placePaymentService.placePaymentCancelEvent(paymentCancelRequestDto)
-        return ResponseEntity.ok("SUCCESS")
+    fun cancelPayment(@RequestBody paymentCancelRequestDto: PaymentCancelRequestDto): ResponseEntity<CommonResponse> {
+        val responseDto = placePaymentService.placePaymentCancelEvent(paymentCancelRequestDto)
+        return ResponseEntity.ok(CommonResponse(data = responseDto))
     }
 }

@@ -15,3 +15,7 @@ data class PaymentResponseDto(
         }
     }
 }
+
+data class PaymentCancelResponseDto(
+    val cancelEventId: String,
+)

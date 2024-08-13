@@ -1,6 +1,6 @@
 package org.example.bankapp.service.event
 
-import org.example.bankapp.common.exception.EventExecutionTimeoutException
+import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Async
 import org.springframework.transaction.event.TransactionPhase
 import org.springframework.transaction.event.TransactionalEventListener
@@ -10,6 +10,8 @@ import java.util.concurrent.TimeoutException
 import java.util.concurrent.atomic.AtomicBoolean
 
 abstract class GenericEventHandler<T : Any> {
+
+    private val log = LoggerFactory.getLogger(javaClass)
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     fun handleEvent(event: Any) {
@@ -25,9 +27,9 @@ abstract class GenericEventHandler<T : Any> {
         try {
             future.get(5, TimeUnit.SECONDS)
         } catch (e: TimeoutException) {
-            handleException(event, isCancelled, future)
+            handleException(event, isCancelled, future, e)
         } catch (e: Exception) {
-            handleException(event, isCancelled, future)
+            handleException(event, isCancelled, future, e)
         }
     }
 
@@ -41,11 +43,12 @@ abstract class GenericEventHandler<T : Any> {
         }
     }
 
-    private fun handleException(event: T, isCancelled: AtomicBoolean, future: CompletableFuture<Unit>) {
+    private fun handleException(event: T, isCancelled: AtomicBoolean, future: CompletableFuture<Unit>, e: Exception) {
         isCancelled.set(true)
         future.cancel(true)
         onFailure(event)
-        throw EventExecutionTimeoutException("")
+        log.error("Exception occurred: ", e)
+        throw e
     }
 
     protected abstract fun executeEvent(event: T)

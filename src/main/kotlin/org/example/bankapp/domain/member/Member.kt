@@ -70,6 +70,11 @@ class Member(
         return this.wallet.currentBalance
     }
 
+    fun subtractMemberWalletBalance(amount: Int): Int {
+        this.wallet = wallet.copy(currentBalance = this.wallet.currentBalance - amount)
+        return this.wallet.currentBalance
+    }
+
     fun getBalanceLimit(): BalanceLimit = balanceLimit
     fun getWallet(): Wallet = wallet
 }

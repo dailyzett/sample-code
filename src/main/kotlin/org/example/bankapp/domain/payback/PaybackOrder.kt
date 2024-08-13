@@ -39,4 +39,18 @@ class PaybackOrder(
 
     @Column(name = "created_dt")
     val createdDt: LocalDateTime = LocalDateTime.now(),
-)
+) {
+    companion object {
+        fun fromForCancel(paybackOrder: PaybackOrder): PaybackOrder {
+            return PaybackOrder(
+                paybackEventId = paybackOrder.paybackEventId,
+                paymentEventId = paybackOrder.paymentEventId,
+                paybackOrderStatus = PaybackOrderStatus.CANCELLED,
+                paymentAmount = paybackOrder.paymentAmount,
+                paybackAmount = paybackOrder.paybackAmount,
+                paybackTargetId = paybackOrder.paybackTargetId,
+                createdDt = paybackOrder.createdDt
+            )
+        }
+    }
+}

@@ -1,6 +1,9 @@
 package org.example.bankapp.service.payback
 
-import org.example.bankapp.common.exception.*
+import org.example.bankapp.common.exception.MemberNotFoundException
+import org.example.bankapp.common.exception.MemberNotRegisteredException
+import org.example.bankapp.common.exception.NotFoundPaybackOrder
+import org.example.bankapp.common.exception.NotNeedToPayback
 import org.example.bankapp.domain.dto.PaybackEventsDto
 import org.example.bankapp.domain.member.MemberId
 import org.example.bankapp.domain.payback.PaybackOrder
@@ -10,6 +13,7 @@ import org.example.bankapp.repository.payback.PaybackEventRepository
 import org.example.bankapp.repository.payback.PaybackOrderRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
 
 @Service
@@ -28,7 +32,6 @@ class PaybackExecutorService(
             ?: throw NotFoundPaybackOrder("")
 
         if (foundPaybackOrder.paybackOrderStatus == NOT_NEED_TO_PAYBACK) throw NotNeedToPayback("")
-        if (foundPaybackOrder.paybackOrderStatus == SUCCESS) throw AlreadyPaybackSuccessException("")
 
         val paybackAmount = calculatePaybackAmount(foundPaybackOrder, paybackPercent)
         updateMemberCurrentBalance(paybackAmount, foundPaybackOrder.paybackTargetId)
@@ -58,7 +61,7 @@ class PaybackExecutorService(
         foundMember.addMemberWalletBalance(paybackAmount)
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     fun fail(event: PaybackEventsDto) {
         val paybackEventId = event.paybackEvent.id
         val paymentEventId = event.paymentEventId

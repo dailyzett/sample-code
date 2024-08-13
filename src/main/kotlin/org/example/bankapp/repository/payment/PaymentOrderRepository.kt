@@ -12,13 +12,5 @@ interface PaymentOrderRepository : JpaRepository<PaymentOrder, Long> {
     @Query("SELECT p FROM PaymentOrder p WHERE p.paymentEvent.id.id = :paymentEventId AND p.paymentOrderStatus = :status")
     fun findByIdAndStatus(paymentEventId: String, status: PaymentOrderStatus): PaymentOrder?
 
-    @Query(
-        """SELECT CASE WHEN COUNT(p) > 0 THEN TRUE ELSE FALSE END 
-                FROM PaymentOrder p 
-                WHERE p.paymentEvent = :paymentEvent 
-                AND p.paymentOrderStatus = :status"""
-    )
-    fun existsByEventAndStatus(paymentEvent: PaymentEvent, status: PaymentOrderStatus): Boolean
-
     fun existsByPaymentEventAndPaymentOrderStatus(paymentEvent: PaymentEvent, status: PaymentOrderStatus): Boolean
 }

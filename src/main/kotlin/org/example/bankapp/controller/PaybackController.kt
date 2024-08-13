@@ -1,6 +1,7 @@
 package org.example.bankapp.controller
 
 import org.example.bankapp.domain.dto.CommonResponse
+import org.example.bankapp.domain.dto.PaybackCancelRequestDto
 import org.example.bankapp.domain.dto.PaybackRequestDto
 import org.example.bankapp.service.payback.PlacePaybackService
 import org.springframework.http.ResponseEntity
@@ -22,7 +23,8 @@ class PaybackController(
     }
 
     @PostMapping("/cancel")
-    fun cancelPayback() {
-        TODO()
+    fun cancelPayback(@RequestBody paybackCancelRequestDto: PaybackCancelRequestDto): ResponseEntity<CommonResponse> {
+        val responseDto = placePaybackService.placePaybackCancelEvent(paybackCancelRequestDto)
+        return ResponseEntity.ok(CommonResponse(data = responseDto))
     }
 }
