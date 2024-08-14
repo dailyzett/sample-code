@@ -4,8 +4,8 @@ import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "T_PAYMENT_ORDER")
-class PaymentOrder(
+@Table(name = "payment_orders")
+class PaymentOrders(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
@@ -14,7 +14,7 @@ class PaymentOrder(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_event_id")
-    val paymentEvent: PaymentEvent,
+    val paymentEvents: PaymentEvents,
 
     @Column(name = "payment_order_status")
     @Enumerated(EnumType.STRING)
@@ -23,16 +23,16 @@ class PaymentOrder(
     @Column(name = "created_dt")
     val createdDt: LocalDateTime = LocalDateTime.now(),
 ) {
-    constructor(amount: Int, paymentEvent: PaymentEvent) : this(
+    constructor(amount: Int, paymentEvents: PaymentEvents) : this(
         amount = amount,
-        paymentEvent = paymentEvent,
+        paymentEvents = paymentEvents,
         paymentOrderStatus = PaymentOrderStatus.EXECUTING,
         createdDt = LocalDateTime.now(),
     )
 
-    constructor(amount: Int, paymentEvent: PaymentEvent, paymentOrderStatus: PaymentOrderStatus) : this(
+    constructor(amount: Int, paymentEvents: PaymentEvents, paymentOrderStatus: PaymentOrderStatus) : this(
         amount = amount,
-        paymentEvent = paymentEvent,
+        paymentEvents = paymentEvents,
         paymentOrderStatus = paymentOrderStatus,
         createdDt = LocalDateTime.now()
     )

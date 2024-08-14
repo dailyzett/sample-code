@@ -1,7 +1,7 @@
 package org.example.bankapp.repository.member
 
-import org.example.bankapp.domain.member.Member
+import org.example.bankapp.domain.member.Members
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface MemberRepository : JpaRepository<Member, Long> {
+interface MemberRepository : JpaRepository<Members, Long> {
 }

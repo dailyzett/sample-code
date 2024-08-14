@@ -6,13 +6,13 @@ import org.example.bankapp.common.exception.PaymentCancelNotCompletedException
 import org.example.bankapp.common.exception.PaymentNotCompletedException
 import org.example.bankapp.domain.dto.PaymentCancelEventsDto
 import org.example.bankapp.domain.dto.PaymentEventsDto
-import org.example.bankapp.domain.payback.PaybackOrder
 import org.example.bankapp.domain.payback.PaybackOrderStatus.NOT_NEED_TO_PAYBACK
 import org.example.bankapp.domain.payback.PaybackOrderStatus.NOT_STARTED
-import org.example.bankapp.domain.payment.PaymentEvent
-import org.example.bankapp.domain.payment.PaymentOrder
+import org.example.bankapp.domain.payback.PaybackOrders
+import org.example.bankapp.domain.payment.PaymentEvents
 import org.example.bankapp.domain.payment.PaymentOrderStatus
-import org.example.bankapp.domain.payment.cancel.PaymentCancelEvent
+import org.example.bankapp.domain.payment.PaymentOrders
+import org.example.bankapp.domain.payment.cancel.PaymentCancelEvents
 import org.example.bankapp.repository.payback.PaybackOrderRepository
 import org.example.bankapp.repository.payment.PaymentCancelEventRepository
 import org.example.bankapp.repository.payment.PaymentEventRepository
@@ -30,20 +30,20 @@ class PaybackOrderService(
 ) {
     @Transactional
     fun addPaybackOrder(paymentEventsDto: PaymentEventsDto) {
-        val paymentEvent: PaymentEvent = paymentEventsDto.event
+        val paymentEvents: PaymentEvents = paymentEventsDto.event
 
-        val foundPaymentEvent = paymentEventRepository.findByIdOrNull(paymentEvent.id)
+        val foundPaymentEvent = paymentEventRepository.findByIdOrNull(paymentEvents.id)
             ?: throw NotFoundPaymentEvent("")
 
         if (!foundPaymentEvent.getIsPaymentDone()) throw PaymentNotCompletedException("")
 
-        val target = PaybackOrder(
+        val target = PaybackOrders(
             paybackEventId = null,
-            paymentEventId = paymentEvent.id,
+            paymentEventId = paymentEvents.id,
             paybackOrderStatus = NOT_STARTED,
             paymentAmount = paymentEventsDto.amount,
             paybackAmount = null,
-            paybackTargetId = paymentEvent.payingMember.memberId
+            paybackTargetId = paymentEvents.payingMember.memberId
         )
 
         paybackOrderRepository.save(target)
@@ -51,22 +51,22 @@ class PaybackOrderService(
 
     @Transactional
     fun excludeFromPaybackOrder(paybackCancelEventsDto: PaymentCancelEventsDto) {
-        val cancelEvent: PaymentCancelEvent = paybackCancelEventsDto.cancelEvent
+        val cancelEvent: PaymentCancelEvents = paybackCancelEventsDto.cancelEvent
         val paymentEventId = cancelEvent.paymentEventId
 
-        val foundCancelEvent: PaymentCancelEvent = paymentCancelEventRepository.findByPaymentEventId(paymentEventId)
+        val foundCancelEvent: PaymentCancelEvents = paymentCancelEventRepository.findByPaymentEventId(paymentEventId)
             ?: throw NotFoundPaymentEvent("")
         if (!foundCancelEvent.getIsCancelDone()) throw PaymentCancelNotCompletedException("")
 
-        val paymentOrder: PaymentOrder =
+        val paymentOrders: PaymentOrders =
             paymentOrderRepository.findByIdAndStatus(paymentEventId.id, PaymentOrderStatus.CANCELLED)
                 ?: throw NotFoundPaymentCancelEvent("")
 
-        val target = PaybackOrder(
+        val target = PaybackOrders(
             paybackEventId = null,
             paymentEventId = paymentEventId,
             paybackOrderStatus = NOT_NEED_TO_PAYBACK,
-            paymentAmount = paymentOrder.amount,
+            paymentAmount = paymentOrders.amount,
             paybackAmount = null,
             paybackTargetId = cancelEvent.cancellingMember.memberId
         )

@@ -5,9 +5,9 @@ import org.example.bankapp.common.exception.AlreadyPaybackCancelledPaymentExcept
 import org.example.bankapp.common.exception.AlreadyPaybackSuccessException
 import org.example.bankapp.domain.dto.*
 import org.example.bankapp.domain.member.MemberId
-import org.example.bankapp.domain.payback.PaybackCancelEvent
-import org.example.bankapp.domain.payback.PaybackEvent
+import org.example.bankapp.domain.payback.PaybackCancelEvents
 import org.example.bankapp.domain.payback.PaybackEventId
+import org.example.bankapp.domain.payback.PaybackEvents
 import org.example.bankapp.domain.payback.PaybackOrderStatus
 import org.example.bankapp.repository.EventJdbcRepository
 import org.example.bankapp.repository.payback.PaybackCancelEventRepository
@@ -31,7 +31,7 @@ class PlacePaybackService(
         val paymentEventId = paybackRequestDto.paymentEventId
         val paybackEventId: PaybackEventId = eventIdService.createPaybackEventId(paybackRequestDto.memberId)
 
-        val paybackEvent = PaybackEvent(
+        val paybackEvents = PaybackEvents(
             id = paybackEventId,
             paybackTargetId = paybackTargetId,
             isPaybackDone = false,
@@ -41,10 +41,10 @@ class PlacePaybackService(
         paybackOrderRepository.findTopByPaymentEventIdOrderByIdDesc(paymentEventId)
             ?.let { if (it.paybackOrderStatus == PaybackOrderStatus.SUCCESS) throw AlreadyPaybackSuccessException("") }
 
-        eventJdbcRepository.insertPaybackEvent(paybackEvent)
+        eventJdbcRepository.insertPaybackEvent(paybackEvents)
 
         val paybackEventsDto = PaybackEventsDto(
-            paybackEvent = paybackEvent,
+            paybackEvents = paybackEvents,
             paybackPercent = paybackPercent,
             paymentEventId = paymentEventId
         )
@@ -59,7 +59,7 @@ class PlacePaybackService(
         val paybackCancelEventId = eventIdService.createPaybackCancelEventId(cancellingMemberId.id)
 
         val paybackEventId = PaybackEventId(paybackCancelRequestDto.paybackEventId)
-        val paybackCancelEvent = PaybackCancelEvent(
+        val paybackCancelEvents = PaybackCancelEvents(
             id = paybackCancelEventId,
             isCancelDone = false,
             paybackEventId = paybackEventId
@@ -68,9 +68,9 @@ class PlacePaybackService(
         paybackCancelEventRepository.countByPaybackEventId(paybackEventId)
             .let { if (it > 0) throw AlreadyPaybackCancelledPaymentException("") }
 
-        eventJdbcRepository.insertPaybackCancelEvent(paybackCancelEvent)
+        eventJdbcRepository.insertPaybackCancelEvent(paybackCancelEvents)
 
-        val paybackCancelEventsDto = PaybackCancelEventsDto(paybackCancelEvent)
+        val paybackCancelEventsDto = PaybackCancelEventsDto(paybackCancelEvents)
         Events.raise(paybackCancelEventsDto)
         return PaybackCancelResponseDto(paybackCancelEventId)
     }

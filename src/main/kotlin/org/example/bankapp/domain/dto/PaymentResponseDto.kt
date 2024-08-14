@@ -1,16 +1,16 @@
 package org.example.bankapp.domain.dto
 
-import org.example.bankapp.domain.payment.PaymentEvent
+import org.example.bankapp.domain.payment.PaymentEvents
 
 data class PaymentResponseDto(
     val eventId: String,
     val payingMemberId: Long
 ) {
     companion object {
-        fun of(paymentEvent: PaymentEvent): PaymentResponseDto {
+        fun of(paymentEvents: PaymentEvents): PaymentResponseDto {
             return PaymentResponseDto(
-                eventId = paymentEvent.id.id,
-                payingMemberId = paymentEvent.payingMember.memberId.id
+                eventId = paymentEvents.id.id,
+                payingMemberId = paymentEvents.payingMember.memberId.id
             )
         }
     }

@@ -125,13 +125,13 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
             is DuplicatedPaymentException -> {
                 status = HttpStatus.BAD_REQUEST.name
                 httpStatus = HttpStatus.BAD_REQUEST
-                message = "중복 지불이 감지되었습니다"
+                message = "중복 결제가 감지되었습니다"
             }
 
             is PaymentAlreadySuccessException -> {
                 status = HttpStatus.BAD_REQUEST.name
                 httpStatus = HttpStatus.BAD_REQUEST
-                message = "지불이 이미 성공했습니다"
+                message = "결제가 이미 성공했습니다"
             }
 
             is EventExecutionTimeoutException -> {

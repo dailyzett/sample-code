@@ -6,8 +6,8 @@ import java.io.Serializable
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "T_PAYBACK_EVENT")
-class PaybackEvent(
+@Table(name = "payback_events")
+class PaybackEvents(
     @EmbeddedId
     val id: PaybackEventId,
 

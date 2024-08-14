@@ -1,26 +1,26 @@
 package org.example.bankapp.domain.dto
 
-import org.example.bankapp.domain.payback.PaybackCancelEvent
-import org.example.bankapp.domain.payback.PaybackEvent
-import org.example.bankapp.domain.payment.PaymentEvent
+import org.example.bankapp.domain.payback.PaybackCancelEvents
+import org.example.bankapp.domain.payback.PaybackEvents
 import org.example.bankapp.domain.payment.PaymentEventId
-import org.example.bankapp.domain.payment.cancel.PaymentCancelEvent
+import org.example.bankapp.domain.payment.PaymentEvents
+import org.example.bankapp.domain.payment.cancel.PaymentCancelEvents
 
 data class PaymentEventsDto(
-    val event: PaymentEvent,
+    val event: PaymentEvents,
     val amount: Int,
 )
 
 data class PaymentCancelEventsDto(
-    val cancelEvent: PaymentCancelEvent,
+    val cancelEvent: PaymentCancelEvents,
 )
 
 data class PaybackEventsDto(
-    val paybackEvent: PaybackEvent,
+    val paybackEvents: PaybackEvents,
     val paybackPercent: Int,
     val paymentEventId: PaymentEventId,
 )
 
 data class PaybackCancelEventsDto(
-    val paybackCancelEvent: PaybackCancelEvent,
+    val paybackCancelEvents: PaybackCancelEvents,
 )

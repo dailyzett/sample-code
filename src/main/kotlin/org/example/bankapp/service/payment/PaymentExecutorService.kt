@@ -1,14 +1,14 @@
 package org.example.bankapp.service.payment
 
 import org.example.bankapp.common.exception.PaymentAlreadySuccessException
-import org.example.bankapp.domain.payment.PaymentEvent
-import org.example.bankapp.domain.payment.PaymentOrder
+import org.example.bankapp.domain.dto.PaymentEventsDto
+import org.example.bankapp.domain.payment.PaymentEvents
 import org.example.bankapp.domain.payment.PaymentOrderStatus.FAILED
 import org.example.bankapp.domain.payment.PaymentOrderStatus.SUCCESS
+import org.example.bankapp.domain.payment.PaymentOrders
 import org.example.bankapp.repository.member.MemberRepository
 import org.example.bankapp.repository.payment.PaymentEventRepository
 import org.example.bankapp.repository.payment.PaymentOrderRepository
-import org.example.bankapp.domain.dto.PaymentEventsDto
 import org.slf4j.LoggerFactory
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -41,17 +41,17 @@ class PaymentExecutorService(
         val paymentEvent = paymentEventRepository.findByIdOrNull(paymentEventsDto.event.id)
         paymentEvent!!.changePaymentDoneState()
 
-        val paymentOrder = PaymentOrder(paymentEventsDto.amount, paymentEventsDto.event, SUCCESS)
-        paymentOrderRepository.save(paymentOrder)
+        val paymentOrders = PaymentOrders(paymentEventsDto.amount, paymentEventsDto.event, SUCCESS)
+        paymentOrderRepository.save(paymentOrders)
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     fun fail(paymentEventsDto: PaymentEventsDto) {
         logger.info("[FAIL TIME EXCEED]")
-        val paymentOrder = PaymentOrder(paymentEventsDto.amount, paymentEventsDto.event, FAILED)
-        paymentOrderRepository.save(paymentOrder)
+        val paymentOrders = PaymentOrders(paymentEventsDto.amount, paymentEventsDto.event, FAILED)
+        paymentOrderRepository.save(paymentOrders)
     }
 
-    private fun isPaymentAlreadyExecute(paymentEvent: PaymentEvent) =
-        paymentOrderRepository.existsByPaymentEventAndPaymentOrderStatus(paymentEvent, SUCCESS)
+    private fun isPaymentAlreadyExecute(paymentEvents: PaymentEvents) =
+        paymentOrderRepository.existsByPaymentEventsAndPaymentOrderStatus(paymentEvents, SUCCESS)
 }

@@ -4,8 +4,8 @@ import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "T_PAYBACK_CANCEL_EVENT")
-class PaybackCancelEvent(
+@Table(name = "payback_cancel_events")
+class PaybackCancelEvents(
     @Id
     val id: String,
 

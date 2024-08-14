@@ -5,11 +5,10 @@ import org.example.bankapp.common.exception.*
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "T_MEMBER")
-class Member(
+@Table(name = "members")
+class Members(
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
 
     @Column(name = "user_name")

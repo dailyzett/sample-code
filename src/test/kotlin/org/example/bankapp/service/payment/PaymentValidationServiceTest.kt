@@ -10,10 +10,10 @@ import org.example.bankapp.common.exception.PaymentNotCompletedException
 import org.example.bankapp.domain.member.MemberId
 import org.example.bankapp.domain.payment.EventType
 import org.example.bankapp.domain.payment.PayingMember
-import org.example.bankapp.domain.payment.PaymentEvent
 import org.example.bankapp.domain.payment.PaymentEventId
+import org.example.bankapp.domain.payment.PaymentEvents
 import org.example.bankapp.domain.payment.cancel.CancellingMember
-import org.example.bankapp.domain.payment.cancel.PaymentCancelEvent
+import org.example.bankapp.domain.payment.cancel.PaymentCancelEvents
 import org.example.bankapp.repository.payment.PaymentCancelEventRepository
 import org.example.bankapp.repository.payment.PaymentEventRepository
 import org.springframework.data.repository.findByIdOrNull
@@ -39,7 +39,7 @@ class PaymentValidationServiceTest : BehaviorSpec({
         }
 
         When("결제가 완료된 상태가 아닐 때") {
-            every { paymentEventRepository.findByIdOrNull(paymentEventId) } returns PaymentEvent(
+            every { paymentEventRepository.findByIdOrNull(paymentEventId) } returns PaymentEvents(
                 id = PaymentEventId(""),
                 isPaymentDone = false,
                 payingMember = PayingMember(MemberId(1L)),
@@ -53,13 +53,13 @@ class PaymentValidationServiceTest : BehaviorSpec({
         }
 
         When("동일 취소 이벤트가 이미 있다면") {
-            every { paymentEventRepository.findByIdOrNull(paymentEventId) } returns PaymentEvent(
+            every { paymentEventRepository.findByIdOrNull(paymentEventId) } returns PaymentEvents(
                 id = PaymentEventId(""),
                 isPaymentDone = true,
                 payingMember = PayingMember(MemberId(1L)),
             )
 
-            val cancelEvent = PaymentCancelEvent(
+            val cancelEvent = PaymentCancelEvents(
                 eventId = "",
                 cancellingMember = CancellingMember(MemberId(1L)),
                 eventType = EventType.PAYMENT,

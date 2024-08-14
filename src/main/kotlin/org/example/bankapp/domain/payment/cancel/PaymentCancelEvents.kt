@@ -6,8 +6,8 @@ import org.example.bankapp.domain.payment.PaymentEventId
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "T_PAYMENT_CANCEL_EVENT")
-class PaymentCancelEvent(
+@Table(name = "payment_cancel_events")
+class PaymentCancelEvents(
     @Id
     val id: String,
 

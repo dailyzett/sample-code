@@ -12,6 +12,10 @@ class EventIdService {
         return PaymentEventId("${Instant.now().epochSecond}-${memberId.id}")
     }
 
+    fun createPaymentCancelEventId(memberId: MemberId): PaymentEventId {
+        return PaymentEventId("${Instant.now().epochSecond}-${memberId.id}")
+    }
+
     fun createPaybackEventId(memberId: Long): PaybackEventId {
         return PaybackEventId("${Instant.now().epochSecond}-${memberId}")
     }

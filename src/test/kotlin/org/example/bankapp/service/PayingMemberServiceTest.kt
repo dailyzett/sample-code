@@ -7,8 +7,8 @@ import io.mockk.mockk
 import org.example.bankapp.common.exception.*
 import org.example.bankapp.domain.dto.PaymentRequestDto
 import org.example.bankapp.domain.member.BalanceLimit
-import org.example.bankapp.domain.member.Member
 import org.example.bankapp.domain.member.MemberId
+import org.example.bankapp.domain.member.Members
 import org.example.bankapp.domain.member.Wallet
 import org.example.bankapp.repository.member.MemberRepository
 import org.example.bankapp.service.payment.PayingMemberService
@@ -31,7 +31,7 @@ class PayingMemberServiceTest : BehaviorSpec({
         }
 
         When("가입되어 있는 상태가 아니라면") {
-            every { memberRepository.findByIdOrNull(any()) } returns Member(
+            every { memberRepository.findByIdOrNull(any()) } returns Members(
                 23L,
                 "TestUser",
                 false,
@@ -46,7 +46,7 @@ class PayingMemberServiceTest : BehaviorSpec({
         }
 
         When("현재 가지고 있는 잔액이 부족하다면") {
-            every { memberRepository.findByIdOrNull(any()) } returns Member(
+            every { memberRepository.findByIdOrNull(any()) } returns Members(
                 23L,
                 "TestUser",
                 true,
@@ -61,7 +61,7 @@ class PayingMemberServiceTest : BehaviorSpec({
         }
 
         When("1회 송신 한도를 초과했다면") {
-            every { memberRepository.findByIdOrNull(any()) } returns Member(
+            every { memberRepository.findByIdOrNull(any()) } returns Members(
                 23L,
                 "TestUser",
                 true,
@@ -76,7 +76,7 @@ class PayingMemberServiceTest : BehaviorSpec({
         }
 
         When("1일 송신 한도를 초과했다면") {
-            every { memberRepository.findByIdOrNull(any()) } returns Member(
+            every { memberRepository.findByIdOrNull(any()) } returns Members(
                 23L,
                 "TestUser",
                 true,
@@ -91,7 +91,7 @@ class PayingMemberServiceTest : BehaviorSpec({
         }
 
         When("한 달 송신 한도를 초과했다면") {
-            every { memberRepository.findByIdOrNull(any()) } returns Member(
+            every { memberRepository.findByIdOrNull(any()) } returns Members(
                 23L,
                 "TestUser",
                 true,

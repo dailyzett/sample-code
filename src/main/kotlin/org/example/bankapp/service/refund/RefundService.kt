@@ -6,15 +6,15 @@ import org.example.bankapp.common.exception.NotFoundPaybackOrder
 import org.example.bankapp.common.exception.PaybackNotCompletedException
 import org.example.bankapp.domain.dto.PaybackCancelEventsDto
 import org.example.bankapp.domain.dto.PaymentCancelEventsDto
-import org.example.bankapp.domain.member.Member
-import org.example.bankapp.domain.payback.PaybackCancelEvent
-import org.example.bankapp.domain.payback.PaybackEvent
-import org.example.bankapp.domain.payback.PaybackOrder
+import org.example.bankapp.domain.member.Members
+import org.example.bankapp.domain.payback.PaybackCancelEvents
+import org.example.bankapp.domain.payback.PaybackEvents
 import org.example.bankapp.domain.payback.PaybackOrderStatus
-import org.example.bankapp.domain.payment.PaymentOrder
+import org.example.bankapp.domain.payback.PaybackOrders
 import org.example.bankapp.domain.payment.PaymentOrderStatus.CANCELLED
 import org.example.bankapp.domain.payment.PaymentOrderStatus.SUCCESS
-import org.example.bankapp.domain.payment.cancel.PaymentCancelEvent
+import org.example.bankapp.domain.payment.PaymentOrders
+import org.example.bankapp.domain.payment.cancel.PaymentCancelEvents
 import org.example.bankapp.repository.member.MemberRepository
 import org.example.bankapp.repository.payback.PaybackCancelEventRepository
 import org.example.bankapp.repository.payback.PaybackEventRepository
@@ -41,16 +41,16 @@ class RefundService(
         val cancellingMemberId = cancelEvent.cancellingMember.memberId
         val paymentEventId = paymentCancelEventsDto.cancelEvent.paymentEventId
 
-        val paymentOrder: PaymentOrder = paymentOrderRepository.findByIdAndStatus(paymentEventId.id, SUCCESS)!!
-        val foundMember: Member = memberRepository.findByIdOrNull(cancellingMemberId.id)
+        val paymentOrders: PaymentOrders = paymentOrderRepository.findByIdAndStatus(paymentEventId.id, SUCCESS)!!
+        val foundMembers: Members = memberRepository.findByIdOrNull(cancellingMemberId.id)
             ?: throw MemberNotFoundException("")
-        val paymentCancelEvent: PaymentCancelEvent = paymentCancelEventRepository.findByIdOrNull(cancelEvent.id)!!
+        val paymentCancelEvents: PaymentCancelEvents = paymentCancelEventRepository.findByIdOrNull(cancelEvent.id)!!
 
-        foundMember.addMemberBalanceInfo(paymentOrder.amount)
-        paymentCancelEvent.changeIsCancelDone()
+        foundMembers.addMemberBalanceInfo(paymentOrders.amount)
+        paymentCancelEvents.changeIsCancelDone()
 
-        val savedPaymentOrder = PaymentOrder(paymentOrder.amount, paymentOrder.paymentEvent, CANCELLED)
-        paymentOrderRepository.save(savedPaymentOrder)
+        val savedPaymentOrders = PaymentOrders(paymentOrders.amount, paymentOrders.paymentEvents, CANCELLED)
+        paymentOrderRepository.save(savedPaymentOrders)
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -78,35 +78,35 @@ class RefundService(
      */
     @Transactional
     fun executePaybackRefund(paybackCancelEventsDto: PaybackCancelEventsDto) {
-        val foundPaybackEvent: PaybackEvent = ensurePaybackCompleted(paybackCancelEventsDto.paybackCancelEvent)
-        val foundMember: Member = fetchPaybackMember(foundPaybackEvent)
+        val foundPaybackEvents: PaybackEvents = ensurePaybackCompleted(paybackCancelEventsDto.paybackCancelEvents)
+        val foundMembers: Members = fetchPaybackMember(foundPaybackEvents)
 
-        val foundPaybackOrder: PaybackOrder = paybackOrderRepository.findByPaybackEventIdAndPaybackOrderStatus(
-            foundPaybackEvent.id,
+        val foundPaybackOrders: PaybackOrders = paybackOrderRepository.findByPaybackEventIdAndPaybackOrderStatus(
+            foundPaybackEvents.id,
             PaybackOrderStatus.SUCCESS
         ) ?: throw NotFoundPaybackOrder("")
 
-        val refundAmount: Int = foundPaybackOrder.paybackAmount ?: 0
-        foundMember.subtractMemberWalletBalance(refundAmount)
+        val refundAmount: Int = foundPaybackOrders.paybackAmount ?: 0
+        foundMembers.subtractMemberWalletBalance(refundAmount)
 
-        updateCancelStateToDone(paybackCancelEventsDto.paybackCancelEvent)
-        paybackOrderRepository.save(PaybackOrder.fromForCancel(foundPaybackOrder))
+        updateCancelStateToDone(paybackCancelEventsDto.paybackCancelEvents)
+        paybackOrderRepository.save(PaybackOrders.fromForCancel(foundPaybackOrders))
     }
 
-    private fun fetchPaybackMember(foundPaybackEvent: PaybackEvent): Member {
-        return memberRepository.findByIdOrNull(foundPaybackEvent.paybackTargetId.id)
+    private fun fetchPaybackMember(foundPaybackEvents: PaybackEvents): Members {
+        return memberRepository.findByIdOrNull(foundPaybackEvents.paybackTargetId.id)
             ?: throw MemberNotFoundException("")
     }
 
-    private fun ensurePaybackCompleted(paybackCancelEvent: PaybackCancelEvent): PaybackEvent {
-        val foundPaybackEvent = paybackEventRepository.findByIdOrNull(paybackCancelEvent.paybackEventId)
+    private fun ensurePaybackCompleted(paybackCancelEvents: PaybackCancelEvents): PaybackEvents {
+        val foundPaybackEvent = paybackEventRepository.findByIdOrNull(paybackCancelEvents.paybackEventId)
             ?: throw NotFoundPaybackEvent("")
         if (!foundPaybackEvent.isPaybackDone) throw PaybackNotCompletedException("")
         return foundPaybackEvent
     }
 
-    private fun updateCancelStateToDone(paybackCancelEvent: PaybackCancelEvent) {
-        val foundPaybackCancelEvent = paybackCancelEventRepository.findByIdOrNull(paybackCancelEvent.id)!!
+    private fun updateCancelStateToDone(paybackCancelEvents: PaybackCancelEvents) {
+        val foundPaybackCancelEvent = paybackCancelEventRepository.findByIdOrNull(paybackCancelEvents.id)!!
         foundPaybackCancelEvent.updateToCancelDoneTrue()
     }
 }

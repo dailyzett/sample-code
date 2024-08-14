@@ -4,10 +4,10 @@ import org.example.bankapp.common.exception.DuplicatedPaybackCancelException
 import org.example.bankapp.common.exception.DuplicatedPaybackException
 import org.example.bankapp.common.exception.DuplicatedPaymentCancelException
 import org.example.bankapp.common.exception.DuplicatedPaymentException
-import org.example.bankapp.domain.payback.PaybackCancelEvent
-import org.example.bankapp.domain.payback.PaybackEvent
-import org.example.bankapp.domain.payment.PaymentEvent
-import org.example.bankapp.domain.payment.cancel.PaymentCancelEvent
+import org.example.bankapp.domain.payback.PaybackCancelEvents
+import org.example.bankapp.domain.payback.PaybackEvents
+import org.example.bankapp.domain.payment.PaymentEvents
+import org.example.bankapp.domain.payment.cancel.PaymentCancelEvents
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
@@ -17,18 +17,18 @@ import java.time.LocalDateTime
 class EventJdbcRepository(
     private val jdbcTemplate: JdbcTemplate,
 ) {
-    fun insertPaymentEvent(paymentEvent: PaymentEvent) {
+    fun insertPaymentEvent(paymentEvents: PaymentEvents) {
         val sql = """
-            INSERT INTO T_PAYMENT_EVENT(id, is_payment_done, member_id, created_dt)
+            INSERT INTO payment_events(id, is_payment_done, member_id, created_dt)
             VALUES (?, ?, ?, ?);
         """.trimIndent()
 
         try {
             jdbcTemplate.update(
                 sql,
-                paymentEvent.id.id,
-                paymentEvent.getIsPaymentDone(),
-                paymentEvent.payingMember.memberId.id,
+                paymentEvents.id.id,
+                paymentEvents.getIsPaymentDone(),
+                paymentEvents.payingMember.memberId.id,
                 LocalDateTime.now()
             )
         } catch (e: DuplicateKeyException) {
@@ -36,62 +36,66 @@ class EventJdbcRepository(
         }
     }
 
-    fun insertPaymentCancelEvent(paymentCancelEvent: PaymentCancelEvent) {
+    fun insertPaymentCancelEvent(paymentCancelEvents: PaymentCancelEvents) {
         val sql = """
-            INSERT INTO T_PAYMENT_CANCEL_EVENT(id, is_cancel_done, event_type, payment_event_id ,member_id, created_dt)
+            INSERT INTO payment_cancel_events(id, is_cancel_done, event_type, payment_event_id ,member_id, created_dt)
             VALUES (?, ?, ?, ?, ?, ?)
         """.trimIndent()
 
         try {
             jdbcTemplate.update(
                 sql,
-                paymentCancelEvent.id,
-                paymentCancelEvent.getIsCancelDone(),
-                paymentCancelEvent.eventType.name,
-                paymentCancelEvent.paymentEventId.id,
-                paymentCancelEvent.cancellingMember.memberId.id,
-                paymentCancelEvent.createdDt
+                paymentCancelEvents.id,
+                paymentCancelEvents.getIsCancelDone(),
+                paymentCancelEvents.eventType.name,
+                paymentCancelEvents.paymentEventId.id,
+                paymentCancelEvents.cancellingMember.memberId.id,
+                paymentCancelEvents.createdDt
             )
         } catch (e: DuplicateKeyException) {
             throw DuplicatedPaymentCancelException("")
         }
     }
 
-    fun insertPaybackEvent(paybackEvent: PaybackEvent) {
+    fun insertPaybackEvent(paybackEvents: PaybackEvents) {
         val sql = """
-            INSERT INTO T_PAYBACK_EVENT (id, is_payback_done, member_id, created_dt)
+            INSERT INTO payback_events (id, is_payback_done, member_id, created_dt)
             VALUES (?, ?, ?, ?)
         """.trimIndent()
 
         try {
             jdbcTemplate.update(
                 sql,
-                paybackEvent.id.id,
-                paybackEvent.isPaybackDone,
-                paybackEvent.paybackTargetId.id,
-                paybackEvent.createdDt
+                paybackEvents.id.id,
+                paybackEvents.isPaybackDone,
+                paybackEvents.paybackTargetId.id,
+                paybackEvents.createdDt
             )
         } catch (e: DuplicateKeyException) {
             throw DuplicatedPaybackException("")
+        } catch (e: Exception) {
+            throw e
         }
     }
 
-    fun insertPaybackCancelEvent(paybackCancelEvent: PaybackCancelEvent) {
+    fun insertPaybackCancelEvent(paybackCancelEvents: PaybackCancelEvents) {
         val sql = """
-            INSERT INTO T_PAYBACK_CANCEL_EVENT (id, is_cancel_done, payback_event_id, created_dt)
+            INSERT INTO payback_cancel_events (id, is_cancel_done, payback_event_id, created_dt)
             VALUES (?, ?, ?, ?)
         """.trimIndent()
 
         try {
             jdbcTemplate.update(
                 sql,
-                paybackCancelEvent.id,
-                paybackCancelEvent.isCancelDone,
-                paybackCancelEvent.paybackEventId.id,
-                paybackCancelEvent.createdDt
+                paybackCancelEvents.id,
+                paybackCancelEvents.isCancelDone,
+                paybackCancelEvents.paybackEventId.id,
+                paybackCancelEvents.createdDt
             )
         } catch (e: DuplicateKeyException) {
             throw DuplicatedPaybackCancelException("")
+        } catch (e: Exception) {
+            throw e
         }
     }
 }

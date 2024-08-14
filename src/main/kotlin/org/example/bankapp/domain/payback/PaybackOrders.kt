@@ -6,8 +6,8 @@ import org.example.bankapp.domain.payment.PaymentEventId
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "T_PAYBACK_ORDER")
-class PaybackOrder(
+@Table(name = "payback_orders")
+class PaybackOrders(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
@@ -41,15 +41,15 @@ class PaybackOrder(
     val createdDt: LocalDateTime = LocalDateTime.now(),
 ) {
     companion object {
-        fun fromForCancel(paybackOrder: PaybackOrder): PaybackOrder {
-            return PaybackOrder(
-                paybackEventId = paybackOrder.paybackEventId,
-                paymentEventId = paybackOrder.paymentEventId,
+        fun fromForCancel(paybackOrders: PaybackOrders): PaybackOrders {
+            return PaybackOrders(
+                paybackEventId = paybackOrders.paybackEventId,
+                paymentEventId = paybackOrders.paymentEventId,
                 paybackOrderStatus = PaybackOrderStatus.CANCELLED,
-                paymentAmount = paybackOrder.paymentAmount,
-                paybackAmount = paybackOrder.paybackAmount,
-                paybackTargetId = paybackOrder.paybackTargetId,
-                createdDt = paybackOrder.createdDt
+                paymentAmount = paybackOrders.paymentAmount,
+                paybackAmount = paybackOrders.paybackAmount,
+                paybackTargetId = paybackOrders.paybackTargetId,
+                createdDt = paybackOrders.createdDt
             )
         }
     }
