@@ -1,5 +1,8 @@
 package org.example.eventsourcing.service
 
+import org.example.eventsourcing.command.AddItem
+import org.example.eventsourcing.command.ChangeQuantity
+import org.example.eventsourcing.command.RemoveItem
 import org.example.eventsourcing.store.CartStore
 import org.springframework.stereotype.Service
 
@@ -7,21 +10,23 @@ import org.springframework.stereotype.Service
 class CartService(
     private val cartStore: CartStore,
 ) {
-    fun addItem(cartId: String, productNo: String, productName: String, quantity: Int) {
-        val foundCart = cartStore.load(cartId)
-        foundCart.addItem(productNo, productName, quantity)
+    fun addItem(command: AddItem) {
+        val foundCart = cartStore.load(command.cartId)
+        foundCart.addItem(command)
         cartStore.save(foundCart)
     }
 
-    fun changeQuantity(cartId: String, productNo: String, quantity: Int) {
-        val foundCart = cartStore.load(cartId)
-        foundCart.changeQuantity(productNo, quantity)
+    fun changeQuantity(command: ChangeQuantity) {
+        command.validate()
+
+        val foundCart = cartStore.load(command.cartId)
+        foundCart.changeQuantity(command)
         cartStore.save(foundCart)
     }
 
-    fun removeItem(cartId: String, productNo: String) {
-        val foundCart = cartStore.load(cartId)
-        foundCart.removeItem(productNo)
+    fun removeItem(command: RemoveItem) {
+        val foundCart = cartStore.load(command.cartId)
+        foundCart.removeItem(command)
         cartStore.save(foundCart)
     }
 }

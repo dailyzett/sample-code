@@ -1,6 +1,6 @@
 package org.example.eventsourcing.command
 
-data class CartRequestDto(
+data class AddItem(
     val cartId: String,
     val productNo: String,
     val productName: String,

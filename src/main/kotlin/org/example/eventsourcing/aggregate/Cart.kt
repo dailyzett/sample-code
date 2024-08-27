@@ -1,5 +1,8 @@
 package org.example.eventsourcing.aggregate
 
+import org.example.eventsourcing.command.AddItem
+import org.example.eventsourcing.command.ChangeQuantity
+import org.example.eventsourcing.command.RemoveItem
 import org.example.eventsourcing.event.Event
 import org.example.eventsourcing.event.ItemAdded
 import org.example.eventsourcing.event.ItemRemoved
@@ -16,25 +19,25 @@ class Cart(
         events = mutableListOf()
     )
 
-    fun addItem(productNo: String, productName: String, quantity: Int) {
-        items.add(Item(productNo, productName, quantity))
-        val event = ItemAdded(productNo, productName, quantity)
+    fun addItem(command: AddItem) {
+        items.add(Item(command.productNo, command.productName, command.quantity))
+        val event = ItemAdded(command.productNo, command.productName, command.quantity)
         this.events.add(event)
     }
 
-    fun changeQuantity(productNo: String, quantity: Int) {
-        val foundItem = findItem(productNo) ?: return
-        foundItem.changeQuantity(quantity)
+    fun changeQuantity(command: ChangeQuantity) {
+        val foundItem = findItem(command.productNo) ?: return
+        foundItem.changeQuantity(command.quantity)
 
-        val event = QuantityChanged(productNo, quantity)
+        val event = QuantityChanged(command.productNo, command.quantity)
         this.events.add(event)
     }
 
-    fun removeItem(productNo: String) {
-        val foundItem = findItem(productNo) ?: return
+    fun removeItem(command: RemoveItem) {
+        val foundItem = findItem(command.productNo) ?: return
         items.remove(foundItem)
 
-        val event = ItemRemoved(productNo)
+        val event = ItemRemoved(command.productNo)
         this.events.add(event)
     }
 
