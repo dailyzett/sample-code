@@ -2,6 +2,7 @@ package org.example.eventsourcing.store
 
 import jakarta.transaction.Transactional
 import org.example.eventsourcing.aggregate.Cart
+import org.example.eventsourcing.event.Event
 import org.example.eventsourcing.store.jpa.CartEventJpo
 import org.example.eventsourcing.store.jpa.CartEventRepository
 import org.example.eventsourcing.store.jpa.CartJpo
@@ -24,6 +25,12 @@ class CartStore(
         val cartJpo = cartRepository.findByIdOrNull(cartId)
             ?: throw NoSuchElementException("")
 
-        return Cart(cartJpo.cartId)
+        val eventJpos: List<CartEventJpo> = cartEventRepository.findByCartIdOrderByTimeAsc(cartId)
+        val events: List<Event> = eventJpos.map { eventJpo -> eventJpo.toEvent() }
+
+        val cart = cartJpo.toCart()
+        events.forEach { event -> cart.applyEvent(event, false) }
+
+        return cart
     }
 }

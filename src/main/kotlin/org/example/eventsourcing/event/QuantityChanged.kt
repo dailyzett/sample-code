@@ -1,6 +1,6 @@
 package org.example.eventsourcing.event
 
-class QuantityChanged(
+data class QuantityChanged(
     val productNo: String,
     val quantity: Int,
 ) : Event()

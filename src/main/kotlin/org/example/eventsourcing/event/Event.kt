@@ -7,16 +7,18 @@ import java.util.*
 abstract class Event(
     val eventId: String,
     val time: Long,
-    val cartId: String
 ) {
     constructor() : this(
         eventId = UUID.randomUUID().toString(),
         time = System.currentTimeMillis(),
-        cartId = ""
     )
 
     @JsonIgnore
     fun getPayload(): String {
         return JsonUtil.toJson(this)
+    }
+
+    fun typeName(): String {
+        return this.javaClass.typeName
     }
 }

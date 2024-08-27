@@ -16,4 +16,8 @@ class CartJpo(
     constructor(cart: Cart) : this(
         cartId = cart.cartId,
     )
+
+    fun toCart(): Cart {
+        return Cart(cartId)
+    }
 }

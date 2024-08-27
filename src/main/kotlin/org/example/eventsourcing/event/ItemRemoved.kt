@@ -1,5 +1,5 @@
 package org.example.eventsourcing.event
 
-class ItemRemoved(
-    productNo: String,
+data class ItemRemoved(
+    val productNo: String,
 ) : Event()
