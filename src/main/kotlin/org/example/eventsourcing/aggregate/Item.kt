@@ -1,6 +1,6 @@
 package org.example.eventsourcing.aggregate
 
-class Item(
+data class Item(
     val productNo: String = "",
     val productName: String = "",
     val price: Int = 0,

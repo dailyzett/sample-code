@@ -26,6 +26,8 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+    testImplementation 'io.kotest:kotest-runner-junit5:5.9.1'
+    testImplementation 'io.mockk:mockk:1.13.12'
     runtimeOnly 'com.mysql:mysql-connector-j'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
