@@ -2,6 +2,7 @@ package org.example.eventsourcing.controller
 
 import org.example.eventsourcing.command.AddItem
 import org.example.eventsourcing.command.ChangeQuantity
+import org.example.eventsourcing.command.CreateCart
 import org.example.eventsourcing.command.RemoveItem
 import org.example.eventsourcing.service.CartService
 import org.springframework.web.bind.annotation.*
@@ -24,5 +25,10 @@ class CartController(
     @DeleteMapping("")
     fun deleteCart(@RequestBody command: RemoveItem) {
         cartService.removeItem(command)
+    }
+
+    @PostMapping("/create")
+    fun createCart(@RequestBody command: CreateCart) {
+        cartService.createCart(command)
     }
 }

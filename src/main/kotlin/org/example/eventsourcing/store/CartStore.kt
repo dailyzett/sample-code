@@ -30,7 +30,9 @@ class CartStore(
 
         val cart = cartJpo.toCart()
         events.forEach { event -> cart.applyEvent(event, false) }
-
+        cart.version = cartJpo.version
         return cart
     }
+
+    fun exists(cartId: String) = cartRepository.existsById(cartId)
 }

@@ -2,23 +2,42 @@ package org.example.eventsourcing.aggregate
 
 import org.example.eventsourcing.command.AddItem
 import org.example.eventsourcing.command.ChangeQuantity
+import org.example.eventsourcing.command.CreateCart
 import org.example.eventsourcing.command.RemoveItem
-import org.example.eventsourcing.event.Event
-import org.example.eventsourcing.event.ItemAdded
-import org.example.eventsourcing.event.ItemRemoved
-import org.example.eventsourcing.event.QuantityChanged
+import org.example.eventsourcing.event.*
 import java.lang.reflect.Method
 
 class Cart(
-    val cartId: String = "",
+    var cartId: String = "",
     val items: MutableList<Item> = mutableListOf(),
-    val events: MutableList<Event> = mutableListOf()
+    val events: MutableList<Event> = mutableListOf(),
+    var deleted: Boolean = false,
+    var version: Long = 0,
 ) {
     constructor(cartId: String) : this(
         cartId = cartId,
         items = mutableListOf(),
         events = mutableListOf()
     )
+
+    constructor(cartId: String, version: Long) : this(
+        cartId = cartId,
+        version = version,
+        items = mutableListOf(),
+        events = mutableListOf()
+    )
+
+    fun delete() {
+        this.applyEvent(CartDeleted(cartId))
+    }
+
+    private fun on(event: CartDeleted) {
+        this.markDelete()
+    }
+
+    private fun markDelete() {
+        deleted = true
+    }
 
     fun addItem(command: AddItem) {
         if (!containsItem(command.productNo)) {
@@ -51,6 +70,14 @@ class Cart(
 
     private fun on(event: ItemRemoved) {
         this.items.removeIf { it.productNo == event.productNo }
+    }
+
+    fun Cart(command: CreateCart) {
+        this.applyEvent(CartCreated(command.cartId))
+    }
+
+    private fun on(event: CartCreated) {
+        this.cartId = event.cartId
     }
 
     fun findItem(productNo: String) = items.find { it.productNo == productNo }
