@@ -7,10 +7,12 @@ import java.util.*
 abstract class Event(
     val eventId: String,
     val time: Long,
+    protected val rehydration: Boolean,
 ) {
     constructor() : this(
         eventId = UUID.randomUUID().toString(),
         time = System.currentTimeMillis(),
+        rehydration = true
     )
 
     @JsonIgnore

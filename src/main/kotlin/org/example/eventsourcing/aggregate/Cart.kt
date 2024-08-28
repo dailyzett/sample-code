@@ -1,10 +1,12 @@
 package org.example.eventsourcing.aggregate
 
+import org.example.eventsourcing.JsonUtil
 import org.example.eventsourcing.command.AddItem
 import org.example.eventsourcing.command.ChangeQuantity
 import org.example.eventsourcing.command.CreateCart
 import org.example.eventsourcing.command.RemoveItem
 import org.example.eventsourcing.event.*
+import org.example.eventsourcing.eventsourcing.Snapshot
 import java.lang.reflect.Method
 
 class Cart(
@@ -95,5 +97,10 @@ class Cart(
                 this.events.add(event)
             }
         }
+    }
+
+    fun snapshot(): Snapshot {
+        val time = this.events[this.events.size - 1].time
+        return Snapshot(JsonUtil.toJson(this), time)
     }
 }

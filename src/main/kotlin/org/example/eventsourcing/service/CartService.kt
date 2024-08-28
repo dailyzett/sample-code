@@ -19,7 +19,6 @@ class CartService(
 
     fun addItem(command: AddItem) {
         val foundCart: Cart = cartStore.load(command.cartId)
-        foundCart.version = command.version
         foundCart.addItem(command)
 
         try {
