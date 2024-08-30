@@ -1,6 +1,5 @@
 package org.example.eventsourcing.service
 
-import jakarta.persistence.OptimisticLockException
 import org.example.eventsourcing.aggregate.Cart
 import org.example.eventsourcing.command.AddItem
 import org.example.eventsourcing.command.ChangeQuantity
@@ -20,12 +19,7 @@ class CartService(
     fun addItem(command: AddItem) {
         val foundCart: Cart = cartStore.load(command.cartId)
         foundCart.addItem(command)
-
-        try {
-            cartStore.save(foundCart)
-        } catch (e: OptimisticLockException) {
-            throw RuntimeException("")
-        }
+        cartStore.save(foundCart)
     }
 
     fun changeQuantity(command: ChangeQuantity) {
@@ -44,7 +38,7 @@ class CartService(
 
     fun createCart(command: CreateCart) {
         if (this.cartStore.exists(command.cartId)) throw RuntimeException("Cart already exists")
-        val cart = Cart(command.cartId)
-        cartStore.save(cart)
+        val cart = Cart(command)
+        this.cartStore.save(cart)
     }
 }

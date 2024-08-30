@@ -1,7 +1,9 @@
 package org.example.eventsourcing.store.jpa
 
 import jakarta.persistence.*
+import org.example.eventsourcing.JsonUtil
 import org.example.eventsourcing.aggregate.Cart
+import org.example.eventsourcing.eventsourcing.Snapshot
 import org.hibernate.annotations.JdbcTypeCode
 import org.hibernate.type.SqlTypes
 
@@ -24,12 +26,21 @@ class CartJpo(
 ) {
     constructor(cart: Cart) : this(
         cartId = cart.cartId,
-        snapshot = cart.snapshot().payload,
-        snapShotTime = cart.snapshot().time,
-        version = cart.version
-    )
+        version = cart.version,
+    ) {
+        if (cart.snapshot != null) {
+            this.snapshot = cart.snapshot!!.payload
+            this.snapShotTime = cart.snapshot!!.time
+        }
+    }
 
     fun toCart(): Cart {
-        return Cart(this.cartId, this.version)
+        if ((this.snapShotTime ?: 0) > 0) {
+            val cart = JsonUtil.fromJson(this.snapshot, Cart::class.java)!!
+            cart.snapshot = Snapshot(this.snapshot, this.snapShotTime!!)
+            return cart;
+        }
+
+        return JsonUtil.fromJson("{}", Cart::class.java)!!
     }
 }

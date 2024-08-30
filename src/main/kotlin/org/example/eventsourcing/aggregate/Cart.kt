@@ -1,5 +1,6 @@
 package org.example.eventsourcing.aggregate
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.example.eventsourcing.JsonUtil
 import org.example.eventsourcing.command.AddItem
 import org.example.eventsourcing.command.ChangeQuantity
@@ -7,6 +8,7 @@ import org.example.eventsourcing.command.CreateCart
 import org.example.eventsourcing.command.RemoveItem
 import org.example.eventsourcing.event.*
 import org.example.eventsourcing.eventsourcing.Snapshot
+import org.slf4j.LoggerFactory
 import java.lang.reflect.Method
 
 class Cart(
@@ -15,19 +17,20 @@ class Cart(
     val events: MutableList<Event> = mutableListOf(),
     var deleted: Boolean = false,
     var version: Long = 0,
+    @JsonIgnore var snapshot: Snapshot? = null
 ) {
+
+    private val log = LoggerFactory.getLogger(this.javaClass)
+
     constructor(cartId: String) : this(
         cartId = cartId,
         items = mutableListOf(),
         events = mutableListOf()
     )
 
-    constructor(cartId: String, version: Long) : this(
-        cartId = cartId,
-        version = version,
-        items = mutableListOf(),
-        events = mutableListOf()
-    )
+    constructor(command: CreateCart) : this() {
+        this.applyEvent(CartCreated(command.cartId))
+    }
 
     fun delete() {
         this.applyEvent(CartDeleted(cartId))
@@ -45,6 +48,9 @@ class Cart(
         if (!containsItem(command.productNo)) {
             val event = ItemAdded(command.cartId, command.productNo, command.productName, command.quantity)
             this.applyEvent(event)
+        } else {
+            val foundItem: Item = this.findItem(command.productNo)!!
+            this.applyEvent(QuantityChanged(command.productNo, foundItem.quantity + 1))
         }
     }
 
@@ -74,10 +80,6 @@ class Cart(
         this.items.removeIf { it.productNo == event.productNo }
     }
 
-    fun Cart(command: CreateCart) {
-        this.applyEvent(CartCreated(command.cartId))
-    }
-
     private fun on(event: CartCreated) {
         this.cartId = event.cartId
     }
@@ -102,5 +104,15 @@ class Cart(
     fun snapshot(): Snapshot {
         val time = this.events[this.events.size - 1].time
         return Snapshot(JsonUtil.toJson(this), time)
+    }
+
+    fun takeSnapshot() {
+        val eventTime = this.events.last().time
+        val currentTime = System.currentTimeMillis()
+
+        snapshot = snapshot?.let {
+            if (eventTime - it.time > 600000) Snapshot(JsonUtil.toJson(this), eventTime)
+            else it
+        } ?: Snapshot(JsonUtil.toJson(this), currentTime)
     }
 }
