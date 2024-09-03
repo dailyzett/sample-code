@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: event-sourcing
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/cart
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+#        format_sql: true
+#    show-sql: true
