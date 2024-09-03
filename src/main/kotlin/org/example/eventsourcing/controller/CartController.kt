@@ -17,8 +17,8 @@ class CartController(
         cartService.addItem(command)
     }
 
-    @PatchMapping("")
-    fun changeCart(@RequestBody command: ChangeQuantity) {
+    @PutMapping(value = ["/{itemId}"], headers = ["command=ChangeQuantity"])
+    fun changeCart(@PathVariable itemId: String, @RequestBody command: ChangeQuantity) {
         cartService.changeQuantity(command)
     }
 

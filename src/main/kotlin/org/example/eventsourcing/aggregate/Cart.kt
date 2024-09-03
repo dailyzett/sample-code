@@ -19,8 +19,19 @@ class Cart(
     var version: Long = 0,
     @JsonIgnore var snapshot: Snapshot? = null
 ) {
-
     private val log = LoggerFactory.getLogger(this.javaClass)
+
+    data class Item(
+        val productNo: String = "",
+        val productName: String = "",
+        var quantity: Int = 0
+    ) {
+        fun changeQuantity(quantity: Int) {
+            this.quantity = quantity
+        }
+
+        fun addQuantity() = quantity++
+    }
 
     constructor(cartId: String) : this(
         cartId = cartId,
