@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+	
+	
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Member" type="com.cen.park.vo.MemberVo"/>
+		<typeAlias alias="QuestionBoard" type="com.cen.park.vo.QuestionBoardVo"/>
+		<typeAlias alias="ReplyBoard" type="com.cen.park.vo.ReplyVo"/>
+		<typeAlias alias="Park" type="com.cen.park.vo.ParkVo"/>
+		<typeAlias alias="Reservation" type="com.cen.park.vo.ReservationVo"/>
+		<typeAlias alias="NoticeBoard" type="com.cen.park.vo.NoticeBoardVo"/>
+	</typeAliases>
+</configuration>

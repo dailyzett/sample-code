@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.writeform{
+	padding: 15px;
+}
+
+.writeform th{
+	width:200px;
+  	text-align: center;
+  	background-color: #f2f2f2;
+  	color: black;
+}
+
+.writeform td, .writeform th{
+	padding: 10px;
+	border:1px solid #ddd;
+	padding: 8px;
+}
+
+.boardRegit{
+	float: right;
+	margin-right : 120px;
+	
+}
+
+.buttonDiv2{
+	margin-top: 2px;
+	float:left;
+}

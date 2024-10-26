@@ -1,0 +1,51 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="css/menu.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+</head>
+<body>
+<header role="banner" class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle pull-left"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        </div>
+        <div class="navbar-inverse side-collapse in">
+            <nav role="navigation" class="navbar-collapse">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="/members">Users</a></li>
+                    <li><a href="/notice">Notice</a></li>
+                    <li><a href="/place_history">History</a></li>
+                    <li><a href="https://ko.online-qrcode-generator.com/">QR Code Generate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<div class="container side-collapse-container">
+    <div class="row">
+        <div class="container" style="padding: 100px 0px 0px 0px">
+            <form role="form" th:action="@{/post}" method="post" th:object="${board}">
+                <div class="form-group">
+                    <label></label>
+                    <input type="text" class="form-control" placeholder="제목 입력" th:field="*{title}">
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <textarea name="content" th:field="*{content}" class="form-control" style="height: 400px" placeholder="게시글 작성"></textarea>
+                </div>
+                <div class="form-group" align="right">
+                    <button type="submit" class="btn">등록</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>

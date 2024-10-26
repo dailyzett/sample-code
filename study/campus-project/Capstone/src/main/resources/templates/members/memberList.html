@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="css/memberList.css">
+    <link rel="stylesheet" href="css/menu.css">
+</head>
+
+
+<body>
+<header role="banner" class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle pull-left"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        </div>
+        <div class="navbar-inverse side-collapse in">
+            <nav role="navigation" class="navbar-collapse">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="/members">Users</a></li>
+                    <li><a href="/notice">Notice</a></li>
+                    <li><a href="/place_history">History</a></li>
+                    <li><a href="https://ko.online-qrcode-generator.com/">QR Code Generate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>아이디</th>
+                <th>이름</th>
+                <th>나이</th>
+                <th>핸드폰 번호</th>
+                <th>현재 위치</th>
+                <th>입장 시간</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td th:text="${member.id}"></td>
+                <td th:text="${member.username}"></td>
+                <td th:text="${member.name}"></td>
+                <td th:text="${member.age}"></td>
+                <td th:text="${member.phone}"></td>
+                <td th:text="${member.currentPlace}"></td>
+                <td th:text="${member.localDateTime}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>
